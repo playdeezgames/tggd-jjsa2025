@@ -15,7 +15,7 @@ Friend Class WaterLocationTypeDescriptor
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
-        Return Nothing
+        Return New InteractWaterDialog(character, location)
     End Function
 
     Friend Overrides Function OnEnter(location As ILocation, character As ICharacter) As IDialog
