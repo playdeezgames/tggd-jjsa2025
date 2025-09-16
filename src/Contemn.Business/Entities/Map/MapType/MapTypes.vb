@@ -4,7 +4,7 @@ Friend Module MapTypes
     Friend ReadOnly Descriptors As IReadOnlyDictionary(Of String, MapTypeDescriptor) =
         New List(Of MapTypeDescriptor) From
         {
-            New RoomMapTypeDescriptor()
+            New OverworldMapTypeDescriptor()
         }.ToDictionary(Function(x) x.MapType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get

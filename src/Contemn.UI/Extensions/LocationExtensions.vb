@@ -5,11 +5,18 @@ Friend Module LocationExtensions
     Private ReadOnly locationPixelTable As IReadOnlyDictionary(Of String, Func(Of ILocation, Integer)) =
         New Dictionary(Of String, Func(Of ILocation, Integer)) From
         {
-            {LocationType.Grass, AddressOf FloorToPixel}
+            {LocationType.Grass, AddressOf GrassToPixel},
+            {LocationType.Tree, AddressOf TreeToPixel}
         }
 
-    Private Function FloorToPixel(location As ILocation) As Integer
+    Private Function TreeToPixel(location As ILocation) As Integer
+        Return UIBufferExtensions.ToPixel(
+            &H9D,
+            Hue.LightGreen,
+            Hue.Black)
+    End Function
 
+    Private Function GrassToPixel(location As ILocation) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("."),
             Hue.Green,

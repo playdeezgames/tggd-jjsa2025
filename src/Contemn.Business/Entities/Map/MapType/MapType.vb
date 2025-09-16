@@ -1,3 +1,3 @@
 ﻿Friend Module MapType
-    Friend ReadOnly Room As String = NameOf(Room)
+    Friend ReadOnly Overworld As String = NameOf(Overworld)
 End Module

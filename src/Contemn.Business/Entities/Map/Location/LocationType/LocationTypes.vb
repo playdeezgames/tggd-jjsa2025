@@ -4,7 +4,8 @@ Friend Module LocationTypes
     Friend ReadOnly Descriptors As IReadOnlyDictionary(Of String, LocationTypeDescriptor) =
         New List(Of LocationTypeDescriptor) From
         {
-            New GrassLocationTypeDescriptor()
+            New GrassLocationTypeDescriptor(),
+            New TreeLocationTypeDescriptor()
         }.ToDictionary(Function(x) x.LocationType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get
