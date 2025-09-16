@@ -59,6 +59,7 @@ Friend Class N00bCharacterTypeDescriptor
 
     Private Sub ProcessStarvation(character As ICharacter)
         If character.IsStatisticMinimum(StatisticType.Satiety) OrElse character.IsStatisticMinimum(StatisticType.Hydration) Then
+            character.PlaySfx(Sfx.PlayerHit)
             character.ChangeStatistic(StatisticType.Health, -1)
         End If
     End Sub
