@@ -16,4 +16,8 @@ Friend Module CharacterExtensions
     Friend Function ToPixel(character As ICharacter) As Integer
         Return characterPixelTable(character.CharacterType)(character)
     End Function
+    <Extension>
+    Friend Function IsDead(character As ICharacter) As Boolean
+        Return character.GetStatistic(StatisticType.Health) = character.GetStatisticMinimum(StatisticType.Health)
+    End Function
 End Module

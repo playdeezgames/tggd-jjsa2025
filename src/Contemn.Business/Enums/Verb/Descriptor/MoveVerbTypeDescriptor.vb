@@ -13,7 +13,10 @@ Friend Class MoveVerbTypeDescriptor
         Dim nextColumn = descriptor.GetNextColumn(character.Column)
         Dim nextRow = descriptor.GetNextRow(character.Row)
         Dim nextLocation = character.Map.GetLocation(nextColumn, nextRow)
-        Return character.MoveTo(nextLocation)
+        If nextLocation IsNot Nothing Then
+            Return character.MoveTo(nextLocation)
+        End If
+        Return Nothing
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean

@@ -26,12 +26,41 @@ Friend Class N00bCharacterTypeDescriptor
     End Function
 
     Friend Overrides Sub OnEnter(character As ICharacter, location As ILocation)
+        ProcessStarvation(character)
+        ProcessHunger(character)
+        ProcessDehydration(character)
         Dim items = location.Items
         For Each item In items
             location.RemoveItem(item)
             character.World.AddMessage(MoodType.Info, $"You pick up {item.Name}.")
             character.AddItem(item)
         Next
+    End Sub
+
+    Private Sub ProcessDehydration(character As ICharacter)
+        If character.IsStatisticMinimum(StatisticType.Hydration) Then
+            character.World.AddMessage(MoodType.Danger, "Yer dehydrated! Drink immediately!")
+        Else
+            If character.ChangeStatistic(StatisticType.Hydration, -1) < HYDRATION_WARNING Then
+                character.World.AddMessage(MoodType.Warning, "Yer thirsty! Drink soon!")
+            End If
+        End If
+    End Sub
+
+    Private Sub ProcessHunger(character As ICharacter)
+        If character.IsStatisticMinimum(StatisticType.Satiety) Then
+            character.World.AddMessage(MoodType.Danger, "Yer starving! Eat immediately!")
+        Else
+            If character.ChangeStatistic(StatisticType.Satiety, -1) < SATIETY_WARNING Then
+                character.World.AddMessage(MoodType.Warning, "Yer famished! Eat soon!")
+            End If
+        End If
+    End Sub
+
+    Private Sub ProcessStarvation(character As ICharacter)
+        If character.IsStatisticMinimum(StatisticType.Satiety) OrElse character.IsStatisticMinimum(StatisticType.Hydration) Then
+            character.ChangeStatistic(StatisticType.Health, -1)
+        End If
     End Sub
 
     Friend Overrides Sub OnLeave(character As ICharacter, location As ILocation)
