@@ -15,6 +15,10 @@ Friend Class N00bCharacterTypeDescriptor
 
     Friend Overrides Sub OnInitialize(character As ICharacter)
         character.World.Avatar = character
+
+        character.SetStatisticRange(StatisticType.Health, MAXIMUM_HEALTH, 0, MAXIMUM_HEALTH)
+        character.SetStatisticRange(StatisticType.Satiety, MAXIMUM_SATIETY, 0, MAXIMUM_SATIETY)
+        character.SetStatisticRange(StatisticType.Hydration, MAXIMUM_HYDRATION, 0, MAXIMUM_HYDRATION)
     End Sub
 
     Friend Overrides Function OnBump(character As ICharacter, location As ILocation) As IDialog

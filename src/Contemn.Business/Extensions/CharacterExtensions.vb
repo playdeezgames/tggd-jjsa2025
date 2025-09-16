@@ -7,6 +7,17 @@ Friend Module CharacterExtensions
         Return character.CharacterType.ToCharacterTypeDescriptor.OnBump(character, location)
     End Function
     <Extension>
+    Friend Sub SetStatisticRange(
+                                character As ICharacter,
+                                statisticType As String,
+                                statisticValue As Integer,
+                                statisticMinimum As Integer,
+                                statisticMaximum As Integer)
+        character.SetStatisticMinimum(statisticType, statisticMinimum)
+        character.SetStatisticMaximum(statisticType, statisticMaximum)
+        character.SetStatistic(statisticType, statisticValue)
+    End Sub
+    <Extension>
     Friend Sub HandleLeave(character As ICharacter, location As ILocation)
         character.CharacterType.ToCharacterTypeDescriptor.OnLeave(character, location)
     End Sub

@@ -14,7 +14,19 @@ Friend Class NavigationState
     Public Overrides Sub Refresh()
         Buffer.Fill
         RenderMap()
+        RenderStatistics()
         RenderMessages()
+    End Sub
+
+    Private Sub RenderStatistics()
+        Dim x = VIEW_WIDTH
+        Dim y = 1
+        Dim avatar = World.Avatar
+        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Health), Hue.Red, Hue.Black)
+        y += 1
+        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Satiety), Hue.Magenta, Hue.Black)
+        y += 1
+        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Hydration), Hue.Blue, Hue.Black)
     End Sub
 
     Shared ReadOnly moodColors As IReadOnlyDictionary(Of String, (ForegroundColor As Integer, BackgroundColor As Integer)) =
