@@ -6,8 +6,16 @@ Friend Module LocationExtensions
         New Dictionary(Of String, Func(Of ILocation, Integer)) From
         {
             {LocationType.Grass, AddressOf GrassToPixel},
-            {LocationType.Tree, AddressOf TreeToPixel}
+            {LocationType.Tree, AddressOf TreeToPixel},
+            {LocationType.Water, AddressOf WaterToPixel}
         }
+
+    Private Function WaterToPixel(location As ILocation) As Integer
+        Return UIBufferExtensions.ToPixel(
+            &HF7,
+            Hue.Black,
+            Hue.Blue)
+    End Function
 
     Private Function TreeToPixel(location As ILocation) As Integer
         Return UIBufferExtensions.ToPixel(
