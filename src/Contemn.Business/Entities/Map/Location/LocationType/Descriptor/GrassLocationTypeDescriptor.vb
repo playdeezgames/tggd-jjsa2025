@@ -1,30 +1,28 @@
 ﻿Imports TGGD.Business
 
-Friend Class WallLocationTypeDescriptor
+Friend Class GrassLocationTypeDescriptor
     Inherits LocationTypeDescriptor
-
     Public Sub New()
-        MyBase.New(Business.LocationType.Wall)
+        MyBase.New(Business.LocationType.Grass)
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
-        Return Nothing
+        Return location.Character.Interact(character)
     End Function
 
     Friend Overrides Sub OnLeave(location As ILocation, character As ICharacter)
-        Throw New NotImplementedException()
     End Sub
 
     Friend Overrides Function OnEnter(location As ILocation, character As ICharacter) As IDialog
-        Throw New NotImplementedException()
+        Return Nothing
     End Function
 
     Friend Overrides Function CanEnter(location As ILocation, character As ICharacter) As Boolean
-        Return False
+        Return True
     End Function
 
     Friend Overrides Function CanSpawn(location As ILocation, itemType As String) As Boolean
-        Return False
+        Return True
     End Function
 
     Friend Overrides Sub OnInitialize(location As Location)
