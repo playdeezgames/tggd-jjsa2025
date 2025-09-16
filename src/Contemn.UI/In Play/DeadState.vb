@@ -10,8 +10,10 @@ Friend Class DeadState
 
     Public Overrides Sub Refresh()
         Buffer.Fill
-        Dim y = (Buffer.Rows) \ 2
+        Dim y = (Buffer.Rows) \ 2 - 1
         Buffer.WriteCentered(y, "Yer Dead!", Hue.Red, Hue.Black)
+        y += 1
+        Buffer.WriteCentered(y, "Winner: Nature", Hue.Green, Hue.Black)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState

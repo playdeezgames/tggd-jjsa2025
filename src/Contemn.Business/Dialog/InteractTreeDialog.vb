@@ -1,16 +1,14 @@
-﻿Imports TGGD.Business
+﻿
+Imports TGGD.Business
 
-Friend Class InteractWaterDialog
+Friend Class InteractTreeDialog
     Inherits BaseDialog
 
-    Shared ReadOnly DRINK_CHOICE As String = NameOf(DRINK_CHOICE)
-    Const DRINK_TEXT = "Drink"
-
-    Private ReadOnly character As ICharacter
-    Private ReadOnly location As ILocation
+    Private character As ICharacter
+    Private location As ILocation
 
     Public Sub New(character As ICharacter, location As ILocation)
-        MyBase.New("Water", GenerateChoices(), GenerateLines())
+        MyBase.New("Tree", GenerateChoices(), GenerateLines())
         Me.character = character
         Me.location = location
     End Sub
@@ -22,8 +20,7 @@ Friend Class InteractWaterDialog
     Private Shared Function GenerateChoices() As IEnumerable(Of (Choice As String, Text As String))
         Dim result As New List(Of (Choice As String, Text As String)) From
             {
-                (NEVER_MIND_CHOICE, NEVER_MIND_TEXT),
-                (DRINK_CHOICE, DRINK_TEXT)
+                (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         Return result
     End Function
@@ -32,17 +29,9 @@ Friend Class InteractWaterDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
                 Return Nothing
-            Case DRINK_CHOICE
-                Return Drink()
             Case Else
                 Throw New NotImplementedException
         End Select
-    End Function
-
-    Private Function Drink() As IDialog
-        Dim hydrationDelta = character.GetStatisticMaximum(StatisticType.Hydration) - character.GetStatistic(StatisticType.Hydration)
-        character.ChangeStatistic(StatisticType.Hydration, hydrationDelta)
-        Return New OkDialog({$"+{hydrationDelta} hydration"}, Function() Nothing)
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
