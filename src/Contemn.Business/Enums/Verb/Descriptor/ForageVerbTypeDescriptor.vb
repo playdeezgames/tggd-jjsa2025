@@ -4,6 +4,7 @@ Friend Class ForageVerbTypeDescriptor
     Inherits VerbTypeDescriptor
     Private ReadOnly FORAGE_AGAIN_CHOICE As String = NameOf(FORAGE_AGAIN_CHOICE)
     Private Const FORAGE_AGAIN_TEXT = "Forage Again..."
+    Friend Shared ReadOnly FindNothingLines As String() = {"You find nothing."}
 
     Public Sub New()
         MyBase.New(Business.VerbType.Forage, "Forage...")
@@ -21,23 +22,26 @@ Friend Class ForageVerbTypeDescriptor
 
     Private Function FoundNothing(character As ICharacter) As IDialog
         Return New MessageDialog(
-            {"You find nothing."},
+            FindNothingLines,
             {(OK_CHOICE, OK_TEXT, BackToGame(character)),
             (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character))},
             BackToGame(character))
     End Function
 
-    Private Function ForageAgain(character As ICharacter) As Func(Of IDialog)
+    Private Shared Function ForageAgain(character As ICharacter) As Func(Of IDialog)
         Return Function() Business.VerbType.Forage.ToVerbTypeDescriptor.Perform(character)
     End Function
 
-    Private Function BackToGame(character As ICharacter) As Func(Of IDialog)
+    Private Shared Function BackToGame(character As ICharacter) As Func(Of IDialog)
+        ArgumentNullException.ThrowIfNull(character)
         Return Function() Nothing
     End Function
 
     Private Function FoundItem(character As ICharacter, item As IItem) As IDialog
+        Dim itemCount = character.GetCountOfItemType(item.ItemType)
         Return New MessageDialog(
-            {$"You find {item.Name}."},
+            {$"You find {item.Name}.",
+            $"You now have {itemCount}."},
             {(OK_CHOICE, OK_TEXT, BackToGame(character)),
             (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character))},
             BackToGame(character))
