@@ -5,4 +5,5 @@
     Public ReadOnly MoveWest As String = NameOf(MoveWest)
     Public ReadOnly ActionList As String = NameOf(ActionList)
     Public ReadOnly Forage As String = NameOf(Forage)
+    Public ReadOnly Inventory As String = NameOf(Inventory)
 End Module

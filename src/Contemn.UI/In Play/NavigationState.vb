@@ -20,7 +20,7 @@ Friend Class NavigationState
 
     Private Sub RenderStatistics()
         Dim x = VIEW_WIDTH
-        Dim y = 1
+        Dim y = 0
         Dim avatar = World.Avatar
         Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Health), Hue.Red, Hue.Black)
         y += 1

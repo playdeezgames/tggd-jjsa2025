@@ -4,8 +4,11 @@ Friend Class VerbListDialog
     Inherits BaseDialog
 
     Private ReadOnly character As ICharacter
-    Sub New(character As ICharacter, verbCategoryType As String)
-        MyBase.New("Actions...", GenerateChoices(character, verbCategoryType), Array.Empty(Of String))
+    Sub New(character As ICharacter, verbCategoryType As String, caption As String)
+        MyBase.New(
+            caption,
+            GenerateChoices(character, verbCategoryType),
+            Array.Empty(Of String))
         Me.character = character
     End Sub
     Private Shared Function GenerateChoices(character As ICharacter, verbCategoryType As String) As IEnumerable(Of (Choice As String, Text As String))

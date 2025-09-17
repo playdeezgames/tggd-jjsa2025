@@ -1,17 +1,17 @@
 ﻿Imports TGGD.Business
 
-Friend Class ActionListVerbTypeDescriptor
+Friend Class InventoryVerbTypeDescriptor
     Inherits VerbTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.VerbType.ActionList, Business.VerbCategoryType.Action, Nothing)
+        MyBase.New(Business.VerbType.Inventory, Business.VerbCategoryType.Action, "Inventory")
     End Sub
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
-        Return New VerbListDialog(character, Business.VerbCategoryType.Action, "Actions...")
+        Return New InventoryDialog(character)
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
-        Return True
+        Return character.HasItems
     End Function
 End Class
