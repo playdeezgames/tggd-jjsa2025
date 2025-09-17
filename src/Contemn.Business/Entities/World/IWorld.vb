@@ -14,4 +14,6 @@ Public Interface IWorld
     ReadOnly Property MessageCount As Integer
     Sub DismissMessage()
     Function GetMessage(line As Integer) As IMessage
+    Function CreateGenerator() As IGenerator
+    Function GetGenerator(generatorId As Integer) As IGenerator
 End Interface

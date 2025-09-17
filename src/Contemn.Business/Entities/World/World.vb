@@ -51,6 +51,7 @@ Public Class World
         Data.Messages.Clear()
         Data.Items.Clear()
         Data.RecycledItems.Clear()
+        Data.Generators.Clear()
         Data.AvatarCharacterId = Nothing
     End Sub
     Public Overrides Sub Initialize()
@@ -178,4 +179,14 @@ Public Class World
     Public Overrides Sub Recycle()
         Clear()
     End Sub
+
+    Public Function GetGenerator(generatorId As Integer) As IGenerator Implements IWorld.GetGenerator
+        Return New Generator(Data, generatorId)
+    End Function
+
+    Public Function CreateGenerator() As IGenerator Implements IWorld.CreateGenerator
+        Dim generatorId = Data.Generators.Count
+        Data.Generators.Add(New Dictionary(Of String, Integer)())
+        Return New Generator(Data, generatorId)
+    End Function
 End Class

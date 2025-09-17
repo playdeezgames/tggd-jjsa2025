@@ -3,4 +3,6 @@
     Friend Const ROOM_ROWS = 49
     Friend ReadOnly NEVER_MIND_CHOICE As String = NameOf(NEVER_MIND_CHOICE)
     Friend Const NEVER_MIND_TEXT = "Never Mind"
+    Friend ReadOnly OK_CHOICE As String = NameOf(OK_CHOICE)
+    Friend Const OK_TEXT = "OK"
 End Module

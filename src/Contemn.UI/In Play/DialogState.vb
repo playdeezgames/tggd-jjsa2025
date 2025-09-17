@@ -50,7 +50,8 @@ Friend Class DialogState
                 choiceIndex = (choiceIndex + 1) Mod dialog.Choices.Count
                 Return Me
             Case UI.Command.Green
-                Return SetNextDialog(dialog.Choose(dialog.Choices.ToArray()(choiceIndex).Choice))
+                Dim nextDialog = dialog.Choose(dialog.Choices.ToArray()(choiceIndex).Choice)
+                Return SetNextDialog(nextDialog)
             Case UI.Command.Red
                 Return SetNextDialog(dialog.CancelDialog())
             Case Else

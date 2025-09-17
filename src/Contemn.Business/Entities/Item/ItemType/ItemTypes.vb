@@ -4,6 +4,7 @@ Friend Module ItemTypes
     Friend ReadOnly Descriptors As IReadOnlyDictionary(Of String, ItemTypeDescriptor) =
         New List(Of ItemTypeDescriptor) From
         {
+            New PlantFiberItemTypeDescriptor()
         }.ToDictionary(Function(x) x.ItemType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get

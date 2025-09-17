@@ -114,4 +114,12 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     Public Sub PlaySfx(sfx As String) Implements IEntity.PlaySfx
         _playSfx.Invoke(sfx)
     End Sub
+
+    Public Function HasMetadata(metadataType As String) As Boolean Implements IEntity.HasMetadata
+        Return EntityData.Metadatas.ContainsKey(metadataType)
+    End Function
+
+    Public Function HasStatistic(statisticType As String) As Boolean Implements IEntity.HasStatistic
+        Return EntityData.Statistics.ContainsKey(statisticType)
+    End Function
 End Class

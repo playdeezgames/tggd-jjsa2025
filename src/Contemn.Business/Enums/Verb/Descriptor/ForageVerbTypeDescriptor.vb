@@ -8,10 +8,24 @@ Friend Class ForageVerbTypeDescriptor
     End Sub
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
-        Return Nothing
+        Dim generator = character.Location.GetForageGenerator()
+        Dim item = generator.GenerateItem(character)
+        If item IsNot Nothing Then
+            Return FoundItem(character, item)
+        Else
+            Return FoundNothing(character)
+        End If
+    End Function
+
+    Private Function FoundNothing(character As ICharacter) As IDialog
+        Return New MessageDialog({"You find nothing."}, {(OK_CHOICE, OK_TEXT, Function() Nothing)}, Function() Nothing)
+    End Function
+
+    Private Function FoundItem(character As ICharacter, item As IItem) As IDialog
+        Return New MessageDialog({$"You find {item.Name}."}, {(OK_CHOICE, OK_TEXT, Function() Nothing)}, Function() Nothing)
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
-        Return character.Location.GetTag(TagType.CanForage)
+        Return character.Location.HasMetadata(MetadataType.ForageTable)
     End Function
 End Class
