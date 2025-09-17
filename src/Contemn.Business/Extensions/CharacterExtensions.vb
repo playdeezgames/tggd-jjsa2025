@@ -18,7 +18,7 @@ Friend Module CharacterExtensions
         character.SetStatistic(statisticType, statisticValue)
     End Sub
     <Extension>
-    Friend Function IsStatisticMinimum(character As ICharacter, statisticType As String) As Boolean
+    Friend Function IsStatisticAtMinimum(character As ICharacter, statisticType As String) As Boolean
         Return character.GetStatistic(statisticType) = character.GetStatisticMinimum(statisticType)
     End Function
     <Extension>

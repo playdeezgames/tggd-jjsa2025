@@ -27,7 +27,17 @@ Friend Class NavigationState
         Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Satiety), Hue.Magenta, Hue.Black)
         y += 1
         Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Hydration), Hue.Blue, Hue.Black)
+        y += 1
+        y = RenderIllness(x, y, avatar)
     End Sub
+
+    Private Function RenderIllness(x As Integer, y As Integer, character As ICharacter) As Integer
+        If character.GetStatistic(StatisticType.Illness) > character.GetStatisticMinimum(StatisticType.Illness) Then
+            Buffer.Write(x, y, character.FormatStatistic(StatisticType.Illness), Hue.Brown, Hue.Black)
+            Return y + 1
+        End If
+        Return y
+    End Function
 
     Shared ReadOnly moodColors As IReadOnlyDictionary(Of String, (ForegroundColor As Integer, BackgroundColor As Integer)) =
         New Dictionary(Of String, (ForegroundColor As Integer, BackgroundColor As Integer)) From

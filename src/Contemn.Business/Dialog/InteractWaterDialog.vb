@@ -41,8 +41,17 @@ Friend Class InteractWaterDialog
 
     Private Function Drink() As IDialog
         Dim hydrationDelta = character.GetStatisticMaximum(StatisticType.Hydration) - character.GetStatistic(StatisticType.Hydration)
+        Dim messageLines As New List(Of String) From
+            {
+                $"+{hydrationDelta} hydration"
+            }
+        If RNG.GenerateBoolean(1, 1) Then
+            Dim illness = RNG.RollXDY(1, 4)
+            character.ChangeStatistic(StatisticType.Illness, illness)
+            messageLines.Add($"+{illness} illness")
+        End If
         character.ChangeStatistic(StatisticType.Hydration, hydrationDelta)
-        Return New OkDialog({$"+{hydrationDelta} hydration"}, Function() Nothing)
+        Return New OkDialog(messageLines, Function() Nothing)
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
