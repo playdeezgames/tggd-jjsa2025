@@ -1,18 +1,18 @@
 ﻿Imports TGGD.Business
 
-Friend Class ActionListDialog
+Friend Class VerbListDialog
     Inherits BaseDialog
 
     Private ReadOnly character As ICharacter
-    Sub New(character As ICharacter)
-        MyBase.New("Actions...", GenerateChoices(character), Array.Empty(Of String))
+    Sub New(character As ICharacter, verbCategoryType As String)
+        MyBase.New("Actions...", GenerateChoices(character, verbCategoryType), Array.Empty(Of String))
         Me.character = character
     End Sub
-    Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
+    Private Shared Function GenerateChoices(character As ICharacter, verbCategoryType As String) As IEnumerable(Of (Choice As String, Text As String))
         Dim result As New List(Of (Choice As String, Text As String)) From {
                 (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
-        For Each verbType In character.AvailableVerbs
+        For Each verbType In character.AvailableVerbsOfCategory(verbCategoryType)
             Dim descriptor = verbType.ToVerbTypeDescriptor
             result.Add((verbType, descriptor.VerbTypeName))
         Next

@@ -7,7 +7,7 @@ Friend Class ForageVerbTypeDescriptor
     Friend Shared ReadOnly FindNothingLines As String() = {"You find nothing."}
 
     Public Sub New()
-        MyBase.New(Business.VerbType.Forage, "Forage...")
+        MyBase.New(Business.VerbType.Forage, Business.VerbCategoryType.Action, "Forage...")
     End Sub
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
