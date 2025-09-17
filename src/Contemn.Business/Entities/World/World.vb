@@ -185,8 +185,15 @@ Public Class World
     End Function
 
     Public Function CreateGenerator() As IGenerator Implements IWorld.CreateGenerator
-        Dim generatorId = Data.Generators.Count
-        Data.Generators.Add(New Dictionary(Of String, Integer)())
+        Dim generatorId As Integer
+        If Data.RecycledGenerators.Any Then
+            generatorId = Data.RecycledGenerators.First
+            Data.Generators(generatorId).Clear()
+            Data.RecycledGenerators.Remove(generatorId)
+        Else
+            generatorId = Data.Generators.Count
+            Data.Generators.Add(New Dictionary(Of String, Integer)())
+        End If
         Return New Generator(Data, generatorId)
     End Function
 End Class

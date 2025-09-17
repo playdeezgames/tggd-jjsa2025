@@ -11,4 +11,8 @@ Friend Module GeneratorExtensions
         End If
         Return Nothing
     End Function
+    <Extension>
+    Friend Function IsDepleted(generator As IGenerator) As Boolean
+        Return generator.GetWeight(String.Empty) = generator.TotalWeight
+    End Function
 End Module

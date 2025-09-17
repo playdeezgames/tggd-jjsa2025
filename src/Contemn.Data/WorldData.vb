@@ -11,4 +11,5 @@ Public Class WorldData
     Property Items As New List(Of ItemData)
     Property RecycledItems As New HashSet(Of Integer)
     Property Generators As New List(Of Dictionary(Of String, Integer))
+    Property RecycledGenerators As New HashSet(Of Integer)
 End Class
