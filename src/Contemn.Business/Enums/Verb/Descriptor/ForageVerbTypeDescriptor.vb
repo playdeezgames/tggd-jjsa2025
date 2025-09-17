@@ -2,6 +2,8 @@
 
 Friend Class ForageVerbTypeDescriptor
     Inherits VerbTypeDescriptor
+    Private ReadOnly FORAGE_AGAIN_CHOICE As String = NameOf(FORAGE_AGAIN_CHOICE)
+    Private Const FORAGE_AGAIN_TEXT = "Forage Again..."
 
     Public Sub New()
         MyBase.New(Business.VerbType.Forage, "Forage...")
@@ -18,11 +20,27 @@ Friend Class ForageVerbTypeDescriptor
     End Function
 
     Private Function FoundNothing(character As ICharacter) As IDialog
-        Return New MessageDialog({"You find nothing."}, {(OK_CHOICE, OK_TEXT, Function() Nothing)}, Function() Nothing)
+        Return New MessageDialog(
+            {"You find nothing."},
+            {(OK_CHOICE, OK_TEXT, BackToGame(character)),
+            (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character))},
+            BackToGame(character))
+    End Function
+
+    Private Function ForageAgain(character As ICharacter) As Func(Of IDialog)
+        Return Function() Business.VerbType.Forage.ToVerbTypeDescriptor.Perform(character)
+    End Function
+
+    Private Function BackToGame(character As ICharacter) As Func(Of IDialog)
+        Return Function() Nothing
     End Function
 
     Private Function FoundItem(character As ICharacter, item As IItem) As IDialog
-        Return New MessageDialog({$"You find {item.Name}."}, {(OK_CHOICE, OK_TEXT, Function() Nothing)}, Function() Nothing)
+        Return New MessageDialog(
+            {$"You find {item.Name}."},
+            {(OK_CHOICE, OK_TEXT, BackToGame(character)),
+            (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character))},
+            BackToGame(character))
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
