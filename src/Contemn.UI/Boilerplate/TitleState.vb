@@ -13,7 +13,8 @@ Friend Class TitleState
 
     Public Overrides Sub Refresh()
         Buffer.Fill()
-        Buffer.WriteCentered(Buffer.Rows \ 2, "Grubstaker of SPLORR!!", Hue.LightMagenta, Hue.Black)
+        Buffer.WriteCentered(Buffer.Rows \ 2 - 1, "Grubstaker of SPLORR!!", Hue.LightMagenta, Hue.Black)
+        Buffer.WriteCentered(Buffer.Rows \ 2, "(The Dead Do Not Hunger)", Hue.Magenta, Hue.Black)
         Buffer.WriteCentered(Buffer.Rows \ 2 + 2, "A Production of TheGrumpyGameDev", Hue.DarkGray, Hue.Black)
         Buffer.WriteCentered(Buffer.Rows \ 2 + 3, "For Jern Jam 2025 x SciAnts", Hue.DarkGray, Hue.Black)
         Buffer.WriteCentered(Buffer.Rows \ 2 + 4, "September 2025", Hue.DarkGray, Hue.Black)

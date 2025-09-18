@@ -42,8 +42,10 @@ Friend Class N00bCharacterTypeDescriptor
         Dim result As New List(Of (Mood As String, Text As String))
         result.AddRange(ProcessIllness(character))
         result.AddRange(ProcessStarvation(character))
-        result.AddRange(ProcessHunger(character))
-        result.AddRange(ProcessDehydration(character))
+        If Not character.IsDead Then
+            result.AddRange(ProcessHunger(character))
+            result.AddRange(ProcessDehydration(character))
+        End If
         Return result
     End Function
 

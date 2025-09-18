@@ -24,13 +24,11 @@ Friend Class ForageVerbTypeDescriptor
     Private Function FoundNothing(character As ICharacter, lines As IEnumerable(Of String)) As IDialog
         Dim messageLines As New List(Of String)(FindNothingLines)
         messageLines.AddRange(lines)
-        Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog))) From
+        Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
-                (OK_CHOICE, OK_TEXT, BackToGame(character))
+                (OK_CHOICE, OK_TEXT, BackToGame(character), True),
+                (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character), Not character.IsDead)
             }
-        If Not character.IsDead Then
-            messageChoices.Add((FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character)))
-        End If
         Return New MessageDialog(
             messageLines,
             messageChoices,
@@ -54,16 +52,15 @@ Friend Class ForageVerbTypeDescriptor
                 $"You now have {itemCount}."
             }
         messageLines.AddRange(lines)
-        Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog))) From
+        Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
-                (OK_CHOICE, OK_TEXT, BackToGame(character))
+                (OK_CHOICE, OK_TEXT, BackToGame(character), True),
+                (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character), Not character.IsDead AndAlso Not generator.IsDepleted)
             }
         If generator.IsDepleted Then
             messageLines.Add($"{character.Location.LocationType.ToLocationTypeDescriptor.LocationType} is now depleted.")
             character.Location.LocationType = LocationType.Dirt
             generator.Recycle()
-        ElseIf Not character.IsDead() Then
-            messageChoices.Add((FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character)))
         End If
         Return New MessageDialog(
             messageLines,

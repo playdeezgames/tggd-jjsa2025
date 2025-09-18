@@ -5,6 +5,6 @@ Friend Class OkDialog
 
 
     Public Sub New(lines As IEnumerable(Of String), nextDialog As Func(Of IDialog))
-        MyBase.New(lines, {(OK_CHOICE, OK_TEXT, nextDialog)}, nextDialog)
+        MyBase.New(lines, {(OK_CHOICE, OK_TEXT, nextDialog, True)}, nextDialog)
     End Sub
 End Class
