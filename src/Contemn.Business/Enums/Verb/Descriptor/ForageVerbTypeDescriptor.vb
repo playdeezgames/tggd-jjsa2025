@@ -13,18 +13,27 @@ Friend Class ForageVerbTypeDescriptor
     Public Overrides Function Perform(character As ICharacter) As IDialog
         Dim generator = character.Location.GetForageGenerator()
         Dim item = generator.GenerateItem(character)
+        Dim lines = character.ProcessTurn().Select(Function(x) x.Text)
         If item IsNot Nothing Then
-            Return FoundItem(character, item, generator)
+            Return FoundItem(character, item, generator, lines)
         Else
-            Return FoundNothing(character)
+            Return FoundNothing(character, lines)
         End If
     End Function
 
-    Private Function FoundNothing(character As ICharacter) As IDialog
+    Private Function FoundNothing(character As ICharacter, lines As IEnumerable(Of String)) As IDialog
+        Dim messageLines As New List(Of String)(FindNothingLines)
+        messageLines.AddRange(lines)
+        Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog))) From
+            {
+                (OK_CHOICE, OK_TEXT, BackToGame(character))
+            }
+        If Not character.IsDead Then
+            messageChoices.Add((FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character)))
+        End If
         Return New MessageDialog(
-            FindNothingLines,
-            {(OK_CHOICE, OK_TEXT, BackToGame(character)),
-            (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character))},
+            messageLines,
+            messageChoices,
             BackToGame(character))
     End Function
 
@@ -37,13 +46,14 @@ Friend Class ForageVerbTypeDescriptor
         Return Function() Nothing
     End Function
 
-    Private Function FoundItem(character As ICharacter, item As IItem, generator As IGenerator) As IDialog
+    Private Function FoundItem(character As ICharacter, item As IItem, generator As IGenerator, lines As IEnumerable(Of String)) As IDialog
         Dim itemCount = character.GetCountOfItemType(item.ItemType)
         Dim messageLines As New List(Of String) From
             {
                 $"You find {item.Name}.",
                 $"You now have {itemCount}."
             }
+        messageLines.AddRange(lines)
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog))) From
             {
                 (OK_CHOICE, OK_TEXT, BackToGame(character))
@@ -52,7 +62,7 @@ Friend Class ForageVerbTypeDescriptor
             messageLines.Add($"{character.Location.LocationType.ToLocationTypeDescriptor.LocationType} is now depleted.")
             character.Location.LocationType = LocationType.Dirt
             generator.Recycle()
-        Else
+        ElseIf Not character.IsDead() Then
             messageChoices.Add((FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character)))
         End If
         Return New MessageDialog(

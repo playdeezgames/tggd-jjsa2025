@@ -27,7 +27,9 @@ Friend Class N00bCharacterTypeDescriptor
     End Function
 
     Friend Overrides Sub OnEnter(character As ICharacter, location As ILocation)
-        ProcessTime(character)
+        For Each line In character.ProcessTurn()
+            character.World.AddMessage(line.Mood, line.Text)
+        Next
         Dim items = location.Items
         For Each item In items
             location.RemoveItem(item)
@@ -36,49 +38,61 @@ Friend Class N00bCharacterTypeDescriptor
         Next
     End Sub
 
-    Private Sub ProcessTime(character As ICharacter)
-        ProcessIllness(character)
-        ProcessStarvation(character)
-        ProcessHunger(character)
-        ProcessDehydration(character)
-    End Sub
+    Friend Overrides Function OnProcessTurn(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
+        Dim result As New List(Of (Mood As String, Text As String))
+        result.AddRange(ProcessIllness(character))
+        result.AddRange(ProcessStarvation(character))
+        result.AddRange(ProcessHunger(character))
+        result.AddRange(ProcessDehydration(character))
+        Return result
+    End Function
 
-    Private Sub ProcessIllness(character As ICharacter)
+    Private Function ProcessIllness(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
+        Dim result As New List(Of (Mood As String, Text As String))
         If Not character.IsStatisticAtMinimum(StatisticType.Illness) Then
             Dim illness = character.GetStatistic(StatisticType.Illness)
-            character.World.AddMessage(MoodType.Danger, $"-{illness} HLT due to illness.")
+            result.Add((MoodType.Danger, $"-{illness} HLT due to illness."))
             character.PlaySfx(Sfx.PlayerHit)
             character.ChangeStatistic(StatisticType.Health, -illness)
             character.ChangeStatistic(StatisticType.Illness, -1)
         End If
-    End Sub
+        Return result
+    End Function
 
-    Private Sub ProcessDehydration(character As ICharacter)
+    Private Function ProcessDehydration(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
+        Dim result As New List(Of (Mood As String, Text As String))
         If character.IsStatisticAtMinimum(StatisticType.Hydration) Then
-            character.World.AddMessage(MoodType.Danger, "Yer dehydrated! Drink immediately!")
+            result.Add((MoodType.Danger, "Yer dehydrated! Drink immediately!"))
         Else
             If character.ChangeStatistic(StatisticType.Hydration, -1) < HYDRATION_WARNING Then
-                character.World.AddMessage(MoodType.Warning, "Yer thirsty! Drink soon!")
+                result.Add((MoodType.Warning, "Yer thirsty! Drink soon!"))
             End If
         End If
-    End Sub
+        Return result
+    End Function
 
-    Private Sub ProcessHunger(character As ICharacter)
+    Private Function ProcessHunger(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
+        Dim result As New List(Of (Mood As String, Text As String))
         If character.IsStatisticAtMinimum(StatisticType.Satiety) Then
-            character.World.AddMessage(MoodType.Danger, "Yer starving! Eat immediately!")
+            result.Add((MoodType.Danger, "Yer starving! Eat immediately!"))
         Else
             If character.ChangeStatistic(StatisticType.Satiety, -1) < SATIETY_WARNING Then
-                character.World.AddMessage(MoodType.Warning, "Yer famished! Eat soon!")
+                result.Add((MoodType.Warning, "Yer famished! Eat soon!"))
             End If
         End If
-    End Sub
+        Return result
+    End Function
 
-    Private Sub ProcessStarvation(character As ICharacter)
+    Private Function ProcessStarvation(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
         If character.IsStatisticAtMinimum(StatisticType.Satiety) OrElse character.IsStatisticAtMinimum(StatisticType.Hydration) Then
             character.PlaySfx(Sfx.PlayerHit)
             character.ChangeStatistic(StatisticType.Health, -1)
         End If
-    End Sub
+        If character.IsDead Then
+            Return {(MoodType.Danger, "Yer dead.")}
+        End If
+        Return Array.Empty(Of (Mood As String, Text As String))
+    End Function
 
     Friend Overrides Sub OnLeave(character As ICharacter, location As ILocation)
     End Sub

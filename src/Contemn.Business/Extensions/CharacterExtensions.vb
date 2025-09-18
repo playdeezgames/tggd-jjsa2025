@@ -29,5 +29,8 @@ Friend Module CharacterExtensions
     Friend Sub HandleEnter(character As ICharacter, location As ILocation)
         character.CharacterType.ToCharacterTypeDescriptor.OnEnter(character, location)
     End Sub
-
+    <Extension>
+    Friend Function IsDead(character As ICharacter) As Boolean
+        Return character.IsStatisticAtMinimum(StatisticType.Health)
+    End Function
 End Module
