@@ -1,9 +1,12 @@
 ﻿Friend MustInherit Class RecipeTypeDescriptor
+    Friend ReadOnly Property RecipeType As String
     Private ReadOnly inputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)
     Sub New(
+           recipeType As String,
            inputs As IReadOnlyDictionary(Of String, Integer),
            outputs As IReadOnlyDictionary(Of String, Integer))
+        Me.RecipeType = recipeType
         Me.inputs = inputs
         Me.outputs = outputs
     End Sub
@@ -14,4 +17,11 @@
     Friend Function HasInput(itemType As String) As Boolean
         Return inputs.ContainsKey(itemType)
     End Function
+    Friend ReadOnly Property Name As String
+        Get
+            Dim inputList = inputs.Select(Function(x) $"{x.Value} {x.Key.ToItemTypeDescriptor.ItemTypeName}")
+            Dim outputList = outputs.Select(Function(x) $"{x.Value} {x.Key.ToItemTypeDescriptor.ItemTypeName}")
+            Return $"{String.Join("+", inputList)}->{String.Join("+", outputList)}"
+        End Get
+    End Property
 End Class

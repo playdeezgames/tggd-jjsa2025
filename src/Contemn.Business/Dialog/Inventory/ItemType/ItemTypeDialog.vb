@@ -26,7 +26,7 @@ Friend Class ItemTypeDialog
             {
                 (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
-        If RecipeTypes.Descriptors.Any(Function(x) x.CanCraft(character) AndAlso x.HasInput(itemType)) Then
+        If RecipeTypes.Descriptors.Any(Function(x) x.Value.HasInput(itemType) AndAlso x.Value.CanCraft(character)) Then
             result.Add((CRAFT_CHOICE, CRAFT_TEXT))
         End If
         Return result
@@ -36,6 +36,8 @@ Friend Class ItemTypeDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
                 Return VerbType.Inventory.ToVerbTypeDescriptor.Perform(character)
+            Case CRAFT_CHOICE
+                Return New ItemTypeCraftDialog(character, itemType)
             Case Else
                 Throw New NotImplementedException
         End Select

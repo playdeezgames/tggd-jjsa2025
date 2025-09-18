@@ -1,11 +1,10 @@
-﻿Imports System.Reflection.Metadata.Ecma335
-Imports TGGD.Business
+﻿Imports TGGD.Business
 
-Friend Class PlantFiberItemTypeDescriptor
+Friend Class TwineItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.ItemType.PlantFiber, "Fiber", 0, True)
+        MyBase.New(Business.ItemType.Twine, "Twine", 0, True)
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -26,7 +25,7 @@ Friend Class PlantFiberItemTypeDescriptor
     End Function
 
     Friend Overrides Function GetName(item As Item) As String
-        Return Me.ItemTypeName
+        Return ItemTypeName
     End Function
 
     Friend Overrides Function Choose(item As IItem, character As ICharacter, choice As String) As IDialog
