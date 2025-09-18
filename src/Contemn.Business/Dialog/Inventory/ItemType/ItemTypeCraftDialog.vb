@@ -1,7 +1,10 @@
-﻿Imports TGGD.Business
+﻿Imports System.Reflection.Metadata.Ecma335
+Imports TGGD.Business
 
 Friend Class ItemTypeCraftDialog
     Inherits BaseDialog
+    Private Shared ReadOnly CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
+    Private Const CRAFT_ANOTHER_TEXT = "Craft Another"
 
     Private ReadOnly character As ICharacter
     Private ReadOnly itemType As String
@@ -44,7 +47,25 @@ Friend Class ItemTypeCraftDialog
     End Function
 
     Private Function CraftRecipe(recipeType As String) As IDialog
-        Return Nothing
+        Dim descriptor = recipeType.ToRecipeTypeDescriptor
+        Dim messageLines = descriptor.Craft(character)
+        Return New MessageDialog(
+            messageLines,
+            {
+                (OK_CHOICE, OK_TEXT, BackToGame(), True),
+                (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, CraftAnother(recipeType), descriptor.CanCraft(character))
+            }, BackToGame())
+    End Function
+
+    Private Function CraftAnother(recipeType As String) As Func(Of IDialog)
+        Return Function() CraftRecipe(recipeType)
+    End Function
+
+    Private Function BackToGame() As Func(Of IDialog)
+        Return Function() If(
+            character.HasItemsOfType(itemType),
+            CType(New ItemTypeDialog(character, itemType), IDialog),
+            CType(New InventoryDialog(character), IDialog))
     End Function
 
     Public Overrides Function CancelDialog() As IDialog

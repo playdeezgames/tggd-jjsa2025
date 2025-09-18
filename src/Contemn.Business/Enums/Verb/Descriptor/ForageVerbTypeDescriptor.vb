@@ -26,21 +26,20 @@ Friend Class ForageVerbTypeDescriptor
         messageLines.AddRange(lines)
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
-                (OK_CHOICE, OK_TEXT, BackToGame(character), True),
+                (OK_CHOICE, OK_TEXT, BackToGame(), True),
                 (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character), Not character.IsDead)
             }
         Return New MessageDialog(
             messageLines,
             messageChoices,
-            BackToGame(character))
+            BackToGame())
     End Function
 
     Private Shared Function ForageAgain(character As ICharacter) As Func(Of IDialog)
         Return Function() Business.VerbType.Forage.ToVerbTypeDescriptor.Perform(character)
     End Function
 
-    Private Shared Function BackToGame(character As ICharacter) As Func(Of IDialog)
-        ArgumentNullException.ThrowIfNull(character)
+    Private Shared Function BackToGame() As Func(Of IDialog)
         Return Function() Nothing
     End Function
 
@@ -54,7 +53,7 @@ Friend Class ForageVerbTypeDescriptor
         messageLines.AddRange(lines)
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
-                (OK_CHOICE, OK_TEXT, BackToGame(character), True),
+                (OK_CHOICE, OK_TEXT, BackToGame(), True),
                 (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character), Not character.IsDead AndAlso Not generator.IsDepleted)
             }
         If generator.IsDepleted Then
@@ -65,7 +64,7 @@ Friend Class ForageVerbTypeDescriptor
         Return New MessageDialog(
             messageLines,
             messageChoices,
-            BackToGame(character))
+            BackToGame())
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean

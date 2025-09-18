@@ -7,4 +7,5 @@
     Function GetCountOfItemType(itemType As String) As Integer
     Function GetItemOfType(itemType As String) As IItem
     Function HasItemsOfType(itemType As String) As Boolean
+    Function ItemsOfType(itemType As String) As IEnumerable(Of IItem)
 End Interface

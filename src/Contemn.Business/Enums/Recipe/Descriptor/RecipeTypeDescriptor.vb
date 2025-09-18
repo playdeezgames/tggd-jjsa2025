@@ -14,6 +14,36 @@
         Return inputs.All(Function(x) character.GetCountOfItemType(x.Key) >= x.Value)
     End Function
 
+    Friend Function Craft(character As ICharacter) As IEnumerable(Of String)
+        Dim results As New List(Of String)
+        Dim deltas As New Dictionary(Of String, Integer)
+        For Each itemType In New HashSet(Of String)(inputs.Keys.Concat(outputs.Keys))
+            deltas(itemType) = 0
+            Dim count As Integer
+            If inputs.TryGetValue(itemType, count) Then
+                deltas(itemType) -= count
+            End If
+            If outputs.TryGetValue(itemType, count) Then
+                deltas(itemType) += count
+            End If
+        Next
+        For Each delta In deltas
+            If delta.Value < 0 Then
+                results.Add($"{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}")
+                For Each item In character.ItemsOfType(delta.Key).Take(-delta.Value)
+                    character.RemoveItem(item)
+                    item.Recycle()
+                Next
+            ElseIf delta.Value > 0 Then
+                results.Add($"+{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}")
+                For Each dummy In Enumerable.Range(0, delta.Value)
+                    character.World.CreateItem(delta.Key, character)
+                Next
+            End If
+        Next
+        Return results
+    End Function
+
     Friend Function HasInput(itemType As String) As Boolean
         Return inputs.ContainsKey(itemType)
     End Function
