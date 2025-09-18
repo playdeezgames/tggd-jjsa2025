@@ -16,7 +16,7 @@ Friend Class ItemTypeDialog
     End Sub
 
     Private Shared Function GenerateLines(character As ICharacter, itemType As String) As IEnumerable(Of String)
-        Return Array.Empty(Of String)
+        Return {$"You have {character.GetCountOfItemType(itemType)}."}
     End Function
 
     Private Shared Function GenerateChoices(character As ICharacter, itemType As String) As IEnumerable(Of (Choice As String, Text As String))
