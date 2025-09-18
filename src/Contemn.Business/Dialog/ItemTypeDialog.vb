@@ -5,6 +5,8 @@ Friend Class ItemTypeDialog
 
     Private ReadOnly character As ICharacter
     Private ReadOnly itemType As String
+    Private Shared ReadOnly CRAFT_CHOICE As String = NameOf(CRAFT_CHOICE)
+    Private Const CRAFT_TEXT = "Craft..."
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
@@ -24,6 +26,9 @@ Friend Class ItemTypeDialog
             {
                 (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
+        If RecipeTypes.Descriptors.Any(Function(x) x.CanCraft(character) AndAlso x.HasInput(itemType)) Then
+            result.Add((CRAFT_CHOICE, CRAFT_TEXT))
+        End If
         Return result
     End Function
 
