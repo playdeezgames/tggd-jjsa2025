@@ -4,4 +4,5 @@
     Public ReadOnly Hydration As String = NameOf(Hydration)
     Public ReadOnly Illness As String = NameOf(Illness)
     Public ReadOnly ForageGeneratorId As String = NameOf(ForageGeneratorId)
+    Public ReadOnly Score As String = NameOf(Score)
 End Module

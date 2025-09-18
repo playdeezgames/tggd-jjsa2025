@@ -19,9 +19,11 @@ Friend Class NavigationState
     End Sub
 
     Private Sub RenderStatistics()
+        Dim avatar = World.Avatar
         Dim x = VIEW_WIDTH
         Dim y = 0
-        Dim avatar = World.Avatar
+        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Score), Hue.Green, Hue.Black)
+        y += 2
         Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Health), Hue.Red, Hue.Black)
         y += 1
         Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Satiety), Hue.Magenta, Hue.Black)

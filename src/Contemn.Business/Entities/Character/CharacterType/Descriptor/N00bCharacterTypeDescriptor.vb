@@ -20,6 +20,7 @@ Friend Class N00bCharacterTypeDescriptor
         character.SetStatisticRange(StatisticType.Satiety, MAXIMUM_SATIETY, 0, MAXIMUM_SATIETY)
         character.SetStatisticRange(StatisticType.Hydration, MAXIMUM_HYDRATION, 0, MAXIMUM_HYDRATION)
         character.SetStatisticRange(StatisticType.Illness, 0, 0, Integer.MaxValue)
+        character.SetStatisticRange(StatisticType.Score, 0, 0, Integer.MaxValue)
     End Sub
 
     Friend Overrides Function OnBump(character As ICharacter, location As ILocation) As IDialog
@@ -40,6 +41,7 @@ Friend Class N00bCharacterTypeDescriptor
 
     Friend Overrides Function OnProcessTurn(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
         Dim result As New List(Of (Mood As String, Text As String))
+        character.ChangeStatistic(StatisticType.Score, 1)
         result.AddRange(ProcessIllness(character))
         result.AddRange(ProcessStarvation(character))
         If Not character.IsDead Then
