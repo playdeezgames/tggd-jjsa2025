@@ -13,8 +13,8 @@ Friend Class InteractTreeDialog
         Me.location = location
     End Sub
 
-    Private Shared Function GenerateLines() As IEnumerable(Of String)
-        Return Array.Empty(Of String)
+    Private Shared Function GenerateLines() As IEnumerable(Of (Mood As String, Text As String))
+        Return Array.Empty(Of (Mood As String, Text As String))
     End Function
 
     Private Shared Function GenerateChoices() As IEnumerable(Of (Choice As String, Text As String))

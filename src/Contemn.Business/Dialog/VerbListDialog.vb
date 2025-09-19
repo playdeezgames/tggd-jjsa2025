@@ -8,7 +8,7 @@ Friend Class VerbListDialog
         MyBase.New(
             caption,
             GenerateChoices(character, verbCategoryType),
-            Array.Empty(Of String))
+            Array.Empty(Of (Mood As String, Text As String)))
         Me.character = character
     End Sub
     Private Shared Function GenerateChoices(character As ICharacter, verbCategoryType As String) As IEnumerable(Of (Choice As String, Text As String))

@@ -15,8 +15,8 @@ Friend Class InteractWaterDialog
         Me.location = location
     End Sub
 
-    Private Shared Function GenerateLines() As IEnumerable(Of String)
-        Return Array.Empty(Of String)
+    Private Shared Function GenerateLines() As IEnumerable(Of (Mood As String, Text As String))
+        Return Array.Empty(Of (Mood As String, Text As String))
     End Function
 
     Private Shared Function GenerateChoices() As IEnumerable(Of (Choice As String, Text As String))
@@ -41,14 +41,14 @@ Friend Class InteractWaterDialog
 
     Private Function Drink() As IDialog
         Dim hydrationDelta = character.GetStatisticMaximum(StatisticType.Hydration) - character.GetStatistic(StatisticType.Hydration)
-        Dim messageLines As New List(Of String) From
+        Dim messageLines As New List(Of (Mood As String, Text As String)) From
             {
-                $"+{hydrationDelta} hydration"
+                (MoodType.Info, $"+{hydrationDelta} hydration")
             }
         If RNG.GenerateBoolean(1, 1) Then
             Dim illness = RNG.RollXDY(1, 4)
             character.ChangeStatistic(StatisticType.Illness, illness)
-            messageLines.Add($"+{illness} illness")
+            messageLines.Add((MoodType.Info, $"+{illness} illness"))
         End If
         character.ChangeStatistic(StatisticType.Hydration, hydrationDelta)
         Return New OkDialog(messageLines, Function() Nothing)

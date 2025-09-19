@@ -8,7 +8,7 @@ Friend Class MessageDialog
     ReadOnly choiceTable As IReadOnlyDictionary(Of String, Func(Of IDialog))
 
     Public Sub New(
-                  lines As IEnumerable(Of String),
+                  lines As IEnumerable(Of (Mood As String, Text As String)),
                   choices As IEnumerable(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)),
                   cancelDialog As Func(Of IDialog))
         MyBase.New("Message", choices.Where(Function(x) x.Enabled).Select(Function(x) (x.Choice, x.Text)), lines)

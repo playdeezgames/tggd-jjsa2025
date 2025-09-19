@@ -41,15 +41,6 @@ Friend Class NavigationState
         Return y
     End Function
 
-    Shared ReadOnly moodColors As IReadOnlyDictionary(Of String, (ForegroundColor As Integer, BackgroundColor As Integer)) =
-        New Dictionary(Of String, (ForegroundColor As Integer, BackgroundColor As Integer)) From
-        {
-            {MoodType.Info, (Hue.LightGray, Hue.Black)},
-            {MoodType.Danger, (Hue.Black, Hue.Red)},
-            {MoodType.Warning, (Hue.Black, Hue.Yellow)}
-        }
-
-
     Private Sub RenderMessages()
         While World.MessageCount > MESSAGE_LINES
             World.DismissMessage()

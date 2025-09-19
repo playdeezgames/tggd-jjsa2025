@@ -10,8 +10,8 @@ Friend Class InventoryDialog
         Me.character = character
     End Sub
 
-    Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of String)
-        Return Array.Empty(Of String)
+    Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
+        Return Array.Empty(Of (Mood As String, Text As String))
     End Function
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))

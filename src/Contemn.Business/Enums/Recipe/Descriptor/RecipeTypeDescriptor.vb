@@ -14,8 +14,8 @@
         Return inputs.All(Function(x) character.GetCountOfItemType(x.Key) >= x.Value)
     End Function
 
-    Friend Function Craft(character As ICharacter) As IEnumerable(Of String)
-        Dim results As New List(Of String)
+    Friend Function Craft(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
+        Dim results As New List(Of (Mood As String, Text As String))
         Dim deltas As New Dictionary(Of String, Integer)
         For Each itemType In New HashSet(Of String)(inputs.Keys.Concat(outputs.Keys))
             deltas(itemType) = 0
@@ -29,13 +29,13 @@
         Next
         For Each delta In deltas
             If delta.Value < 0 Then
-                results.Add($"{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}")
+                results.Add((MoodType.Info, $"{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}"))
                 For Each item In character.ItemsOfType(delta.Key).Take(-delta.Value)
                     character.RemoveItem(item)
                     item.Recycle()
                 Next
             ElseIf delta.Value > 0 Then
-                results.Add($"+{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}")
+                results.Add((MoodType.Info, $"+{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}"))
                 For Each dummy In Enumerable.Range(0, delta.Value)
                     character.World.CreateItem(delta.Key, character)
                 Next
