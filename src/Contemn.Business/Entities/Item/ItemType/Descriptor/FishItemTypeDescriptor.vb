@@ -2,6 +2,8 @@
 
 Friend Class FishItemTypeDescriptor
     Inherits ItemTypeDescriptor
+    Private Shared ReadOnly EAT_ANOTHER_CHOICE As String = NameOf(EAT_ANOTHER_CHOICE)
+    Private Const EAT_ANOTHER_TEXT = "Eat Another..."
 
     Public Sub New()
         MyBase.New(
@@ -18,6 +20,7 @@ Friend Class FishItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As Item)
+        item.SetStatistic(StatisticType.Satiety, 25)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
@@ -42,9 +45,23 @@ Friend Class FishItemTypeDescriptor
     End Function
 
     Private Function Eat(item As IItem, character As ICharacter) As IDialog
+        Dim lines As New List(Of (Mood As String, Text As String))
+        character.ChangeStatistic(StatisticType.Satiety, item.GetStatistic(StatisticType.Satiety))
+        lines.Add((MoodType.Info, $"+{item.GetStatistic(StatisticType.Satiety)} {StatisticType.Satiety.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Satiety)})"))
+        If RNG.GenerateBoolean(1, 1) Then
+            Dim illness = RNG.RollXDY(1, 4)
+            character.ChangeStatistic(StatisticType.Illness, illness)
+            lines.Add((MoodType.Info, $"+{illness} {StatisticType.Illness.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Illness)})"))
+        End If
+        character.RemoveItem(item)
+        lines.Add((MoodType.Info, $"-1 {item.Name}({character.GetCountOfItemType(ItemType)})"))
+        item.Recycle()
         Return New MessageDialog(
-            {},
-            {(NEVER_MIND_CHOICE, NEVER_MIND_TEXT, ItemTypeDialog.LaunchMenu(character, ItemType), True)},
+            lines,
+            {
+                (NEVER_MIND_CHOICE, NEVER_MIND_TEXT, ItemTypeDialog.LaunchMenu(character, ItemType), True),
+                (EAT_ANOTHER_CHOICE, EAT_ANOTHER_TEXT, Function() Eat(character.GetItemOfType(ItemType), character), character.HasItemsOfType(ItemType))
+            },
             ItemTypeDialog.LaunchMenu(character, ItemType))
     End Function
 
