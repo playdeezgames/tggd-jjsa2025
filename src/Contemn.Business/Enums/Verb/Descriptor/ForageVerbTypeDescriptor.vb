@@ -26,21 +26,17 @@ Friend Class ForageVerbTypeDescriptor
         messageLines.AddRange(lines)
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
-                (OK_CHOICE, OK_TEXT, BackToGame(), True),
+                (OK_CHOICE, OK_TEXT, VerbListDialog.LaunchMenu(character), True),
                 (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character), Not character.IsDead)
             }
         Return New MessageDialog(
             messageLines,
             messageChoices,
-            BackToGame())
+            VerbListDialog.LaunchMenu(character))
     End Function
 
     Private Shared Function ForageAgain(character As ICharacter) As Func(Of IDialog)
         Return Function() Business.VerbType.Forage.ToVerbTypeDescriptor.Perform(character)
-    End Function
-
-    Private Shared Function BackToGame() As Func(Of IDialog)
-        Return Function() Nothing
     End Function
 
     Private Function FoundItem(character As ICharacter, item As IItem, generator As IGenerator, lines As IEnumerable(Of (Mood As String, Text As String))) As IDialog
@@ -53,7 +49,7 @@ Friend Class ForageVerbTypeDescriptor
         messageLines.AddRange(lines)
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
-                (OK_CHOICE, OK_TEXT, BackToGame(), True),
+                (OK_CHOICE, OK_TEXT, VerbListDialog.LaunchMenu(character), True),
                 (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character), Not character.IsDead AndAlso Not generator.IsDepleted)
             }
         If generator.IsDepleted Then
@@ -64,7 +60,7 @@ Friend Class ForageVerbTypeDescriptor
         Return New MessageDialog(
             messageLines,
             messageChoices,
-            BackToGame())
+            VerbListDialog.LaunchMenu(character))
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean

@@ -33,10 +33,22 @@ Friend Class FishItemTypeDescriptor
     End Function
 
     Friend Overrides Function Choose(item As IItem, character As ICharacter, choice As String) As IDialog
-        Throw New NotImplementedException()
+        Select Case choice
+            Case EAT_CHOICE
+                Return Eat(item, character)
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+
+    Private Function Eat(item As IItem, character As ICharacter) As IDialog
+        Return New MessageDialog(
+            {},
+            {(NEVER_MIND_CHOICE, NEVER_MIND_TEXT, ItemTypeDialog.LaunchMenu(character, ItemType), True)},
+            ItemTypeDialog.LaunchMenu(character, ItemType))
     End Function
 
     Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
-        Return Array.Empty(Of (Choice As String, Text As String))
+        Return {(EAT_CHOICE, EAT_TEXT)}
     End Function
 End Class

@@ -1,4 +1,5 @@
 ﻿Imports Contemn.Data
+Imports TGGD.Business
 
 Public Class Item
     Inherits Entity(Of ItemData)
@@ -45,4 +46,8 @@ Public Class Item
         MyBase.Initialize()
         ItemType.ToItemTypeDescriptor.HandleInitialize(Me)
     End Sub
+
+    Public Function MakeChoice(character As ICharacter, choice As String) As IDialog Implements IItem.MakeChoice
+        Return ItemType.ToItemTypeDescriptor.Choose(Me, character, choice)
+    End Function
 End Class

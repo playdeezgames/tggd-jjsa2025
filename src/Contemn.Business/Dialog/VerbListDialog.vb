@@ -11,6 +11,11 @@ Friend Class VerbListDialog
             Array.Empty(Of (Mood As String, Text As String)))
         Me.character = character
     End Sub
+
+    Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
+        Return Function() CType(New VerbListDialog(character, VerbCategoryType.Action, "Actions..."), IDialog)
+    End Function
+
     Private Shared Function GenerateChoices(character As ICharacter, verbCategoryType As String) As IEnumerable(Of (Choice As String, Text As String))
         Dim result As New List(Of (Choice As String, Text As String)) From {
                 (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)

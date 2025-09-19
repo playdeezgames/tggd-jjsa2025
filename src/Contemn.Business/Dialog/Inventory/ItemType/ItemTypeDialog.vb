@@ -29,6 +29,7 @@ Friend Class ItemTypeDialog
         If RecipeTypes.Descriptors.Any(Function(x) x.Value.HasInput(itemType) AndAlso x.Value.CanCraft(character)) Then
             result.Add((CRAFT_CHOICE, CRAFT_TEXT))
         End If
+        result.AddRange(character.GetItemOfType(itemType).GetAvailableChoices(character))
         Return result
     End Function
 
@@ -39,11 +40,19 @@ Friend Class ItemTypeDialog
             Case CRAFT_CHOICE
                 Return New ItemTypeCraftDialog(character, itemType)
             Case Else
-                Throw New NotImplementedException
+                Return character.GetItemOfType(itemType).MakeChoice(character, choice)
         End Select
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
         Return VerbType.Inventory.ToVerbTypeDescriptor.Perform(character)
+    End Function
+
+
+    Friend Shared Function LaunchMenu(character As ICharacter, itemType As String) As Func(Of IDialog)
+        Return Function() If(
+            character.HasItemsOfType(itemType),
+            CType(New ItemTypeDialog(character, itemType), IDialog),
+            InventoryDialog.LaunchMenu(character).Invoke)
     End Function
 End Class

@@ -5,4 +5,6 @@
     Friend Const NEVER_MIND_TEXT = "Never Mind"
     Friend ReadOnly OK_CHOICE As String = NameOf(OK_CHOICE)
     Friend Const OK_TEXT = "OK"
+    Friend ReadOnly EAT_CHOICE As String = NameOf(EAT_CHOICE)
+    Friend Const EAT_TEXT = "Eat"
 End Module

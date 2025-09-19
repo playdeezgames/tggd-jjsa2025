@@ -47,4 +47,11 @@ Friend Class InventoryDialog
     Public Overrides Function CancelDialog() As IDialog
         Return VerbType.ActionList.ToVerbTypeDescriptor.Perform(character)
     End Function
+
+    Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
+        Return Function() If(
+                    character.HasItems,
+                    CType(New InventoryDialog(character), IDialog),
+                    VerbListDialog.LaunchMenu(character).Invoke())
+    End Function
 End Class

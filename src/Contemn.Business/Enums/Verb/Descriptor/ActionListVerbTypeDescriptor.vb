@@ -8,7 +8,7 @@ Friend Class ActionListVerbTypeDescriptor
     End Sub
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
-        Return New VerbListDialog(character, Business.VerbCategoryType.Action, "Actions...")
+        Return VerbListDialog.LaunchMenu(character).Invoke()
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean

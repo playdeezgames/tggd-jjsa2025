@@ -52,20 +52,13 @@ Friend Class ItemTypeCraftDialog
         Return New MessageDialog(
             messageLines,
             {
-                (OK_CHOICE, OK_TEXT, BackToGame(), True),
+                (OK_CHOICE, OK_TEXT, ItemTypeDialog.LaunchMenu(character, itemType), True),
                 (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, CraftAnother(recipeType), descriptor.CanCraft(character))
-            }, BackToGame())
+            }, ItemTypeDialog.LaunchMenu(character, itemType))
     End Function
 
     Private Function CraftAnother(recipeType As String) As Func(Of IDialog)
         Return Function() CraftRecipe(recipeType)
-    End Function
-
-    Private Function BackToGame() As Func(Of IDialog)
-        Return Function() If(
-            character.HasItemsOfType(itemType),
-            CType(New ItemTypeDialog(character, itemType), IDialog),
-            CType(New InventoryDialog(character), IDialog))
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
