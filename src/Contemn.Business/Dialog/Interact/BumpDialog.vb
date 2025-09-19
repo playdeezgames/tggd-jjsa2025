@@ -1,14 +1,18 @@
 ﻿Imports TGGD.Business
 
-Friend Class InteractWaterDialog
+Friend Class BumpDialog
     Inherits BaseDialog
 
     Private ReadOnly character As ICharacter
 
     Public Sub New(character As ICharacter)
-        MyBase.New("Water", GenerateChoices(character), GenerateLines())
+        MyBase.New(GenerateCaption(character), GenerateChoices(character), GenerateLines())
         Me.character = character
     End Sub
+
+    Private Shared Function GenerateCaption(character As ICharacter) As String
+        Return character.GetBumpLocation().LocationType.ToLocationTypeDescriptor.LocationTypeName
+    End Function
 
     Private Shared Function GenerateLines() As IEnumerable(Of (Mood As String, Text As String))
         Return Array.Empty(Of (Mood As String, Text As String))

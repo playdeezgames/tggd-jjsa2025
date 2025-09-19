@@ -4,7 +4,7 @@ Friend Class DirtLocationTypeDescriptor
     Inherits LocationTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.LocationType.Dirt)
+        MyBase.New(Business.LocationType.Dirt, "Dirt")
     End Sub
 
     Friend Overrides Sub OnLeave(location As ILocation, character As ICharacter)

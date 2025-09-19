@@ -4,7 +4,7 @@ Friend Class WaterLocationTypeDescriptor
     Inherits LocationTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.LocationType.Water)
+        MyBase.New(Business.LocationType.Water, "Water")
     End Sub
 
     Friend Overrides Sub OnLeave(location As ILocation, character As ICharacter)
@@ -15,7 +15,7 @@ Friend Class WaterLocationTypeDescriptor
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
-        Return New InteractWaterDialog(character)
+        Return New BumpDialog(character)
     End Function
 
     Friend Overrides Function OnEnter(location As ILocation, character As ICharacter) As IDialog

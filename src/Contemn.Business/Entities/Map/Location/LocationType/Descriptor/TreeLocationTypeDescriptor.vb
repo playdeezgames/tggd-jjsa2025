@@ -4,7 +4,7 @@ Friend Class TreeLocationTypeDescriptor
     Inherits LocationTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.LocationType.Tree)
+        MyBase.New(Business.LocationType.Tree, "Tree")
     End Sub
 
     Friend Overrides Sub OnLeave(location As ILocation, character As ICharacter)
@@ -15,7 +15,7 @@ Friend Class TreeLocationTypeDescriptor
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
-        Return New InteractTreeDialog(character, location)
+        Return New BumpDialog(character)
     End Function
 
     Friend Overrides Function OnEnter(location As ILocation, character As ICharacter) As IDialog

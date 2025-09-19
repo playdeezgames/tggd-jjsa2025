@@ -2,8 +2,10 @@
 
 Friend MustInherit Class LocationTypeDescriptor
     Friend ReadOnly Property LocationType As String
-    Sub New(locationType As String)
+    Friend ReadOnly Property LocationTypeName As String
+    Sub New(locationType As String, locationTypeName As String)
         Me.LocationType = locationType
+        Me.LocationTypeName = locationTypeName
     End Sub
 
     Friend MustOverride Function OnBump(location As ILocation, character As ICharacter) As IDialog

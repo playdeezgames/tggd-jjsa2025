@@ -3,7 +3,7 @@
 Friend Class GrassLocationTypeDescriptor
     Inherits LocationTypeDescriptor
     Public Sub New()
-        MyBase.New(Business.LocationType.Grass)
+        MyBase.New(Business.LocationType.Grass, "Grass")
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog

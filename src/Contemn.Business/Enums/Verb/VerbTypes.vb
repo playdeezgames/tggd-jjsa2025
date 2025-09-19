@@ -11,7 +11,8 @@ Friend Module VerbTypes
             New ActionListVerbTypeDescriptor(),
             New ForageVerbTypeDescriptor(),
             New InventoryVerbTypeDescriptor(),
-            New DrinkVerbTypeDescriptor()
+            New DrinkVerbTypeDescriptor(),
+            New FishVerbTypeDescriptor()
         }.ToDictionary(Function(x) x.VerbType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get

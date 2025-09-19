@@ -6,7 +6,8 @@ Friend Module ItemTypes
         {
             New PlantFiberItemTypeDescriptor(),
             New TwineItemTypeDescriptor(),
-            New FishingNetItemTypeDescriptor()
+            New FishingNetItemTypeDescriptor(),
+            New FishItemTypeDescriptor()
         }.ToDictionary(Function(x) x.ItemType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get
