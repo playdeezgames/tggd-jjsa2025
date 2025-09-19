@@ -29,16 +29,16 @@
         Next
         For Each delta In deltas
             If delta.Value < 0 Then
-                results.Add((MoodType.Info, $"{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}"))
                 For Each item In character.ItemsOfType(delta.Key).Take(-delta.Value)
                     character.RemoveItem(item)
                     item.Recycle()
                 Next
+                results.Add((MoodType.Info, $"{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
             ElseIf delta.Value > 0 Then
-                results.Add((MoodType.Info, $"+{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}"))
                 For Each dummy In Enumerable.Range(0, delta.Value)
                     character.World.CreateItem(delta.Key, character)
                 Next
+                results.Add((MoodType.Info, $"+{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
             End If
         Next
         Return results
