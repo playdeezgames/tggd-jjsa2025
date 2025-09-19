@@ -80,7 +80,7 @@ Friend Class Character
     End Function
 
     Private Function Bump(nextLocation As ILocation) As IDialog
-        Return Me.HandleBump(nextLocation)
+        Return HandleBump(nextLocation)
     End Function
 
     Private Function Enter(nextLocation As ILocation) As IDialog
