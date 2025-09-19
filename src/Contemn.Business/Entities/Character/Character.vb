@@ -92,6 +92,7 @@ Friend Class Character
     End Function
 
     Private Sub Leave()
+        SetBumpLocation(Nothing)
         Me.HandleLeave(Location)
         Location.HandleLeave(Me)
         Data.Locations(EntityData.LocationId).CharacterId = Nothing

@@ -10,7 +10,8 @@ Friend Module VerbTypes
             New MoveVerbTypeDescriptor(VerbType.MoveWest, DirectionType.West),
             New ActionListVerbTypeDescriptor(),
             New ForageVerbTypeDescriptor(),
-            New InventoryVerbTypeDescriptor()
+            New InventoryVerbTypeDescriptor(),
+            New DrinkVerbTypeDescriptor()
         }.ToDictionary(Function(x) x.VerbType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get

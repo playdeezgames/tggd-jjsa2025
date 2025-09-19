@@ -1,0 +1,35 @@
+﻿Imports TGGD.Business
+
+Friend Class DrinkVerbTypeDescriptor
+    Inherits VerbTypeDescriptor
+
+    Public Sub New()
+        MyBase.New(
+            Business.VerbType.Drink,
+            Business.VerbCategoryType.Bump,
+            "Drink")
+    End Sub
+
+    Public Overrides Function Perform(character As ICharacter) As IDialog
+        Dim hydrationDelta = character.GetStatisticMaximum(StatisticType.Hydration) - character.GetStatistic(StatisticType.Hydration)
+        Dim messageLines As New List(Of (Mood As String, Text As String)) From
+            {
+                (MoodType.Info, $"+{hydrationDelta} hydration")
+            }
+        If RNG.GenerateBoolean(1, 1) Then
+            Dim illness = RNG.RollXDY(1, 4)
+            character.ChangeStatistic(StatisticType.Illness, illness)
+            messageLines.Add((MoodType.Info, $"+{illness} illness"))
+        End If
+        character.ChangeStatistic(StatisticType.Hydration, hydrationDelta)
+        Return New OkDialog(messageLines, Function() Nothing)
+    End Function
+
+    Public Overrides Function CanPerform(character As ICharacter) As Boolean
+        Dim bumpLocation = character.GetBumpLocation()
+        If bumpLocation Is Nothing Then
+            Return False
+        End If
+        Return bumpLocation.LocationType = LocationType.Water
+    End Function
+End Class
