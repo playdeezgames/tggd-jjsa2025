@@ -12,6 +12,6 @@ Friend Class InventoryVerbTypeDescriptor
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
-        Return character.HasItems
+        Return MyBase.CanPerform(character) AndAlso character.HasItems
     End Function
 End Class

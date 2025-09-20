@@ -27,7 +27,7 @@ Friend Class ForageVerbTypeDescriptor
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
                 (OK_CHOICE, OK_TEXT, VerbListDialog.LaunchMenu(character), True),
-                (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, Function() Perform(character), Not character.IsDead)
+                (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
             }
         character.PlaySfx(Sfx.Shucks)
         Return New MessageDialog(
@@ -48,7 +48,7 @@ Friend Class ForageVerbTypeDescriptor
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
                 (OK_CHOICE, OK_TEXT, VerbListDialog.LaunchMenu(character), True),
-                (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, Function() Perform(character), Not character.IsDead AndAlso Not generator.IsDepleted)
+                (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
             }
         If generator.IsDepleted Then
             messageLines.Add((MoodType.Warning, $"{character.Location.LocationType.ToLocationTypeDescriptor.LocationType} is now depleted."))
@@ -62,6 +62,6 @@ Friend Class ForageVerbTypeDescriptor
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
-        Return character.Location.HasMetadata(MetadataType.ForageTable)
+        Return MyBase.CanPerform(character) AndAlso character.Location.HasMetadata(MetadataType.ForageTable)
     End Function
 End Class

@@ -49,6 +49,9 @@ Friend Class FishVerbTypeDescriptor
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
+        If Not MyBase.CanPerform(character) Then
+            Return False
+        End If
         If Not character.GetBumpLocation().LocationType = Business.LocationType.Water Then
             Return False
         End If

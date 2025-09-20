@@ -10,7 +10,9 @@ Friend MustInherit Class VerbTypeDescriptor
         Me.VerbCategoryType = verbCategoryType
     End Sub
     MustOverride Function Perform(character As ICharacter) As IDialog
-    MustOverride Function CanPerform(character As ICharacter) As Boolean
+    Overridable Function CanPerform(character As ICharacter) As Boolean
+        Return Not character.IsDead
+    End Function
     Function CanChoose(character As Character) As Boolean
         Return Not String.IsNullOrEmpty(VerbTypeName) AndAlso CanPerform(character)
     End Function

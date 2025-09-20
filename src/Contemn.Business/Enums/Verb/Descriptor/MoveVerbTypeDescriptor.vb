@@ -20,6 +20,6 @@ Friend Class MoveVerbTypeDescriptor
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
-        Return True
+        Return MyBase.CanPerform(character)
     End Function
 End Class

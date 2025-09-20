@@ -26,6 +26,9 @@ Friend Class DrinkVerbTypeDescriptor
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
+        If Not MyBase.CanPerform(character) Then
+            Return False
+        End If
         Dim bumpLocation = character.GetBumpLocation()
         If bumpLocation Is Nothing Then
             Return False

@@ -10,8 +10,4 @@ Friend Class ActionListVerbTypeDescriptor
     Public Overrides Function Perform(character As ICharacter) As IDialog
         Return VerbListDialog.LaunchMenu(character).Invoke()
     End Function
-
-    Public Overrides Function CanPerform(character As ICharacter) As Boolean
-        Return True
-    End Function
 End Class
