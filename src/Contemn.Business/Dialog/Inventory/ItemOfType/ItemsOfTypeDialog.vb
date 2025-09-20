@@ -24,19 +24,31 @@ Friend Class ItemsOfTypeDialog
             {
                 (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
+        result.AddRange(character.ItemsOfType(itemType).Select(Function(x) (x.ItemId.ToString, x.Name)))
         Return result
     End Function
 
     Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
-                Return VerbType.Inventory.ToVerbTypeDescriptor.Perform(character)
+                Return CancelDialog()
             Case Else
-                Throw New NotImplementedException
+                Return ItemOfType(CInt(choice))
         End Select
     End Function
 
+    Private Function ItemOfType(itemId As Integer) As IDialog
+        Return New ItemOfTypeDialog(character, character.World.GetItem(itemId))
+    End Function
+
     Public Overrides Function CancelDialog() As IDialog
-        Return VerbType.Inventory.ToVerbTypeDescriptor.Perform(character)
+        Return InventoryDialog.LaunchMenu(character).Invoke()
+    End Function
+
+    Friend Shared Function LaunchMenu(character As ICharacter, itemType As String) As Func(Of IDialog)
+        Return Function() If(
+            character.HasItemsOfType(itemType),
+            New ItemsOfTypeDialog(character, itemType),
+            InventoryDialog.LaunchMenu(character).Invoke())
     End Function
 End Class

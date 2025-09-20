@@ -50,4 +50,8 @@ Public Class Item
     Public Function MakeChoice(character As ICharacter, choice As String) As IDialog Implements IItem.MakeChoice
         Return ItemType.ToItemTypeDescriptor.Choose(Me, character, choice)
     End Function
+
+    Public Function Describe() As IEnumerable(Of (Mood As String, Text As String)) Implements IItem.Describe
+        Return ItemType.ToItemTypeDescriptor.Describe(Me)
+    End Function
 End Class

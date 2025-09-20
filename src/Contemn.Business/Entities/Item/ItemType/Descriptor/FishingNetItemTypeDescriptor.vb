@@ -30,7 +30,7 @@ Friend Class FishingNetItemTypeDescriptor
     End Function
 
     Friend Overrides Function GetName(item As Item) As String
-        Return ItemTypeName
+        Return $"{ItemTypeName}({item.GetStatistic(StatisticType.Durability)}/{item.GetStatisticMaximum(StatisticType.Durability)})"
     End Function
 
     Friend Overrides Function Choose(item As IItem, character As ICharacter, choice As String) As IDialog
@@ -39,5 +39,12 @@ Friend Class FishingNetItemTypeDescriptor
 
     Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
         Return Array.Empty(Of (Choice As String, Text As String))
+    End Function
+
+    Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
+        Return {
+            (MoodType.Info, "Its a fishing net."),
+            (MoodType.Info, item.FormatStatistic(StatisticType.Durability))
+        }
     End Function
 End Class

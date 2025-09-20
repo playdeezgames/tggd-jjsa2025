@@ -36,4 +36,10 @@ Friend Class PlantFiberItemTypeDescriptor
     Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
         Return Array.Empty(Of (Choice As String, Text As String))
     End Function
+
+    Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
+        Return {
+            (MoodType.Info, "Its plant fiber.")
+        }
+    End Function
 End Class

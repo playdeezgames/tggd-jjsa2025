@@ -70,4 +70,10 @@ Friend Class FishItemTypeDescriptor
     Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
         Return {(EAT_CHOICE, EAT_TEXT)}
     End Function
+
+    Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
+        Return {
+            (MoodType.Info, "Its a fish.")
+        }
+    End Function
 End Class

@@ -8,6 +8,6 @@
     End Sub
 
     Friend Overrides Function Format(statisticValue As Integer, statisticMinimum As Integer, statisticMaximum As Integer) As String
-        Return $"{StatisticTypeName}({statisticValue}/{statisticMaximum})"
+        Return $"DUR: {statisticValue}/{statisticMaximum}"
     End Function
 End Class

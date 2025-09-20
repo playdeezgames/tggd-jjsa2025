@@ -19,9 +19,8 @@ Friend Class InventoryDialog
             {
                 (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
-        For Each itemStack In character.Items.GroupBy(Function(x) x.Name)
-            Dim item = itemStack.First
-            result.Add((item.ItemType, $"{item.Name}({itemStack.Count})"))
+        For Each itemStack In character.Items.GroupBy(Function(x) x.ItemType)
+            result.Add((itemStack.Key, $"{itemStack.Key.ToItemTypeDescriptor.ItemTypeName}({itemStack.Count})"))
         Next
         Return result
     End Function
