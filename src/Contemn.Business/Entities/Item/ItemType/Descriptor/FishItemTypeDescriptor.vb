@@ -51,11 +51,13 @@ Friend Class FishItemTypeDescriptor
         If RNG.GenerateBoolean(1, 1) Then
             Dim illness = RNG.RollXDY(1, 4)
             character.ChangeStatistic(StatisticType.Illness, illness)
+            lines.Add((MoodType.Info, "You get food poisoning."))
             lines.Add((MoodType.Info, $"+{illness} {StatisticType.Illness.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Illness)})"))
         End If
         character.RemoveItem(item)
         lines.Add((MoodType.Info, $"-1 {item.Name}({character.GetCountOfItemType(ItemType)})"))
         item.Recycle()
+        character.PlaySfx(Sfx.Eat)
         Return New MessageDialog(
             lines,
             {

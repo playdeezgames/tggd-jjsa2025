@@ -27,30 +27,28 @@ Friend Class ForageVerbTypeDescriptor
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
                 (OK_CHOICE, OK_TEXT, VerbListDialog.LaunchMenu(character), True),
-                (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character), Not character.IsDead)
+                (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, Function() Perform(character), Not character.IsDead)
             }
+        character.PlaySfx(Sfx.Shucks)
         Return New MessageDialog(
             messageLines,
             messageChoices,
             VerbListDialog.LaunchMenu(character))
     End Function
 
-    Private Shared Function ForageAgain(character As ICharacter) As Func(Of IDialog)
-        Return Function() Business.VerbType.Forage.ToVerbTypeDescriptor.Perform(character)
-    End Function
-
     Private Function FoundItem(character As ICharacter, item As IItem, generator As IGenerator, lines As IEnumerable(Of (Mood As String, Text As String))) As IDialog
         Dim itemCount = character.GetCountOfItemType(item.ItemType)
         Dim messageLines As New List(Of (Mood As String, Text As String)) From
             {
-                (MoodType.Info, $"You find {item.Name}."),
-                (MoodType.Info, $"You now have {itemCount}.")
+                (MoodType.Info, $"+1 {item.Name}({itemCount})")
             }
+        character.ChangeStatistic(StatisticType.Score, 1)
+        character.PlaySfx(Sfx.WooHoo)
         messageLines.AddRange(lines)
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
                 (OK_CHOICE, OK_TEXT, VerbListDialog.LaunchMenu(character), True),
-                (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, ForageAgain(character), Not character.IsDead AndAlso Not generator.IsDepleted)
+                (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, Function() Perform(character), Not character.IsDead AndAlso Not generator.IsDepleted)
             }
         If generator.IsDepleted Then
             messageLines.Add((MoodType.Warning, $"{character.Location.LocationType.ToLocationTypeDescriptor.LocationType} is now depleted."))

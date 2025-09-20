@@ -49,6 +49,8 @@ Friend Class ItemTypeCraftDialog
     Private Function CraftRecipe(recipeType As String) As IDialog
         Dim descriptor = recipeType.ToRecipeTypeDescriptor
         Dim messageLines = descriptor.Craft(character)
+        character.PlaySfx(Sfx.Craft)
+        character.ChangeStatistic(StatisticType.Score, 1)
         Return New MessageDialog(
             messageLines,
             {

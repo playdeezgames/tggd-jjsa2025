@@ -2,6 +2,7 @@
 
 Friend Class FishVerbTypeDescriptor
     Inherits VerbTypeDescriptor
+    Private Const CATCH_ANOTHER_TEXT = "Catch Another"
 
     Public Sub New()
         MyBase.New(
@@ -11,13 +12,38 @@ Friend Class FishVerbTypeDescriptor
     End Sub
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
-        Dim item = character.World.CreateItem(ItemType.Fish, character)
+        Dim bumpLocation = character.GetBumpLocation()
+        Dim success = RNG.GenerateBoolean(bumpLocation.GetStatistic(StatisticType.Depletion), bumpLocation.GetStatistic(StatisticType.Resource))
+        If success Then
+            Return CatchFish(character, bumpLocation)
+        End If
+        Return NoCatch(character)
+    End Function
+
+    Private Function NoCatch(character As ICharacter) As IDialog
+        character.PlaySfx(Sfx.Shucks)
         Return New MessageDialog(
+            character.ProcessTurn().
+                Append((MoodType.Info, $"You catch nothing.")),
             {
-                (MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(ItemType.Fish)})")
+                (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
+                (TRY_AGAIN_CHOICE, TRY_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
             },
+            Function() Nothing)
+    End Function
+
+    Private Function CatchFish(character As ICharacter, bumpLocation As ILocation) As IDialog
+        Dim item = character.World.CreateItem(ItemType.Fish, character)
+        bumpLocation.ChangeStatistic(StatisticType.Depletion, 1)
+        bumpLocation.ChangeStatistic(StatisticType.Resource, -1)
+        character.ChangeStatistic(StatisticType.Score, 1)
+        character.PlaySfx(Sfx.WooHoo)
+        Return New MessageDialog(
+            character.ProcessTurn().
+                Append((MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(ItemType.Fish)})")),
             {
-                (OK_CHOICE, OK_TEXT, Function() Nothing, True)
+                (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
+                (TRY_AGAIN_CHOICE, CATCH_ANOTHER_TEXT, Function() Perform(character), CanPerform(character))
             },
             Function() Nothing)
     End Function

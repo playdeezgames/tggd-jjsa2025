@@ -7,4 +7,6 @@
     Friend Const OK_TEXT = "OK"
     Friend ReadOnly EAT_CHOICE As String = NameOf(EAT_CHOICE)
     Friend Const EAT_TEXT = "Eat"
+    Friend ReadOnly TRY_AGAIN_CHOICE As String = NameOf(TRY_AGAIN_CHOICE)
+    Friend Const TRY_AGAIN_TEXT = "Try Again"
 End Module
