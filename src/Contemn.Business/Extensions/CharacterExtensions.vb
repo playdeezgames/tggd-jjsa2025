@@ -20,21 +20,6 @@ Friend Module CharacterExtensions
         Return character.World.GetLocation(character.GetStatistic(StatisticType.BumpLocationId))
     End Function
     <Extension>
-    Friend Sub SetStatisticRange(
-                                character As ICharacter,
-                                statisticType As String,
-                                statisticValue As Integer,
-                                statisticMinimum As Integer,
-                                statisticMaximum As Integer)
-        character.SetStatisticMinimum(statisticType, statisticMinimum)
-        character.SetStatisticMaximum(statisticType, statisticMaximum)
-        character.SetStatistic(statisticType, statisticValue)
-    End Sub
-    <Extension>
-    Friend Function IsStatisticAtMinimum(character As ICharacter, statisticType As String) As Boolean
-        Return character.GetStatistic(statisticType) = character.GetStatisticMinimum(statisticType)
-    End Function
-    <Extension>
     Friend Sub HandleLeave(character As ICharacter, location As ILocation)
         character.CharacterType.ToCharacterTypeDescriptor.OnLeave(character, location)
     End Sub

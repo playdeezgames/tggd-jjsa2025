@@ -2,7 +2,7 @@
 
 Friend Class FishingNetItemTypeDescriptor
     Inherits ItemTypeDescriptor
-
+    Const MAXIMUM_DURABILITY = 20
     Public Sub New()
         MyBase.New(
             Business.ItemType.FishingNet,
@@ -18,6 +18,7 @@ Friend Class FishingNetItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As Item)
+        item.SetStatisticRange(StatisticType.Durability, MAXIMUM_DURABILITY, 0, MAXIMUM_DURABILITY)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

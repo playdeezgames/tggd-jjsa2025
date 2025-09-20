@@ -39,13 +39,26 @@ Friend Class FishVerbTypeDescriptor
         character.ChangeStatistic(StatisticType.Score, 1)
         character.PlaySfx(Sfx.WooHoo)
         Return New MessageDialog(
-            character.ProcessTurn().
-                Append((MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(ItemType.Fish)})")),
-            {
-                (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
-                (TRY_AGAIN_CHOICE, CATCH_ANOTHER_TEXT, Function() Perform(character), CanPerform(character))
-            },
-            Function() Nothing)
+                    character.ProcessTurn().
+                        Append((MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(ItemType.Fish)})")).
+                        Append((MoodType.Info, DepleteNet(character))),
+                    {
+                        (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
+                        (TRY_AGAIN_CHOICE, CATCH_ANOTHER_TEXT, Function() Perform(character), CanPerform(character))
+                    },
+                    Function() Nothing)
+    End Function
+
+    Private Shared Function DepleteNet(character As ICharacter) As String
+        Dim net = character.GetItemOfType(ItemType.FishingNet)
+        net.ChangeStatistic(StatisticType.Durability, -1)
+        Dim netRuined = net.IsStatisticAtMinimum(StatisticType.Durability)
+        Dim netLine = If(netRuined, $"Yer {net.Name} is ruined!", $"-1 {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName} {net.Name}")
+        If netRuined Then
+            character.RemoveItem(net)
+            net.Recycle()
+        End If
+        Return netLine
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
