@@ -1,10 +1,10 @@
 ﻿Imports TGGD.Business
 
-Friend Class PlantFiberItemTypeDescriptor
+Friend Class RockItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.ItemType.PlantFiber, "Fiber", 0, True)
+        MyBase.New(Business.ItemType.Rock, "Rock", 0, True)
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -38,7 +38,7 @@ Friend Class PlantFiberItemTypeDescriptor
 
     Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
         Return {
-            (MoodType.Info, "Its plant fiber.")
+            (MoodType.Info, "Its a rock.")
         }
     End Function
 End Class
