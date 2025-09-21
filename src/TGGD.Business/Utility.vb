@@ -12,7 +12,11 @@ Public Module Utility
         Return items.ToList
     End Function
     <Extension>
-    Public Function AppendIf(Of TSource)(source As IEnumerable(Of TSource), element As TSource, condition As Boolean) As IEnumerable(Of TSource)
+    Public Function AppendIf(Of TSource)(source As IEnumerable(Of TSource), condition As Boolean, element As TSource) As IEnumerable(Of TSource)
         Return If(condition, source.Append(element), source)
+    End Function
+    <Extension>
+    Public Function ConcatIf(Of TSource)(source As IEnumerable(Of TSource), condition As Boolean, elements As IEnumerable(Of TSource)) As IEnumerable(Of TSource)
+        Return If(condition, source.Concat(elements), source)
     End Function
 End Module

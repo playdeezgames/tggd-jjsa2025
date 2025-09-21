@@ -9,7 +9,8 @@ Friend Module ItemTypes
             New FishingNetItemTypeDescriptor(),
             New FishItemTypeDescriptor(),
             New RockItemTypeDescriptor(),
-            New SharpRockItemTypeDescriptor()
+            New SharpRockItemTypeDescriptor(),
+            New StickItemTypeDescriptor()
         }.ToDictionary(Function(x) x.ItemType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get

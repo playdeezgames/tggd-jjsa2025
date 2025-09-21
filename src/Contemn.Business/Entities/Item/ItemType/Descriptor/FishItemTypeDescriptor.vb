@@ -73,7 +73,7 @@ Friend Class FishItemTypeDescriptor
 
     Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
         Return {
-            (MoodType.Info, "Its a fish.")
+            (MoodType.Info, "It's a fish.")
         }
     End Function
 End Class

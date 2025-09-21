@@ -38,7 +38,7 @@ Friend Class PlantFiberItemTypeDescriptor
 
     Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
         Return {
-            (MoodType.Info, "Its plant fiber.")
+            (MoodType.Info, "It's plant fiber.")
         }
     End Function
 End Class

@@ -1,0 +1,39 @@
+﻿Imports System.Reflection.Metadata.Ecma335
+Imports TGGD.Business
+
+Friend Class CollectStickVerbTypeDescriptor
+    Inherits VerbTypeDescriptor
+    Private ReadOnly COLLECT_ANOTHER_CHOICE As String = NameOf(COLLECT_ANOTHER_CHOICE)
+    Private Const COLLECT_ANOTHER_TEXT = "Collect Another"
+
+    Public Sub New()
+        MyBase.New(Business.VerbType.CollectStick, Business.VerbCategoryType.Bump, "Collect Stick")
+    End Sub
+
+    Public Overrides Function Perform(character As ICharacter) As IDialog
+        Return New MessageDialog(
+            character.
+                ProcessTurn().
+                Concat(HandlePerform(character)),
+            {
+                (OK_CHOICE, OK_TEXT, Function() Nothing, True),
+                (COLLECT_ANOTHER_CHOICE, COLLECT_ANOTHER_TEXT, Function() Perform(character), CanPerform(character))
+            },
+            Function() New BumpDialog(character))
+    End Function
+
+    Private Function HandlePerform(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
+        Dim result As New List(Of (Mood As String, Text As String))
+        Dim stick = character.World.CreateItem(ItemType.Stick, character)
+        character.GetBumpLocation().ChangeStatistic(StatisticType.Resource, -1)
+        result.Add((MoodType.Info, $"+1 {stick.Name}({character.GetCountOfItemType(stick.ItemType)})"))
+        Return result
+    End Function
+
+    Public Overrides Function CanPerform(character As ICharacter) As Boolean
+        Dim bumpLocation = character.GetBumpLocation()
+        Return MyBase.CanPerform(character) AndAlso
+            bumpLocation.LocationType = LocationType.Tree AndAlso
+            Not bumpLocation.IsStatisticAtMinimum(StatisticType.Resource)
+    End Function
+End Class

@@ -1,10 +1,14 @@
 ﻿Imports TGGD.Business
 
-Friend Class SharpRockItemTypeDescriptor
+Friend Class StickItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.ItemType.SharpRock, "Sharp Rock", 0, True)
+        MyBase.New(
+            Business.ItemType.Stick,
+            "Stick",
+            0,
+            True)
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -25,7 +29,7 @@ Friend Class SharpRockItemTypeDescriptor
     End Function
 
     Friend Overrides Function GetName(item As Item) As String
-        Return Me.ItemTypeName
+        Return ItemTypeName
     End Function
 
     Friend Overrides Function Choose(item As IItem, character As ICharacter, choice As String) As IDialog
@@ -38,7 +42,7 @@ Friend Class SharpRockItemTypeDescriptor
 
     Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
         Return {
-            (MoodType.Info, "It's a sharp rock.")
+            (MoodType.Info, "It's a stick.")
         }
     End Function
 End Class

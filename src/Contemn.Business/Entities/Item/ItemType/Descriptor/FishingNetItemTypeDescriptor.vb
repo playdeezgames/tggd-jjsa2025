@@ -78,7 +78,7 @@ Friend Class FishingNetItemTypeDescriptor
 
     Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
         Return {
-            (MoodType.Info, "Its a fishing net."),
+            (MoodType.Info, "It's a fishing net."),
             (MoodType.Info, item.FormatStatistic(StatisticType.Durability))
         }
     End Function

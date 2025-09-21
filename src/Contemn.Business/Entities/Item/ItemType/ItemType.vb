@@ -4,5 +4,6 @@
     Public ReadOnly PlantFiber As String = NameOf(PlantFiber)
     Public ReadOnly Rock As String = NameOf(Rock)
     Public ReadOnly SharpRock As String = NameOf(SharpRock)
+    Public ReadOnly Stick As String = NameOf(Stick)
     Public ReadOnly Twine As String = NameOf(Twine)
 End Module

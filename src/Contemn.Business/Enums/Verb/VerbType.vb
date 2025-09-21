@@ -1,5 +1,6 @@
 ﻿Public Module VerbType
     Public ReadOnly ActionList As String = NameOf(ActionList)
+    Public ReadOnly CollectStick As String = NameOf(CollectStick)
     Public ReadOnly Drink As String = NameOf(Drink)
     Public ReadOnly Fish As String = NameOf(Fish)
     Public ReadOnly Forage As String = NameOf(Forage)

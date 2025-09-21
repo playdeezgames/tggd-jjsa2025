@@ -38,7 +38,7 @@ Friend Class RockItemTypeDescriptor
 
     Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
         Return {
-            (MoodType.Info, "Its a rock.")
+            (MoodType.Info, "It's a rock.")
         }
     End Function
 End Class

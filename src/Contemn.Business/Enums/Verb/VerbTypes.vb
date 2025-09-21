@@ -12,7 +12,8 @@ Friend Module VerbTypes
             New ForageVerbTypeDescriptor(),
             New InventoryVerbTypeDescriptor(),
             New DrinkVerbTypeDescriptor(),
-            New FishVerbTypeDescriptor()
+            New FishVerbTypeDescriptor(),
+            New CollectStickVerbTypeDescriptor()
         }
         Return result
     End Function

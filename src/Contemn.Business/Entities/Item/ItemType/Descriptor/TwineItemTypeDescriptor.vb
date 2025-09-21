@@ -38,7 +38,7 @@ Friend Class TwineItemTypeDescriptor
 
     Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
         Return {
-            (MoodType.Info, "Its twine.")
+            (MoodType.Info, "It's twine.")
         }
     End Function
 End Class
