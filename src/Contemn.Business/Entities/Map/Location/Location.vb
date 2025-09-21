@@ -64,6 +64,12 @@ Friend Class Location
         End Get
     End Property
 
+    Public ReadOnly Property Name As String Implements ILocation.Name
+        Get
+            Return LocationType.ToLocationTypeDescriptor.GetName(Me)
+        End Get
+    End Property
+
     Public Overrides Sub Recycle()
         Clear()
         Data.RecycledLocations.Add(LocationId)

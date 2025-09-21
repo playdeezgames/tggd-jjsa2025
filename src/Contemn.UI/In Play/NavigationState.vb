@@ -31,6 +31,8 @@ Friend Class NavigationState
         Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Hydration), Hue.Blue, Hue.Black)
         y += 1
         y = RenderIllness(x, y, avatar)
+        Buffer.Write(x, y, $"Terrain: {avatar.Location.Name}", Hue.LightGray, Hue.Black)
+
     End Sub
 
     Private Function RenderIllness(x As Integer, y As Integer, character As ICharacter) As Integer
