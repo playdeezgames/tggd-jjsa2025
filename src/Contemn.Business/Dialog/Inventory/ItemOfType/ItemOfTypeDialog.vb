@@ -24,6 +24,7 @@ Friend Class ItemOfTypeDialog
     Private Shared Function GenerateChoices(character As ICharacter, item As IItem) As IEnumerable(Of (Choice As String, Text As String))
         Dim result As New List(Of (Choice As String, Text As String)) From
             {(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)}
+        result.AddRange(item.GetAvailableChoices(character))
         Return result
     End Function
 
