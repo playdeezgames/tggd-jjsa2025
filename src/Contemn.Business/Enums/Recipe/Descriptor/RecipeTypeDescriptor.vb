@@ -30,8 +30,7 @@
         For Each delta In deltas
             If delta.Value < 0 Then
                 For Each item In character.ItemsOfType(delta.Key).Take(-delta.Value)
-                    character.RemoveItem(item)
-                    item.Recycle()
+                    character.RemoveAndRecycleItem(item)
                 Next
                 results.Add((MoodType.Info, $"{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
             ElseIf delta.Value > 0 Then

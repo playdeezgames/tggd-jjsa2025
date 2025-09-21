@@ -13,6 +13,11 @@ Friend Module CharacterExtensions
         character.SetStatistic(StatisticType.BumpLocationId, location?.LocationId)
     End Sub
     <Extension>
+    Friend Sub RemoveAndRecycleItem(character As ICharacter, item As IItem)
+        character.RemoveItem(item)
+        item.Recycle()
+    End Sub
+    <Extension>
     Friend Function GetBumpLocation(character As ICharacter) As ILocation
         If Not character.HasStatistic(StatisticType.BumpLocationId) Then
             Return Nothing

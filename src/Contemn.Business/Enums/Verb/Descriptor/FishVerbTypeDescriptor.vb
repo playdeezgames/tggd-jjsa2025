@@ -55,8 +55,7 @@ Friend Class FishVerbTypeDescriptor
         Dim netRuined = net.IsStatisticAtMinimum(StatisticType.Durability)
         Dim netLine = If(netRuined, $"Yer {net.Name} is ruined!", $"-1 {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName} {net.Name}")
         If netRuined Then
-            character.RemoveItem(net)
-            net.Recycle()
+            character.RemoveAndRecycleItem(net)
         End If
         Return netLine
     End Function

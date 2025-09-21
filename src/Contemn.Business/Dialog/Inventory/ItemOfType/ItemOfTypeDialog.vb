@@ -37,7 +37,7 @@ Friend Class ItemOfTypeDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Throw New NotImplementedException
+                Return item.MakeChoice(character, choice)
         End Select
     End Function
 

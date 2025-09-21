@@ -16,4 +16,8 @@ Public Module EntityExtensions
     Friend Function IsStatisticAtMinimum(entity As IEntity, statisticType As String) As Boolean
         Return entity.GetStatistic(statisticType) = entity.GetStatisticMinimum(statisticType)
     End Function
+    <Extension>
+    Friend Function IsStatisticAtMaximum(entity As IEntity, statisticType As String) As Boolean
+        Return entity.GetStatistic(statisticType) = entity.GetStatisticMaximum(statisticType)
+    End Function
 End Module
