@@ -7,7 +7,8 @@ Friend Module LocationTypes
             New GrassLocationTypeDescriptor(),
             New TreeLocationTypeDescriptor(),
             New WaterLocationTypeDescriptor(),
-            New DirtLocationTypeDescriptor()
+            New DirtLocationTypeDescriptor(),
+            New RockLocationTypeDescriptor()
         }.ToDictionary(Function(x) x.LocationType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get

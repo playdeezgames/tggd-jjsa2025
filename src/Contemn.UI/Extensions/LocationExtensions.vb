@@ -8,8 +8,16 @@ Friend Module LocationExtensions
             {LocationType.Grass, AddressOf GrassToPixel},
             {LocationType.Tree, AddressOf TreeToPixel},
             {LocationType.Water, AddressOf WaterToPixel},
-            {LocationType.Dirt, AddressOf DirtToPixel}
+            {LocationType.Dirt, AddressOf DirtToPixel},
+            {LocationType.Rock, AddressOf RockToPixel}
         }
+
+    Private Function RockToPixel(location As ILocation) As Integer
+        Return UIBufferExtensions.ToPixel(
+            7,
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
 
     Private Function DirtToPixel(location As ILocation) As Integer
         Return UIBufferExtensions.ToPixel(
