@@ -22,7 +22,7 @@ Friend Class DialogState
         Buffer.Fill()
         Buffer.WriteCentered(0, dialog.Caption, Hue.Brown, Hue.Black)
         Dim topRow = 1
-        For Each line In dialog.LegacyLines
+        For Each line In dialog.Lines
             Dim colors = MoodColors(line.Mood)
             Buffer.WriteCentered(topRow, line.Text, colors.ForegroundColor, colors.BackgroundColor)
             topRow += 1
