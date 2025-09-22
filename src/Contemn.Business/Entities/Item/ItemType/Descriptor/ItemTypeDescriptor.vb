@@ -19,7 +19,7 @@ Friend MustInherit Class ItemTypeDescriptor
     Friend MustOverride Function CanSpawnLocation(location As ILocation) As Boolean
     Friend MustOverride Function GetName(item As Item) As String
     Friend MustOverride Function Choose(item As IItem, character As ICharacter, choice As String) As IDialog
-    Friend MustOverride Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
+    Friend MustOverride Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of IDialogChoice)
     Friend MustOverride Sub HandleAddItem(item As IItem, character As ICharacter)
     Friend MustOverride Sub HandleRemoveItem(item As IItem, character As ICharacter)
     Friend MustOverride Sub HandleInitialize(item As Item)

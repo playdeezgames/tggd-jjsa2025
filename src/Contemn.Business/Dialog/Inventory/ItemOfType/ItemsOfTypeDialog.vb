@@ -19,12 +19,12 @@ Friend Class ItemsOfTypeDialog
         Return Array.Empty(Of IDialogLine)
     End Function
 
-    Private Shared Function GenerateChoices(character As ICharacter, itemType As String) As IEnumerable(Of (Choice As String, Text As String))
-        Dim result As New List(Of (Choice As String, Text As String)) From
+    Private Shared Function GenerateChoices(character As ICharacter, itemType As String) As IEnumerable(Of IDialogChoice)
+        Dim result As New List(Of IDialogChoice) From
             {
-                (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
+                New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
-        result.AddRange(character.ItemsOfType(itemType).Select(Function(x) (x.ItemId.ToString, x.Name)))
+        result.AddRange(character.ItemsOfType(itemType).Select(Function(x) New DialogChoice(x.ItemId.ToString, x.Name)))
         Return result
     End Function
 

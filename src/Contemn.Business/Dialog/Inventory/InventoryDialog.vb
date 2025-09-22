@@ -14,13 +14,13 @@ Friend Class InventoryDialog
         Return Array.Empty(Of IDialogLine)
     End Function
 
-    Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
-        Dim result As New List(Of (Choice As String, Text As String)) From
+    Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
+        Dim result As New List(Of IDialogChoice) From
             {
-                (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
+                New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         For Each itemStack In character.Items.GroupBy(Function(x) x.ItemType)
-            result.Add((itemStack.Key, $"{itemStack.Key.ToItemTypeDescriptor.ItemTypeName}({itemStack.Count})"))
+            result.Add(New DialogChoice(itemStack.Key, $"{itemStack.Key.ToItemTypeDescriptor.ItemTypeName}({itemStack.Count})"))
         Next
         Return result
     End Function

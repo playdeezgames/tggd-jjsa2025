@@ -11,7 +11,7 @@ Friend Class MessageDialog
                   lines As IEnumerable(Of IDialogLine),
                   choices As IEnumerable(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)),
                   cancelDialog As Func(Of IDialog))
-        MyBase.New("Message", choices.Where(Function(x) x.Enabled).Select(Function(x) (x.Choice, x.Text)), lines)
+        MyBase.New("Message", choices.Where(Function(x) x.Enabled).Select(Function(x) New DialogChoice(x.Choice, x.Text)), lines)
         Me.choiceTable = choices.Where(Function(x) x.Enabled).ToDictionary(Function(x) x.Choice, Function(x) x.NextDialog)
         Me.onCancel = cancelDialog
     End Sub

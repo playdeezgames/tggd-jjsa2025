@@ -67,8 +67,8 @@ Friend Class FishItemTypeDescriptor
             ItemTypeDialog.LaunchMenu(character, ItemType))
     End Function
 
-    Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
-        Return {(EAT_CHOICE, EAT_TEXT)}
+    Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of IDialogChoice)
+        Return {New DialogChoice(EAT_CHOICE, EAT_TEXT)}
     End Function
 
     Friend Overrides Function Describe(item As Item) As IEnumerable(Of IDialogLine)

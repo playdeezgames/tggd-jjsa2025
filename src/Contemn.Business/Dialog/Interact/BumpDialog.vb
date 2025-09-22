@@ -18,15 +18,15 @@ Friend Class BumpDialog
         Return Array.Empty(Of IDialogLine)
     End Function
 
-    Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
-        Dim result As New List(Of (Choice As String, Text As String)) From
+    Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
+        Dim result As New List(Of IDialogChoice) From
             {
-                (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
+                New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         For Each verbType In VerbTypes.AllOfCategory(VerbCategoryType.Bump)
             Dim descriptor = verbType.ToVerbTypeDescriptor
             If descriptor.CanPerform(character) Then
-                result.Add((verbType, descriptor.VerbTypeName))
+                result.Add(New DialogChoice(verbType, descriptor.VerbTypeName))
             End If
         Next
         Return result

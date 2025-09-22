@@ -38,7 +38,7 @@ Public Class Item
         Data.RecycledItems.Add(ItemId)
     End Sub
 
-    Public Function GetAvailableChoices(character As ICharacter) As IEnumerable(Of (Choice As String, Text As String)) Implements IItem.GetAvailableChoices
+    Public Function GetAvailableChoices(character As ICharacter) As IEnumerable(Of IDialogChoice) Implements IItem.GetAvailableChoices
         Return ItemType.ToItemTypeDescriptor.GetAvailableChoices(Me, character)
     End Function
 

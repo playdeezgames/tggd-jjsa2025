@@ -4,7 +4,7 @@ Public MustInherit Class BaseDialog
     Implements IDialog
     Sub New(
            caption As String,
-           choices As IEnumerable(Of (Choice As String, Text As String)),
+           choices As IEnumerable(Of IDialogChoice),
            lines As IEnumerable(Of IDialogLine))
         Me.Caption = caption
         Me.Choices = choices.Select(Function(x) New DialogChoice(x.Choice, x.Text))

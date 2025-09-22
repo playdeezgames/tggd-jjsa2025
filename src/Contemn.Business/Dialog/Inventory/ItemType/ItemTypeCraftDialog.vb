@@ -22,13 +22,13 @@ Friend Class ItemTypeCraftDialog
         Return Array.Empty(Of IDialogLine)
     End Function
 
-    Private Shared Function GenerateChoices(character As ICharacter, itemType As String) As IEnumerable(Of (Choice As String, Text As String))
-        Dim choices As New List(Of (Choice As String, Text As String)) From
+    Private Shared Function GenerateChoices(character As ICharacter, itemType As String) As IEnumerable(Of IDialogChoice)
+        Dim choices As New List(Of IDialogChoice) From
             {
-                (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
+                New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         For Each entry In RecipeTypes.Descriptors.Where(Function(x) x.Value.HasInput(itemType) AndAlso x.Value.CanCraft(character))
-            choices.Add((entry.Key, entry.Value.Name))
+            choices.Add(New DialogChoice(entry.Key, entry.Value.Name))
         Next
         Return choices
     End Function

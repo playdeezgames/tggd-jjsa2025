@@ -32,8 +32,8 @@ Friend Class RockItemTypeDescriptor
         Throw New NotImplementedException()
     End Function
 
-    Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
-        Return Array.Empty(Of (Choice As String, Text As String))
+    Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of IDialogChoice)
+        Return Array.Empty(Of IDialogChoice)
     End Function
 
     Friend Overrides Function Describe(item As Item) As IEnumerable(Of IDialogLine)

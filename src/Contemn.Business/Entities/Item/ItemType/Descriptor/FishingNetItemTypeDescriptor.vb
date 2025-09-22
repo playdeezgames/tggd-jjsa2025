@@ -3,7 +3,7 @@
 Friend Class FishingNetItemTypeDescriptor
     Inherits ItemTypeDescriptor
     Const MAXIMUM_DURABILITY = 20
-    Private ReadOnly MendChoice As (Choice As String, Text As String) = ("MEND_CHOICE", "Mend")
+    Private ReadOnly MendChoice As IDialogChoice = New DialogChoice("MEND_CHOICE", "Mend")
 
     Public Sub New()
         MyBase.New(
@@ -64,8 +64,8 @@ Friend Class FishingNetItemTypeDescriptor
         Return result
     End Function
 
-    Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))
-        Dim choices As New List(Of (Choice As String, Text As String))
+    Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of IDialogChoice)
+        Dim choices As New List(Of IDialogChoice)
         If CanMend(item, character) Then
             choices.Add(MendChoice)
         End If

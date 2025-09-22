@@ -21,13 +21,13 @@ Friend Class ItemTypeDialog
         Return {New DialogLine(MoodType.Info, $"You have {character.GetCountOfItemType(itemType)}.")}
     End Function
 
-    Private Shared Function GenerateChoices(character As ICharacter, itemType As String) As IEnumerable(Of (Choice As String, Text As String))
-        Dim result As New List(Of (Choice As String, Text As String)) From
+    Private Shared Function GenerateChoices(character As ICharacter, itemType As String) As IEnumerable(Of IDialogChoice)
+        Dim result As New List(Of IDialogChoice) From
             {
-                (NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
+                New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         If RecipeTypes.Descriptors.Any(Function(x) x.Value.HasInput(itemType) AndAlso x.Value.CanCraft(character)) Then
-            result.Add((CRAFT_CHOICE, CRAFT_TEXT))
+            result.Add(New DialogChoice(CRAFT_CHOICE, CRAFT_TEXT))
         End If
         result.AddRange(character.GetItemOfType(itemType).GetAvailableChoices(character))
         Return result
