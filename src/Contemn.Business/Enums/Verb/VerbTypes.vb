@@ -13,7 +13,8 @@ Friend Module VerbTypes
             New InventoryVerbTypeDescriptor(),
             New DrinkVerbTypeDescriptor(),
             New FishVerbTypeDescriptor(),
-            New CollectStickVerbTypeDescriptor()
+            New CollectStickVerbTypeDescriptor(),
+            New CraftVerbTypeDescriptor()
         }
         Return result
     End Function
