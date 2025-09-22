@@ -5,11 +5,11 @@ Public MustInherit Class BaseDialog
     Sub New(
            caption As String,
            choices As IEnumerable(Of (Choice As String, Text As String)),
-           lines As IEnumerable(Of (Mood As String, Text As String)))
+           lines As IEnumerable(Of IDialogLine))
         Me.Caption = caption
         Me.LegacyChoices = choices
         Me.Choices = choices.Select(Function(x) New DialogChoice(x.Choice, x.Text))
-        Me.Lines = lines.Select(Function(x) New DialogLine(x.Mood, x.Text))
+        Me.Lines = lines
     End Sub
     Public ReadOnly Property Caption As String Implements IDialog.Caption
     Public ReadOnly Property LegacyChoices As IEnumerable(Of (Choice As String, Text As String)) Implements IDialog.LegacyChoices

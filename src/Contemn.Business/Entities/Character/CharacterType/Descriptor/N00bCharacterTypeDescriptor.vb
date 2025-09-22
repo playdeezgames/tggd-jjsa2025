@@ -39,8 +39,8 @@ Friend Class N00bCharacterTypeDescriptor
         Next
     End Sub
 
-    Friend Overrides Function OnProcessTurn(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
-        Dim result As New List(Of (Mood As String, Text As String))
+    Friend Overrides Function OnProcessTurn(character As ICharacter) As IEnumerable(Of IDialogLine)
+        Dim result As New List(Of IDialogLine)
         character.ChangeStatistic(StatisticType.Score, 1)
         result.AddRange(ProcessIllness(character))
         result.AddRange(ProcessStarvation(character))
@@ -51,11 +51,11 @@ Friend Class N00bCharacterTypeDescriptor
         Return result
     End Function
 
-    Private Function ProcessIllness(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
-        Dim result As New List(Of (Mood As String, Text As String))
+    Private Function ProcessIllness(character As ICharacter) As IEnumerable(Of IDialogLine)
+        Dim result As New List(Of IDialogLine)
         If Not character.IsStatisticAtMinimum(StatisticType.Illness) Then
             Dim illness = character.GetStatistic(StatisticType.Illness)
-            result.Add((MoodType.Danger, $"-{illness} HLT due to illness."))
+            result.Add(New DialogLine(MoodType.Danger, $"-{illness} HLT due to illness."))
             character.PlaySfx(Sfx.PlayerHit)
             character.ChangeStatistic(StatisticType.Health, -illness)
             character.ChangeStatistic(StatisticType.Illness, -1)
@@ -63,39 +63,39 @@ Friend Class N00bCharacterTypeDescriptor
         Return result
     End Function
 
-    Private Function ProcessDehydration(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
-        Dim result As New List(Of (Mood As String, Text As String))
+    Private Function ProcessDehydration(character As ICharacter) As IEnumerable(Of IDialogLine)
+        Dim result As New List(Of IDialogLine)
         If character.IsStatisticAtMinimum(StatisticType.Hydration) Then
-            result.Add((MoodType.Danger, "Yer dehydrated! Drink immediately!"))
+            result.Add(New DialogLine(MoodType.Danger, "Yer dehydrated! Drink immediately!"))
         Else
             If character.ChangeStatistic(StatisticType.Hydration, -1) < HYDRATION_WARNING Then
-                result.Add((MoodType.Warning, "Yer thirsty! Drink soon!"))
+                result.Add(New DialogLine(MoodType.Warning, "Yer thirsty! Drink soon!"))
             End If
         End If
         Return result
     End Function
 
-    Private Function ProcessHunger(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
-        Dim result As New List(Of (Mood As String, Text As String))
+    Private Function ProcessHunger(character As ICharacter) As IEnumerable(Of IDialogLine)
+        Dim result As New List(Of IDialogLine)
         If character.IsStatisticAtMinimum(StatisticType.Satiety) Then
-            result.Add((MoodType.Danger, "Yer starving! Eat immediately!"))
+            result.Add(New DialogLine(MoodType.Danger, "Yer starving! Eat immediately!"))
         Else
             If character.ChangeStatistic(StatisticType.Satiety, -1) < SATIETY_WARNING Then
-                result.Add((MoodType.Warning, "Yer famished! Eat soon!"))
+                result.Add(New DialogLine(MoodType.Warning, "Yer famished! Eat soon!"))
             End If
         End If
         Return result
     End Function
 
-    Private Function ProcessStarvation(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
+    Private Function ProcessStarvation(character As ICharacter) As IEnumerable(Of IDialogLine)
         If character.IsStatisticAtMinimum(StatisticType.Satiety) OrElse character.IsStatisticAtMinimum(StatisticType.Hydration) Then
             character.PlaySfx(Sfx.PlayerHit)
             character.ChangeStatistic(StatisticType.Health, -1)
         End If
         If character.IsDead Then
-            Return {(MoodType.Danger, "Yer dead.")}
+            Return {New DialogLine(MoodType.Danger, "Yer dead.")}
         End If
-        Return Array.Empty(Of (Mood As String, Text As String))
+        Return Array.Empty(Of IDialogLine)
     End Function
 
     Friend Overrides Sub OnLeave(character As ICharacter, location As ILocation)

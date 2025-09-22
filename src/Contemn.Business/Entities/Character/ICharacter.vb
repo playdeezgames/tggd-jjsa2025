@@ -13,5 +13,5 @@ Public Interface ICharacter
     Function Interact(initiator As ICharacter) As IDialog
     ReadOnly Property Column As Integer
     ReadOnly Property Row As Integer
-    Function ProcessTurn() As IEnumerable(Of (Mood As String, Text As String))
+    Function ProcessTurn() As IEnumerable(Of IDialogLine)
 End Interface

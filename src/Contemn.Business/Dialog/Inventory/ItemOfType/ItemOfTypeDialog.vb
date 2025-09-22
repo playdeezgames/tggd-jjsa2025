@@ -17,7 +17,7 @@ Friend Class ItemOfTypeDialog
         Me.item = item
     End Sub
 
-    Private Shared Function GenerateLines(character As ICharacter, item As IItem) As IEnumerable(Of (Mood As String, Text As String))
+    Private Shared Function GenerateLines(character As ICharacter, item As IItem) As IEnumerable(Of IDialogLine)
         Return item.Describe()
     End Function
 

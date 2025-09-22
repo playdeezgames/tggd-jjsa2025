@@ -12,14 +12,14 @@ Friend Class DrinkVerbTypeDescriptor
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
         Dim hydrationDelta = character.GetStatisticMaximum(StatisticType.Hydration) - character.GetStatistic(StatisticType.Hydration)
-        Dim messageLines As New List(Of (Mood As String, Text As String)) From
+        Dim messageLines As New List(Of IDialogLine) From
             {
-                (MoodType.Info, $"+{hydrationDelta} hydration")
+                New DialogLine(MoodType.Info, $"+{hydrationDelta} hydration")
             }
         If RNG.GenerateBoolean(1, 1) Then
             Dim illness = RNG.RollXDY(1, 4)
             character.ChangeStatistic(StatisticType.Illness, illness)
-            messageLines.Add((MoodType.Info, $"+{illness} illness"))
+            messageLines.Add(New DialogLine(MoodType.Info, $"+{illness} illness"))
         End If
         character.ChangeStatistic(StatisticType.Hydration, hydrationDelta)
         Return New OkDialog(messageLines, Function() Nothing)

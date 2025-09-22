@@ -45,17 +45,17 @@ Friend Class FishItemTypeDescriptor
     End Function
 
     Private Function Eat(item As IItem, character As ICharacter) As IDialog
-        Dim lines As New List(Of (Mood As String, Text As String))
+        Dim lines As New List(Of IDialogLine)
         character.ChangeStatistic(StatisticType.Satiety, item.GetStatistic(StatisticType.Satiety))
-        lines.Add((MoodType.Info, $"+{item.GetStatistic(StatisticType.Satiety)} {StatisticType.Satiety.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Satiety)})"))
+        lines.Add(New DialogLine(MoodType.Info, $"+{item.GetStatistic(StatisticType.Satiety)} {StatisticType.Satiety.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Satiety)})"))
         If RNG.GenerateBoolean(1, 1) Then
             Dim illness = RNG.RollXDY(1, 4)
             character.ChangeStatistic(StatisticType.Illness, illness)
-            lines.Add((MoodType.Info, "You get food poisoning."))
-            lines.Add((MoodType.Info, $"+{illness} {StatisticType.Illness.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Illness)})"))
+            lines.Add(New DialogLine(MoodType.Info, "You get food poisoning."))
+            lines.Add(New DialogLine(MoodType.Info, $"+{illness} {StatisticType.Illness.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Illness)})"))
         End If
         character.RemoveItem(item)
-        lines.Add((MoodType.Info, $"-1 {item.Name}({character.GetCountOfItemType(ItemType)})"))
+        lines.Add(New DialogLine(MoodType.Info, $"-1 {item.Name}({character.GetCountOfItemType(ItemType)})"))
         item.Recycle()
         character.PlaySfx(Sfx.Eat)
         Return New MessageDialog(
@@ -71,9 +71,9 @@ Friend Class FishItemTypeDescriptor
         Return {(EAT_CHOICE, EAT_TEXT)}
     End Function
 
-    Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
+    Friend Overrides Function Describe(item As Item) As IEnumerable(Of IDialogLine)
         Return {
-            (MoodType.Info, "It's a fish.")
+            New DialogLine(MoodType.Info, "It's a fish.")
         }
     End Function
 End Class

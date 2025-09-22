@@ -24,7 +24,7 @@ Friend Class FishVerbTypeDescriptor
         character.PlaySfx(Sfx.Shucks)
         Return New MessageDialog(
             character.ProcessTurn().
-                Append((MoodType.Info, $"You catch nothing.")),
+                Append(New DialogLine(MoodType.Info, $"You catch nothing.")),
             {
                 (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
                 (TRY_AGAIN_CHOICE, TRY_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
@@ -40,8 +40,8 @@ Friend Class FishVerbTypeDescriptor
         character.PlaySfx(Sfx.WooHoo)
         Return New MessageDialog(
                     character.ProcessTurn().
-                        Append((MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(ItemType.Fish)})")).
-                        Append((MoodType.Info, DepleteNet(character))),
+                        Append(New DialogLine(MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(ItemType.Fish)})")).
+                        Append(New DialogLine(MoodType.Info, DepleteNet(character))),
                     {
                         (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
                         (TRY_AGAIN_CHOICE, CATCH_ANOTHER_TEXT, Function() Perform(character), CanPerform(character))

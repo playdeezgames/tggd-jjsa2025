@@ -23,5 +23,5 @@ Friend MustInherit Class ItemTypeDescriptor
     Friend MustOverride Sub HandleAddItem(item As IItem, character As ICharacter)
     Friend MustOverride Sub HandleRemoveItem(item As IItem, character As ICharacter)
     Friend MustOverride Sub HandleInitialize(item As Item)
-    Friend MustOverride Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
+    Friend MustOverride Function Describe(item As Item) As IEnumerable(Of IDialogLine)
 End Class

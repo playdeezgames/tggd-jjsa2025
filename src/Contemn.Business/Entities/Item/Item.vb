@@ -51,7 +51,7 @@ Public Class Item
         Return ItemType.ToItemTypeDescriptor.Choose(Me, character, choice)
     End Function
 
-    Public Function Describe() As IEnumerable(Of (Mood As String, Text As String)) Implements IItem.Describe
+    Public Function Describe() As IEnumerable(Of IDialogLine) Implements IItem.Describe
         Return ItemType.ToItemTypeDescriptor.Describe(Me)
     End Function
 End Class

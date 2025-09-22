@@ -15,8 +15,8 @@ Friend Class CraftDialog
         Me.character = character
     End Sub
 
-    Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
-        Return Array.Empty(Of (Mood As String, Text As String))
+    Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
+        Return Array.Empty(Of IDialogLine)
     End Function
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of (Choice As String, Text As String))

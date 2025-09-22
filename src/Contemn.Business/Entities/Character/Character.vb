@@ -123,7 +123,7 @@ Friend Class Character
         Return VerbTypes.AllOfCategory(verbCategoryType).Where(Function(x) CanPerform(x))
     End Function
 
-    Public Function ProcessTurn() As IEnumerable(Of (Mood As String, Text As String)) Implements ICharacter.ProcessTurn
+    Public Function ProcessTurn() As IEnumerable(Of IDialogLine) Implements ICharacter.ProcessTurn
         Return CharacterType.ToCharacterTypeDescriptor.OnProcessTurn(Me)
     End Function
 End Class

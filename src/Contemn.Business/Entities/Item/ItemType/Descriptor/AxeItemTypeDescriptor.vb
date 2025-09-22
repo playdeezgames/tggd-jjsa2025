@@ -47,10 +47,10 @@ Friend Class AxeItemTypeDescriptor
         Return Array.Empty(Of (Choice As String, Text As String))
     End Function
 
-    Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
+    Friend Overrides Function Describe(item As Item) As IEnumerable(Of IDialogLine)
         Return {
-                (MoodType.Info, "It's an axe."),
-                (MoodType.Info, item.FormatStatistic(StatisticType.Durability))
+                New DialogLine(MoodType.Info, "It's an axe."),
+                New DialogLine(MoodType.Info, item.FormatStatistic(StatisticType.Durability))
         }
     End Function
 End Class

@@ -1,4 +1,6 @@
-﻿Friend MustInherit Class RecipeTypeDescriptor
+﻿Imports TGGD.Business
+
+Friend MustInherit Class RecipeTypeDescriptor
     Friend ReadOnly Property RecipeType As String
     Private ReadOnly inputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)
@@ -14,8 +16,8 @@
         Return inputs.All(Function(x) character.GetCountOfItemType(x.Key) >= x.Value)
     End Function
 
-    Friend Function Craft(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
-        Dim results As New List(Of (Mood As String, Text As String))
+    Friend Function Craft(character As ICharacter) As IEnumerable(Of IDialogLine)
+        Dim results As New List(Of IDialogLine)
         Dim deltas As New Dictionary(Of String, Integer)
         For Each itemType In New HashSet(Of String)(inputs.Keys.Concat(outputs.Keys))
             deltas(itemType) = 0
@@ -32,12 +34,12 @@
                 For Each item In character.ItemsOfType(delta.Key).Take(-delta.Value)
                     character.RemoveAndRecycleItem(item)
                 Next
-                results.Add((MoodType.Info, $"{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
+                results.Add(New DialogLine(MoodType.Info, $"{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
             ElseIf delta.Value > 0 Then
                 For Each dummy In Enumerable.Range(0, delta.Value)
                     character.World.CreateItem(delta.Key, character)
                 Next
-                results.Add((MoodType.Info, $"+{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
+                results.Add(New DialogLine(MoodType.Info, $"+{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
             End If
         Next
         Return results

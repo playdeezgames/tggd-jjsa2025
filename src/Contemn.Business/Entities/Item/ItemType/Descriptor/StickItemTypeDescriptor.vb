@@ -40,9 +40,9 @@ Friend Class StickItemTypeDescriptor
         Return Array.Empty(Of (Choice As String, Text As String))
     End Function
 
-    Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
+    Friend Overrides Function Describe(item As Item) As IEnumerable(Of IDialogLine)
         Return {
-            (MoodType.Info, "It's a stick.")
+            New DialogLine(MoodType.Info, "It's a stick.")
         }
     End Function
 End Class

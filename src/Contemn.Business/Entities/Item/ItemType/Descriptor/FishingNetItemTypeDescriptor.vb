@@ -51,15 +51,15 @@ Friend Class FishingNetItemTypeDescriptor
             Function() New ItemOfTypeDialog(character, item))
     End Function
 
-    Private Function GenerateMendLines(item As IItem, character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
+    Private Function GenerateMendLines(item As IItem, character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim result = character.ProcessTurn().ToList
         Dim originalDurability = item.GetStatistic(StatisticType.Durability)
         item.ChangeStatistic(StatisticType.Durability, item.GetStatisticMaximum(StatisticType.Durability) \ 2)
         Dim mendDurability = item.GetStatistic(StatisticType.Durability) - originalDurability
-        result.Add((MoodType.Info, $"+{mendDurability} {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName}({item.GetStatistic(StatisticType.Durability)}/{item.GetStatisticMaximum(StatisticType.Durability)})"))
+        result.Add(New DialogLine(MoodType.Info, $"+{mendDurability} {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName}({item.GetStatistic(StatisticType.Durability)}/{item.GetStatisticMaximum(StatisticType.Durability)})"))
         Dim twine = character.GetItemOfType(Business.ItemType.Twine)
         character.RemoveItem(twine)
-        result.Add((MoodType.Info, $"-1 {twine.Name}({character.GetCountOfItemType(twine.ItemType)})"))
+        result.Add(New DialogLine(MoodType.Info, $"-1 {twine.Name}({character.GetCountOfItemType(twine.ItemType)})"))
         twine.Recycle()
         Return result
     End Function
@@ -76,10 +76,10 @@ Friend Class FishingNetItemTypeDescriptor
         Return Not item.IsStatisticAtMaximum(StatisticType.Durability) AndAlso character.HasItemsOfType(Business.ItemType.Twine)
     End Function
 
-    Friend Overrides Function Describe(item As Item) As IEnumerable(Of (Mood As String, Text As String))
+    Friend Overrides Function Describe(item As Item) As IEnumerable(Of IDialogLine)
         Return {
-            (MoodType.Info, "It's a fishing net."),
-            (MoodType.Info, item.FormatStatistic(StatisticType.Durability))
+            New DialogLine(MoodType.Info, "It's a fishing net."),
+            New DialogLine(MoodType.Info, item.FormatStatistic(StatisticType.Durability))
         }
     End Function
 End Class

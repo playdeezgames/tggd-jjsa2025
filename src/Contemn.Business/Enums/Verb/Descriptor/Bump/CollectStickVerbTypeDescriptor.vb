@@ -22,11 +22,11 @@ Friend Class CollectStickVerbTypeDescriptor
             Function() New BumpDialog(character))
     End Function
 
-    Private Function HandlePerform(character As ICharacter) As IEnumerable(Of (Mood As String, Text As String))
-        Dim result As New List(Of (Mood As String, Text As String))
+    Private Function HandlePerform(character As ICharacter) As IEnumerable(Of IDialogLine)
+        Dim result As New List(Of IDialogLine)
         Dim stick = character.World.CreateItem(ItemType.Stick, character)
         character.GetBumpLocation().ChangeStatistic(StatisticType.Resource, -1)
-        result.Add((MoodType.Info, $"+1 {stick.Name}({character.GetCountOfItemType(stick.ItemType)})"))
+        result.Add(New DialogLine(MoodType.Info, $"+1 {stick.Name}({character.GetCountOfItemType(stick.ItemType)})"))
         Return result
     End Function
 

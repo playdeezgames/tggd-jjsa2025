@@ -8,7 +8,7 @@ Public Class VerbListDialog
         MyBase.New(
             caption,
             GenerateChoices(character, verbCategoryType),
-            Array.Empty(Of (Mood As String, Text As String)))
+            Array.Empty(Of IDialogLine))
         Me.character = character
     End Sub
 
