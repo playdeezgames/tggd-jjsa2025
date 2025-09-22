@@ -42,25 +42,8 @@ Friend Class ItemTypeCraftDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return CraftRecipe(choice)
+                Return character.CraftRecipe(choice, ItemTypeDialog.LaunchMenu(character, itemType))
         End Select
-    End Function
-
-    Private Function CraftRecipe(recipeType As String) As IDialog
-        Dim descriptor = recipeType.ToRecipeTypeDescriptor
-        Dim messageLines = descriptor.Craft(character)
-        character.PlaySfx(Sfx.Craft)
-        character.ChangeStatistic(StatisticType.Score, 1)
-        Return New MessageDialog(
-            messageLines,
-            {
-                (OK_CHOICE, OK_TEXT, ItemTypeDialog.LaunchMenu(character, itemType), True),
-                (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, CraftAnother(recipeType), descriptor.CanCraft(character))
-            }, ItemTypeDialog.LaunchMenu(character, itemType))
-    End Function
-
-    Private Function CraftAnother(recipeType As String) As Func(Of IDialog)
-        Return Function() CraftRecipe(recipeType)
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
