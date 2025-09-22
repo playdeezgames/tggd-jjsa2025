@@ -1,4 +1,5 @@
 ﻿Public Module ItemType
+    Public ReadOnly Axe As String = NameOf(Axe)
     Public ReadOnly Fish As String = NameOf(Fish)
     Public ReadOnly FishingNet As String = NameOf(FishingNet)
     Public ReadOnly PlantFiber As String = NameOf(PlantFiber)
