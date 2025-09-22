@@ -51,13 +51,21 @@ Friend Class CraftDialog
         Return New MessageDialog(
             messageLines,
             {
-                (OK_CHOICE, OK_TEXT, AddressOf CancelDialog, True),
+                (OK_CHOICE, OK_TEXT, LaunchMenu(character), True),
                 (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, CraftAnother(recipeType), descriptor.CanCraft(character))
-            }, AddressOf CancelDialog)
+            },
+            LaunchMenu(character))
     End Function
 
     Private Function CraftAnother(recipeType As String) As Func(Of IDialog)
         Return Function() CraftRecipe(recipeType)
+    End Function
+
+    Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
+        If RecipeTypes.Descriptors.Values.Any(Function(x) x.CanCraft(character)) Then
+            Return Function() New CraftDialog(character)
+        End If
+        Return VerbListDialog.LaunchMenu(character)
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
