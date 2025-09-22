@@ -30,7 +30,7 @@ Friend Class DialogState
         Dim centerRow = (topRow + Buffer.Rows - 1) \ 2
         Buffer.Fill(0, centerRow, Buffer.Columns, 1, 0, Hue.Black, Hue.LightGray)
         Dim row = centerRow - choiceIndex
-        For Each choice In dialog.Choices
+        For Each choice In dialog.LegacyChoices
             If row >= topRow AndAlso row < Buffer.Rows - 1 Then
                 If row = centerRow Then
                     Buffer.WriteCentered(row, choice.Text, Hue.Black, Hue.LightGray)
@@ -45,13 +45,13 @@ Friend Class DialogState
     Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
             Case UI.Command.Up
-                choiceIndex = (choiceIndex + dialog.Choices.Count - 1) Mod dialog.Choices.Count
+                choiceIndex = (choiceIndex + dialog.LegacyChoices.Count - 1) Mod dialog.LegacyChoices.Count
                 Return Me
             Case UI.Command.Down
-                choiceIndex = (choiceIndex + 1) Mod dialog.Choices.Count
+                choiceIndex = (choiceIndex + 1) Mod dialog.LegacyChoices.Count
                 Return Me
             Case UI.Command.Green
-                Dim nextDialog = dialog.Choose(dialog.Choices.ToArray()(choiceIndex).Choice)
+                Dim nextDialog = dialog.Choose(dialog.LegacyChoices.ToArray()(choiceIndex).Choice)
                 Return SetNextDialog(nextDialog)
             Case UI.Command.Red
                 Return SetNextDialog(dialog.CancelDialog())
