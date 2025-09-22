@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class VerbListDialog
+Public Class VerbListDialog
     Inherits BaseDialog
 
     Private ReadOnly character As ICharacter
@@ -12,7 +12,7 @@ Friend Class VerbListDialog
         Me.character = character
     End Sub
 
-    Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
+    Public Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
         Return Function() CType(New VerbListDialog(character, VerbCategoryType.Action, "Actions..."), IDialog)
     End Function
 

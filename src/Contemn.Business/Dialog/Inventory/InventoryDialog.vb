@@ -28,7 +28,7 @@ Friend Class InventoryDialog
     Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
-                Return VerbType.ActionList.ToVerbTypeDescriptor.Perform(character)
+                Return VerbListDialog.LaunchMenu(character).Invoke()
             Case Else
                 Return MakeItemTypeDialog(choice)
         End Select
@@ -44,7 +44,7 @@ Friend Class InventoryDialog
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return VerbType.ActionList.ToVerbTypeDescriptor.Perform(character)
+        Return VerbListDialog.LaunchMenu(character).Invoke()
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)

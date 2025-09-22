@@ -12,8 +12,9 @@ Friend Class TreeLocationTypeDescriptor
     End Sub
 
     Friend Overrides Sub OnInitialize(location As Location)
-        location.SetStatistic(StatisticType.Resource, 20)
+        location.SetStatistic(StatisticType.Resource, 50)
         location.SetStatisticMinimum(StatisticType.Resource, 0)
+        location.SetTag(TagType.IsChoppable, True)
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog

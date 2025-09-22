@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend MustInherit Class BaseDialog
+Public MustInherit Class BaseDialog
     Implements IDialog
     Sub New(
            caption As String,

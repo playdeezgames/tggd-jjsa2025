@@ -24,6 +24,7 @@ Friend Class AxeItemTypeDescriptor
             MAXIMUM_DURABILITY,
             0,
             MAXIMUM_DURABILITY)
+        item.SetTag(TagType.CanChop, True)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

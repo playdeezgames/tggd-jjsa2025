@@ -8,13 +8,13 @@ Friend Module VerbTypes
             New MoveVerbTypeDescriptor(VerbType.MoveEast, DirectionType.East),
             New MoveVerbTypeDescriptor(VerbType.MoveSouth, DirectionType.South),
             New MoveVerbTypeDescriptor(VerbType.MoveWest, DirectionType.West),
-            New ActionListVerbTypeDescriptor(),
             New ForageVerbTypeDescriptor(),
             New InventoryVerbTypeDescriptor(),
             New DrinkVerbTypeDescriptor(),
             New FishVerbTypeDescriptor(),
             New CollectStickVerbTypeDescriptor(),
-            New CraftVerbTypeDescriptor()
+            New CraftVerbTypeDescriptor(),
+            New ChopWoodVerbTypeDescriptor()
         }
         Return result
     End Function
