@@ -36,10 +36,10 @@ Friend Module CharacterExtensions
     Friend Function IsDead(character As ICharacter) As Boolean
         Return character.IsStatisticAtMinimum(StatisticType.Health)
     End Function
-    Private ReadOnly CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
-    Private Const CRAFT_ANOTHER_TEXT = "Craft Another"
     <Extension>
     Friend Function CraftRecipe(character As ICharacter, recipeType As String, nextDialog As Func(Of IDialog)) As IDialog
+        Dim CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
+        Const CRAFT_ANOTHER_TEXT = "Craft Another"
         Dim descriptor = recipeType.ToRecipeTypeDescriptor
         Dim messageLines = descriptor.Craft(character)
         character.PlaySfx(Sfx.Craft)
