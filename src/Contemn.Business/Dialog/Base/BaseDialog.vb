@@ -9,11 +9,11 @@ Public MustInherit Class BaseDialog
         Me.Caption = caption
         Me.LegacyChoices = choices
         Me.Choices = choices.Select(Function(x) New DialogChoice(x.Choice, x.Text))
-        Me.Lines = lines
+        Me.LegacyLines = lines
     End Sub
     Public ReadOnly Property Caption As String Implements IDialog.Caption
     Public ReadOnly Property LegacyChoices As IEnumerable(Of (Choice As String, Text As String)) Implements IDialog.LegacyChoices
-    Public ReadOnly Property Lines As IEnumerable(Of (Mood As String, Text As String)) Implements IDialog.Lines
+    Public ReadOnly Property LegacyLines As IEnumerable(Of (Mood As String, Text As String)) Implements IDialog.LegacyLines
     Public ReadOnly Property Choices As IEnumerable(Of IDialogChoice) Implements IDialog.Choices
     Public MustOverride Function Choose(choice As String) As IDialog Implements IDialog.Choose
     Public MustOverride Function CancelDialog() As IDialog Implements IDialog.CancelDialog
