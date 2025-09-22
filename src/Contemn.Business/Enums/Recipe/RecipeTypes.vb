@@ -6,7 +6,8 @@ Friend Module RecipeTypes
         {
             New TwineRecipeTypeDescriptor(),
             New FishingNetRecipeTypeDescriptor(),
-            New SharpRockRecipeTypeDescriptor()
+            New SharpRockRecipeTypeDescriptor(),
+            New AxeRecipeTypeDescriptor()
         }.ToDictionary(
             Function(x) x.RecipeType,
             Function(x) x)
