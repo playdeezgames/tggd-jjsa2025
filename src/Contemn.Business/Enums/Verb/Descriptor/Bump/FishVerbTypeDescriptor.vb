@@ -41,7 +41,7 @@ Friend Class FishVerbTypeDescriptor
         Return New MessageDialog(
                     character.ProcessTurn().
                         Append(New DialogLine(MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(ItemType.Fish)})")).
-                        Append(New DialogLine(MoodType.Info, DepleteNet(character))),
+                        Concat(DepleteNet(character)),
                     {
                         (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
                         (TRY_AGAIN_CHOICE, CATCH_ANOTHER_TEXT, Function() Perform(character), CanPerform(character))
@@ -49,15 +49,30 @@ Friend Class FishVerbTypeDescriptor
                     Function() Nothing)
     End Function
 
-    Private Shared Function DepleteNet(character As ICharacter) As String
+    Private Shared Function DepleteNet(character As ICharacter) As IEnumerable(Of IDialogLine)
+        Dim lines As New List(Of IDialogLine)
         Dim net = character.GetItemOfType(ItemType.FishingNet)
         net.ChangeStatistic(StatisticType.Durability, -1)
         Dim netRuined = net.IsStatisticAtMinimum(StatisticType.Durability)
-        Dim netLine = If(netRuined, $"Yer {net.Name} is ruined!", $"-1 {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName} {net.Name}")
         If netRuined Then
+            lines.Add(
+            New DialogLine(
+                MoodType.Info,
+                $"Yer {net.Name} is ruined!"))
             character.RemoveAndRecycleItem(net)
+        Else
+            lines.Add(
+                New DialogLine(
+                    MoodType.Info,
+                    $"-1 {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName} {net.Name}"))
+            If net.GetStatistic(StatisticType.Durability) < net.GetStatisticMaximum(StatisticType.Durability) \ 3 Then
+                lines.Add(
+                New DialogLine(
+                    MoodType.Warning,
+                    $"Repair yer {net.Name} soon."))
+            End If
         End If
-        Return netLine
+        Return lines
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean

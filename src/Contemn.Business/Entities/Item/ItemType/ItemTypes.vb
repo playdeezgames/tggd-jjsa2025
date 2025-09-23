@@ -11,7 +11,8 @@ Friend Module ItemTypes
             New RockItemTypeDescriptor(),
             New SharpRockItemTypeDescriptor(),
             New StickItemTypeDescriptor(),
-            New AxeItemTypeDescriptor()
+            New AxeItemTypeDescriptor(),
+            New LogItemTypeDescriptor()
         }.ToDictionary(Function(x) x.ItemType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get
