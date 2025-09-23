@@ -7,30 +7,31 @@ Public Class UIContext
     Implements IUIContext
     ReadOnly buffer As IUIBuffer(Of Integer)
     Private state As IUIState = Nothing
-    Private ReadOnly sfxQueue As New Queue(Of String)
+    Private ReadOnly eventQueue As New Queue(Of IEnumerable(Of String))
     Private ReadOnly worldData As New WorldData
     Private ReadOnly Property World As IWorld
         Get
             Return New Business.World(worldData, AddressOf PlaySfx)
         End Get
     End Property
+    Const EVENT_PLAY_SFX = "PlaySfx"
     Private Sub PlaySfx(sfx As String)
-        sfxQueue.Enqueue(sfx)
+        eventQueue.Enqueue({EVENT_PLAY_SFX, sfx})
     End Sub
     Sub New(columns As Integer, rows As Integer, frameBuffer As Integer())
         Me.buffer = New UIBuffer(Of Integer)(columns, rows, frameBuffer)
         state = New TitleState(buffer, World, AddressOf PlaySfx)
     End Sub
 
-    Public ReadOnly Property [Event] As String Implements IUIContext.Event
+    Public ReadOnly Property [Event] As IEnumerable(Of String) Implements IUIContext.Event
         Get
-            Return If(sfxQueue.Any, sfxQueue.Peek, Nothing)
+            Return If(eventQueue.Any, eventQueue.Peek, Nothing)
         End Get
     End Property
 
     Public Sub NextEvent() Implements IUIContext.NextEvent
-        If sfxQueue.Any Then
-            sfxQueue.Dequeue()
+        If eventQueue.Any Then
+            eventQueue.Dequeue()
         End If
     End Sub
 
