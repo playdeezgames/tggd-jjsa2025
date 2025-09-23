@@ -15,13 +15,13 @@ Friend Class ChopWoodVerbTypeDescriptor
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
         Dim bumpLocation = character.GetBumpLocation()
-        Dim item = character.World.CreateItem(ItemType.Log, character)
+        Dim tool = character.World.CreateItem(ItemType.Log, character)
         bumpLocation.ChangeStatistic(StatisticType.Resource, -RESOURCE_PER_LOG)
         character.ChangeStatistic(StatisticType.Score, 1)
         character.PlaySfx(Sfx.WooHoo)
         Return New MessageDialog(
                     character.ProcessTurn().
-                        Append(New DialogLine(MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(ItemType.Log)})")).
+                        Append(New DialogLine(MoodType.Info, $"+1 {tool.Name}({character.GetCountOfItemType(ItemType.Log)})")).
                         Concat(DepleteAxe(character)),
                     {
                         (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
@@ -30,27 +30,27 @@ Friend Class ChopWoodVerbTypeDescriptor
                     Function() Nothing)
     End Function
 
-    Private Function DepleteAxe(character As ICharacter) As IEnumerable(Of IDialogLine)
+    Private Shared Function DepleteAxe(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim lines As New List(Of IDialogLine)
-        Dim chopper = character.Items.First(Function(x) x.GetTag(TagType.CanChop))
-        chopper.ChangeStatistic(StatisticType.Durability, -1)
-        Dim netRuined = chopper.IsStatisticAtMinimum(StatisticType.Durability)
-        If netRuined Then
+        Dim tool = character.Items.First(Function(x) x.GetTag(TagType.CanChop))
+        tool.ChangeStatistic(StatisticType.Durability, -1)
+        Dim toolRuined = tool.IsStatisticAtMinimum(StatisticType.Durability)
+        If toolRuined Then
             lines.Add(
             New DialogLine(
                 MoodType.Info,
-                $"Yer {chopper.Name} is ruined!"))
-            character.RemoveAndRecycleItem(chopper)
+                $"Yer {tool.Name} is ruined!"))
+            character.RemoveAndRecycleItem(tool)
         Else
             lines.Add(
                 New DialogLine(
                     MoodType.Info,
-                    $"-1 {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName} {chopper.Name}"))
-            If chopper.GetStatistic(StatisticType.Durability) < chopper.GetStatisticMaximum(StatisticType.Durability) \ 3 Then
+                    $"-1 {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName} {tool.Name}"))
+            If tool.GetStatistic(StatisticType.Durability) < tool.GetStatisticMaximum(StatisticType.Durability) \ 3 Then
                 lines.Add(
                 New DialogLine(
                     MoodType.Warning,
-                    $"Repair yer {chopper.Name} soon."))
+                    $"Repair yer {tool.Name} soon."))
             End If
         End If
         Return lines

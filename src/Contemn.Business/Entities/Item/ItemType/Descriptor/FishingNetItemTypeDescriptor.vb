@@ -21,6 +21,7 @@ Friend Class FishingNetItemTypeDescriptor
 
     Friend Overrides Sub HandleInitialize(item As Item)
         item.SetStatisticRange(StatisticType.Durability, MAXIMUM_DURABILITY, 0, MAXIMUM_DURABILITY)
+        item.SetTag(TagType.CanFish, True)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

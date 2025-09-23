@@ -51,25 +51,25 @@ Friend Class FishVerbTypeDescriptor
 
     Private Shared Function DepleteNet(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim lines As New List(Of IDialogLine)
-        Dim net = character.GetItemOfType(ItemType.FishingNet)
-        net.ChangeStatistic(StatisticType.Durability, -1)
-        Dim netRuined = net.IsStatisticAtMinimum(StatisticType.Durability)
+        Dim tool = character.Items.First(Function(x) x.GetTag(TagType.CanFish))
+        tool.ChangeStatistic(StatisticType.Durability, -1)
+        Dim netRuined = tool.IsStatisticAtMinimum(StatisticType.Durability)
         If netRuined Then
             lines.Add(
             New DialogLine(
                 MoodType.Info,
-                $"Yer {net.Name} is ruined!"))
-            character.RemoveAndRecycleItem(net)
+                $"Yer {tool.Name} is ruined!"))
+            character.RemoveAndRecycleItem(tool)
         Else
             lines.Add(
                 New DialogLine(
                     MoodType.Info,
-                    $"-1 {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName} {net.Name}"))
-            If net.GetStatistic(StatisticType.Durability) < net.GetStatisticMaximum(StatisticType.Durability) \ 3 Then
+                    $"-1 {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName} {tool.Name}"))
+            If tool.GetStatistic(StatisticType.Durability) < tool.GetStatisticMaximum(StatisticType.Durability) \ 3 Then
                 lines.Add(
                 New DialogLine(
                     MoodType.Warning,
-                    $"Repair yer {net.Name} soon."))
+                    $"Repair yer {tool.Name} soon."))
             End If
         End If
         Return lines
@@ -79,10 +79,10 @@ Friend Class FishVerbTypeDescriptor
         If Not MyBase.CanPerform(character) Then
             Return False
         End If
-        If Not character.GetBumpLocation().LocationType = Business.LocationType.Water Then
+        If Not character.GetBumpLocation().GetTag(TagType.CanFish) Then
             Return False
         End If
-        If Not character.HasItemsOfType(ItemType.FishingNet) Then
+        If Not character.Items.Any(Function(x) x.GetTag(TagType.CanFish)) Then
             Return False
         End If
         Return True

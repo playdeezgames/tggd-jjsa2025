@@ -15,6 +15,7 @@ Friend Class WaterLocationTypeDescriptor
         location.SetStatistic(StatisticType.Resource, 20)
         location.SetStatisticMinimum(StatisticType.Resource, 0)
         location.SetStatistic(StatisticType.Depletion, 0)
+        location.SetTag(TagType.CanFish, True)
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
