@@ -17,7 +17,7 @@ Friend Class BladeItemTypeDescriptor
     Friend Overrides Sub HandleRemoveItem(item As IItem, character As ICharacter)
     End Sub
 
-    Friend Overrides Sub HandleInitialize(item As Item)
+    Friend Overrides Sub HandleInitialize(item As IItem)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
@@ -28,7 +28,7 @@ Friend Class BladeItemTypeDescriptor
         Return False
     End Function
 
-    Friend Overrides Function GetName(item As Item) As String
+    Friend Overrides Function GetName(item As IItem) As String
         Return ItemTypeName
     End Function
 
@@ -36,11 +36,11 @@ Friend Class BladeItemTypeDescriptor
         Throw New NotImplementedException()
     End Function
 
-    Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of IDialogChoice)
+    Friend Overrides Function GetAvailableChoices(item As IItem, character As ICharacter) As IEnumerable(Of IDialogChoice)
         Return Array.Empty(Of IDialogChoice)
     End Function
 
-    Friend Overrides Function Describe(item As Item) As IEnumerable(Of IDialogLine)
+    Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
         Return {New DialogLine(MoodType.Info, "It's a blade.")}
     End Function
 End Class

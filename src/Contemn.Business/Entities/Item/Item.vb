@@ -1,7 +1,7 @@
 ﻿Imports Contemn.Data
 Imports TGGD.Business
 
-Public Class Item
+Friend Class Item
     Inherits Entity(Of ItemData)
     Implements IItem
 

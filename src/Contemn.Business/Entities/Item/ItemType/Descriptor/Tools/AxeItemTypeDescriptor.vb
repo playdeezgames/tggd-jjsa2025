@@ -16,7 +16,7 @@ Friend Class AxeItemTypeDescriptor
             MAXIMUM_DURABILITY)
     End Sub
 
-    Friend Overrides Function Describe(item As Item) As IEnumerable(Of IDialogLine)
+    Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
         Return {
                 New DialogLine(MoodType.Info, "It's an axe."),
                 New DialogLine(MoodType.Info, item.FormatStatistic(StatisticType.Durability))

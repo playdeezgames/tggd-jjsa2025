@@ -42,7 +42,7 @@ Friend MustInherit Class MendableItemTypeDescriptor
         Return False
     End Function
 
-    Friend Overrides Sub HandleInitialize(item As Item)
+    Friend Overrides Sub HandleInitialize(item As IItem)
         item.SetStatisticRange(
             StatisticType.Durability,
             maximumDurability,
@@ -52,7 +52,7 @@ Friend MustInherit Class MendableItemTypeDescriptor
             item.SetTag(tag, True)
         Next
     End Sub
-    Friend Overrides Function GetName(item As Item) As String
+    Friend Overrides Function GetName(item As IItem) As String
         Return $"{ItemTypeName}({item.GetStatistic(StatisticType.Durability)}/{item.GetStatisticMaximum(StatisticType.Durability)})"
     End Function
 
@@ -90,7 +90,7 @@ Friend MustInherit Class MendableItemTypeDescriptor
         Return result
     End Function
 
-    Friend Overrides Function GetAvailableChoices(item As Item, character As ICharacter) As IEnumerable(Of IDialogChoice)
+    Friend Overrides Function GetAvailableChoices(item As IItem, character As ICharacter) As IEnumerable(Of IDialogChoice)
         Dim choices As New List(Of IDialogChoice)
         If CanMend(item, character) Then
             choices.Add(MendChoice)
@@ -98,7 +98,7 @@ Friend MustInherit Class MendableItemTypeDescriptor
         Return choices
     End Function
 
-    Private Function CanMend(item As Item, character As ICharacter) As Boolean
+    Private Function CanMend(item As IItem, character As ICharacter) As Boolean
         Return Not item.IsStatisticAtMaximum(StatisticType.Durability) AndAlso character.HasItemsOfType(mendConsumptionItemType)
     End Function
 
