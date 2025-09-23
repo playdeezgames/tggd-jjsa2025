@@ -22,13 +22,13 @@ Public Class UIContext
         state = New TitleState(buffer, World, AddressOf PlaySfx)
     End Sub
 
-    Public ReadOnly Property Sfx As String Implements IUIContext.Sfx
+    Public ReadOnly Property [Event] As String Implements IUIContext.Event
         Get
             Return If(sfxQueue.Any, sfxQueue.Peek, Nothing)
         End Get
     End Property
 
-    Public Sub NextSfx() Implements IUIContext.NextSfx
+    Public Sub NextEvent() Implements IUIContext.NextEvent
         If sfxQueue.Any Then
             sfxQueue.Dequeue()
         End If

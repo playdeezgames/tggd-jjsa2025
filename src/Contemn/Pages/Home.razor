@@ -61,10 +61,10 @@
 	}
 	private async Task ProcessSfxAsync()
 	{
-		while (!string.IsNullOrEmpty(context.Sfx))
+		while (!string.IsNullOrEmpty(context.Event))
 		{
-			await JSRuntime.InvokeVoidAsync("playSfx", context.Sfx);
-			context.NextSfx();
+			await JSRuntime.InvokeVoidAsync("playSfx", context.Event);
+			context.NextEvent();
 		}
 	}
 	readonly IReadOnlyDictionary<string, string> CommandTable = new Dictionary<string, string>()
