@@ -7,6 +7,7 @@ Public Interface IWorld
     Function CreateLocation(locationType As String, map As IMap, column As Integer, row As Integer) As ILocation
     Function GetLocation(locationId As Integer) As ILocation
     Function CreateCharacter(characterType As String, location As ILocation) As ICharacter
+    Function GetCharacter(characterId As Integer) As ICharacter
     Function CreateItem(itemType As String, entity As IInventoryEntity) As IItem
     Function GetItem(itemId As Integer) As IItem
     Property Avatar As ICharacter

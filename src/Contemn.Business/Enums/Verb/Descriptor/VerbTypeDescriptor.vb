@@ -13,7 +13,7 @@ Friend MustInherit Class VerbTypeDescriptor
     Overridable Function CanPerform(character As ICharacter) As Boolean
         Return Not character.IsDead
     End Function
-    Function CanChoose(character As Character) As Boolean
+    Function CanChoose(character As ICharacter) As Boolean
         Return Not String.IsNullOrEmpty(VerbTypeName) AndAlso CanPerform(character)
     End Function
 End Class

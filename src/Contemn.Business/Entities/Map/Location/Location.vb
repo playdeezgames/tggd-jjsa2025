@@ -54,7 +54,7 @@ Friend Class Location
 
     Public ReadOnly Property Character As ICharacter Implements ILocation.Character
         Get
-            Return If(HasCharacter, New Character(Data, EntityData.CharacterId.Value, AddressOf PlaySfx), Nothing)
+            Return If(HasCharacter, World.GetCharacter(EntityData.CharacterId.Value), Nothing)
         End Get
     End Property
 

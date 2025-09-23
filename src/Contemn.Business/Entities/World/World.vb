@@ -196,4 +196,8 @@ Public Class World
         End If
         Return New Generator(Data, generatorId)
     End Function
+
+    Public Function GetCharacter(characterId As Integer) As ICharacter Implements IWorld.GetCharacter
+        Return New Character(Data, characterId, AddressOf PlaySfx)
+    End Function
 End Class
