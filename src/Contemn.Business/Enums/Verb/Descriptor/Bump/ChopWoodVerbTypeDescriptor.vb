@@ -22,7 +22,8 @@ Friend Class ChopWoodVerbTypeDescriptor
         Return New MessageDialog(
                     character.ProcessTurn().
                         Append(New DialogLine(MoodType.Info, $"+1 {tool.Name}({character.GetCountOfItemType(ItemType.Log)})")).
-                        Concat(DepleteAxe(character)),
+                        Concat(DepleteAxe(character)).
+                        Concat(TreeLocationTypeDescriptor.DepleteTree(bumpLocation)),
                     {
                         (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
                         (TRY_AGAIN_CHOICE, CHOP_AGAIN_TEXT, Function() Perform(character), CanPerform(character))

@@ -32,4 +32,12 @@ Friend Class TreeLocationTypeDescriptor
     Friend Overrides Function CanSpawn(location As ILocation, itemType As String) As Boolean
         Return False
     End Function
+    Friend Shared Function DepleteTree(bumpLocation As ILocation) As IEnumerable(Of IDialogLine)
+        Dim result As New List(Of IDialogLine)
+        If bumpLocation.IsStatisticAtMinimum(StatisticType.Resource) Then
+            result.Add(New DialogLine(MoodType.Warning, $"{bumpLocation.Name} depleted."))
+            bumpLocation.LocationType = Business.LocationType.Dirt
+        End If
+        Return result
+    End Function
 End Class
