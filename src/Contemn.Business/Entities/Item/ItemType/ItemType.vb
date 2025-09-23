@@ -8,4 +8,5 @@
     Public ReadOnly SharpRock As String = NameOf(SharpRock)
     Public ReadOnly Stick As String = NameOf(Stick)
     Public ReadOnly Twine As String = NameOf(Twine)
+    Public ReadOnly Blade As String = NameOf(Blade)
 End Module
