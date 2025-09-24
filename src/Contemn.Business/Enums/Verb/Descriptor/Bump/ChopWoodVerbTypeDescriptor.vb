@@ -22,39 +22,13 @@ Friend Class ChopWoodVerbTypeDescriptor
         Return New MessageDialog(
                     character.ProcessTurn().
                         Append(New DialogLine(MoodType.Info, $"+1 {tool.Name}({character.GetCountOfItemType(NameOf(LogItemTypeDescriptor))})")).
-                        Concat(DepleteAxe(character)).
+                        Concat(character.Items.First(Function(x) x.GetTag(TagType.CanChop)).Deplete(character)).
                         Concat(TreeLocationTypeDescriptor.DepleteTree(bumpLocation)),
                     {
                         (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
                         (TRY_AGAIN_CHOICE, CHOP_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
                     },
                     Function() Nothing)
-    End Function
-
-    Private Shared Function DepleteAxe(character As ICharacter) As IEnumerable(Of IDialogLine)
-        Dim lines As New List(Of IDialogLine)
-        Dim tool = character.Items.First(Function(x) x.GetTag(TagType.CanChop))
-        tool.ChangeStatistic(StatisticType.Durability, -1)
-        Dim toolRuined = tool.IsStatisticAtMinimum(StatisticType.Durability)
-        If toolRuined Then
-            lines.Add(
-            New DialogLine(
-                MoodType.Info,
-                $"Yer {tool.Name} is ruined!"))
-            character.RemoveAndRecycleItem(tool)
-        Else
-            lines.Add(
-                New DialogLine(
-                    MoodType.Info,
-                    $"-1 {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName} {tool.Name}"))
-            If tool.GetStatistic(StatisticType.Durability) < tool.GetStatisticMaximum(StatisticType.Durability) \ 3 Then
-                lines.Add(
-                New DialogLine(
-                    MoodType.Warning,
-                    $"Repair yer {tool.Name} soon."))
-            End If
-        End If
-        Return lines
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
