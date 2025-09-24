@@ -16,9 +16,9 @@ Friend MustInherit Class RecipeTypeDescriptor
         Me.durabilities = durabilities
     End Sub
     Friend Overridable Function CanCraft(character As ICharacter) As Boolean
-        Return inputs.All(Function(x) character.GetCountOfItemType(x.Key) >= x.Value)
+        Return inputs.All(Function(x) character.GetCountOfItemType(x.Key) >= x.Value) AndAlso
+            durabilities.All(Function(x) character.GetDurabilityTotal(x.Key) >= x.Value)
     End Function
-
     Friend Function Craft(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim results As New List(Of IDialogLine)
         Dim deltas As New Dictionary(Of String, Integer)
@@ -45,9 +45,13 @@ Friend MustInherit Class RecipeTypeDescriptor
                 results.Add(New DialogLine(MoodType.Info, $"+{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
             End If
         Next
+        For Each entry In durabilities
+            For Each dummy In Enumerable.Range(0, entry.Value)
+                results.AddRange(character.Items.First(Function(x) x.GetTag(entry.Key)).Deplete(character))
+            Next
+        Next
         Return results
     End Function
-
     Friend Function HasInput(itemType As String) As Boolean
         Return inputs.ContainsKey(itemType)
     End Function

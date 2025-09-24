@@ -6,17 +6,15 @@
             NameOf(RawFishFiletRecipeTypeDescriptor),
             New Dictionary(Of String, Integer) From
             {
-                {NameOf(FishItemTypeDescriptor), 1},
-                {NameOf(KnifeItemTypeDescriptor), 1}
+                {NameOf(FishItemTypeDescriptor), 1}
             },
             New Dictionary(Of String, Integer) From
             {
-                {NameOf(RawFishFiletItemTypeDescriptor), 2},
-                {NameOf(KnifeItemTypeDescriptor), 1}
+                {NameOf(RawFishFiletItemTypeDescriptor), 2}
             },
             New Dictionary(Of String, Integer) From
             {
-                {NameOf(KnifeItemTypeDescriptor), 1}
+                {TagType.CanCut, 1}
             })
     End Sub
 End Class

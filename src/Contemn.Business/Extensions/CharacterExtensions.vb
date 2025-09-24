@@ -52,4 +52,8 @@ Friend Module CharacterExtensions
             },
             nextDialog)
     End Function
+    <Extension>
+    Friend Function GetDurabilityTotal(character As ICharacter, tag As String) As Integer
+        Return character.Items.Where(Function(x) x.GetTag(tag)).Sum(Function(x) x.GetStatistic(StatisticType.Durability))
+    End Function
 End Module
