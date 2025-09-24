@@ -9,4 +9,5 @@
     Public ReadOnly Stick As String = NameOf(Stick)
     Public ReadOnly Twine As String = NameOf(Twine)
     Public ReadOnly Blade As String = NameOf(Blade)
+    Public ReadOnly Knife As String = NameOf(Knife)
 End Module
