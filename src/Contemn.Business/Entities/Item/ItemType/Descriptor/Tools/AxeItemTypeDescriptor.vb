@@ -6,13 +6,13 @@ Friend Class AxeItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.ItemType.Axe,
+            NameOf(AxeItemTypeDescriptor),
             "Axe",
             0,
             False,
             MAXIMUM_DURABILITY,
             {TagType.CanChop},
-            Business.ItemType.SharpRock,
+            NameOf(SharpRockItemTypeDescriptor),
             MAXIMUM_DURABILITY)
     End Sub
 

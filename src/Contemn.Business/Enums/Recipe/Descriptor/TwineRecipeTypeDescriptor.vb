@@ -6,11 +6,11 @@
             NameOf(TwineRecipeTypeDescriptor),
             New Dictionary(Of String, Integer) From
             {
-                {ItemType.PlantFiber, 2}
+                {NameOf(PlantFiberItemTypeDescriptor), 2}
             },
             New Dictionary(Of String, Integer) From
             {
-                {ItemType.Twine, 1}
+                {NameOf(TwineItemTypeDescriptor), 1}
             })
     End Sub
 End Class

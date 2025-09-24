@@ -5,12 +5,12 @@
         MyBase.New(
             NameOf(BladeRecipeTypeDescriptor),
             New Dictionary(Of String, Integer) From {
-                {ItemType.Rock, 1},
-                {ItemType.SharpRock, 1}
+                {NameOf(RockItemTypeDescriptor), 1},
+                {NameOf(SharpRockItemTypeDescriptor), 1}
             },
             New Dictionary(Of String, Integer) From {
-                {ItemType.Rock, 1},
-                {ItemType.Blade, 2}
+                {NameOf(RockItemTypeDescriptor), 1},
+                {NameOf(BladeItemTypeDescriptor), 2}
             })
     End Sub
 End Class

@@ -7,6 +7,6 @@
 
     Friend Overrides Sub Initialize(generator As IGenerator)
         generator.SetWeight(String.Empty, 5)
-        generator.SetWeight(ItemType.PlantFiber, 20)
+        generator.SetWeight(NameOf(PlantFiberItemTypeDescriptor), 20)
     End Sub
 End Class

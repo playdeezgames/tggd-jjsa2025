@@ -15,13 +15,13 @@ Friend Class ChopWoodVerbTypeDescriptor
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
         Dim bumpLocation = character.GetBumpLocation()
-        Dim tool = character.World.CreateItem(ItemType.Log, character)
+        Dim tool = character.World.CreateItem(NameOf(LogItemTypeDescriptor), character)
         bumpLocation.ChangeStatistic(StatisticType.Resource, -RESOURCE_PER_LOG)
         character.ChangeStatistic(StatisticType.Score, 1)
         character.PlaySfx(Sfx.WooHoo)
         Return New MessageDialog(
                     character.ProcessTurn().
-                        Append(New DialogLine(MoodType.Info, $"+1 {tool.Name}({character.GetCountOfItemType(ItemType.Log)})")).
+                        Append(New DialogLine(MoodType.Info, $"+1 {tool.Name}({character.GetCountOfItemType(NameOf(LogItemTypeDescriptor))})")).
                         Concat(DepleteAxe(character)).
                         Concat(TreeLocationTypeDescriptor.DepleteTree(bumpLocation)),
                     {

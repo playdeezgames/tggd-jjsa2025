@@ -7,7 +7,7 @@ Friend Class FishItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.ItemType.Fish,
+            NameOf(FishItemTypeDescriptor),
             "Fish",
             0,
             True)

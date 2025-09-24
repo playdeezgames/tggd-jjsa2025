@@ -25,7 +25,7 @@ Friend Class CollectStickVerbTypeDescriptor
     Private Function HandlePerform(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim bumpLocation = character.GetBumpLocation()
         Dim result As New List(Of IDialogLine)
-        Dim stick = character.World.CreateItem(ItemType.Stick, character)
+        Dim stick = character.World.CreateItem(NameOf(StickItemTypeDescriptor), character)
         bumpLocation.ChangeStatistic(StatisticType.Resource, -1)
         result.Add(New DialogLine(MoodType.Info, $"+1 {stick.Name}({character.GetCountOfItemType(stick.ItemType)})"))
         result.AddRange(TreeLocationTypeDescriptor.DepleteTree(bumpLocation))

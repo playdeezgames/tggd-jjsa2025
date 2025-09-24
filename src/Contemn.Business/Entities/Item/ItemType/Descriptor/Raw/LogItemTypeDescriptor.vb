@@ -5,7 +5,7 @@ Friend Class LogItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.ItemType.Log,
+            NameOf(LogItemTypeDescriptor),
             "Log",
             0,
             True)

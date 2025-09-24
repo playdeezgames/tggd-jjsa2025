@@ -4,7 +4,7 @@ Friend Class TwineItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.ItemType.Twine, "Twine", 0, True)
+        MyBase.New(NameOf(TwineItemTypeDescriptor), "Twine", 0, True)
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

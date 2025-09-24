@@ -6,13 +6,13 @@
             NameOf(AxeRecipeTypeDescriptor),
             New Dictionary(Of String, Integer) From
             {
-                {ItemType.Stick, 1},
-                {ItemType.Twine, 1},
-                {ItemType.SharpRock, 1}
+                {NameOf(StickItemTypeDescriptor), 1},
+                {NameOf(TwineItemTypeDescriptor), 1},
+                {NameOf(SharpRockItemTypeDescriptor), 1}
             },
             New Dictionary(Of String, Integer) From
             {
-                {ItemType.Axe, 1}
+                {NameOf(AxeItemTypeDescriptor), 1}
             })
     End Sub
 End Class

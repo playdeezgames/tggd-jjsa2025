@@ -33,14 +33,14 @@ Friend Class FishVerbTypeDescriptor
     End Function
 
     Private Function CatchFish(character As ICharacter, bumpLocation As ILocation) As IDialog
-        Dim item = character.World.CreateItem(ItemType.Fish, character)
+        Dim item = character.World.CreateItem(NameOf(FishItemTypeDescriptor), character)
         bumpLocation.ChangeStatistic(StatisticType.Depletion, 1)
         bumpLocation.ChangeStatistic(StatisticType.Resource, -1)
         character.ChangeStatistic(StatisticType.Score, 1)
         character.PlaySfx(Sfx.WooHoo)
         Return New MessageDialog(
                     character.ProcessTurn().
-                        Append(New DialogLine(MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(ItemType.Fish)})")).
+                        Append(New DialogLine(MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(NameOf(FishItemTypeDescriptor))})")).
                         Concat(DepleteNet(character)),
                     {
                         (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),

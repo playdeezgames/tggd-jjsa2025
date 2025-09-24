@@ -4,7 +4,7 @@ Friend Class PlantFiberItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.ItemType.PlantFiber, "Fiber", 0, True)
+        MyBase.New(NameOf(PlantFiberItemTypeDescriptor), "Fiber", 0, True)
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

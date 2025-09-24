@@ -6,11 +6,11 @@
             NameOf(FishingNetRecipeTypeDescriptor),
             New Dictionary(Of String, Integer) From
             {
-                {ItemType.Twine, 4}
+                {NameOf(TwineItemTypeDescriptor), 4}
             },
             New Dictionary(Of String, Integer) From
             {
-                {ItemType.FishingNet, 1}
+                {NameOf(FishingNetItemTypeDescriptor), 1}
             })
     End Sub
 End Class

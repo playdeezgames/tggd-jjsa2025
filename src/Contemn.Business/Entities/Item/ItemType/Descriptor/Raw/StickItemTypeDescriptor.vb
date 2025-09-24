@@ -5,7 +5,7 @@ Friend Class StickItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.ItemType.Stick,
+            NameOf(StickItemTypeDescriptor),
             "Stick",
             0,
             True)

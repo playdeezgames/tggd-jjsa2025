@@ -6,13 +6,13 @@ Friend Class KnifeItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.ItemType.Knife,
+            NameOf(KnifeItemTypeDescriptor),
             "Knife",
             0,
             False,
             MAXIMUM_DURABILITY,
             {TagType.CanCut},
-            Business.ItemType.Blade,
+            NameOf(BladeItemTypeDescriptor),
             MAXIMUM_DURABILITY)
     End Sub
 

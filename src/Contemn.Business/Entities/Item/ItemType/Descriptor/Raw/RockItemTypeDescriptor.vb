@@ -4,7 +4,7 @@ Friend Class RockItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.ItemType.Rock, "Rock", 0, True)
+        MyBase.New(NameOf(RockItemTypeDescriptor), "Rock", 0, True)
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

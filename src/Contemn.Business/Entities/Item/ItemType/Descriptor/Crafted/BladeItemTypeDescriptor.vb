@@ -5,7 +5,7 @@ Friend Class BladeItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.ItemType.Blade,
+            NameOf(BladeItemTypeDescriptor),
             "Blade",
             0,
             True)

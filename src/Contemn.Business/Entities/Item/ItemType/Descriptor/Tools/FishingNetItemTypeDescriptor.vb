@@ -6,13 +6,13 @@ Friend Class FishingNetItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.ItemType.FishingNet,
+            NameOf(FishingNetItemTypeDescriptor),
             "Net",
             0,
             False,
             MAXIMUM_DURABILITY,
             {TagType.CanFish},
-            Business.ItemType.Twine,
+            NameOf(TwineItemTypeDescriptor),
             MAXIMUM_DURABILITY \ 2)
     End Sub
 

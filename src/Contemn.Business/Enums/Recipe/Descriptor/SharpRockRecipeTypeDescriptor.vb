@@ -6,12 +6,12 @@
             NameOf(SharpRockRecipeTypeDescriptor),
             New Dictionary(Of String, Integer) From
             {
-                {ItemType.Rock, 2}
+                {NameOf(RockItemTypeDescriptor), 2}
             },
             New Dictionary(Of String, Integer) From
             {
-                {ItemType.SharpRock, 1},
-                {ItemType.Rock, 1}
+                {NameOf(SharpRockItemTypeDescriptor), 1},
+                {NameOf(RockItemTypeDescriptor), 1}
             })
     End Sub
 End Class

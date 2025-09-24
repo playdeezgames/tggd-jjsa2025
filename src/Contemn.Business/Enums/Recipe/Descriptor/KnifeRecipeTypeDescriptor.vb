@@ -6,13 +6,13 @@
             NameOf(KnifeRecipeTypeDescriptor),
             New Dictionary(Of String, Integer) From
             {
-                {ItemType.Stick, 1},
-                {ItemType.Twine, 1},
-                {ItemType.Blade, 1}
+                {NameOf(StickItemTypeDescriptor), 1},
+                {NameOf(TwineItemTypeDescriptor), 1},
+                {NameOf(BladeItemTypeDescriptor), 1}
             },
             New Dictionary(Of String, Integer) From
             {
-                {ItemType.Knife, 1}
+                {NameOf(KnifeItemTypeDescriptor), 1}
             })
     End Sub
 End Class
