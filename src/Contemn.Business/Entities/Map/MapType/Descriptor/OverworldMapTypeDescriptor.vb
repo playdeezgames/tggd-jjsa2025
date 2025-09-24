@@ -11,6 +11,6 @@
         }
 
     Public Sub New()
-        MyBase.New(Business.MapType.Overworld, 1, terrainGenerator)
+        MyBase.New(NameOf(OverworldMapTypeDescriptor), 1, terrainGenerator)
     End Sub
 End Class
