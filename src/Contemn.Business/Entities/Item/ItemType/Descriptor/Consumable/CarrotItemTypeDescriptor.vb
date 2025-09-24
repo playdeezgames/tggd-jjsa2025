@@ -1,15 +1,15 @@
 ﻿Imports TGGD.Business
 
-Friend Class RawFishFiletItemTypeDescriptor
+Friend Class CarrotItemTypeDescriptor
     Inherits ConsumableItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            NameOf(RawFishFiletItemTypeDescriptor),
-            "Raw Filet",
+            NameOf(CarrotItemTypeDescriptor),
+            "Carrot",
             0,
             True,
-            (1, 1, 4))
+            (0, 1, 0))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -19,7 +19,7 @@ Friend Class RawFishFiletItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
-        item.SetStatistic(StatisticType.Satiety, 15)
+        item.SetStatistic(StatisticType.Satiety, 10)
     End Sub
 
     Protected Overrides Function OtherChoice(item As IItem, character As ICharacter, choice As String) As IDialog
@@ -40,7 +40,7 @@ Friend Class RawFishFiletItemTypeDescriptor
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
         Return {
-            New DialogLine(MoodType.Info, "It's a raw fish filet.")
+            New DialogLine(MoodType.Info, "It's a carrot.")
         }
     End Function
 End Class

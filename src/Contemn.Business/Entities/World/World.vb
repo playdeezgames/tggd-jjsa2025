@@ -60,8 +60,9 @@ Public Class World
         CreateCharacters()
         CreateItems()
         AddMessage(MoodType.Info, "Welcome to Grubstaker of SPLORR!!")
-        AddMessage(MoodType.Info, "Arrows, WASD, ZQSD: MOVE")
-        AddMessage(MoodType.Info, "Space: ACTIONS | Backspace: GAME MENU")
+        AddMessage(MoodType.Info, "MOVE: Arrows, WASD, ZQSD")
+        AddMessage(MoodType.Info, "ACTION MENU: Space")
+        AddMessage(MoodType.Info, "GAME MENU: Backspace")
     End Sub
 
     Private Sub CreateItems()

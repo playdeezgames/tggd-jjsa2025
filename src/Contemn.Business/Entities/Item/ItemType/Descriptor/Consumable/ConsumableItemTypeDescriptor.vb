@@ -24,9 +24,11 @@ Friend MustInherit Class ConsumableItemTypeDescriptor
             Case EAT_CHOICE
                 Return Eat(item, character)
             Case Else
-                Throw New NotImplementedException
+                Return OtherChoice(item, character, choice)
         End Select
     End Function
+
+    Protected MustOverride Function OtherChoice(item As IItem, character As ICharacter, choice As String) As IDialog
 
     Private Function Eat(item As IItem, character As ICharacter) As IDialog
         Dim lines As New List(Of IDialogLine)

@@ -22,6 +22,10 @@ Friend Class FishItemTypeDescriptor
         item.SetStatistic(StatisticType.Satiety, 20)
     End Sub
 
+    Protected Overrides Function OtherChoice(item As IItem, character As ICharacter, choice As String) As IDialog
+        Throw New NotImplementedException()
+    End Function
+
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
         Return False
     End Function
