@@ -6,7 +6,7 @@ Friend Class RawFishFiletItemTypeDescriptor
     Public Sub New()
         MyBase.New(
             NameOf(RawFishFiletItemTypeDescriptor),
-            "Raw Fish Filet",
+            "Raw Filet",
             0,
             True,
             (1, 1, 4))
