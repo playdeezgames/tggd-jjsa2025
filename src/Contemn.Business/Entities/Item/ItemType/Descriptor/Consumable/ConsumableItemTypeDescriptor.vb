@@ -1,39 +1,23 @@
 ﻿Imports TGGD.Business
 
-Friend Class FishItemTypeDescriptor
+Friend MustInherit Class ConsumableItemTypeDescriptor
     Inherits ItemTypeDescriptor
     Private Shared ReadOnly EAT_ANOTHER_CHOICE As String = NameOf(EAT_ANOTHER_CHOICE)
     Private Const EAT_ANOTHER_TEXT = "Eat Another..."
+    Private ReadOnly foodPoisoningStats As (Hazard As Integer, Safety As Integer, Severity As Integer)
 
-    Public Sub New()
-        MyBase.New(
-            NameOf(FishItemTypeDescriptor),
-            "Fish",
-            0,
-            True)
+    Protected Sub New(
+                     itemType As String,
+                     itemTypeName As String,
+                     itemCount As Integer,
+                     isAggregate As Boolean,
+                     foodPoisoningStats As (Hazard As Integer, Safety As Integer, Severity As Integer))
+        MyBase.New(itemType,
+                   itemTypeName,
+                   itemCount,
+                   isAggregate)
+        Me.foodPoisoningStats = foodPoisoningStats
     End Sub
-
-    Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
-    End Sub
-
-    Friend Overrides Sub HandleRemoveItem(item As IItem, character As ICharacter)
-    End Sub
-
-    Friend Overrides Sub HandleInitialize(item As IItem)
-        item.SetStatistic(StatisticType.Satiety, 25)
-    End Sub
-
-    Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
-        Return False
-    End Function
-
-    Friend Overrides Function CanSpawnLocation(location As ILocation) As Boolean
-        Return False
-    End Function
-
-    Friend Overrides Function GetName(item As IItem) As String
-        Return ItemTypeName
-    End Function
 
     Friend Overrides Function Choose(item As IItem, character As ICharacter, choice As String) As IDialog
         Select Case choice
@@ -48,8 +32,8 @@ Friend Class FishItemTypeDescriptor
         Dim lines As New List(Of IDialogLine)
         character.ChangeStatistic(StatisticType.Satiety, item.GetStatistic(StatisticType.Satiety))
         lines.Add(New DialogLine(MoodType.Info, $"+{item.GetStatistic(StatisticType.Satiety)} {StatisticType.Satiety.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Satiety)})"))
-        If RNG.GenerateBoolean(1, 1) Then
-            Dim illness = RNG.RollXDY(1, 4)
+        If RNG.GenerateBoolean(foodPoisoningStats.Safety, foodPoisoningStats.Hazard) Then
+            Dim illness = RNG.RollXDY(1, foodPoisoningStats.Severity)
             character.ChangeStatistic(StatisticType.Illness, illness)
             lines.Add(New DialogLine(MoodType.Info, "You get food poisoning."))
             lines.Add(New DialogLine(MoodType.Info, $"+{illness} {StatisticType.Illness.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Illness)})"))
@@ -69,11 +53,5 @@ Friend Class FishItemTypeDescriptor
 
     Friend Overrides Function GetAvailableChoices(item As IItem, character As ICharacter) As IEnumerable(Of IDialogChoice)
         Return {New DialogChoice(EAT_CHOICE, EAT_TEXT)}
-    End Function
-
-    Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
-        Return {
-            New DialogLine(MoodType.Info, "It's a fish.")
-        }
     End Function
 End Class

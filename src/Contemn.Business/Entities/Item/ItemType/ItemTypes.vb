@@ -14,7 +14,8 @@ Friend Module ItemTypes
             New AxeItemTypeDescriptor(),
             New LogItemTypeDescriptor(),
             New BladeItemTypeDescriptor(),
-            New KnifeItemTypeDescriptor()
+            New KnifeItemTypeDescriptor(),
+            New RawFishFiletItemTypeDescriptor()
         }.ToDictionary(Function(x) x.ItemType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get

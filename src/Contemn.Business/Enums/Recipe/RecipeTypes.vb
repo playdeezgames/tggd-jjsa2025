@@ -9,7 +9,8 @@ Friend Module RecipeTypes
             New SharpRockRecipeTypeDescriptor(),
             New AxeRecipeTypeDescriptor(),
             New BladeRecipeTypeDescriptor(),
-            New KnifeRecipeTypeDescriptor()
+            New KnifeRecipeTypeDescriptor(),
+            New RawFishFiletRecipeTypeDescriptor()
         }.ToDictionary(
             Function(x) x.RecipeType,
             Function(x) x)
