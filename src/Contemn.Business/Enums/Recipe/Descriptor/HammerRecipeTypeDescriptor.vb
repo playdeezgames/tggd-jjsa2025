@@ -1,20 +1,19 @@
-﻿Friend Class SharpRockRecipeTypeDescriptor
+﻿Friend Class HammerRecipeTypeDescriptor
     Inherits RecipeTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            NameOf(SharpRockRecipeTypeDescriptor),
+            NameOf(HammerRecipeTypeDescriptor),
             New Dictionary(Of String, Integer) From
             {
+                {NameOf(StickItemTypeDescriptor), 1},
+                {NameOf(TwineItemTypeDescriptor), 1},
                 {NameOf(RockItemTypeDescriptor), 1}
             },
             New Dictionary(Of String, Integer) From
             {
-                {NameOf(SharpRockItemTypeDescriptor), 1}
+                {NameOf(HammerItemTypeDescriptor), 1}
             },
-            New Dictionary(Of String, Integer) From
-            {
-                {TagType.CanHammer, 1}
-            })
+            New Dictionary(Of String, Integer))
     End Sub
 End Class
