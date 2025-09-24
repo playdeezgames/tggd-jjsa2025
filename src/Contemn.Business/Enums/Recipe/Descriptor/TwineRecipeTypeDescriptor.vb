@@ -11,6 +11,7 @@
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(TwineItemTypeDescriptor), 1}
-            })
+            },
+            New Dictionary(Of String, Integer))
     End Sub
 End Class

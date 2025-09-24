@@ -12,6 +12,7 @@
             {
                 {NameOf(SharpRockItemTypeDescriptor), 1},
                 {NameOf(RockItemTypeDescriptor), 1}
-            })
+            },
+            New Dictionary(Of String, Integer))
     End Sub
 End Class

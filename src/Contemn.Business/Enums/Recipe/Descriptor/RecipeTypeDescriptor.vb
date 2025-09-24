@@ -4,13 +4,16 @@ Friend MustInherit Class RecipeTypeDescriptor
     Friend ReadOnly Property RecipeType As String
     Private ReadOnly inputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)
+    Private ReadOnly durabilities As IReadOnlyDictionary(Of String, Integer)
     Sub New(
            recipeType As String,
            inputs As IReadOnlyDictionary(Of String, Integer),
-           outputs As IReadOnlyDictionary(Of String, Integer))
+           outputs As IReadOnlyDictionary(Of String, Integer),
+           durabilities As IReadOnlyDictionary(Of String, Integer))
         Me.RecipeType = recipeType
         Me.inputs = inputs
         Me.outputs = outputs
+        Me.durabilities = durabilities
     End Sub
     Friend Overridable Function CanCraft(character As ICharacter) As Boolean
         Return inputs.All(Function(x) character.GetCountOfItemType(x.Key) >= x.Value)

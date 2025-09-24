@@ -11,6 +11,7 @@
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(FishingNetItemTypeDescriptor), 1}
-            })
+            },
+            New Dictionary(Of String, Integer))
     End Sub
 End Class

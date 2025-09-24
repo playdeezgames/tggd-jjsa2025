@@ -13,6 +13,10 @@
             {
                 {NameOf(RawFishFiletItemTypeDescriptor), 2},
                 {NameOf(KnifeItemTypeDescriptor), 1}
+            },
+            New Dictionary(Of String, Integer) From
+            {
+                {NameOf(KnifeItemTypeDescriptor), 1}
             })
     End Sub
 End Class

@@ -11,6 +11,7 @@
             New Dictionary(Of String, Integer) From {
                 {NameOf(RockItemTypeDescriptor), 1},
                 {NameOf(BladeItemTypeDescriptor), 2}
-            })
+            },
+            New Dictionary(Of String, Integer))
     End Sub
 End Class
