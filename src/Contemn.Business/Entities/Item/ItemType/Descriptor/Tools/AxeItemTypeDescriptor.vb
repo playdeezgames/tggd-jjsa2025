@@ -11,7 +11,7 @@ Friend Class AxeItemTypeDescriptor
             0,
             False,
             MAXIMUM_DURABILITY,
-            {TagType.CanChop},
+            {TagType.CanChop, TagType.CanSharpen},
             NameOf(SharpRockItemTypeDescriptor),
             MAXIMUM_DURABILITY)
     End Sub

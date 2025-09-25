@@ -11,7 +11,7 @@ Friend Class KnifeItemTypeDescriptor
             0,
             False,
             MAXIMUM_DURABILITY,
-            {TagType.CanCut},
+            {TagType.CanCut, TagType.CanSharpen},
             NameOf(BladeItemTypeDescriptor),
             MAXIMUM_DURABILITY)
     End Sub
