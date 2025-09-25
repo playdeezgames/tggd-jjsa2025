@@ -12,6 +12,7 @@ Friend Class DirtLocationTypeDescriptor
 
     Friend Overrides Sub OnInitialize(location As Location)
         location.SetMetadata(MetadataType.ForageTable, Nothing)
+        location.SetTag(TagType.IsPlaceable, True)
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog

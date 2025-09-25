@@ -22,6 +22,7 @@ Friend Class Location
         End Get
         Set(value As String)
             If value <> EntityData.LocationType Then
+                Clear()
                 EntityData.LocationType = value
                 Initialize()
             End If

@@ -9,8 +9,24 @@ Friend Module LocationExtensions
             {LocationType.Tree, AddressOf TreeToPixel},
             {LocationType.Water, AddressOf WaterToPixel},
             {LocationType.Dirt, AddressOf DirtToPixel},
-            {LocationType.Rock, AddressOf RockToPixel}
+            {LocationType.Rock, AddressOf RockToPixel},
+            {LocationType.CampFire, AddressOf CampFireToPixel},
+            {LocationType.Furnace, AddressOf FurnaceToPixel}
         }
+
+    Private Function FurnaceToPixel(location As ILocation) As Integer
+        Return UIBufferExtensions.ToPixel(
+            8,
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
+
+    Private Function CampFireToPixel(location As ILocation) As Integer
+        Return UIBufferExtensions.ToPixel(
+            15,
+            Hue.Brown,
+            Hue.Black)
+    End Function
 
     Private Function RockToPixel(location As ILocation) As Integer
         Return UIBufferExtensions.ToPixel(

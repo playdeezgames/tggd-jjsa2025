@@ -19,6 +19,8 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     End Sub
     Public Overridable Sub Clear() Implements IEntity.Clear
         EntityData.Statistics.Clear()
+        EntityData.Metadatas.Clear()
+        EntityData.Tags.Clear()
     End Sub
 
     Public Overridable Sub Initialize() Implements IEntity.Initialize

@@ -1,12 +1,12 @@
 ﻿Imports TGGD.Business
 
-Friend Class CampFireItemTypeDescriptor
+Friend Class FurnaceItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            NameOf(CampFireItemTypeDescriptor),
-            "Camp Fire",
+            NameOf(FurnaceItemTypeDescriptor),
+            "Furnace",
             0,
             True)
     End Sub
@@ -18,6 +18,8 @@ Friend Class CampFireItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        item.SetTag(TagType.CanPlace, True)
+        item.SetMetadata(MetadataType.PlaceLocationType, LocationType.Furnace)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
@@ -32,17 +34,17 @@ Friend Class CampFireItemTypeDescriptor
         Return ItemTypeName
     End Function
 
+    Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
+        Return {
+            New DialogLine(MoodType.Info, "It's a furnace.")
+            }
+    End Function
+
     Friend Overrides Function Choose(item As IItem, character As ICharacter, choice As String) As IDialog
         Throw New NotImplementedException()
     End Function
 
     Friend Overrides Function GetAvailableChoices(item As IItem, character As ICharacter) As IEnumerable(Of IDialogChoice)
         Return Array.Empty(Of IDialogChoice)
-    End Function
-
-    Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
-        Return {
-            New DialogLine(MoodType.Info, "It's a campfire.")
-            }
     End Function
 End Class

@@ -4,4 +4,6 @@
     Public ReadOnly Water As String = NameOf(Water)
     Public ReadOnly Dirt As String = NameOf(Dirt)
     Public ReadOnly Rock As String = NameOf(Rock)
+    Public ReadOnly CampFire As String = NameOf(CampFire)
+    Public ReadOnly Furnace As String = NameOf(Furnace)
 End Module

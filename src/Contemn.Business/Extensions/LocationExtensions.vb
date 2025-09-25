@@ -3,6 +3,13 @@ Imports TGGD.Business
 
 Friend Module LocationExtensions
     <Extension>
+    Friend Function NextLocation(location As ILocation, direction As String) As ILocation
+        Dim descriptor = direction.ToDirectionTypeDescriptor
+        Dim nextColumn = descriptor.GetNextColumn(location.Column)
+        Dim nextRow = descriptor.GetNextRow(location.Row)
+        Return location.Map.GetLocation(nextColumn, nextRow)
+    End Function
+    <Extension>
     Friend Function HandleBump(location As ILocation, character As ICharacter) As IDialog
         Return location.LocationType.ToLocationTypeDescriptor.OnBump(location, character)
     End Function
@@ -16,7 +23,7 @@ Friend Module LocationExtensions
     End Function
     <Extension>
     Friend Function GetForageGenerator(location As ILocation) As IGenerator
-        If location.hasstatistic(StatisticType.ForageGeneratorId) Then
+        If location.HasStatistic(StatisticType.ForageGeneratorId) Then
             Return location.World.GetGenerator(location.GetStatistic(StatisticType.ForageGeneratorId))
         End If
         Dim forageTableType = location.GetMetadata(MetadataType.ForageTable)
