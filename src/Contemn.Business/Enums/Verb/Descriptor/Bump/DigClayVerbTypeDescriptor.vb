@@ -1,44 +1,26 @@
 ﻿Imports TGGD.Business
 
-Friend Class FishVerbTypeDescriptor
+Friend Class DigClayVerbTypeDescriptor
     Inherits VerbTypeDescriptor
-    ReadOnly itemType As String = NameOf(FishItemTypeDescriptor)
-    ReadOnly toolTag As String = TagType.CanFish
-    ReadOnly locationTag As String = TagType.IsDiggable
-    ReadOnly validLocationTypes As IEnumerable(Of String) = {LocationType.Water}
-    ReadOnly failMessage As String = $"You catch nothing."
-
 
     Public Sub New()
         MyBase.New(
-            Business.VerbType.Fish,
+            Business.VerbType.DigClay,
             Business.VerbCategoryType.Bump,
-            "Fish")
+            "Dig Clay")
     End Sub
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
         Dim bumpLocation = character.GetBumpLocation()
         Dim success = RNG.GenerateBoolean(bumpLocation.GetStatistic(StatisticType.Depletion), bumpLocation.GetStatistic(StatisticType.Resource))
         If success Then
-            Return HandleSuccess(character, bumpLocation)
+            Return FindClay(character, bumpLocation)
         End If
-        Return HandleFailure(character)
+        Return FindNothing(character)
     End Function
 
-    Private Function HandleFailure(character As ICharacter) As IDialog
-        character.PlaySfx(Sfx.Shucks)
-        Return New MessageDialog(
-            character.ProcessTurn().
-                Append(New DialogLine(MoodType.Info, failMessage)),
-            {
-                (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
-                (TRY_AGAIN_CHOICE, TRY_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
-            },
-            Function() Nothing)
-    End Function
-
-    Private Function HandleSuccess(character As ICharacter, bumpLocation As ILocation) As IDialog
-        Dim item = character.World.CreateItem(itemType, character)
+    Private Function FindClay(character As ICharacter, bumpLocation As ILocation) As IDialog
+        Dim item = character.World.CreateItem(NameOf(ClayItemTypeDescriptor), character)
         bumpLocation.ChangeStatistic(StatisticType.Depletion, 1)
         bumpLocation.ChangeStatistic(StatisticType.Resource, -1)
         character.ChangeStatistic(StatisticType.Score, 1)
@@ -46,7 +28,7 @@ Friend Class FishVerbTypeDescriptor
         Return New MessageDialog(
                     character.ProcessTurn().
                         Append(New DialogLine(MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(NameOf(FishItemTypeDescriptor))})")).
-                        Concat(character.Items.First(Function(x) x.GetTag(toolTag)).Deplete(character)),
+                        Concat(character.Items.First(Function(x) x.GetTag(TagType.CanDig)).Deplete(character)),
                     {
                         (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
                         (TRY_AGAIN_CHOICE, TRY_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
@@ -54,13 +36,25 @@ Friend Class FishVerbTypeDescriptor
                     Function() Nothing)
     End Function
 
+    Private Function FindNothing(character As ICharacter) As IDialog
+        character.PlaySfx(Sfx.Shucks)
+        Return New MessageDialog(
+            character.ProcessTurn().
+                Append(New DialogLine(MoodType.Info, $"You mind nothing.")),
+            {
+                (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
+                (TRY_AGAIN_CHOICE, TRY_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
+            },
+            Function() Nothing)
+    End Function
+
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
         Dim bumpLocation = character.GetBumpLocation()
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso
-            bumpLocation.GetTag(locationTag) AndAlso
-            validLocationTypes.Contains(bumpLocation.LocationType) AndAlso
+            bumpLocation.GetTag(TagType.IsDiggable) AndAlso
+            bumpLocation.LocationType = LocationType.Water AndAlso
             Not bumpLocation.IsStatisticAtMinimum(StatisticType.Resource) AndAlso
-            character.Items.Any(Function(x) x.GetTag(toolTag))
+            character.Items.Any(Function(x) x.GetTag(TagType.CanDig))
     End Function
 End Class

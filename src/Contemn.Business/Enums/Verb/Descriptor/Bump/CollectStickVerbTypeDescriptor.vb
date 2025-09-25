@@ -24,6 +24,7 @@ Friend Class CollectStickVerbTypeDescriptor
 
     Private Function HandlePerform(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim bumpLocation = character.GetBumpLocation()
+        character.PlaySfx(Sfx.WooHoo)
         Dim result As New List(Of IDialogLine)
         Dim stick = character.World.CreateItem(NameOf(StickItemTypeDescriptor), character)
         bumpLocation.ChangeStatistic(StatisticType.Resource, -1)
@@ -35,6 +36,7 @@ Friend Class CollectStickVerbTypeDescriptor
     Public Overrides Function CanPerform(character As ICharacter) As Boolean
         Dim bumpLocation = character.GetBumpLocation()
         Return MyBase.CanPerform(character) AndAlso
+            bumpLocation IsNot Nothing AndAlso
             bumpLocation.LocationType = LocationType.Tree AndAlso
             Not bumpLocation.IsStatisticAtMinimum(StatisticType.Resource)
     End Function

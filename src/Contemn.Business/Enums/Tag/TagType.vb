@@ -6,4 +6,5 @@
     Friend ReadOnly CanHammer As String = NameOf(CanHammer)
     Friend ReadOnly CanSharpen As String = NameOf(CanSharpen)
     Friend ReadOnly IsChoppable As String = NameOf(IsChoppable)
+    Friend ReadOnly IsDiggable As String = NameOf(IsDiggable)
 End Module
