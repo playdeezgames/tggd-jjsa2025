@@ -2,22 +2,16 @@
 
 Friend Class CraftDialog
     Inherits BaseDialog
-    Private Shared ReadOnly CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
-    Private Const CRAFT_ANOTHER_TEXT = "Craft Another"
 
     Private ReadOnly character As ICharacter
 
     Public Sub New(character As ICharacter)
         MyBase.New(
-            GenerateCaption(character),
+            "Craft...",
             GenerateChoices(character),
-            GenerateLines(character))
+            Array.Empty(Of IDialogLine))
         Me.character = character
     End Sub
-
-    Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
-        Return Array.Empty(Of IDialogLine)
-    End Function
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
         Dim choices As New List(Of IDialogChoice) From
@@ -30,10 +24,6 @@ Friend Class CraftDialog
         Return choices
     End Function
 
-    Private Shared Function GenerateCaption(character As ICharacter) As String
-        Return $"Craft..."
-    End Function
-
     Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
@@ -44,10 +34,10 @@ Friend Class CraftDialog
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
-        If RecipeTypes.Descriptors.Values.Any(Function(x) x.CanCraft(character)) Then
-            Return Function() New CraftDialog(character)
-        End If
-        Return VerbListDialog.LaunchMenu(character)
+        Return Function() If(
+            RecipeTypes.Descriptors.Values.Any(Function(x) x.CanCraft(character)),
+            New CraftDialog(character),
+            VerbListDialog.LaunchMenu(character).Invoke)
     End Function
 
     Public Overrides Function CancelDialog() As IDialog

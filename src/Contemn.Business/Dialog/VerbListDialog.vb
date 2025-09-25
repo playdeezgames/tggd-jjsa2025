@@ -13,7 +13,7 @@ Public Class VerbListDialog
     End Sub
 
     Public Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
-        Return Function() CType(New VerbListDialog(character, VerbCategoryType.Action, "Actions..."), IDialog)
+        Return Function() New VerbListDialog(character, VerbCategoryType.Action, "Actions...")
     End Function
 
     Private Shared Function GenerateChoices(character As ICharacter, verbCategoryType As String) As IEnumerable(Of IDialogChoice)

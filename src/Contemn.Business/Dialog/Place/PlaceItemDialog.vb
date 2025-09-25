@@ -31,8 +31,8 @@ Public Class PlaceItemDialog
         Return "Place..."
     End Function
 
-    Friend Shared Function LaunchMenu(character As ICharacter) As IDialog
-        Return If(
+    Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
+        Return Function() If(
             VerbType.Place.ToVerbTypeDescriptor.CanPerform(character),
             New PlaceItemDialog(character),
             VerbListDialog.LaunchMenu(character).Invoke)

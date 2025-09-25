@@ -11,7 +11,7 @@ Friend Class PlaceVerbTypeDescriptor
     End Sub
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
-        Return PlaceItemDialog.LaunchMenu(character)
+        Return PlaceItemDialog.LaunchMenu(character).Invoke
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean

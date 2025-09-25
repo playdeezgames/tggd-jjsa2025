@@ -44,7 +44,7 @@ Friend Class InventoryDialog
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return VerbListDialog.LaunchMenu(character).Invoke()
+        Return Choose(NEVER_MIND_CHOICE)
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)

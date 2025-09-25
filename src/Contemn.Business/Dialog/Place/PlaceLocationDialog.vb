@@ -57,6 +57,6 @@ Friend Class PlaceLocationDialog
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return PlaceItemDialog.LaunchMenu(character)
+        Return PlaceItemDialog.LaunchMenu(character).Invoke
     End Function
 End Class
