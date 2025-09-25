@@ -78,4 +78,11 @@ Friend Class Map
         End If
         Return Nothing
     End Function
+    Public Overrides Sub Clear()
+        MyBase.Clear()
+        EntityData.MapType = Nothing
+        EntityData.Columns = 0
+        EntityData.Rows = 0
+        EntityData.Locations.Clear()
+    End Sub
 End Class

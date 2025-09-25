@@ -54,4 +54,9 @@ Friend Class Item
     Public Function Describe() As IEnumerable(Of IDialogLine) Implements IItem.Describe
         Return ItemType.ToItemTypeDescriptor.Describe(Me)
     End Function
+
+    Public Overrides Sub Clear()
+        MyBase.Clear()
+        EntityData.ItemType = Nothing
+    End Sub
 End Class

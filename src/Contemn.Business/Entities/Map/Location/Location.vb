@@ -22,12 +22,25 @@ Friend Class Location
         End Get
         Set(value As String)
             If value <> EntityData.LocationType Then
-                Clear()
+                EntityData.Statistics.Clear()
+                EntityData.StatisticMinimums.Clear()
+                EntityData.StatisticMaximums.Clear()
+                EntityData.Metadatas.Clear()
+                EntityData.Tags.Clear()
                 EntityData.LocationType = value
                 Initialize()
             End If
         End Set
     End Property
+
+    Public Overrides Sub Clear()
+        MyBase.Clear()
+        EntityData.LocationType = Nothing
+        EntityData.MapId = 0
+        EntityData.Column = 0
+        EntityData.Row = 0
+        EntityData.CharacterId = Nothing
+    End Sub
 
     Public ReadOnly Property Column As Integer Implements ILocation.Column
         Get

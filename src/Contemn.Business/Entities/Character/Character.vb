@@ -126,4 +126,10 @@ Friend Class Character
     Public Function ProcessTurn() As IEnumerable(Of IDialogLine) Implements ICharacter.ProcessTurn
         Return CharacterType.ToCharacterTypeDescriptor.OnProcessTurn(Me)
     End Function
+
+    Public Overrides Sub Clear()
+        MyBase.Clear()
+        EntityData.LocationId = 0
+        EntityData.CharacterType = Nothing
+    End Sub
 End Class
