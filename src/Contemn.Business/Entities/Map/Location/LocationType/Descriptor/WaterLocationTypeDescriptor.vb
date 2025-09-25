@@ -15,7 +15,7 @@ Friend Class WaterLocationTypeDescriptor
         location.SetStatistic(StatisticType.Resource, 20)
         location.SetStatisticMinimum(StatisticType.Resource, 0)
         location.SetStatistic(StatisticType.Depletion, 0)
-        location.SetTag(TagType.CanFish, True)
+        location.SetTag(TagType.IsFishable, True)
         location.SetTag(TagType.IsDiggable, True)
     End Sub
 
