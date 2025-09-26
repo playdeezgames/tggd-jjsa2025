@@ -13,7 +13,7 @@ Friend Class ForageVerbTypeDescriptor
     Public Overrides Function Perform(character As ICharacter) As IDialog
         Dim generator = character.Location.GetForageGenerator()
         Dim item = generator.GenerateItem(character)
-        Dim lines = character.ProcessTurn()
+        Dim lines = character.World.ProcessTurn()
         If item IsNot Nothing Then
             Return FoundItem(character, item, generator, lines)
         Else

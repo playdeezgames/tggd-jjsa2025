@@ -78,7 +78,7 @@ Friend MustInherit Class MendableItemTypeDescriptor
     End Function
 
     Private Function GenerateMendLines(item As IItem, character As ICharacter) As IEnumerable(Of IDialogLine)
-        Dim result = character.ProcessTurn().ToList
+        Dim result = character.World.ProcessTurn().ToList
         Dim originalDurability = item.GetStatistic(StatisticType.Durability)
         item.ChangeStatistic(StatisticType.Durability, durabilityRepaired)
         Dim mendDurability = item.GetStatistic(StatisticType.Durability) - originalDurability

@@ -20,7 +20,7 @@ Friend Class ChopWoodVerbTypeDescriptor
         character.ChangeStatistic(StatisticType.Score, 1)
         character.PlaySfx(Sfx.WooHoo)
         Return New MessageDialog(
-                    character.ProcessTurn().
+                    character.World.ProcessTurn().
                         Append(New DialogLine(MoodType.Info, $"+1 {tool.Name}({character.GetCountOfItemType(NameOf(LogItemTypeDescriptor))})")).
                         Concat(character.Items.First(Function(x) x.GetTag(TagType.CanChop)).Deplete(character)).
                         Concat(TreeLocationTypeDescriptor.DepleteTree(bumpLocation)),

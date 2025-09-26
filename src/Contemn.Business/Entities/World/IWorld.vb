@@ -1,4 +1,6 @@
 ﻿
+Imports TGGD.Business
+
 Public Interface IWorld
     Inherits IEntity
     Function CreateMap(mapType As String) As IMap
@@ -17,4 +19,5 @@ Public Interface IWorld
     Function GetMessage(line As Integer) As IMessage
     Function CreateGenerator() As IGenerator
     Function GetGenerator(generatorId As Integer) As IGenerator
+    Function ProcessTurn() As IEnumerable(Of IDialogLine)
 End Interface

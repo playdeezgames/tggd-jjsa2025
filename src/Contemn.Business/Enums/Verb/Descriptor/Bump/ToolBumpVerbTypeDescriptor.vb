@@ -39,7 +39,7 @@ Friend MustInherit Class ToolBumpVerbTypeDescriptor
     Private Function HandleFailure(character As ICharacter) As IDialog
         character.PlaySfx(Sfx.Shucks)
         Return New MessageDialog(
-            character.ProcessTurn().
+            character.World.ProcessTurn().
                 Append(New DialogLine(MoodType.Info, failMessage)),
             {
                 (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
@@ -55,7 +55,7 @@ Friend MustInherit Class ToolBumpVerbTypeDescriptor
         character.ChangeStatistic(StatisticType.Score, 1)
         character.PlaySfx(Sfx.WooHoo)
         Return New MessageDialog(
-                    character.ProcessTurn().
+                    character.World.ProcessTurn().
                         Append(New DialogLine(MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(itemType)})")).
                         Concat(character.Items.First(Function(x) x.GetTag(toolTag)).Deplete(character)),
                     {

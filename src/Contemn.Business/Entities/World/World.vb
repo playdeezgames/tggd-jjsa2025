@@ -201,4 +201,10 @@ Public Class World
     Public Function GetCharacter(characterId As Integer) As ICharacter Implements IWorld.GetCharacter
         Return New Character(Data, characterId, AddressOf PlaySfx)
     End Function
+
+    Public Function ProcessTurn() As IEnumerable(Of IDialogLine) Implements IWorld.ProcessTurn
+        Dim result As New List(Of IDialogLine)
+        result.AddRange(Avatar.ProcessTurn())
+        Return result
+    End Function
 End Class

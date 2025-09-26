@@ -28,7 +28,7 @@ Friend Class N00bCharacterTypeDescriptor
     End Function
 
     Friend Overrides Sub OnEnter(character As ICharacter, location As ILocation)
-        For Each line In character.ProcessTurn()
+        For Each line In character.World.ProcessTurn()
             character.World.AddMessage(line.Mood, line.Text)
         Next
         Dim items = location.Items

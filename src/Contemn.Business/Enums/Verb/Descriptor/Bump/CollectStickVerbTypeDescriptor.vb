@@ -13,6 +13,7 @@ Friend Class CollectStickVerbTypeDescriptor
     Public Overrides Function Perform(character As ICharacter) As IDialog
         Return New MessageDialog(
             character.
+                World.
                 ProcessTurn().
                 Concat(HandlePerform(character)),
             {
