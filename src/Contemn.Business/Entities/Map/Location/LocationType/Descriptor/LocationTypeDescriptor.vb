@@ -17,4 +17,6 @@ Friend MustInherit Class LocationTypeDescriptor
     Friend Overridable Function GetName(location As Location) As String
         Return LocationTypeName
     End Function
+
+    Friend MustOverride Sub OnProcessTurn(location As Location)
 End Class

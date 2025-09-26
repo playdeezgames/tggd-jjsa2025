@@ -40,6 +40,13 @@ Public Class World
             Return Data
         End Get
     End Property
+
+    Public ReadOnly Property ActiveLocations As IEnumerable(Of ILocation) Implements IWorld.ActiveLocations
+        Get
+            Return EntityData.ActiveLocations.Select(Function(x) New Location(Data, x, AddressOf PlaySfx))
+        End Get
+    End Property
+
     Public Overrides Sub Clear()
         MyBase.Clear()
         Data.Maps.Clear()
@@ -53,6 +60,7 @@ Public Class World
         Data.RecycledItems.Clear()
         Data.Generators.Clear()
         Data.AvatarCharacterId = Nothing
+        Data.ActiveLocations.Clear()
     End Sub
     Public Overrides Sub Initialize()
         MyBase.Initialize()
@@ -69,7 +77,7 @@ Public Class World
         For Each itemType In ItemTypes.All
             Dim descriptor = itemType.ToItemTypeDescriptor
             Dim candidateMaps = Maps.Where(Function(x) descriptor.CanSpawnMap(x))
-            For Each dummy In Enumerable.Range(0, descriptor.itemCount)
+            For Each dummy In Enumerable.Range(0, descriptor.ItemCount)
                 Dim map = RNG.FromEnumerable(candidateMaps)
                 Dim candidateLocations = map.Locations.Where(Function(x) descriptor.CanSpawnLocation(x))
                 CreateItem(itemType, RNG.FromEnumerable(candidateLocations))
@@ -203,8 +211,19 @@ Public Class World
     End Function
 
     Public Function ProcessTurn() As IEnumerable(Of IDialogLine) Implements IWorld.ProcessTurn
+        For Each location In ActiveLocations
+            location.ProcessTurn()
+        Next
         Dim result As New List(Of IDialogLine)
         result.AddRange(Avatar.ProcessTurn())
         Return result
     End Function
+
+    Public Sub ActivateLocation(location As ILocation) Implements IWorld.ActivateLocation
+        EntityData.ActiveLocations.Add(location.LocationId)
+    End Sub
+
+    Public Sub DeactivateLocation(location As ILocation) Implements IWorld.DeactivateLocation
+        EntityData.ActiveLocations.Remove(location.LocationId)
+    End Sub
 End Class

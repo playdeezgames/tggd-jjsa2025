@@ -29,4 +29,8 @@ Friend Class GrassLocationTypeDescriptor
         location.SetMetadata(MetadataType.ForageTable, ForageTableType.Grass)
         location.SetTag(TagType.IsPlaceable, True)
     End Sub
+
+    Friend Overrides Sub OnProcessTurn(location As Location)
+        Throw New NotImplementedException()
+    End Sub
 End Class

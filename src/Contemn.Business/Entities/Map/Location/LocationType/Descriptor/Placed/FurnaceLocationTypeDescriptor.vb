@@ -2,7 +2,7 @@
 
 Friend Class FurnaceLocationTypeDescriptor
     Inherits LocationTypeDescriptor
-
+    Const FUEL_MAXIMUM = 50
     Public Sub New()
         MyBase.New(
             Business.LocationType.Furnace,
@@ -14,6 +14,15 @@ Friend Class FurnaceLocationTypeDescriptor
     End Sub
 
     Friend Overrides Sub OnInitialize(location As Location)
+        location.SetStatisticRange(StatisticType.Fuel, 0, 0, FUEL_MAXIMUM)
+        location.SetTag(TagType.IsRefuelable, True)
+        location.World.ActivateLocation(location)
+    End Sub
+
+    Friend Overrides Sub OnProcessTurn(location As Location)
+        If Not location.IsStatisticAtMinimum(StatisticType.Fuel) Then
+            location.ChangeStatistic(StatisticType.Fuel, -1)
+        End If
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog

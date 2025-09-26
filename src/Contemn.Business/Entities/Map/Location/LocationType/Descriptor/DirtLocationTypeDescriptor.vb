@@ -15,6 +15,10 @@ Friend Class DirtLocationTypeDescriptor
         location.SetTag(TagType.IsPlaceable, True)
     End Sub
 
+    Friend Overrides Sub OnProcessTurn(location As Location)
+        Throw New NotImplementedException()
+    End Sub
+
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
         Throw New NotImplementedException()
     End Function

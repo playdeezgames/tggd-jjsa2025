@@ -2,6 +2,7 @@
 
 Friend Class CampFireLocationTypeDescriptor
     Inherits LocationTypeDescriptor
+    Const FUEL_MAXIMUM = 25
 
     Public Sub New()
         MyBase.New(
@@ -14,6 +15,15 @@ Friend Class CampFireLocationTypeDescriptor
     End Sub
 
     Friend Overrides Sub OnInitialize(location As Location)
+        location.SetStatisticRange(StatisticType.Fuel, FUEL_MAXIMUM, 0, FUEL_MAXIMUM)
+        location.SetTag(TagType.IsRefuelable, True)
+        location.World.ActivateLocation(location)
+    End Sub
+
+    Friend Overrides Sub OnProcessTurn(location As Location)
+        If Not location.IsStatisticAtMinimum(StatisticType.Fuel) Then
+            location.ChangeStatistic(StatisticType.Fuel, -1)
+        End If
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog

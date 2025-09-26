@@ -14,6 +14,10 @@ Friend Class RockLocationTypeDescriptor
         location.SetMetadata(MetadataType.ForageTable, ForageTableType.Rock)
     End Sub
 
+    Friend Overrides Sub OnProcessTurn(location As Location)
+        Throw New NotImplementedException()
+    End Sub
+
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
         Return Nothing
     End Function

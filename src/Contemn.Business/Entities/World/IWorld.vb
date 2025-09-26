@@ -20,4 +20,7 @@ Public Interface IWorld
     Function CreateGenerator() As IGenerator
     Function GetGenerator(generatorId As Integer) As IGenerator
     Function ProcessTurn() As IEnumerable(Of IDialogLine)
+    Sub ActivateLocation(location As ILocation)
+    Sub DeactivateLocation(location As ILocation)
+    ReadOnly Property ActiveLocations As IEnumerable(Of ILocation)
 End Interface

@@ -8,4 +8,5 @@
     ReadOnly Property HasCharacter As Boolean
     ReadOnly Property Character As ICharacter
     ReadOnly Property Name As String
+    Sub ProcessTurn()
 End Interface

@@ -40,4 +40,8 @@ Friend Class TreeLocationTypeDescriptor
         End If
         Return result
     End Function
+
+    Friend Overrides Sub OnProcessTurn(location As Location)
+        Throw New NotImplementedException()
+    End Sub
 End Class

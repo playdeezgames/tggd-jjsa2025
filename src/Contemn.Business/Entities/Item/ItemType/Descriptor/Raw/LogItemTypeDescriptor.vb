@@ -18,6 +18,8 @@ Friend Class LogItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        item.SetStatistic(StatisticType.Fuel, 5)
+        item.SetTag(TagType.CanRefuel, True)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

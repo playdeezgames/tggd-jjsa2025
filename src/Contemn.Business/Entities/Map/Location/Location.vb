@@ -22,6 +22,7 @@ Friend Class Location
         End Get
         Set(value As String)
             If value <> EntityData.LocationType Then
+                World.DeactivateLocation(Me)
                 EntityData.Statistics.Clear()
                 EntityData.StatisticMinimums.Clear()
                 EntityData.StatisticMaximums.Clear()
@@ -40,6 +41,7 @@ Friend Class Location
         EntityData.Column = 0
         EntityData.Row = 0
         EntityData.CharacterId = Nothing
+        World.DeactivateLocation(Me)
     End Sub
 
     Public ReadOnly Property Column As Integer Implements ILocation.Column
@@ -93,5 +95,9 @@ Friend Class Location
     End Sub
 
     Protected Overrides Sub HandleRemoveItem(item As IItem)
+    End Sub
+
+    Public Sub ProcessTurn() Implements ILocation.ProcessTurn
+        LocationType.ToLocationTypeDescriptor.OnProcessTurn(Me)
     End Sub
 End Class

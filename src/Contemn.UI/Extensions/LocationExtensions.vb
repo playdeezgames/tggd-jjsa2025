@@ -18,13 +18,13 @@ Friend Module LocationExtensions
         Return UIBufferExtensions.ToPixel(
             8,
             Hue.DarkGray,
-            Hue.Black)
+            If(location.GetStatistic(StatisticType.Fuel) > 0, Hue.Red, Hue.Black))
     End Function
 
     Private Function CampFireToPixel(location As ILocation) As Integer
         Return UIBufferExtensions.ToPixel(
             15,
-            Hue.Brown,
+            If(location.GetStatistic(StatisticType.Fuel) > 0, Hue.Red, Hue.Brown),
             Hue.Black)
     End Function
 

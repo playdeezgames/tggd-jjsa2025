@@ -19,6 +19,10 @@ Friend Class WaterLocationTypeDescriptor
         location.SetTag(TagType.IsDiggable, True)
     End Sub
 
+    Friend Overrides Sub OnProcessTurn(location As Location)
+        Throw New NotImplementedException()
+    End Sub
+
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
         Return New BumpDialog(character)
     End Function
