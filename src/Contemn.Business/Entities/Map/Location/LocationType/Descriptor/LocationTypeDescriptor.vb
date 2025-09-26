@@ -19,4 +19,7 @@ Friend MustInherit Class LocationTypeDescriptor
     End Function
 
     Friend MustOverride Sub OnProcessTurn(location As Location)
+    Friend Overridable Function GenerateBumpLines(location As Location, character As ICharacter) As IEnumerable(Of IDialogLine)
+        Return Array.Empty(Of IDialogLine)
+    End Function
 End Class

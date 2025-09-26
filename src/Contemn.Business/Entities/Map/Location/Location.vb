@@ -1,4 +1,5 @@
 ﻿Imports Contemn.Data
+Imports TGGD.Business
 
 Friend Class Location
     Inherits InventoryEntity(Of LocationData)
@@ -100,4 +101,8 @@ Friend Class Location
     Public Sub ProcessTurn() Implements ILocation.ProcessTurn
         LocationType.ToLocationTypeDescriptor.OnProcessTurn(Me)
     End Sub
+
+    Public Function GenerateBumpLines(character As ICharacter) As IEnumerable(Of IDialogLine) Implements ILocation.GenerateBumpLines
+        Return LocationType.ToLocationTypeDescriptor.GenerateBumpLines(Me, character)
+    End Function
 End Class

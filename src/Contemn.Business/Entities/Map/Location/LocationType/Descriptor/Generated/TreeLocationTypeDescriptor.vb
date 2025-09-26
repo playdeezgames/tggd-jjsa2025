@@ -18,7 +18,7 @@ Friend Class TreeLocationTypeDescriptor
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
-        Return New BumpDialog(character, Array.Empty(Of IDialogLine))
+        Return New BumpDialog(character)
     End Function
 
     Friend Overrides Function OnEnter(location As ILocation, character As ICharacter) As IDialog

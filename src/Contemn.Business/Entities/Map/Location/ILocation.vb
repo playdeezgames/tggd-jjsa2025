@@ -1,4 +1,6 @@
-﻿Public Interface ILocation
+﻿Imports TGGD.Business
+
+Public Interface ILocation
     Inherits IInventoryEntity
     ReadOnly Property LocationId As Integer
     Property LocationType As String
@@ -9,4 +11,5 @@
     ReadOnly Property Character As ICharacter
     ReadOnly Property Name As String
     Sub ProcessTurn()
+    Function GenerateBumpLines(character As ICharacter) As IEnumerable(Of IDialogLine)
 End Interface

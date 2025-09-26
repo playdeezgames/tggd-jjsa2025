@@ -20,7 +20,7 @@ Friend Class CollectStickVerbTypeDescriptor
                 (OK_CHOICE, OK_TEXT, Function() Nothing, True),
                 (COLLECT_ANOTHER_CHOICE, COLLECT_ANOTHER_TEXT, Function() Perform(character), CanPerform(character))
             },
-            Function() New BumpDialog(character, Array.Empty(Of IDialogLine)))
+            Function() New BumpDialog(character))
     End Function
 
     Private Function HandlePerform(character As ICharacter) As IEnumerable(Of IDialogLine)

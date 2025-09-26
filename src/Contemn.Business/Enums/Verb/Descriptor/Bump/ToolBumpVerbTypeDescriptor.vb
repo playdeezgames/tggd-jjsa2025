@@ -42,7 +42,7 @@ Friend MustInherit Class ToolBumpVerbTypeDescriptor
             character.World.ProcessTurn().
                 Append(New DialogLine(MoodType.Info, failMessage)),
             {
-                (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character, Array.Empty(Of IDialogLine)), True),
+                (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
                 (TRY_AGAIN_CHOICE, TRY_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
             },
             Function() Nothing)
@@ -59,7 +59,7 @@ Friend MustInherit Class ToolBumpVerbTypeDescriptor
                         Append(New DialogLine(MoodType.Info, $"+1 {item.Name}({character.GetCountOfItemType(itemType)})")).
                         Concat(character.Items.First(Function(x) x.GetTag(toolTag)).Deplete(character)),
                     {
-                        (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character, Array.Empty(Of IDialogLine)), True),
+                        (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
                         (TRY_AGAIN_CHOICE, TRY_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
                     },
                     Function() Nothing)

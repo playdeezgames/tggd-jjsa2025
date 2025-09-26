@@ -13,15 +13,26 @@ Friend Class RefuelItemDialog
     End Sub
 
     Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
-        Return Array.Empty(Of IDialogLine)
+        Dim location = character.GetBumpLocation()
+        Return {
+            New DialogLine(MoodType.Info, location.FormatStatistic(StatisticType.Fuel))
+            }
     End Function
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
-        Return {New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)}
+        Dim statisticName = StatisticType.Fuel.ToStatisticTypeDescriptor.StatisticTypeName
+        Return {
+            New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
+        }.Concat(
+            character.Items.
+            Where(Function(x) x.GetTag(TagType.CanRefuel)).
+            Select(Function(x) New DialogChoice(
+                x.ItemId.ToString,
+                $"{x.Name}(+{x.GetStatistic(Business.StatisticType.Fuel)} {statisticName})")))
     End Function
 
     Private Shared Function GenerateCaption(character As ICharacter) As String
-        Return "Refuel With..."
+        Return $"Refuel {character.GetBumpLocation().Name} With..."
     End Function
 
     Public Overrides Function Choose(choice As String) As TGGD.Business.IDialog
@@ -29,26 +40,26 @@ Friend Class RefuelItemDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Throw New NotImplementedException
+                Return DoRefuel(character.World.GetItem(CInt(choice)))
         End Select
     End Function
 
+    Private Function DoRefuel(item As IItem) As IDialog
+        Dim bumpLocation = character.GetBumpLocation()
+        bumpLocation.ChangeStatistic(StatisticType.Fuel, item.GetStatistic(StatisticType.Fuel))
+        character.ChangeStatistic(StatisticType.Score, 1)
+        character.RemoveAndRecycleItem(item)
+        Return LaunchMenu(character).Invoke()
+    End Function
+
     Public Overrides Function CancelDialog() As TGGD.Business.IDialog
-        Return New BumpDialog(
-                Character,
-                {
-                    New DialogLine(MoodType.Info, Character.GetBumpLocation().FormatStatistic(StatisticType.Fuel))
-                })
+        Return New BumpDialog(character)
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
         Return Function() If(
             VerbType.Refuel.ToVerbTypeDescriptor.CanPerform(character),
             CType(New RefuelItemDialog(character), IDialog),
-            CType(New BumpDialog(
-                character,
-                {
-                    New DialogLine(MoodType.Info, character.GetBumpLocation().FormatStatistic(StatisticType.Fuel))
-                }), IDialog))
+            CType(New BumpDialog(character), IDialog))
     End Function
 End Class

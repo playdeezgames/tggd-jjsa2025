@@ -26,10 +26,10 @@ Friend Class FurnaceLocationTypeDescriptor
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
-        Return New BumpDialog(character, GenerateLines(location, character))
+        Return New BumpDialog(character)
     End Function
 
-    Private Function GenerateLines(location As ILocation, character As ICharacter) As IEnumerable(Of IDialogLine)
+    Friend Overrides Function GenerateBumpLines(location As Location, character As ICharacter) As IEnumerable(Of IDialogLine)
         Return {
             New DialogLine(MoodType.Info, location.FormatStatistic(StatisticType.Fuel))
             }
