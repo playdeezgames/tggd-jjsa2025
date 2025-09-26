@@ -12,4 +12,5 @@
     Public ReadOnly MoveSouth As String = NameOf(MoveSouth)
     Public ReadOnly MoveWest As String = NameOf(MoveWest)
     Public ReadOnly Place As String = NameOf(Place)
+    Public ReadOnly Refuel As String = NameOf(Refuel)
 End Module

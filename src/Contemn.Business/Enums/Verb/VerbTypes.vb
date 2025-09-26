@@ -16,7 +16,8 @@ Friend Module VerbTypes
             New CraftVerbTypeDescriptor(),
             New ChopWoodVerbTypeDescriptor(),
             New DigClayVerbTypeDescriptor(),
-            New PlaceVerbTypeDescriptor()
+            New PlaceVerbTypeDescriptor(),
+            New RefuelVerbTypeDescriptor()
         }
         Return result
     End Function
