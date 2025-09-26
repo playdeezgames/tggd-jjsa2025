@@ -5,17 +5,13 @@ Friend Class BumpDialog
 
     Private ReadOnly character As ICharacter
 
-    Public Sub New(character As ICharacter)
-        MyBase.New(GenerateCaption(character), GenerateChoices(character), GenerateLines())
+    Public Sub New(character As ICharacter, lines As IEnumerable(Of IDialogLine))
+        MyBase.New(GenerateCaption(character), GenerateChoices(character), lines)
         Me.character = character
     End Sub
 
     Private Shared Function GenerateCaption(character As ICharacter) As String
         Return character.GetBumpLocation().LocationType.ToLocationTypeDescriptor.LocationTypeName
-    End Function
-
-    Private Shared Function GenerateLines() As IEnumerable(Of IDialogLine)
-        Return Array.Empty(Of IDialogLine)
     End Function
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
