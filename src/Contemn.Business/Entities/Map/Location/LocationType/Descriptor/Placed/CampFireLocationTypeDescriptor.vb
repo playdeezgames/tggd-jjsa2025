@@ -19,6 +19,7 @@ Friend Class CampFireLocationTypeDescriptor
         location.SetStatisticRange(StatisticType.Fuel, FUEL_INITIAL, 0, FUEL_MAXIMUM)
         location.SetTag(TagType.IsRefuelable, True)
         location.World.ActivateLocation(location)
+        location.SetTag(TagType.CanCook, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

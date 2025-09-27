@@ -6,7 +6,7 @@ Friend Class CookedFishFiletItemTypeDescriptor
     Public Sub New()
         MyBase.New(
             NameOf(CookedFishFiletItemTypeDescriptor),
-            "Cooked Fish Filet",
+            "Cooked Filet",
             0,
             True, (0, 1, 0))
     End Sub

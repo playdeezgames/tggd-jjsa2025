@@ -1,6 +1,7 @@
 ﻿Public Module VerbType
     Public ReadOnly ChopWood As String = NameOf(ChopWood)
     Public ReadOnly CollectStick As String = NameOf(CollectStick)
+    Public ReadOnly Cook As String = NameOf(Cook)
     Public ReadOnly Craft As String = NameOf(Craft)
     Public ReadOnly DigClay As String = NameOf(DigClay)
     Public ReadOnly Drink As String = NameOf(Drink)

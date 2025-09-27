@@ -1,5 +1,6 @@
 ﻿Public Module TagType
     Friend ReadOnly CanChop As String = NameOf(CanChop)
+    Friend ReadOnly CanCook As String = NameOf(CanCook)
     Friend ReadOnly CanCut As String = NameOf(CanCut)
     Friend ReadOnly CanDig As String = NameOf(CanDig)
     Friend ReadOnly CanFish As String = NameOf(CanFish)
@@ -8,6 +9,7 @@
     Friend ReadOnly CanRefuel As String = NameOf(CanRefuel)
     Friend ReadOnly CanSharpen As String = NameOf(CanSharpen)
     Friend ReadOnly IsChoppable As String = NameOf(IsChoppable)
+    Friend ReadOnly IsCookable As String = NameOf(IsCookable)
     Friend ReadOnly IsDiggable As String = NameOf(IsDiggable)
     Friend ReadOnly IsFishable As String = NameOf(IsFishable)
     Friend ReadOnly IsPlaceable As String = NameOf(IsPlaceable)
