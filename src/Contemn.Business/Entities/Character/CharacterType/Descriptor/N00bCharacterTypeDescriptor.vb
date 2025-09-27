@@ -12,6 +12,7 @@ Friend Class N00bCharacterTypeDescriptor
     Const MAXIMUM_HYDRATION = 100
     Const SATIETY_WARNING = MAXIMUM_SATIETY / 10
     Const HYDRATION_WARNING = MAXIMUM_HYDRATION / 10
+    Const MAXIMUM_RECOVERY = 10
 
     Friend Overrides Sub OnInitialize(character As ICharacter)
         character.World.Avatar = character
@@ -21,6 +22,7 @@ Friend Class N00bCharacterTypeDescriptor
         character.SetStatisticRange(StatisticType.Hydration, MAXIMUM_HYDRATION, 0, MAXIMUM_HYDRATION)
         character.SetStatisticRange(StatisticType.Illness, 0, 0, Integer.MaxValue)
         character.SetStatisticRange(StatisticType.Score, 0, 0, Integer.MaxValue)
+        character.SetStatisticRange(StatisticType.Recovery, 0, 0, MAXIMUM_RECOVERY)
     End Sub
 
     Friend Overrides Function OnBump(character As ICharacter, location As ILocation) As IDialog
@@ -42,11 +44,27 @@ Friend Class N00bCharacterTypeDescriptor
     Friend Overrides Function OnProcessTurn(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim result As New List(Of IDialogLine)
         character.ChangeStatistic(StatisticType.Score, 1)
+        character.SetTag(TagType.CanRecover, Not character.IsStatisticAtMaximum(StatisticType.Health))
         result.AddRange(ProcessIllness(character))
         result.AddRange(ProcessStarvation(character))
         If Not character.IsDead Then
             result.AddRange(ProcessHunger(character))
             result.AddRange(ProcessDehydration(character))
+        End If
+        result.AddRange(ProcessRecovery(character))
+        Return result
+    End Function
+
+    Private Function ProcessRecovery(character As ICharacter) As IEnumerable(Of IDialogLine)
+        Dim result As New List(Of IDialogLine)
+        If Not character.GetTag(TagType.CanRecover) Then
+            character.SetStatistic(StatisticType.Recovery, 0)
+        ElseIf character.IsStatisticAtMaximum(StatisticType.Recovery) Then
+            character.SetStatistic(StatisticType.Recovery, 0)
+            character.ChangeStatistic(StatisticType.Health, 1)
+            result.Add(New DialogLine(MoodType.Info, $"+1 {character.FormatStatistic(StatisticType.Health)}"))
+        Else
+            character.ChangeStatistic(StatisticType.Recovery, 1)
         End If
         Return result
     End Function
@@ -54,6 +72,7 @@ Friend Class N00bCharacterTypeDescriptor
     Private Function ProcessIllness(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim result As New List(Of IDialogLine)
         If Not character.IsStatisticAtMinimum(StatisticType.Illness) Then
+            character.SetTag(TagType.CanRecover, False)
             Dim illness = character.GetStatistic(StatisticType.Illness)
             result.Add(New DialogLine(MoodType.Danger, $"-{illness} HLT due to illness."))
             character.PlaySfx(Sfx.PlayerHit)
@@ -88,8 +107,10 @@ Friend Class N00bCharacterTypeDescriptor
     End Function
 
     Private Function ProcessStarvation(character As ICharacter) As IEnumerable(Of IDialogLine)
-        If character.IsStatisticAtMinimum(StatisticType.Satiety) OrElse character.IsStatisticAtMinimum(StatisticType.Hydration) Then
+        If character.IsStatisticAtMinimum(StatisticType.Satiety) OrElse
+            character.IsStatisticAtMinimum(StatisticType.Hydration) Then
             character.PlaySfx(Sfx.PlayerHit)
+            character.SetTag(TagType.CanRecover, False)
             character.ChangeStatistic(StatisticType.Health, -1)
         End If
         If character.IsDead Then

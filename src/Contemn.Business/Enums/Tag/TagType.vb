@@ -6,6 +6,7 @@
     Friend ReadOnly CanFish As String = NameOf(CanFish)
     Friend ReadOnly CanHammer As String = NameOf(CanHammer)
     Friend ReadOnly CanPlace As String = NameOf(CanPlace)
+    Friend ReadOnly CanRecover As String = NameOf(CanRecover)
     Friend ReadOnly CanRefuel As String = NameOf(CanRefuel)
     Friend ReadOnly CanSharpen As String = NameOf(CanSharpen)
     Friend ReadOnly IsChoppable As String = NameOf(IsChoppable)
