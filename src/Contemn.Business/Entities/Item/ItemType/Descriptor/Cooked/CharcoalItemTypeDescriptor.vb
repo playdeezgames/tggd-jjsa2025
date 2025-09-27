@@ -1,12 +1,12 @@
 ﻿Imports TGGD.Business
 
-Friend Class LogItemTypeDescriptor
+Friend Class CharcoalItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            NameOf(LogItemTypeDescriptor),
-            "Log",
+            NameOf(CharcoalItemTypeDescriptor),
+            "Charcoal",
             0,
             True)
     End Sub
@@ -18,9 +18,8 @@ Friend Class LogItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
-        item.SetStatistic(StatisticType.Fuel, 5)
+        item.SetStatistic(StatisticType.Fuel, 10)
         item.SetTag(TagType.CanRefuel, True)
-        item.SetTag(TagType.IsCookable, True)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
@@ -45,8 +44,7 @@ Friend Class LogItemTypeDescriptor
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
         Return {
-            New DialogLine(MoodType.Info, "It's a log."),
-            New DialogLine(MoodType.Info, "It's big. It's heavy. It's wood.")
+            New DialogLine(MoodType.Info, "It's a lump of charcoal.")
             }
     End Function
 End Class

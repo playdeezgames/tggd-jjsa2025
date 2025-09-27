@@ -6,7 +6,8 @@ Public Class CookItemDialog
     Private Shared cookTable As IReadOnlyDictionary(Of String, String) =
         New Dictionary(Of String, String) From
         {
-            {NameOf(RawFishFiletItemTypeDescriptor), NameOf(CookedFishFiletItemTypeDescriptor)}
+            {NameOf(RawFishFiletItemTypeDescriptor), NameOf(CookedFishFiletItemTypeDescriptor)},
+            {NameOf(LogItemTypeDescriptor), NameOf(CharcoalItemTypeDescriptor)}
         }
 
     ReadOnly character As ICharacter
