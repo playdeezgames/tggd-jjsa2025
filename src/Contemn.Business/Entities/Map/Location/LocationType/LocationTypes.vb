@@ -10,7 +10,7 @@ Friend Module LocationTypes
             New DirtLocationTypeDescriptor(),
             New RockLocationTypeDescriptor(),
             New CampFireLocationTypeDescriptor(),
-            New FurnaceLocationTypeDescriptor()
+            New KilnLocationTypeDescriptor()
         }.ToDictionary(Function(x) x.LocationType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get

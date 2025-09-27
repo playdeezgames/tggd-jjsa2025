@@ -1,12 +1,12 @@
 ﻿Imports TGGD.Business
 
-Friend Class FurnaceItemTypeDescriptor
+Friend Class KilnItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            NameOf(FurnaceItemTypeDescriptor),
-            "Furnace",
+            NameOf(KilnItemTypeDescriptor),
+            "Kiln",
             0,
             True)
     End Sub
@@ -19,7 +19,7 @@ Friend Class FurnaceItemTypeDescriptor
 
     Friend Overrides Sub HandleInitialize(item As IItem)
         item.SetTag(TagType.CanPlace, True)
-        item.SetMetadata(MetadataType.PlaceLocationType, LocationType.Furnace)
+        item.SetMetadata(MetadataType.PlaceLocationType, LocationType.Kiln)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
@@ -36,7 +36,7 @@ Friend Class FurnaceItemTypeDescriptor
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
         Return {
-            New DialogLine(MoodType.Info, "It's a furnace.")
+            New DialogLine(MoodType.Info, "It's a kiln.")
             }
     End Function
 

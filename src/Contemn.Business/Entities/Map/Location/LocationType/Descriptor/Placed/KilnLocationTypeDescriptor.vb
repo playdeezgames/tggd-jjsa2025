@@ -1,12 +1,12 @@
 ﻿Imports TGGD.Business
 
-Friend Class FurnaceLocationTypeDescriptor
+Friend Class KilnLocationTypeDescriptor
     Inherits LocationTypeDescriptor
     Const FUEL_MAXIMUM = 50
     Public Sub New()
         MyBase.New(
-            Business.LocationType.Furnace,
-            "Furnace")
+            Business.LocationType.Kiln,
+            "Kiln")
     End Sub
 
     Friend Overrides Sub OnLeave(location As ILocation, character As ICharacter)
