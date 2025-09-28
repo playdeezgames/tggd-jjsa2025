@@ -2,7 +2,7 @@
 
 Friend Class FiredPotItemTypeDescriptor
     Inherits ItemTypeDescriptor
-
+    Const MAXIMUM_WATER = 10
     Public Sub New()
         MyBase.New(
             NameOf(FiredPotItemTypeDescriptor),
@@ -18,6 +18,7 @@ Friend Class FiredPotItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        item.SetStatisticRange(StatisticType.Water, 0, 0, MAXIMUM_WATER)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
@@ -42,7 +43,11 @@ Friend Class FiredPotItemTypeDescriptor
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
         Return {
-            New DialogLine(MoodType.Info, "It's a clay pot.")
-            }
+            New DialogLine(MoodType.Info, "It's a clay pot."),
+            New DialogLine(MoodType.Info, item.FormatStatistic(StatisticType.Water))
+            }.
+            AppendIf(
+                Not item.IsStatisticAtMinimum(StatisticType.Water),
+                New DialogLine(MoodType.Info, If(item.GetTag(TagType.Safe), "Safe", "Unsafe")))
     End Function
 End Class

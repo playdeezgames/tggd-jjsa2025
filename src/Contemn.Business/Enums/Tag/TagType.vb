@@ -17,4 +17,5 @@
     Friend ReadOnly IsKiln As String = NameOf(IsKiln)
     Friend ReadOnly IsPlaceable As String = NameOf(IsPlaceable)
     Friend ReadOnly IsRefuelable As String = NameOf(IsRefuelable)
+    Friend ReadOnly Safe As String = NameOf(Safe)
 End Module

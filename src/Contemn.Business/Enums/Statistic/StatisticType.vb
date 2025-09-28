@@ -11,4 +11,5 @@
     Public ReadOnly Score As String = NameOf(Score)
     Public ReadOnly Fuel As String = NameOf(Fuel)
     Public ReadOnly Recovery As String = NameOf(Recovery)
+    Public ReadOnly Water As String = NameOf(Water)
 End Module
