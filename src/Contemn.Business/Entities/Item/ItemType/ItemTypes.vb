@@ -24,7 +24,8 @@ Friend Module ItemTypes
             New CampFireItemTypeDescriptor(),
             New KilnItemTypeDescriptor(),
             New CookedFishFiletItemTypeDescriptor(),
-            New CharcoalItemTypeDescriptor()
+            New CharcoalItemTypeDescriptor(),
+            New FiredPotItemTypeDescriptor()
         }.ToDictionary(Function(x) x.ItemType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get

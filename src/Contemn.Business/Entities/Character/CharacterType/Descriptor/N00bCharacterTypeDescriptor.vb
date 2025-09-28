@@ -55,7 +55,7 @@ Friend Class N00bCharacterTypeDescriptor
         Return result
     End Function
 
-    Private Function ProcessRecovery(character As ICharacter) As IEnumerable(Of IDialogLine)
+    Private Shared Function ProcessRecovery(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim result As New List(Of IDialogLine)
         If Not character.GetTag(TagType.CanRecover) Then
             character.SetStatistic(StatisticType.Recovery, 0)
@@ -69,7 +69,7 @@ Friend Class N00bCharacterTypeDescriptor
         Return result
     End Function
 
-    Private Function ProcessIllness(character As ICharacter) As IEnumerable(Of IDialogLine)
+    Private Shared Function ProcessIllness(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim result As New List(Of IDialogLine)
         If Not character.IsStatisticAtMinimum(StatisticType.Illness) Then
             character.SetTag(TagType.CanRecover, False)
@@ -82,7 +82,7 @@ Friend Class N00bCharacterTypeDescriptor
         Return result
     End Function
 
-    Private Function ProcessDehydration(character As ICharacter) As IEnumerable(Of IDialogLine)
+    Private Shared Function ProcessDehydration(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim result As New List(Of IDialogLine)
         If character.IsStatisticAtMinimum(StatisticType.Hydration) Then
             result.Add(New DialogLine(MoodType.Danger, "Yer dehydrated! Drink immediately!"))
@@ -94,7 +94,7 @@ Friend Class N00bCharacterTypeDescriptor
         Return result
     End Function
 
-    Private Function ProcessHunger(character As ICharacter) As IEnumerable(Of IDialogLine)
+    Private Shared Function ProcessHunger(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim result As New List(Of IDialogLine)
         If character.IsStatisticAtMinimum(StatisticType.Satiety) Then
             result.Add(New DialogLine(MoodType.Danger, "Yer starving! Eat immediately!"))
@@ -106,7 +106,7 @@ Friend Class N00bCharacterTypeDescriptor
         Return result
     End Function
 
-    Private Function ProcessStarvation(character As ICharacter) As IEnumerable(Of IDialogLine)
+    Private Shared Function ProcessStarvation(character As ICharacter) As IEnumerable(Of IDialogLine)
         If character.IsStatisticAtMinimum(StatisticType.Satiety) OrElse
             character.IsStatisticAtMinimum(StatisticType.Hydration) Then
             character.PlaySfx(Sfx.PlayerHit)

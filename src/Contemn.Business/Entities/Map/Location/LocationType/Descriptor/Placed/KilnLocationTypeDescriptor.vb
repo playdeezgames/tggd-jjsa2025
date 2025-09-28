@@ -17,6 +17,7 @@ Friend Class KilnLocationTypeDescriptor
         location.SetStatisticRange(StatisticType.Fuel, 0, 0, FUEL_MAXIMUM)
         location.SetTag(TagType.IsRefuelable, True)
         location.World.ActivateLocation(location)
+        location.SetTag(TagType.IsKiln, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

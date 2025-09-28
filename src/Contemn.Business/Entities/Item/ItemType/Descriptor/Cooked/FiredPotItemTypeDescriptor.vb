@@ -1,14 +1,14 @@
 ﻿Imports TGGD.Business
 
-Friend Class UnfiredPotItemTypeDescriptor
+Friend Class FiredPotItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            NameOf(UnfiredPotItemTypeDescriptor),
-            "Unfired Pot",
+            NameOf(FiredPotItemTypeDescriptor),
+            "Clay Pot",
             0,
-            True)
+            False)
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -18,8 +18,6 @@ Friend Class UnfiredPotItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
-        item.SetTag(TagType.CanKiln, True)
-        item.SetMetadata(MetadataType.FiredItemType, NameOf(FiredPotItemTypeDescriptor))
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
@@ -44,7 +42,7 @@ Friend Class UnfiredPotItemTypeDescriptor
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
         Return {
-            New DialogLine(MoodType.Info, "It's an unfired pot.")
+            New DialogLine(MoodType.Info, "It's a clay pot.")
             }
     End Function
 End Class

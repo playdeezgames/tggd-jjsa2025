@@ -5,6 +5,7 @@
     Friend ReadOnly CanDig As String = NameOf(CanDig)
     Friend ReadOnly CanFish As String = NameOf(CanFish)
     Friend ReadOnly CanHammer As String = NameOf(CanHammer)
+    Friend ReadOnly CanKiln As String = NameOf(CanKiln)
     Friend ReadOnly CanPlace As String = NameOf(CanPlace)
     Friend ReadOnly CanRecover As String = NameOf(CanRecover)
     Friend ReadOnly CanRefuel As String = NameOf(CanRefuel)
@@ -13,6 +14,7 @@
     Friend ReadOnly IsCookable As String = NameOf(IsCookable)
     Friend ReadOnly IsDiggable As String = NameOf(IsDiggable)
     Friend ReadOnly IsFishable As String = NameOf(IsFishable)
+    Friend ReadOnly IsKiln As String = NameOf(IsKiln)
     Friend ReadOnly IsPlaceable As String = NameOf(IsPlaceable)
     Friend ReadOnly IsRefuelable As String = NameOf(IsRefuelable)
 End Module

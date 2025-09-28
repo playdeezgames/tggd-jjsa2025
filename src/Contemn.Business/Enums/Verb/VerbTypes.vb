@@ -18,7 +18,8 @@ Friend Module VerbTypes
             New DigClayVerbTypeDescriptor(),
             New PlaceVerbTypeDescriptor(),
             New RefuelVerbTypeDescriptor(),
-            New CookVerbTypeDescriptor()
+            New CookVerbTypeDescriptor(),
+            New FireVerbTypeDescriptor()
         }
         Return result
     End Function
