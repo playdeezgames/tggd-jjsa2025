@@ -17,6 +17,7 @@ Friend Class WaterLocationTypeDescriptor
         location.SetStatistic(StatisticType.Depletion, 0)
         location.SetTag(TagType.IsFishable, True)
         location.SetTag(TagType.IsDiggable, True)
+        location.SetTag(TagType.CanFill, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

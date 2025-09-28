@@ -5,6 +5,7 @@
     Public ReadOnly Craft As String = NameOf(Craft)
     Public ReadOnly DigClay As String = NameOf(DigClay)
     Public ReadOnly Drink As String = NameOf(Drink)
+    Public ReadOnly Fill As String = NameOf(Fill)
     Public ReadOnly Fish As String = NameOf(Fish)
     Public ReadOnly Forage As String = NameOf(Forage)
     Public ReadOnly Inventory As String = NameOf(Inventory)
