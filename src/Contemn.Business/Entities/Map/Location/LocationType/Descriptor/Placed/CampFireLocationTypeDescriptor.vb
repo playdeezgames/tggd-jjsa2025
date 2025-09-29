@@ -20,6 +20,7 @@ Friend Class CampFireLocationTypeDescriptor
         location.SetTag(TagType.IsRefuelable, True)
         location.World.ActivateLocation(location)
         location.SetTag(TagType.CanCook, True)
+        location.SetTag(TagType.CanBoil, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

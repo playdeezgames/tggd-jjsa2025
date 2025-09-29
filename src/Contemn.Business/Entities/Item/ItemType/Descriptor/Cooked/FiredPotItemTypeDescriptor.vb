@@ -22,6 +22,7 @@ Friend Class FiredPotItemTypeDescriptor
     Friend Overrides Sub HandleInitialize(item As IItem)
         item.SetStatisticRange(StatisticType.Water, 0, 0, MAXIMUM_WATER)
         item.SetTag(TagType.IsFillable, True)
+        item.SetTag(TagType.IsBoilable, True)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
@@ -55,7 +56,7 @@ Friend Class FiredPotItemTypeDescriptor
         character.ChangeStatistic(StatisticType.Hydration, hydrationDelta)
         item.ChangeStatistic(StatisticType.Water, -1)
         Dim illness = 0
-        If RNG.GenerateBoolean(If(item.GetTag(TagType.Safe), 0, 1), 1) Then
+        If RNG.GenerateBoolean(1, If(item.GetTag(TagType.Safe), 0, 1)) Then
             illness = RNG.RollXDY(1, 4)
             character.ChangeStatistic(StatisticType.Illness, illness)
         End If
