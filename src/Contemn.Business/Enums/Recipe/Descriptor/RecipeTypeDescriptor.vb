@@ -5,6 +5,15 @@ Friend MustInherit Class RecipeTypeDescriptor
     Private ReadOnly inputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly durabilities As IReadOnlyDictionary(Of String, Integer)
+    Private Shared ReadOnly tagTypeName As IReadOnlyDictionary(Of String, String) =
+        New Dictionary(Of String, String) From
+        {
+            {TagType.CanChop, "(chopping item)"},
+            {TagType.CanCut, "(cutting item)"},
+            {TagType.CanDig, "(digging item)"},
+            {TagType.CanHammer, "(hammering item)"},
+            {TagType.CanSharpen, "(sharpening item)"}
+        }
     Sub New(
            recipeType As String,
            inputs As IReadOnlyDictionary(Of String, Integer),
@@ -62,4 +71,37 @@ Friend MustInherit Class RecipeTypeDescriptor
             Return $"{String.Join("+", inputList)}->{String.Join("+", outputList)}"
         End Get
     End Property
+
+    Friend Function Describe() As IEnumerable(Of IDialogLine)
+        Return DescribeInputs().Concat(DescribeOutputs()).Concat(DescribeDurabilities())
+    End Function
+
+    Private Function DescribeDurabilities() As IEnumerable(Of IDialogLine)
+        Dim result As New List(Of IDialogLine)
+        If durabilities.Any Then
+            result.Add(New DialogLine(MoodType.Heading, "Durabilities"))
+            result.AddRange(durabilities.Select(Function(x) New DialogLine(MoodType.Info, $"{tagTypeName(x.Key)}({x.Value})")))
+        End If
+        Return result
+    End Function
+
+    Private Function DescribeOutputs() As IEnumerable(Of IDialogLine)
+        Dim result As New List(Of IDialogLine)
+        If outputs.Any Then
+            result.Add(New DialogLine(MoodType.Heading, "Outputs"))
+            result.AddRange(outputs.Select(Function(x) New DialogLine(MoodType.Info, $"{x.Key.ToItemTypeDescriptor.ItemTypeName}({x.Value})")))
+            result.Add(New DialogLine(MoodType.Info, ""))
+        End If
+        Return result
+    End Function
+
+    Private Function DescribeInputs() As IEnumerable(Of IDialogLine)
+        Dim result As New List(Of IDialogLine)
+        If inputs.Any Then
+            result.Add(New DialogLine(MoodType.Heading, "Inputs"))
+            result.AddRange(inputs.Select(Function(x) New DialogLine(MoodType.Info, $"{x.Key.ToItemTypeDescriptor.ItemTypeName}({x.Value})")))
+            result.Add(New DialogLine(MoodType.Info, ""))
+        End If
+        Return result
+    End Function
 End Class

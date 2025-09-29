@@ -1,4 +1,5 @@
 ﻿Public Module VerbType
+    Public ReadOnly Boil As String = NameOf(Boil)
     Public ReadOnly ChopWood As String = NameOf(ChopWood)
     Public ReadOnly CollectStick As String = NameOf(CollectStick)
     Public ReadOnly Cook As String = NameOf(Cook)
@@ -14,6 +15,6 @@
     Public ReadOnly MoveSouth As String = NameOf(MoveSouth)
     Public ReadOnly MoveWest As String = NameOf(MoveWest)
     Public ReadOnly Place As String = NameOf(Place)
+    Public ReadOnly Recipedia As String = NameOf(Recipedia)
     Public ReadOnly Refuel As String = NameOf(Refuel)
-    Public ReadOnly Boil As String = NameOf(Boil)
 End Module

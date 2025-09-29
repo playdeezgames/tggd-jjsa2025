@@ -13,6 +13,7 @@ Friend Module Constants
         {
             {MoodType.Info, (Hue.LightGray, Hue.Black)},
             {MoodType.Danger, (Hue.Black, Hue.Red)},
-            {MoodType.Warning, (Hue.Black, Hue.Yellow)}
+            {MoodType.Warning, (Hue.Black, Hue.Yellow)},
+            {MoodType.Heading, (Hue.Cyan, Hue.Black)}
         }
 End Module
