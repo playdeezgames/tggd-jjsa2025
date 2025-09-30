@@ -18,6 +18,8 @@ Friend Class KilnLocationTypeDescriptor
         location.SetTag(TagType.IsRefuelable, True)
         location.World.ActivateLocation(location)
         location.SetTag(TagType.IsKiln, True)
+        location.SetMetadata(MetadataType.DismantledLocationType, Business.LocationType.Dirt)
+        location.SetTag(TagType.CanDismantle, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

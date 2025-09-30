@@ -4,6 +4,7 @@
     Friend ReadOnly CanCook As String = NameOf(CanCook)
     Friend ReadOnly CanCut As String = NameOf(CanCut)
     Friend ReadOnly CanDig As String = NameOf(CanDig)
+    Friend ReadOnly CanDismantle As String = NameOf(CanDismantle)
     Friend ReadOnly CanFill As String = NameOf(CanFill)
     Friend ReadOnly CanFish As String = NameOf(CanFish)
     Friend ReadOnly CanHammer As String = NameOf(CanHammer)

@@ -22,7 +22,8 @@ Friend Module VerbTypes
             New FireVerbTypeDescriptor(),
             New FillVerbTypeDescriptor(),
             New BoilVerbTypeDescriptor(),
-            New RecipediaVerbTypeDescriptor()
+            New RecipediaVerbTypeDescriptor(),
+            New DismantleVerbTypeDescriptor()
         }
         Return result
     End Function

@@ -21,6 +21,8 @@ Friend Class CampFireLocationTypeDescriptor
         location.World.ActivateLocation(location)
         location.SetTag(TagType.CanCook, True)
         location.SetTag(TagType.CanBoil, True)
+        location.SetMetadata(MetadataType.DismantledLocationType, Business.LocationType.Dirt)
+        location.SetTag(TagType.CanDismantle, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)
