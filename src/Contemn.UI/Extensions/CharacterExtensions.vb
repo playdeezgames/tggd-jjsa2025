@@ -18,6 +18,6 @@ Friend Module CharacterExtensions
     End Function
     <Extension>
     Friend Function IsDead(character As ICharacter) As Boolean
-        Return character.GetStatistic(StatisticType.Health) = character.GetStatisticMinimum(StatisticType.Health)
+        Return False
     End Function
 End Module

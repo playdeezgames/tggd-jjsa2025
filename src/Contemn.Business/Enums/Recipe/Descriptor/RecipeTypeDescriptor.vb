@@ -4,29 +4,20 @@ Friend MustInherit Class RecipeTypeDescriptor
     Friend ReadOnly Property RecipeType As String
     Private ReadOnly inputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)
-    Private ReadOnly durabilities As IReadOnlyDictionary(Of String, Integer)
     Private Shared ReadOnly tagTypeName As IReadOnlyDictionary(Of String, String) =
         New Dictionary(Of String, String) From
         {
-            {TagType.CanChop, "(chopping item)"},
-            {TagType.CanCut, "(cutting item)"},
-            {TagType.CanDig, "(digging item)"},
-            {TagType.CanHammer, "(hammering item)"},
-            {TagType.CanSharpen, "(sharpening item)"}
         }
     Sub New(
            recipeType As String,
            inputs As IReadOnlyDictionary(Of String, Integer),
-           outputs As IReadOnlyDictionary(Of String, Integer),
-           durabilities As IReadOnlyDictionary(Of String, Integer))
+           outputs As IReadOnlyDictionary(Of String, Integer))
         Me.RecipeType = recipeType
         Me.inputs = inputs
         Me.outputs = outputs
-        Me.durabilities = durabilities
     End Sub
     Friend Overridable Function CanCraft(character As ICharacter) As Boolean
-        Return inputs.All(Function(x) character.GetCountOfItemType(x.Key) >= x.Value) AndAlso
-            durabilities.All(Function(x) character.GetDurabilityTotal(x.Key) >= x.Value)
+        Return inputs.All(Function(x) character.GetCountOfItemType(x.Key) >= x.Value)
     End Function
     Friend Function Craft(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim results As New List(Of IDialogLine)
@@ -54,11 +45,6 @@ Friend MustInherit Class RecipeTypeDescriptor
                 results.Add(New DialogLine(MoodType.Info, $"+{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
             End If
         Next
-        For Each entry In durabilities
-            For Each dummy In Enumerable.Range(0, entry.Value)
-                results.AddRange(character.Items.First(Function(x) x.GetTag(entry.Key)).Deplete(character))
-            Next
-        Next
         Return results
     End Function
     Friend Function HasInput(itemType As String) As Boolean
@@ -73,16 +59,7 @@ Friend MustInherit Class RecipeTypeDescriptor
     End Property
 
     Friend Function Describe() As IEnumerable(Of IDialogLine)
-        Return DescribeInputs().Concat(DescribeOutputs()).Concat(DescribeDurabilities())
-    End Function
-
-    Private Function DescribeDurabilities() As IEnumerable(Of IDialogLine)
-        Dim result As New List(Of IDialogLine)
-        If durabilities.Any Then
-            result.Add(New DialogLine(MoodType.Heading, "Durabilities"))
-            result.AddRange(durabilities.Select(Function(x) New DialogLine(MoodType.Info, $"{tagTypeName(x.Key)}({x.Value})")))
-        End If
-        Return result
+        Return DescribeInputs().Concat(DescribeOutputs())
     End Function
 
     Private Function DescribeOutputs() As IEnumerable(Of IDialogLine)

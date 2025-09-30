@@ -83,6 +83,11 @@ Friend Class Character
         Return HandleBump(nextLocation)
     End Function
 
+    Private Function HandleBump(nextLocation As ILocation) As IDialog
+        SetBumpLocation(nextLocation)
+        Return nextLocation.LocationType.ToLocationTypeDescriptor.OnBump(nextLocation, Me)
+    End Function
+
     Private Function Enter(nextLocation As ILocation) As IDialog
         Leave()
         EntityData.LocationId = nextLocation.LocationId

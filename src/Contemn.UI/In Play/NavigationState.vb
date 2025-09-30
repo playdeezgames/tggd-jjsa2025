@@ -22,26 +22,8 @@ Friend Class NavigationState
         Dim avatar = World.Avatar
         Dim x = VIEW_WIDTH
         Dim y = 0
-        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Score), Hue.Green, Hue.Black)
-        y += 2
-        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Health), Hue.Red, Hue.Black)
-        y += 1
-        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Satiety), Hue.Magenta, Hue.Black)
-        y += 1
-        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Hydration), Hue.Blue, Hue.Black)
-        y += 1
-        y = RenderIllness(x, y, avatar)
         Buffer.Write(x, y, $"Terrain: {avatar.Location.Name}", Hue.LightGray, Hue.Black)
-
     End Sub
-
-    Private Function RenderIllness(x As Integer, y As Integer, character As ICharacter) As Integer
-        If character.GetStatistic(StatisticType.Illness) > character.GetStatisticMinimum(StatisticType.Illness) Then
-            Buffer.Write(x, y, character.FormatStatistic(StatisticType.Illness), Hue.Brown, Hue.Black)
-            Return y + 1
-        End If
-        Return y
-    End Function
 
     Private Sub RenderMessages()
         While World.MessageCount > MESSAGE_LINES

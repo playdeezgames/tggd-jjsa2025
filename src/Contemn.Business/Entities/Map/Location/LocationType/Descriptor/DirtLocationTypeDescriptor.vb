@@ -11,8 +11,6 @@ Friend Class DirtLocationTypeDescriptor
     End Sub
 
     Friend Overrides Sub OnInitialize(location As Location)
-        location.SetMetadata(MetadataType.ForageTable, Nothing)
-        location.SetTag(TagType.IsPlaceable, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

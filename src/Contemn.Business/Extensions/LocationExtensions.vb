@@ -21,18 +21,4 @@ Friend Module LocationExtensions
     Friend Function HandleEnter(location As ILocation, character As ICharacter) As IDialog
         Return location.LocationType.ToLocationTypeDescriptor.OnEnter(location, character)
     End Function
-    <Extension>
-    Friend Function GetForageGenerator(location As ILocation) As IGenerator
-        If location.HasStatistic(StatisticType.ForageGeneratorId) Then
-            Return location.World.GetGenerator(location.GetStatistic(StatisticType.ForageGeneratorId))
-        End If
-        Dim forageTableType = location.GetMetadata(MetadataType.ForageTable)
-        If Not String.IsNullOrEmpty(forageTableType) Then
-            Dim generator As IGenerator = location.World.CreateGenerator()
-            location.SetStatistic(StatisticType.ForageGeneratorId, generator.GeneratorId)
-            forageTableType.ToForageTableTypeDescriptor.Initialize(generator)
-            Return generator
-        End If
-        Return Nothing
-    End Function
 End Module
