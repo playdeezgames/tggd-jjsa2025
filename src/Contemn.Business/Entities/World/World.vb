@@ -67,7 +67,7 @@ Public Class World
         CreateMaps()
         CreateCharacters()
         CreateItems()
-        AddMessage(MoodType.Info, "Welcome to Grubstaker of SPLORR!!")
+        AddMessage(MoodType.Info, "Welcome to (PLACEHOLDER)")
         AddMessage(MoodType.Info, "MOVE: Arrows, WASD, ZQSD")
         AddMessage(MoodType.Info, "ACTION MENU: Space")
         AddMessage(MoodType.Info, "GAME MENU: Backspace")
