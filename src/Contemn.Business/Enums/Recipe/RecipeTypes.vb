@@ -4,18 +4,6 @@ Friend Module RecipeTypes
     Friend ReadOnly Descriptors As IReadOnlyDictionary(Of String, RecipeTypeDescriptor) =
         New List(Of RecipeTypeDescriptor) From
         {
-            New TwineRecipeTypeDescriptor(),
-            New FishingNetRecipeTypeDescriptor(),
-            New SharpRockRecipeTypeDescriptor(),
-            New AxeRecipeTypeDescriptor(),
-            New BladeRecipeTypeDescriptor(),
-            New KnifeRecipeTypeDescriptor(),
-            New RawFishFiletRecipeTypeDescriptor(),
-            New HammerRecipeTypeDescriptor(),
-            New SharpStickRecipeTypeDescriptor(),
-            New UnfiredPotRecipeTypeDescriptor(),
-            New CampFireRecipeTypeDescriptor(),
-            New KilnRecipeTypeDescriptor()
         }.ToDictionary(
             Function(x) x.RecipeType,
             Function(x) x)
