@@ -20,7 +20,7 @@ Friend Class InventoryDialog
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         For Each itemStack In character.Items.GroupBy(Function(x) x.ItemType)
-            result.Add(New DialogChoice(itemStack.Key, $"{itemStack.Key.ToItemTypeDescriptor.ItemTypeName}({itemStack.Count})"))
+            result.Add(New DialogChoice(itemStack.Key, $"{itemStack.First.Descriptor.ItemTypeName}({itemStack.Count})"))
         Next
         Return result
     End Function
@@ -35,7 +35,7 @@ Friend Class InventoryDialog
     End Function
 
     Private Function MakeItemTypeDialog(itemType As String) As IDialog
-        Dim descriptor = itemType.ToItemTypeDescriptor
+        Dim descriptor = ItemTypes.Descriptors(itemType)
         If descriptor.IsAggregate Then
             Return New ItemTypeDialog(character, itemType)
         Else

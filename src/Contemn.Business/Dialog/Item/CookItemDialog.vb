@@ -52,11 +52,11 @@ Public Class CookItemDialog
         Dim itemType = item.ItemType
         Dim cookedItemType = cookTable(itemType)
         character.RemoveAndRecycleItem(item)
-        character.World.CreateItem(cookedItemType, character)
+        Dim cookedItem = character.World.CreateItem(cookedItemType, character)
         Return New OkDialog(
             character.World.ProcessTurn().
-            Append(New DialogLine(MoodType.Info, $"-1 {itemType.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(itemType)})")).
-            Append(New DialogLine(MoodType.Info, $"+1 {cookedItemType.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(cookedItemType)})")),
+            Append(New DialogLine(MoodType.Info, $"-1 {item.Descriptor.ItemTypeName}({character.GetCountOfItemType(itemType)})")).
+            Append(New DialogLine(MoodType.Info, $"+1 {cookedItem.Descriptor.ItemTypeName}({character.GetCountOfItemType(cookedItemType)})")),
             LaunchMenu(character))
     End Function
 

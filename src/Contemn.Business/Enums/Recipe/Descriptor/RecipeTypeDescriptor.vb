@@ -46,12 +46,12 @@ Friend MustInherit Class RecipeTypeDescriptor
                 For Each item In character.ItemsOfType(delta.Key).Take(-delta.Value)
                     character.RemoveAndRecycleItem(item)
                 Next
-                results.Add(New DialogLine(MoodType.Info, $"{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
+                results.Add(New DialogLine(MoodType.Info, $"{delta.Value} {ItemTypes.Descriptors(delta.Key).ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
             ElseIf delta.Value > 0 Then
                 For Each dummy In Enumerable.Range(0, delta.Value)
                     character.World.CreateItem(delta.Key, character)
                 Next
-                results.Add(New DialogLine(MoodType.Info, $"+{delta.Value} {delta.Key.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
+                results.Add(New DialogLine(MoodType.Info, $"+{delta.Value} {ItemTypes.Descriptors(delta.Key).ItemTypeName}({character.GetCountOfItemType(delta.Key)})"))
             End If
         Next
         For Each entry In durabilities
@@ -66,8 +66,8 @@ Friend MustInherit Class RecipeTypeDescriptor
     End Function
     Friend ReadOnly Property Name As String
         Get
-            Dim inputList = inputs.Select(Function(x) $"{x.Value} {x.Key.ToItemTypeDescriptor.ItemTypeName}")
-            Dim outputList = outputs.Select(Function(x) $"{x.Value} {x.Key.ToItemTypeDescriptor.ItemTypeName}")
+            Dim inputList = inputs.Select(Function(x) $"{x.Value} {ItemTypes.Descriptors(x.Key).ItemTypeName}")
+            Dim outputList = outputs.Select(Function(x) $"{x.Value} {ItemTypes.Descriptors(x.Key).ItemTypeName}")
             Return $"{String.Join("+", inputList)}->{String.Join("+", outputList)}"
         End Get
     End Property
@@ -89,7 +89,7 @@ Friend MustInherit Class RecipeTypeDescriptor
         Dim result As New List(Of IDialogLine)
         If outputs.Any Then
             result.Add(New DialogLine(MoodType.Heading, "Outputs"))
-            result.AddRange(outputs.Select(Function(x) New DialogLine(MoodType.Info, $"{x.Key.ToItemTypeDescriptor.ItemTypeName}({x.Value})")))
+            result.AddRange(outputs.Select(Function(x) New DialogLine(MoodType.Info, $"{ItemTypes.Descriptors(x.Key).ItemTypeName}({x.Value})")))
             result.Add(New DialogLine(MoodType.Info, ""))
         End If
         Return result
@@ -99,7 +99,7 @@ Friend MustInherit Class RecipeTypeDescriptor
         Dim result As New List(Of IDialogLine)
         If inputs.Any Then
             result.Add(New DialogLine(MoodType.Heading, "Inputs"))
-            result.AddRange(inputs.Select(Function(x) New DialogLine(MoodType.Info, $"{x.Key.ToItemTypeDescriptor.ItemTypeName}({x.Value})")))
+            result.AddRange(inputs.Select(Function(x) New DialogLine(MoodType.Info, $"{ItemTypes.Descriptors(x.Key).ItemTypeName}({x.Value})")))
             result.Add(New DialogLine(MoodType.Info, ""))
         End If
         Return result

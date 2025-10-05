@@ -34,7 +34,7 @@ Friend Class ItemTypeCraftDialog
     End Function
 
     Private Shared Function GenerateCaption(character As ICharacter, itemType As String) As String
-        Return $"Craft with {itemType.ToItemTypeDescriptor.ItemTypeName}..."
+        Return $"Craft with {ItemTypes.Descriptors(itemType).ItemTypeName}..."
     End Function
 
     Public Overrides Function Choose(choice As String) As IDialog

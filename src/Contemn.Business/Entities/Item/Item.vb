@@ -23,7 +23,7 @@ Friend Class Item
 
     Public ReadOnly Property Name As String Implements IItem.Name
         Get
-            Return ItemType.ToItemTypeDescriptor.GetName(Me)
+            Return Descriptor.GetName(Me)
         End Get
     End Property
 
@@ -33,26 +33,32 @@ Friend Class Item
         End Get
     End Property
 
+    Public ReadOnly Property Descriptor As ItemTypeDescriptor Implements IDescribedEntity(Of ItemTypeDescriptor).Descriptor
+        Get
+            Return ItemTypes.Descriptors(ItemType)
+        End Get
+    End Property
+
     Public Overrides Sub Recycle()
         Clear()
         Data.RecycledItems.Add(ItemId)
     End Sub
 
     Public Function GetAvailableChoices(character As ICharacter) As IEnumerable(Of IDialogChoice) Implements IItem.GetAvailableChoices
-        Return ItemType.ToItemTypeDescriptor.GetAvailableChoices(Me, character)
+        Return Descriptor.GetAvailableChoices(Me, character)
     End Function
 
     Public Overrides Sub Initialize()
         MyBase.Initialize()
-        ItemType.ToItemTypeDescriptor.HandleInitialize(Me)
+        Descriptor.HandleInitialize(Me)
     End Sub
 
     Public Function MakeChoice(character As ICharacter, choice As String) As IDialog Implements IItem.MakeChoice
-        Return ItemType.ToItemTypeDescriptor.Choose(Me, character, choice)
+        Return Descriptor.Choose(Me, character, choice)
     End Function
 
     Public Function Describe() As IEnumerable(Of IDialogLine) Implements IItem.Describe
-        Return ItemType.ToItemTypeDescriptor.Describe(Me)
+        Return Descriptor.Describe(Me)
     End Function
 
     Public Overrides Sub Clear()

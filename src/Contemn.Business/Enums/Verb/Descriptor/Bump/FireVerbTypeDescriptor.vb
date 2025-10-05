@@ -18,7 +18,7 @@ Friend Class FireVerbTypeDescriptor
         character.RemoveAndRecycleItem(unfiredItem)
         Return New OkDialog(
             character.World.ProcessTurn().
-            Append(New DialogLine(MoodType.Info, $"-1 {unfiredItemType.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(unfiredItemType)})")).
+            Append(New DialogLine(MoodType.Info, $"-1 {ItemTypes.Descriptors(unfiredItemType).ItemTypeName}({character.GetCountOfItemType(unfiredItemType)})")).
             Append(New DialogLine(MoodType.Info, $"+1 {firedItem.Name}({character.GetCountOfItemType(firedItem.ItemType)})")),
             CharacterActionsDialog.LaunchMenu(character))
     End Function

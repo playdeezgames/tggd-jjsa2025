@@ -131,11 +131,11 @@ public Class N00bCharacterTypeDescriptor
     End Function
 
     Friend Overrides Sub HandleAddItem(character As ICharacter, item As IItem)
-        item.ItemType.ToItemTypeDescriptor.HandleAddItem(item, character)
+        item.Descriptor.HandleAddItem(item, character)
     End Sub
 
     Friend Overrides Sub HandleRemoveItem(character As ICharacter, item As IItem)
-        item.ItemType.ToItemTypeDescriptor.HandleRemoveItem(item, character)
+        item.Descriptor.HandleRemoveItem(item, character)
     End Sub
 
     Friend Overrides Function OnInteract(target As ICharacter, initiator As ICharacter) As IDialog

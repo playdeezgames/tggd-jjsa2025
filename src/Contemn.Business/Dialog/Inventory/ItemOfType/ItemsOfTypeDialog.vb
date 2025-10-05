@@ -8,7 +8,7 @@ Friend Class ItemsOfTypeDialog
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
-            itemType.ToItemTypeDescriptor.ItemTypeName,
+            ItemTypes.Descriptors(itemType).ItemTypeName,
             GenerateChoices(character, itemType),
             GenerateLines(character, itemType))
         Me.character = character

@@ -74,13 +74,12 @@ Public Class World
     End Sub
 
     Private Sub CreateItems()
-        For Each itemType In ItemTypes.All
-            Dim descriptor = itemType.ToItemTypeDescriptor
+        For Each descriptor In ItemTypes.Descriptors.Values
             Dim candidateMaps = Maps.Where(Function(x) descriptor.CanSpawnMap(x))
             For Each dummy In Enumerable.Range(0, descriptor.ItemCount)
                 Dim map = RNG.FromEnumerable(candidateMaps)
                 Dim candidateLocations = map.Locations.Where(Function(x) descriptor.CanSpawnLocation(x))
-                CreateItem(itemType, RNG.FromEnumerable(candidateLocations))
+                CreateItem(descriptor.ItemType, RNG.FromEnumerable(candidateLocations))
             Next
         Next
     End Sub

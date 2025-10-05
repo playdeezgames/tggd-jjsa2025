@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Public Interface IItem
-    Inherits IEntity
+    Inherits IDescribedEntity(Of ItemTypeDescriptor)
     ReadOnly Property ItemId As Integer
     ReadOnly Property ItemType As String
     ReadOnly Property Name As String

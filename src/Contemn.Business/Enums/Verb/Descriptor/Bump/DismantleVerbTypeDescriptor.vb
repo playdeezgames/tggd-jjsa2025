@@ -38,7 +38,7 @@ Friend Class DismantleVerbTypeDescriptor
             For Each dummy In Enumerable.Range(0, itemCount)
                 character.World.CreateItem(itemType, character)
             Next
-            result.Add(New DialogLine(MoodType.Info, $"+{itemCount} {itemType.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(itemType)})"))
+            result.Add(New DialogLine(MoodType.Info, $"+{itemCount} {ItemTypes.Descriptors(itemType).ItemTypeName}({character.GetCountOfItemType(itemType)})"))
         Next
         bumpLocation.LocationType = bumpLocation.GetMetadata(MetadataType.DismantledLocationType)
         Return result

@@ -1,10 +1,10 @@
 ﻿Imports TGGD.Business
 
-Friend MustInherit Class ItemTypeDescriptor
-    ReadOnly Property ItemType As String
-    ReadOnly Property ItemTypeName As String
-    ReadOnly Property ItemCount As Integer
-    ReadOnly Property IsAggregate As Boolean
+Public MustInherit Class ItemTypeDescriptor
+    Friend ReadOnly Property ItemType As String
+    Friend ReadOnly Property ItemTypeName As String
+    Friend ReadOnly Property ItemCount As Integer
+    Friend ReadOnly Property IsAggregate As Boolean
     Sub New(
            itemType As String,
            itemTypeName As String,
