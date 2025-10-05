@@ -56,7 +56,7 @@ Friend Class Character
 
     Public Overrides ReadOnly Property Descriptor As CharacterTypeDescriptor
         Get
-            Return CharacterType.ToCharacterTypeDescriptor
+            Return CharacterTypes.Descriptors(CharacterType)
         End Get
     End Property
 
@@ -67,7 +67,7 @@ Friend Class Character
     Public Overrides Sub Initialize()
         MyBase.Initialize()
         Data.Locations(EntityData.LocationId).CharacterId = CharacterId
-        CharacterType.ToCharacterTypeDescriptor().OnInitialize(Me)
+        Descriptor.OnInitialize(Me)
     End Sub
 
     Public Function Perform(verbType As String) As IDialog Implements ICharacter.Perform
@@ -114,15 +114,15 @@ Friend Class Character
     End Sub
 
     Protected Overrides Sub HandleAddItem(item As IItem)
-        CharacterType.ToCharacterTypeDescriptor.HandleAddItem(Me, item)
+        Descriptor.HandleAddItem(Me, item)
     End Sub
 
     Protected Overrides Sub HandleRemoveItem(item As IItem)
-        CharacterType.ToCharacterTypeDescriptor.HandleRemoveItem(Me, item)
+        Descriptor.HandleRemoveItem(Me, item)
     End Sub
 
     Public Function Interact(initiator As ICharacter) As IDialog Implements ICharacter.Interact
-        Return CharacterType.ToCharacterTypeDescriptor.OnInteract(Me, initiator)
+        Return Descriptor.OnInteract(Me, initiator)
     End Function
 
     Public Function AvailableVerbsOfCategory(verbCategoryType As String) As IEnumerable(Of String) Implements ICharacter.AvailableVerbsOfCategory
@@ -130,7 +130,7 @@ Friend Class Character
     End Function
 
     Public Function ProcessTurn() As IEnumerable(Of IDialogLine) Implements ICharacter.ProcessTurn
-        Return CharacterType.ToCharacterTypeDescriptor.OnProcessTurn(Me)
+        Return Descriptor.OnProcessTurn(Me)
     End Function
 
     Public Overrides Sub Clear()

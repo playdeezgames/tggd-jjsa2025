@@ -5,7 +5,7 @@ Friend Module CharacterExtensions
     <Extension>
     Friend Function HandleBump(character As ICharacter, location As ILocation) As IDialog
         character.SetBumpLocation(location)
-        Dim result = character.CharacterType.ToCharacterTypeDescriptor.OnBump(character, location)
+        Dim result = character.Descriptor.OnBump(character, location)
         Return result
     End Function
     <Extension>
@@ -26,11 +26,11 @@ Friend Module CharacterExtensions
     End Function
     <Extension>
     Friend Sub HandleLeave(character As ICharacter, location As ILocation)
-        character.CharacterType.ToCharacterTypeDescriptor.OnLeave(character, location)
+        character.Descriptor.OnLeave(character, location)
     End Sub
     <Extension>
     Friend Sub HandleEnter(character As ICharacter, location As ILocation)
-        character.CharacterType.ToCharacterTypeDescriptor.OnEnter(character, location)
+        character.Descriptor.OnEnter(character, location)
     End Sub
     <Extension>
     Friend Function IsDead(character As ICharacter) As Boolean

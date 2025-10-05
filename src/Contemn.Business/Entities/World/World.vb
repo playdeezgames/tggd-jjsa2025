@@ -96,13 +96,12 @@ Public Class World
     End Sub
 
     Private Sub CreateCharacters()
-        For Each characterType In CharacterTypes.All
-            Dim descriptor = characterType.ToCharacterTypeDescriptor
+        For Each descriptor In CharacterTypes.Descriptors.Values
             Dim candidateMaps = Maps.Where(Function(x) descriptor.CanSpawnMap(x))
             For Each dummy In Enumerable.Range(0, descriptor.CharacterCount)
                 Dim map = RNG.FromEnumerable(candidateMaps)
                 Dim candidateLocations = map.Locations.Where(Function(x) descriptor.CanSpawnLocation(x))
-                CreateCharacter(characterType, RNG.FromEnumerable(candidateLocations))
+                CreateCharacter(descriptor.CharacterType, RNG.FromEnumerable(candidateLocations))
             Next
         Next
     End Sub
