@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Public Interface ILocation
-    Inherits IInventoryEntity
+    Inherits IInventoryEntity(Of LocationTypeDescriptor)
     ReadOnly Property LocationId As Integer
     Property LocationType As String
     ReadOnly Property Column As Integer

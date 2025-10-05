@@ -2,7 +2,7 @@
 Imports Contemn.Data
 
 Friend Class Character
-    Inherits InventoryEntity(Of CharacterData)
+    Inherits InventoryEntity(Of CharacterData, CharacterTypeDescriptor)
     Implements ICharacter
 
     Public Sub New(data As WorldData, characterId As Integer, playSfx As Action(Of String))
@@ -51,6 +51,12 @@ Friend Class Character
     Public ReadOnly Property AvailableVerbs As IEnumerable(Of String) Implements ICharacter.AvailableVerbs
         Get
             Return VerbTypes.All.Where(Function(x) CanPerform(x))
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property Descriptor As CharacterTypeDescriptor
+        Get
+            Return CharacterType.ToCharacterTypeDescriptor
         End Get
     End Property
 

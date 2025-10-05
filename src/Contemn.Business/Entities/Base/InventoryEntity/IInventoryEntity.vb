@@ -1,5 +1,5 @@
-﻿Public Interface IInventoryEntity
-    Inherits IEntity
+﻿Public Interface IInventoryEntity(Of TDescriptor)
+    Inherits IDescribedEntity(Of TDescriptor)
     Sub AddItem(item As IItem)
     ReadOnly Property HasItems As Boolean
     ReadOnly Property Items As IEnumerable(Of IItem)

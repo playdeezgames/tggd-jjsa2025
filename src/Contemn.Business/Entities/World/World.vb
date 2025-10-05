@@ -153,7 +153,7 @@ Public Class World
         Return result
     End Function
 
-    Public Function CreateItem(itemType As String, entity As IInventoryEntity) As IItem Implements IWorld.CreateItem
+    Public Function CreateItem(Of TDescriptor)(itemType As String, entity As IInventoryEntity(Of TDescriptor)) As IItem Implements IWorld.CreateItem
         Dim itemId As Integer
         If Data.RecycledItems.Any Then
             itemId = Data.RecycledItems.First

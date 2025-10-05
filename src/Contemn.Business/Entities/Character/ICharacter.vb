@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Public Interface ICharacter
-    Inherits IInventoryEntity
+    Inherits IInventoryEntity(Of CharacterTypeDescriptor)
     ReadOnly Property CharacterType As String
     ReadOnly Property CharacterId As Integer
     ReadOnly Property Location As ILocation

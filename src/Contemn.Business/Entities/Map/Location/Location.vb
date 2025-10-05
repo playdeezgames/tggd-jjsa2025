@@ -2,7 +2,7 @@
 Imports TGGD.Business
 
 Friend Class Location
-    Inherits InventoryEntity(Of LocationData)
+    Inherits InventoryEntity(Of LocationData, LocationTypeDescriptor)
     Implements ILocation
 
     Public Sub New(data As WorldData, locationId As Integer, playSfx As Action(Of String))
@@ -84,6 +84,12 @@ Friend Class Location
     Public ReadOnly Property Name As String Implements ILocation.Name
         Get
             Return LocationType.ToLocationTypeDescriptor.GetName(Me)
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property Descriptor As LocationTypeDescriptor
+        Get
+            Return LocationType.ToLocationTypeDescriptor
         End Get
     End Property
 

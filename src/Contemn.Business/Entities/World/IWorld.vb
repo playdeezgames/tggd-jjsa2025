@@ -10,7 +10,7 @@ Public Interface IWorld
     Function GetLocation(locationId As Integer) As ILocation
     Function CreateCharacter(characterType As String, location As ILocation) As ICharacter
     Function GetCharacter(characterId As Integer) As ICharacter
-    Function CreateItem(itemType As String, entity As IInventoryEntity) As IItem
+    Function CreateItem(Of TDescriptor)(itemType As String, entity As IInventoryEntity(Of TDescriptor)) As IItem
     Function GetItem(itemId As Integer) As IItem
     Property Avatar As ICharacter
     Sub AddMessage(mood As String, text As String)
