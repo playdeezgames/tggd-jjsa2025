@@ -17,7 +17,7 @@ Friend Class FillVerbTypeDescriptor
         Return New OkDialog(
             character.World.ProcessTurn().
             Append(New DialogLine(MoodType.Info, $"Filled {item.Name}")),
-            VerbListDialog.LaunchMenu(character))
+            CharacterActionsDialog.LaunchMenu(character))
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean

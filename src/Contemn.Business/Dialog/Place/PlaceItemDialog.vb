@@ -35,13 +35,13 @@ Public Class PlaceItemDialog
         Return Function() If(
             VerbType.Place.ToVerbTypeDescriptor.CanPerform(character),
             New PlaceItemDialog(character),
-            VerbListDialog.LaunchMenu(character).Invoke)
+            CharacterActionsDialog.LaunchMenu(character).Invoke)
     End Function
 
     Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
-                Return VerbListDialog.LaunchMenu(character).Invoke
+                Return CharacterActionsDialog.LaunchMenu(character).Invoke
             Case Else
                 Return ChooseLocation(choice)
         End Select
@@ -52,6 +52,6 @@ Public Class PlaceItemDialog
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return VerbListDialog.LaunchMenu(character).Invoke
+        Return CharacterActionsDialog.LaunchMenu(character).Invoke
     End Function
 End Class

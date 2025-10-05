@@ -37,10 +37,10 @@ Friend Class CraftDialog
         Return Function() If(
             RecipeTypes.Descriptors.Values.Any(Function(x) x.CanCraft(character)),
             New CraftDialog(character),
-            VerbListDialog.LaunchMenu(character).Invoke)
+            CharacterActionsDialog.LaunchMenu(character).Invoke)
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return VerbListDialog.LaunchMenu(character).Invoke()
+        Return CharacterActionsDialog.LaunchMenu(character).Invoke()
     End Function
 End Class

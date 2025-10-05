@@ -20,7 +20,7 @@ Friend Class FireVerbTypeDescriptor
             character.World.ProcessTurn().
             Append(New DialogLine(MoodType.Info, $"-1 {unfiredItemType.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(unfiredItemType)})")).
             Append(New DialogLine(MoodType.Info, $"+1 {firedItem.Name}({character.GetCountOfItemType(firedItem.ItemType)})")),
-            VerbListDialog.LaunchMenu(character))
+            CharacterActionsDialog.LaunchMenu(character))
     End Function
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean

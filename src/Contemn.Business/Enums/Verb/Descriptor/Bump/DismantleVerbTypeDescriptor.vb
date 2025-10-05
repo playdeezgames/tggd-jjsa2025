@@ -28,9 +28,19 @@ Friend Class DismantleVerbTypeDescriptor
     End Sub
 
     Public Overrides Function Perform(character As ICharacter) As IDialog
-        Dim messageLines = character.World.ProcessTurn().Concat(DoDismantle(character))
-        Return New OkDialog(
-            messageLines,
+        Return New ConfirmDialog(
+            "Confirm Dismantle?",
+            {
+                New DialogLine(MoodType.Warning, $"Are you sure you want"),
+                New DialogLine(MoodType.Warning, $"to dismantle {character.GetBumpLocation().Name}?")
+            },
+            ConfirmDismantle(character),
+            BumpDialog.LaunchMenu(character))
+    End Function
+
+    Private Function ConfirmDismantle(character As ICharacter) As Func(Of IDialog)
+        Return Function() New OkDialog(
+            character.World.ProcessTurn().Concat(DoDismantle(character)),
             Function() Nothing)
     End Function
 

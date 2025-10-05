@@ -44,4 +44,8 @@ Friend Class BumpDialog
     Public Overrides Function CancelDialog() As IDialog
         Return Choose(NEVER_MIND_CHOICE)
     End Function
+
+    Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
+        Return Function() New BumpDialog(character)
+    End Function
 End Class

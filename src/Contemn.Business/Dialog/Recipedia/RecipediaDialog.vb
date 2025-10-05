@@ -31,6 +31,6 @@ Friend Class RecipediaDialog
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return VerbListDialog.LaunchMenu(character).Invoke()
+        Return CharacterActionsDialog.LaunchMenu(character).Invoke()
     End Function
 End Class

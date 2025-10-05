@@ -1,0 +1,43 @@
+﻿Imports TGGD.Business
+
+Public Class ConfirmDialog
+    Inherits BaseDialog
+
+    Private Shared ReadOnly NO_CHOICE As String = NameOf(NO_CHOICE)
+    Private Shared ReadOnly YES_CHOICE As String = NameOf(YES_CHOICE)
+    Const NO_TEXT = "No"
+    Const YES_TEXT = "Yes"
+    Private ReadOnly noDialog As Func(Of IDialog)
+    Private ReadOnly yesDialog As Func(Of IDialog)
+
+    Public Sub New(
+                  caption As String,
+                  lines As IEnumerable(Of IDialogLine),
+                  yesDialog As Func(Of IDialog),
+                  noDialog As Func(Of IDialog))
+        MyBase.New(
+            caption,
+            {
+                New DialogChoice(NO_CHOICE, NO_TEXT),
+                New DialogChoice(YES_CHOICE, YES_TEXT)
+            },
+            lines)
+        Me.noDialog = noDialog
+        Me.yesDialog = yesDialog
+    End Sub
+
+    Public Overrides Function Choose(choice As String) As IDialog
+        Select Case choice
+            Case YES_CHOICE
+                Return yesDialog()
+            Case NO_CHOICE
+                Return CancelDialog()
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+
+    Public Overrides Function CancelDialog() As IDialog
+        Return noDialog()
+    End Function
+End Class
