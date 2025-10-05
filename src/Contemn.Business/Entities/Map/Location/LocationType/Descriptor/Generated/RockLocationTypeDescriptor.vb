@@ -11,7 +11,7 @@ Friend Class RockLocationTypeDescriptor
     End Sub
 
     Friend Overrides Sub OnInitialize(location As Location)
-        location.SetMetadata(MetadataType.ForageTable, ForageTableType.Rock)
+        location.SetMetadata(MetadataType.ForageTable, GeneratorType.RockForage)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

@@ -26,7 +26,7 @@ Friend Class GrassLocationTypeDescriptor
     End Function
 
     Friend Overrides Sub OnInitialize(location As Location)
-        location.SetMetadata(MetadataType.ForageTable, ForageTableType.Grass)
+        location.SetMetadata(MetadataType.ForageTable, GeneratorType.GrassForage)
         location.SetTag(TagType.IsPlaceable, True)
     End Sub
 

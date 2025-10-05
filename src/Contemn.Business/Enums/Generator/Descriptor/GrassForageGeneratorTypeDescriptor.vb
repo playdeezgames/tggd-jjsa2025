@@ -1,8 +1,8 @@
-﻿Friend Class GrassForageTableTypeDescriptor
-    Inherits ForageTableTypeDescriptor
+﻿Friend Class GrassForageGeneratorTypeDescriptor
+    Inherits GeneratorTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.ForageTableType.Grass)
+        MyBase.New(Business.GeneratorType.GrassForage)
     End Sub
 
     Friend Overrides Sub Initialize(generator As IGenerator)
