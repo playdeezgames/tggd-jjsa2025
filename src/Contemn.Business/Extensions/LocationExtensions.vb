@@ -28,9 +28,8 @@ Friend Module LocationExtensions
         End If
         Dim forageTableType = location.GetMetadata(MetadataType.ForageTable)
         If Not String.IsNullOrEmpty(forageTableType) Then
-            Dim generator As IGenerator = location.World.CreateGenerator()
+            Dim generator As IGenerator = location.World.CreateGenerator(forageTableType)
             location.SetStatistic(StatisticType.ForageGeneratorId, generator.GeneratorId)
-            forageTableType.ToForageTableTypeDescriptor.Initialize(generator)
             Return generator
         End If
         Return Nothing

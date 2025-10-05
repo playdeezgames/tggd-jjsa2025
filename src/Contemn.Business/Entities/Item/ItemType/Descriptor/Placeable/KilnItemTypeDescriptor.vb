@@ -20,6 +20,7 @@ Friend Class KilnItemTypeDescriptor
     Friend Overrides Sub HandleInitialize(item As IItem)
         item.SetTag(TagType.CanPlace, True)
         item.SetMetadata(MetadataType.PlaceLocationType, LocationType.Kiln)
+        item.SetDismantleTable(item.World.CreateGenerator(NameOf(DismantleKilnGeneratorType)))
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

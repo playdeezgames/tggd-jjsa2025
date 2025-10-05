@@ -5,7 +5,9 @@ Friend Module GeneratorTypes
         New List(Of GeneratorTypeDescriptor) From
         {
             New GrassForageGeneratorTypeDescriptor(),
-            New RockForageGeneratorTypeDescriptor()
+            New RockForageGeneratorTypeDescriptor(),
+            New DismantleCampFireGeneratorType(),
+            New DismantleKilnGeneratorType()
         }.ToDictionary(Function(x) x.GeneratorType, Function(x) x)
     Friend ReadOnly Property All As IEnumerable(Of String)
         Get
@@ -13,7 +15,7 @@ Friend Module GeneratorTypes
         End Get
     End Property
     <Extension>
-    Function ToForageTableTypeDescriptor(statisticType As String) As GeneratorTypeDescriptor
+    Function ToGeneratorTypeDescriptor(statisticType As String) As GeneratorTypeDescriptor
         Return Descriptors(statisticType)
     End Function
 End Module

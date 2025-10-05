@@ -20,6 +20,7 @@ Friend Class CampFireItemTypeDescriptor
     Friend Overrides Sub HandleInitialize(item As IItem)
         item.SetTag(TagType.CanPlace, True)
         item.SetMetadata(MetadataType.PlaceLocationType, LocationType.CampFire)
+        item.SetDismantleTable(item.World.CreateGenerator(NameOf(DismantleCampFireGeneratorType)))
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

@@ -193,7 +193,7 @@ Public Class World
         Return New Generator(Data, generatorId)
     End Function
 
-    Public Function CreateGenerator() As IGenerator Implements IWorld.CreateGenerator
+    Public Function CreateGenerator(generatorType As String) As IGenerator Implements IWorld.CreateGenerator
         Dim generatorId As Integer
         If Data.RecycledGenerators.Any Then
             generatorId = Data.RecycledGenerators.First
@@ -203,7 +203,9 @@ Public Class World
             generatorId = Data.Generators.Count
             Data.Generators.Add(New Dictionary(Of String, Integer)())
         End If
-        Return New Generator(Data, generatorId)
+        Dim result = New Generator(Data, generatorId)
+        generatorType.ToGeneratorTypeDescriptor.Initialize(result)
+        Return result
     End Function
 
     Public Function GetCharacter(characterId As Integer) As ICharacter Implements IWorld.GetCharacter
