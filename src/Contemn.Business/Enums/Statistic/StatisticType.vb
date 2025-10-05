@@ -1,6 +1,7 @@
 ﻿Public Module StatisticType
     Public ReadOnly BumpLocationId As String = NameOf(BumpLocationId)
     Public ReadOnly Depletion As String = NameOf(Depletion)
+    Public ReadOnly DismantleGeneratorId As String = NameOf(DismantleGeneratorId)
     Public ReadOnly Durability As String = NameOf(Durability)
     Public ReadOnly ForageGeneratorId As String = NameOf(ForageGeneratorId)
     Public ReadOnly Health As String = NameOf(Health)

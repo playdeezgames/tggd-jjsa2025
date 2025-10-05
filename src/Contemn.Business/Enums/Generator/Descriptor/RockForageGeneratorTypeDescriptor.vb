@@ -2,7 +2,7 @@
     Inherits GeneratorTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.GeneratorType.RockForage)
+        MyBase.New(NameOf(RockForageGeneratorTypeDescriptor))
     End Sub
 
     Friend Overrides Sub Initialize(generator As IGenerator)
