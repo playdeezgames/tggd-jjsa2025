@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend MustInherit Class LocationTypeDescriptor
+Public MustInherit Class LocationTypeDescriptor
     Friend ReadOnly Property LocationType As String
     Friend ReadOnly Property LocationTypeName As String
     Sub New(locationType As String, locationTypeName As String)

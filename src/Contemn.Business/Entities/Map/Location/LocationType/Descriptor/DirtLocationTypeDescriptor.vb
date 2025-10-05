@@ -1,10 +1,10 @@
 ﻿Imports TGGD.Business
 
-Friend Class DirtLocationTypeDescriptor
+Public Class DirtLocationTypeDescriptor
     Inherits LocationTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.LocationType.Dirt, "Dirt")
+        MyBase.New(NameOf(DirtLocationTypeDescriptor), "Dirt")
     End Sub
 
     Friend Overrides Sub OnLeave(location As ILocation, character As ICharacter)

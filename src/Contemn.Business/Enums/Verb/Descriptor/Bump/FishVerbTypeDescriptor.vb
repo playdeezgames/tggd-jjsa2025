@@ -7,7 +7,7 @@
             NameOf(FishItemTypeDescriptor),
             TagType.CanFish,
             TagType.IsFishable,
-            {LocationType.Water},
+            {NameOf(WaterLocationTypeDescriptor)},
             "You catch nothing.")
     End Sub
 End Class

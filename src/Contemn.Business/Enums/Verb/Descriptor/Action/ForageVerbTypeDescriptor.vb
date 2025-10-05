@@ -52,7 +52,7 @@ Friend Class ForageVerbTypeDescriptor
             }
         If generator.IsDepleted Then
             messageLines.Add(New DialogLine(MoodType.Warning, $"{character.Location.LocationType.ToLocationTypeDescriptor.LocationType} is now depleted."))
-            character.Location.LocationType = LocationType.Dirt
+            character.Location.LocationType = NameOf(DirtLocationTypeDescriptor)
             generator.Recycle()
         End If
         Return New MessageDialog(

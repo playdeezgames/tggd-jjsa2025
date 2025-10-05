@@ -1,10 +1,10 @@
 ﻿Imports TGGD.Business
 
-Friend Class TreeLocationTypeDescriptor
+Public Class TreeLocationTypeDescriptor
     Inherits LocationTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.LocationType.Tree, "Tree")
+        MyBase.New(NameOf(TreeLocationTypeDescriptor), "Tree")
     End Sub
 
     Friend Overrides Sub OnLeave(location As ILocation, character As ICharacter)
@@ -36,7 +36,7 @@ Friend Class TreeLocationTypeDescriptor
         Dim result As New List(Of IDialogLine)
         If bumpLocation.IsStatisticAtMinimum(StatisticType.Resource) Then
             result.Add(New DialogLine(MoodType.Warning, $"{bumpLocation.Name} depleted."))
-            bumpLocation.LocationType = Business.LocationType.Dirt
+            bumpLocation.LocationType = NameOf(DirtLocationTypeDescriptor)
         End If
         Return result
     End Function

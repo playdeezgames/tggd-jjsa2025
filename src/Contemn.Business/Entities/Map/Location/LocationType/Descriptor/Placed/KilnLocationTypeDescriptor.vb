@@ -1,11 +1,11 @@
 ﻿Imports TGGD.Business
 
-Friend Class KilnLocationTypeDescriptor
+Public Class KilnLocationTypeDescriptor
     Inherits LocationTypeDescriptor
     Const FUEL_MAXIMUM = 50
     Public Sub New()
         MyBase.New(
-            Business.LocationType.Kiln,
+            NameOf(KilnLocationTypeDescriptor),
             "Kiln")
     End Sub
 
@@ -18,7 +18,7 @@ Friend Class KilnLocationTypeDescriptor
         location.SetTag(TagType.IsRefuelable, True)
         location.World.ActivateLocation(location)
         location.SetTag(TagType.IsKiln, True)
-        location.SetMetadata(MetadataType.DismantledLocationType, Business.LocationType.Dirt)
+        location.SetMetadata(MetadataType.DismantledLocationType, NameOf(DirtLocationTypeDescriptor))
         location.SetTag(TagType.CanDismantle, True)
         location.SetDismantleTable(location.World.CreateGenerator(NameOf(DismantleKilnGeneratorType)))
     End Sub

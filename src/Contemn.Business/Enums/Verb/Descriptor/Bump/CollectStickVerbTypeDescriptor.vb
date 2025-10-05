@@ -38,7 +38,7 @@ Friend Class CollectStickVerbTypeDescriptor
         Dim bumpLocation = character.GetBumpLocation()
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso
-            bumpLocation.LocationType = LocationType.Tree AndAlso
+            bumpLocation.LocationType = NameOf(TreeLocationTypeDescriptor) AndAlso
             Not bumpLocation.IsStatisticAtMinimum(StatisticType.Resource)
     End Function
 End Class

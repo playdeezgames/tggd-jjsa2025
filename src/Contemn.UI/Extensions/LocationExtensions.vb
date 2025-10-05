@@ -5,13 +5,13 @@ Friend Module LocationExtensions
     Private ReadOnly locationPixelTable As IReadOnlyDictionary(Of String, Func(Of ILocation, Integer)) =
         New Dictionary(Of String, Func(Of ILocation, Integer)) From
         {
-            {LocationType.Grass, AddressOf GrassToPixel},
-            {LocationType.Tree, AddressOf TreeToPixel},
-            {LocationType.Water, AddressOf WaterToPixel},
-            {LocationType.Dirt, AddressOf DirtToPixel},
-            {LocationType.Rock, AddressOf RockToPixel},
-            {LocationType.CampFire, AddressOf CampFireToPixel},
-            {LocationType.Kiln, AddressOf KilnToPixel}
+            {NameOf(GrassLocationTypeDescriptor), AddressOf GrassToPixel},
+            {NameOf(TreeLocationTypeDescriptor), AddressOf TreeToPixel},
+            {NameOf(WaterLocationTypeDescriptor), AddressOf WaterToPixel},
+            {NameOf(DirtLocationTypeDescriptor), AddressOf DirtToPixel},
+            {NameOf(RockLocationTypeDescriptor), AddressOf RockToPixel},
+            {NameOf(CampFireLocationTypeDescriptor), AddressOf CampFireToPixel},
+            {NameOf(KilnLocationTypeDescriptor), AddressOf KilnToPixel}
         }
 
     Private Function KilnToPixel(location As ILocation) As Integer

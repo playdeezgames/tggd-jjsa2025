@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Public Class N00bCharacterTypeDescriptor
+public Class N00bCharacterTypeDescriptor
     Inherits CharacterTypeDescriptor
 
     Public Sub New()
@@ -127,7 +127,7 @@ Public Class N00bCharacterTypeDescriptor
     End Function
 
     Friend Overrides Function CanSpawnLocation(location As ILocation) As Boolean
-        Return Not location.HasCharacter AndAlso location.LocationType = LocationType.Grass
+        Return Not location.HasCharacter AndAlso location.LocationType = NameOf(GrassLocationTypeDescriptor)
     End Function
 
     Friend Overrides Sub HandleAddItem(character As ICharacter, item As IItem)

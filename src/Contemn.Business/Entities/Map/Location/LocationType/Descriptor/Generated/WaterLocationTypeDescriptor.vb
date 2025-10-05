@@ -1,10 +1,10 @@
 ﻿Imports TGGD.Business
 
-Friend Class WaterLocationTypeDescriptor
+Public Class WaterLocationTypeDescriptor
     Inherits LocationTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.LocationType.Water, "Water")
+        MyBase.New(NameOf(WaterLocationTypeDescriptor), "Water")
     End Sub
 
     Friend Overrides Sub OnLeave(location As ILocation, character As ICharacter)

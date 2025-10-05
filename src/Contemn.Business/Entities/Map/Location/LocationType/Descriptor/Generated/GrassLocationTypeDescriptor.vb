@@ -1,9 +1,9 @@
 ﻿Imports TGGD.Business
 
-Friend Class GrassLocationTypeDescriptor
+Public Class GrassLocationTypeDescriptor
     Inherits LocationTypeDescriptor
     Public Sub New()
-        MyBase.New(Business.LocationType.Grass, "Grass")
+        MyBase.New(NameOf(GrassLocationTypeDescriptor), "Grass")
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog

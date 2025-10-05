@@ -1,10 +1,10 @@
 ﻿Imports TGGD.Business
 
-Friend Class RockLocationTypeDescriptor
+Public Class RockLocationTypeDescriptor
     Inherits LocationTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.LocationType.Rock, "Rock")
+        MyBase.New(NameOf(RockLocationTypeDescriptor), "Rock")
     End Sub
 
     Friend Overrides Sub OnLeave(location As ILocation, character As ICharacter)

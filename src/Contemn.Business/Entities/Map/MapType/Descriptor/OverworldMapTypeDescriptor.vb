@@ -4,10 +4,10 @@
     Shared ReadOnly terrainGenerator As IReadOnlyDictionary(Of String, Integer) =
         New Dictionary(Of String, Integer) From
         {
-            {LocationType.Tree, 100},
-            {LocationType.Water, 25},
-            {LocationType.Rock, 25},
-            {LocationType.Grass, 1000}
+            {NameOf(TreeLocationTypeDescriptor), 100},
+            {NameOf(WaterLocationTypeDescriptor), 25},
+            {NameOf(RockLocationTypeDescriptor), 25},
+            {NameOf(GrassLocationTypeDescriptor), 1000}
         }
 
     Public Sub New()

@@ -1,13 +1,13 @@
 ﻿Imports TGGD.Business
 
-Friend Class CampFireLocationTypeDescriptor
+Public Class CampFireLocationTypeDescriptor
     Inherits LocationTypeDescriptor
     Const FUEL_MAXIMUM = 25
     Const FUEL_INITIAL = FUEL_MAXIMUM \ 3
 
     Public Sub New()
         MyBase.New(
-            Business.LocationType.CampFire,
+            NameOf(CampFireLocationTypeDescriptor),
             "Camp Fire")
     End Sub
 
@@ -21,7 +21,7 @@ Friend Class CampFireLocationTypeDescriptor
         location.World.ActivateLocation(location)
         location.SetTag(TagType.CanCook, True)
         location.SetTag(TagType.CanBoil, True)
-        location.SetMetadata(MetadataType.DismantledLocationType, Business.LocationType.Dirt)
+        location.SetMetadata(MetadataType.DismantledLocationType, NameOf(DirtLocationTypeDescriptor))
         location.SetTag(TagType.CanDismantle, True)
         location.SetDismantleTable(location.World.CreateGenerator(NameOf(DismantleCampFireGeneratorType)))
     End Sub

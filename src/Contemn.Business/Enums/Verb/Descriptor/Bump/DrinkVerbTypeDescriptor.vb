@@ -33,6 +33,6 @@ Friend Class DrinkVerbTypeDescriptor
         If bumpLocation Is Nothing Then
             Return False
         End If
-        Return bumpLocation.LocationType = LocationType.Water
+        Return bumpLocation.LocationType = NameOf(WaterLocationTypeDescriptor)
     End Function
 End Class

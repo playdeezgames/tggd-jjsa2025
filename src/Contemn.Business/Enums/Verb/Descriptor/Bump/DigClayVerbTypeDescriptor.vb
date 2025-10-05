@@ -9,7 +9,7 @@ Friend Class DigClayVerbTypeDescriptor
             NameOf(ClayItemTypeDescriptor),
             TagType.CanDig,
             TagType.IsDiggable,
-            {LocationType.Water},
+            {NameOf(WaterLocationTypeDescriptor)},
             "You find nothing.")
     End Sub
 End Class

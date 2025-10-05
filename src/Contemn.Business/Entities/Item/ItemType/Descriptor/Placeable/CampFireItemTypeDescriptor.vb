@@ -19,7 +19,7 @@ Friend Class CampFireItemTypeDescriptor
 
     Friend Overrides Sub HandleInitialize(item As IItem)
         item.SetTag(TagType.CanPlace, True)
-        item.SetMetadata(MetadataType.PlaceLocationType, LocationType.CampFire)
+        item.SetMetadata(MetadataType.PlaceLocationType, NameOf(CampFireLocationTypeDescriptor))
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
