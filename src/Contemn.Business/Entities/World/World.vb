@@ -106,10 +106,9 @@ Public Class World
     End Sub
 
     Private Sub CreateMaps()
-        For Each mapType In MapTypes.All
-            Dim descriptor = mapType.ToMapTypeDescriptor
+        For Each descriptor In MapTypes.Descriptors.Values
             For Each dummy In Enumerable.Range(0, descriptor.MapCount)
-                CreateMap(mapType)
+                CreateMap(descriptor.MapType)
             Next
         Next
     End Sub

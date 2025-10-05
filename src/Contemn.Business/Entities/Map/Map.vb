@@ -44,9 +44,16 @@ Friend Class Map
             Return Data.Maps(MapId)
         End Get
     End Property
+
+    Public ReadOnly Property Descriptor As MapTypeDescriptor Implements IDescribedEntity(Of MapTypeDescriptor).Descriptor
+        Get
+            Return MapTypes.Descriptors(MapType)
+        End Get
+    End Property
+
     Public Overrides Sub Initialize()
         MyBase.Initialize()
-        MapType.ToMapTypeDescriptor.OnInitialize(Me)
+        Descriptor.OnInitialize(Me)
     End Sub
     Public Sub SetLocation(column As Integer, row As Integer, location As ILocation) Implements IMap.SetLocation
         Dim mapColumn As Dictionary(Of Integer, Integer) = Nothing

@@ -1,6 +1,6 @@
-﻿Friend MustInherit Class MapTypeDescriptor
-    ReadOnly Property MapType As String
-    ReadOnly Property MapCount As Integer
+﻿Public MustInherit Class MapTypeDescriptor
+    Friend ReadOnly Property MapType As String
+    Friend ReadOnly Property MapCount As Integer
     Sub New(mapType As String, mapCount As Integer)
         Me.MapType = mapType
         Me.MapCount = mapCount
