@@ -1,10 +1,10 @@
 ﻿Imports TGGD.Business
 
-Friend Class N00bCharacterTypeDescriptor
+Public Class N00bCharacterTypeDescriptor
     Inherits CharacterTypeDescriptor
 
     Public Sub New()
-        MyBase.New(Business.CharacterType.N00b, 1)
+        MyBase.New(NameOf(N00bCharacterTypeDescriptor), 1)
     End Sub
 
     Const MAXIMUM_SATIETY = 100

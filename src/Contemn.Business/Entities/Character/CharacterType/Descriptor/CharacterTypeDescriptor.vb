@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend MustInherit Class CharacterTypeDescriptor
+Public MustInherit Class CharacterTypeDescriptor
     ReadOnly Property CharacterType As String
     ReadOnly Property CharacterCount As Integer
     Sub New(characterType As String, characterCount As Integer)
