@@ -15,6 +15,13 @@ Friend Class Generator
             Return GeneratorData.Values.Sum
         End Get
     End Property
+
+    Public ReadOnly Property Keys As IEnumerable(Of String) Implements IGenerator.Keys
+        Get
+            Return GeneratorData.Keys
+        End Get
+    End Property
+
     Public Sub New(data As WorldData, generatorId As Integer)
         Me.data = data
         Me.GeneratorId = generatorId

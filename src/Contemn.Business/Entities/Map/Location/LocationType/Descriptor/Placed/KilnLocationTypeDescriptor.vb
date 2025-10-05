@@ -20,6 +20,7 @@ Friend Class KilnLocationTypeDescriptor
         location.SetTag(TagType.IsKiln, True)
         location.SetMetadata(MetadataType.DismantledLocationType, Business.LocationType.Dirt)
         location.SetTag(TagType.CanDismantle, True)
+        location.SetDismantleTable(location.World.CreateGenerator(NameOf(DismantleKilnGeneratorType)))
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

@@ -31,12 +31,4 @@ Friend Module ItemExtensions
         End If
         Return lines
     End Function
-    <Extension>
-    Sub SetDismantleTable(item As IItem, generator As IGenerator)
-        item.SetStatistic(StatisticType.DismantleGeneratorId, generator.GeneratorId)
-    End Sub
-    <Extension>
-    Function GetDismantleTable(item As IItem) As IGenerator
-        Return item.World.GetGenerator(item.GetStatistic(StatisticType.DismantleGeneratorId))
-    End Function
 End Module

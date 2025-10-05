@@ -6,6 +6,6 @@
     End Sub
 
     Friend Overrides Sub Initialize(generator As IGenerator)
-        generator.SetWeight(Rock, 4)
+        generator.SetWeight(NameOf(RockItemTypeDescriptor), 4)
     End Sub
 End Class

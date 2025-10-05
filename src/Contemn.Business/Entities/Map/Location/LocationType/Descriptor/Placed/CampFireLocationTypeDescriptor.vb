@@ -23,6 +23,7 @@ Friend Class CampFireLocationTypeDescriptor
         location.SetTag(TagType.CanBoil, True)
         location.SetMetadata(MetadataType.DismantledLocationType, Business.LocationType.Dirt)
         location.SetTag(TagType.CanDismantle, True)
+        location.SetDismantleTable(location.World.CreateGenerator(NameOf(DismantleCampFireGeneratorType)))
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

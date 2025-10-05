@@ -5,4 +5,5 @@
     Function GetWeight(key As String) As Integer
     ReadOnly Property TotalWeight As Integer
     Sub Recycle()
+    ReadOnly Property Keys As IEnumerable(Of String)
 End Interface

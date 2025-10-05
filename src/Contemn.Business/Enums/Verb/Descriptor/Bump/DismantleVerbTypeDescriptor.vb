@@ -3,23 +3,6 @@
 Friend Class DismantleVerbTypeDescriptor
     Inherits VerbTypeDescriptor
 
-    ReadOnly dismantleTable As IReadOnlyDictionary(Of String, IReadOnlyDictionary(Of String, Integer)) =
-        New Dictionary(Of String, IReadOnlyDictionary(Of String, Integer)) From
-        {
-            {
-                LocationType.CampFire,
-                New Dictionary(Of String, Integer) From {
-                    {NameOf(RockItemTypeDescriptor), 4}
-                }
-            },
-            {
-                LocationType.Kiln,
-                New Dictionary(Of String, Integer) From {
-                    {NameOf(RockItemTypeDescriptor), 4}
-                }
-            }
-        }
-
     Public Sub New()
         MyBase.New(
             Business.VerbType.Dismantle,
@@ -49,12 +32,13 @@ Friend Class DismantleVerbTypeDescriptor
         Dim result As New List(Of IDialogLine) From {
             New DialogLine(MoodType.Info, $"You dismantle {bumpLocation.Name}")
         }
-        For Each entry In dismantleTable(bumpLocation.LocationType)
-            Dim itemType = entry.Key
-            For Each dummy In Enumerable.Range(0, entry.Value)
+        Dim dismantleGenerator = bumpLocation.GetDismantleTable()
+        For Each itemType In dismantleGenerator.Keys
+            Dim itemCount = dismantleGenerator.GetWeight(itemType)
+            For Each dummy In Enumerable.Range(0, itemCount)
                 character.World.CreateItem(itemType, character)
             Next
-            result.Add(New DialogLine(MoodType.Info, $"+{entry.Value} {itemType.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(itemType)})"))
+            result.Add(New DialogLine(MoodType.Info, $"+{itemCount} {itemType.ToItemTypeDescriptor.ItemTypeName}({character.GetCountOfItemType(itemType)})"))
         Next
         bumpLocation.LocationType = bumpLocation.GetMetadata(MetadataType.DismantledLocationType)
         Return result

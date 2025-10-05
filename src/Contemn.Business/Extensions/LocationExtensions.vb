@@ -34,4 +34,12 @@ Friend Module LocationExtensions
         End If
         Return Nothing
     End Function
+    <Extension>
+    Sub SetDismantleTable(location As ILocation, generator As IGenerator)
+        location.SetStatistic(StatisticType.DismantleGeneratorId, generator.GeneratorId)
+    End Sub
+    <Extension>
+    Function GetDismantleTable(location As ILocation) As IGenerator
+        Return location.World.GetGenerator(location.GetStatistic(StatisticType.DismantleGeneratorId))
+    End Function
 End Module
