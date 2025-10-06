@@ -15,7 +15,7 @@ Friend Class BumpDialog
     End Function
 
     Private Shared Function GenerateCaption(character As ICharacter) As String
-        Return character.GetBumpLocation().LocationType.ToLocationTypeDescriptor.LocationTypeName
+        Return character.GetBumpLocation().Descriptor.LocationTypeName
     End Function
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)

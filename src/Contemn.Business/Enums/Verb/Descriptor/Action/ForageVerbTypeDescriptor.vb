@@ -51,7 +51,7 @@ Friend Class ForageVerbTypeDescriptor
                 (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
             }
         If generator.IsDepleted Then
-            messageLines.Add(New DialogLine(MoodType.Warning, $"{character.Location.LocationType.ToLocationTypeDescriptor.LocationType} is now depleted."))
+            messageLines.Add(New DialogLine(MoodType.Warning, $"{character.Location.Descriptor.LocationType} is now depleted."))
             character.Location.LocationType = NameOf(DirtLocationTypeDescriptor)
             generator.Recycle()
         End If

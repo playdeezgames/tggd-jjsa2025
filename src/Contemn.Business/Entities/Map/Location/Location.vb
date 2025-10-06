@@ -14,7 +14,7 @@ Friend Class Location
 
     Public Overrides Sub Initialize()
         MyBase.Initialize()
-        LocationType.ToLocationTypeDescriptor.OnInitialize(Me)
+        Descriptor.OnInitialize(Me)
     End Sub
 
     Public Property LocationType As String Implements ILocation.LocationType
@@ -83,13 +83,13 @@ Friend Class Location
 
     Public ReadOnly Property Name As String Implements ILocation.Name
         Get
-            Return LocationType.ToLocationTypeDescriptor.GetName(Me)
+            Return Descriptor.GetName(Me)
         End Get
     End Property
 
     Public Overrides ReadOnly Property Descriptor As LocationTypeDescriptor
         Get
-            Return LocationType.ToLocationTypeDescriptor
+            Return LocationTypes.Descriptors(LocationType)
         End Get
     End Property
 
@@ -105,10 +105,10 @@ Friend Class Location
     End Sub
 
     Public Sub ProcessTurn() Implements ILocation.ProcessTurn
-        LocationType.ToLocationTypeDescriptor.OnProcessTurn(Me)
+        Descriptor.OnProcessTurn(Me)
     End Sub
 
     Public Function GenerateBumpLines(character As ICharacter) As IEnumerable(Of IDialogLine) Implements ILocation.GenerateBumpLines
-        Return LocationType.ToLocationTypeDescriptor.GenerateBumpLines(Me, character)
+        Return Descriptor.GenerateBumpLines(Me, character)
     End Function
 End Class

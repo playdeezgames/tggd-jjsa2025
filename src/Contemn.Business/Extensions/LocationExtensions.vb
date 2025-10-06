@@ -11,15 +11,15 @@ Friend Module LocationExtensions
     End Function
     <Extension>
     Friend Function HandleBump(location As ILocation, character As ICharacter) As IDialog
-        Return location.LocationType.ToLocationTypeDescriptor.OnBump(location, character)
+        Return location.Descriptor.OnBump(location, character)
     End Function
     <Extension>
     Friend Sub HandleLeave(location As ILocation, character As ICharacter)
-        location.LocationType.ToLocationTypeDescriptor.OnLeave(location, character)
+        location.Descriptor.OnLeave(location, character)
     End Sub
     <Extension>
     Friend Function HandleEnter(location As ILocation, character As ICharacter) As IDialog
-        Return location.LocationType.ToLocationTypeDescriptor.OnEnter(location, character)
+        Return location.Descriptor.OnEnter(location, character)
     End Function
     <Extension>
     Friend Function GetForageGenerator(location As ILocation) As IGenerator

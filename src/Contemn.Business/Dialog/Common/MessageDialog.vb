@@ -1,11 +1,10 @@
-﻿Imports System.Reflection.Metadata.Ecma335
-Imports TGGD.Business
+﻿Imports TGGD.Business
 
 Friend Class MessageDialog
     Inherits BaseDialog
 
-    ReadOnly onCancel As Func(Of IDialog)
-    ReadOnly choiceTable As IReadOnlyDictionary(Of String, Func(Of IDialog))
+    Private ReadOnly onCancel As Func(Of IDialog)
+    Private ReadOnly choiceTable As IReadOnlyDictionary(Of String, Func(Of IDialog))
 
     Public Sub New(
                   lines As IEnumerable(Of IDialogLine),

@@ -2,7 +2,9 @@
 
 Friend Class DialogLine
     Implements IDialogLine
-    Public Sub New(mood As String, text As String)
+    Public Sub New(
+                  mood As String,
+                  text As String)
         Me.Mood = mood
         Me.Text = text
     End Sub

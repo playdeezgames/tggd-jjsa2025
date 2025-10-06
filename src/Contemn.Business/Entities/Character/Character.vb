@@ -105,7 +105,7 @@ Friend Class Character
     End Sub
 
     Private Function CanEnter(nextLocation As ILocation) As Boolean
-        Return Not nextLocation.HasCharacter AndAlso nextLocation.LocationType.ToLocationTypeDescriptor.CanEnter(nextLocation, Me)
+        Return Not nextLocation.HasCharacter AndAlso nextLocation.Descriptor.CanEnter(nextLocation, Me)
     End Function
 
     Public Overrides Sub Recycle()

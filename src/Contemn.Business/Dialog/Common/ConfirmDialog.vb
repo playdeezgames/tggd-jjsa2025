@@ -26,7 +26,8 @@ Public Class ConfirmDialog
         Me.yesDialog = yesDialog
     End Sub
 
-    Public Overrides Function Choose(choice As String) As IDialog
+    Public Overrides Function Choose(
+                                    choice As String) As IDialog
         Select Case choice
             Case YES_CHOICE
                 Return yesDialog()

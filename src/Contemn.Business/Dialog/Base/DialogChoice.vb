@@ -3,7 +3,9 @@
 Friend Class DialogChoice
     Implements IDialogChoice
 
-    Public Sub New(choice As String, text As String)
+    Public Sub New(
+                  choice As String,
+                  text As String)
         Me.Choice = choice
         Me.Text = text
     End Sub

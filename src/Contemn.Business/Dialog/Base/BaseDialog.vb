@@ -7,7 +7,7 @@ Public MustInherit Class BaseDialog
            choices As IEnumerable(Of IDialogChoice),
            lines As IEnumerable(Of IDialogLine))
         Me.Caption = caption
-        Me.Choices = choices.Select(Function(x) New DialogChoice(x.Choice, x.Text))
+        Me.Choices = choices
         Me.Lines = lines
     End Sub
     Public ReadOnly Property Caption As String Implements IDialog.Caption
