@@ -8,12 +8,12 @@ Friend Class ChopWoodVerbTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.VerbType.ChopWood,
+            NameOf(ChopWoodVerbTypeDescriptor),
             Business.VerbCategoryType.Bump,
             "Chop Wood")
     End Sub
 
-    Public Overrides Function Perform(character As ICharacter) As IDialog
+    Friend Overrides Function Perform(character As ICharacter) As IDialog
         Dim bumpLocation = character.GetBumpLocation()
         Dim tool = character.World.CreateItem(NameOf(LogItemTypeDescriptor), character)
         bumpLocation.ChangeStatistic(StatisticType.Resource, -RESOURCE_PER_LOG)
@@ -31,7 +31,7 @@ Friend Class ChopWoodVerbTypeDescriptor
                     Function() Nothing)
     End Function
 
-    Public Overrides Function CanPerform(character As ICharacter) As Boolean
+    Friend Overrides Function CanPerform(character As ICharacter) As Boolean
         Dim bumpLocation = character.GetBumpLocation()
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation.GetTag(TagType.IsChoppable) AndAlso

@@ -58,7 +58,7 @@ Friend Class RefuelItemDialog
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
         Return Function() If(
-            VerbType.Refuel.ToVerbTypeDescriptor.CanPerform(character),
+            NameOf(RefuelVerbTypeDescriptor).ToVerbTypeDescriptor.CanPerform(character),
             CType(New RefuelItemDialog(character), IDialog),
             CType(New BumpDialog(character), IDialog))
     End Function

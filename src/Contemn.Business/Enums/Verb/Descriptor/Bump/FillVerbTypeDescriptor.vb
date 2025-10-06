@@ -5,12 +5,12 @@ Friend Class FillVerbTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.VerbType.Fill,
+            NameOf(FillVerbTypeDescriptor),
             Business.VerbCategoryType.Bump,
             "Fill...")
     End Sub
 
-    Public Overrides Function Perform(character As ICharacter) As IDialog
+    Friend Overrides Function Perform(character As ICharacter) As IDialog
         Dim item = character.Items.First(AddressOf GetFillableItem)
         item.SetStatistic(StatisticType.Water, item.GetStatisticMaximum(StatisticType.Water))
         item.SetTag(TagType.Safe, False)
@@ -20,7 +20,7 @@ Friend Class FillVerbTypeDescriptor
             CharacterActionsDialog.LaunchMenu(character))
     End Function
 
-    Public Overrides Function CanPerform(character As ICharacter) As Boolean
+    Friend Overrides Function CanPerform(character As ICharacter) As Boolean
         Dim bumpLocation = character.GetBumpLocation()
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso

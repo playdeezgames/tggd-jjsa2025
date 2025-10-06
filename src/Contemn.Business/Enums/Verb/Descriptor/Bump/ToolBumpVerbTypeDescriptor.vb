@@ -27,7 +27,7 @@ Friend MustInherit Class ToolBumpVerbTypeDescriptor
         Me.failMessage = failMessage
     End Sub
 
-    Public Overrides Function Perform(character As ICharacter) As IDialog
+    Friend Overrides Function Perform(character As ICharacter) As IDialog
         Dim bumpLocation = character.GetBumpLocation()
         Dim success = RNG.GenerateBoolean(bumpLocation.GetStatistic(StatisticType.Depletion), bumpLocation.GetStatistic(StatisticType.Resource))
         If success Then
@@ -65,7 +65,7 @@ Friend MustInherit Class ToolBumpVerbTypeDescriptor
                     Function() Nothing)
     End Function
 
-    Public Overrides Function CanPerform(character As ICharacter) As Boolean
+    Friend Overrides Function CanPerform(character As ICharacter) As Boolean
         Dim bumpLocation = character.GetBumpLocation()
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso

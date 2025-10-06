@@ -2,7 +2,7 @@
     Inherits ToolBumpVerbTypeDescriptor
     Public Sub New()
         MyBase.New(
-            Business.VerbType.Fish,
+            NameOf(FishVerbTypeDescriptor),
             "Fish",
             NameOf(FishItemTypeDescriptor),
             TagType.CanFish,

@@ -5,12 +5,12 @@ Friend Class DismantleVerbTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.VerbType.Dismantle,
+            NameOf(DismantleVerbTypeDescriptor),
             Business.VerbCategoryType.Bump,
             "Dismantle")
     End Sub
 
-    Public Overrides Function Perform(character As ICharacter) As IDialog
+    Friend Overrides Function Perform(character As ICharacter) As IDialog
         Return New ConfirmDialog(
             "Confirm Dismantle?",
             {
@@ -44,7 +44,7 @@ Friend Class DismantleVerbTypeDescriptor
         Return result
     End Function
 
-    Public Overrides Function CanPerform(character As ICharacter) As Boolean
+    Friend Overrides Function CanPerform(character As ICharacter) As Boolean
         Dim bumpLocation = character.GetBumpLocation()
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso

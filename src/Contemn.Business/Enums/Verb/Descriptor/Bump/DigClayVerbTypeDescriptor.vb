@@ -4,7 +4,7 @@ Friend Class DigClayVerbTypeDescriptor
     Inherits ToolBumpVerbTypeDescriptor
     Public Sub New()
         MyBase.New(
-            Business.VerbType.DigClay,
+            NameOf(DigClayVerbTypeDescriptor),
             "Dig Clay",
             NameOf(ClayItemTypeDescriptor),
             TagType.CanDig,

@@ -7,10 +7,10 @@ Friend Class ForageVerbTypeDescriptor
     Friend Shared ReadOnly FindNothingLines As IDialogLine() = {New DialogLine(MoodType.Info, "You find nothing.")}
 
     Public Sub New()
-        MyBase.New(Business.VerbType.Forage, Business.VerbCategoryType.Action, "Forage...")
+        MyBase.New(NameOf(ForageVerbTypeDescriptor), Business.VerbCategoryType.Action, "Forage...")
     End Sub
 
-    Public Overrides Function Perform(character As ICharacter) As IDialog
+    Friend Overrides Function Perform(character As ICharacter) As IDialog
         Dim generator = character.Location.GetForageGenerator()
         Dim item = generator.GenerateItem(character)
         Dim lines = character.World.ProcessTurn()
@@ -61,7 +61,7 @@ Friend Class ForageVerbTypeDescriptor
             CharacterActionsDialog.LaunchMenu(character))
     End Function
 
-    Public Overrides Function CanPerform(character As ICharacter) As Boolean
+    Friend Overrides Function CanPerform(character As ICharacter) As Boolean
         Return MyBase.CanPerform(character) AndAlso character.Location.HasMetadata(MetadataType.ForageTable)
     End Function
 End Class

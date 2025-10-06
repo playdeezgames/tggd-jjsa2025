@@ -5,16 +5,16 @@ Friend Class CookVerbTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.VerbType.Cook,
+            NameOf(CookVerbTypeDescriptor),
             Business.VerbCategoryType.Bump,
             "Cook...")
     End Sub
 
-    Public Overrides Function Perform(character As ICharacter) As IDialog
+    Friend Overrides Function Perform(character As ICharacter) As IDialog
         Return CookItemDialog.LaunchMenu(character).Invoke()
     End Function
 
-    Public Overrides Function CanPerform(character As ICharacter) As Boolean
+    Friend Overrides Function CanPerform(character As ICharacter) As Boolean
         Dim bumpLocation = character.GetBumpLocation()
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso

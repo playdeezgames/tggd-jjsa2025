@@ -5,12 +5,12 @@ Friend Class BoilVerbTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            Business.VerbType.Boil,
+            NameOf(BoilVerbTypeDescriptor),
             Business.VerbCategoryType.Bump,
             "Boil Water")
     End Sub
 
-    Public Overrides Function Perform(character As ICharacter) As IDialog
+    Friend Overrides Function Perform(character As ICharacter) As IDialog
         Dim messageLines = character.World.ProcessTurn()
         Dim item = character.Items.First(AddressOf IsBoilableItem)
         item.SetTag(TagType.Safe, True)
@@ -19,7 +19,7 @@ Friend Class BoilVerbTypeDescriptor
             Function() New BumpDialog(character))
     End Function
 
-    Public Overrides Function CanPerform(character As ICharacter) As Boolean
+    Friend Overrides Function CanPerform(character As ICharacter) As Boolean
         Dim bumpLocation = character.GetBumpLocation()
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso

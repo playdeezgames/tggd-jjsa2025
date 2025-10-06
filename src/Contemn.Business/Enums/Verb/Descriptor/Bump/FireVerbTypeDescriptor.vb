@@ -10,7 +10,7 @@ Friend Class FireVerbTypeDescriptor
             "Fire Pot...")
     End Sub
 
-    Public Overrides Function Perform(character As ICharacter) As IDialog
+    Friend Overrides Function Perform(character As ICharacter) As IDialog
         Dim bumpLocation = character.GetBumpLocation()
         Dim unfiredItem = character.Items.First(Function(x) x.GetTag(TagType.CanKiln))
         Dim unfiredItemType = unfiredItem.ItemType
@@ -23,7 +23,7 @@ Friend Class FireVerbTypeDescriptor
             CharacterActionsDialog.LaunchMenu(character))
     End Function
 
-    Public Overrides Function CanPerform(character As ICharacter) As Boolean
+    Friend Overrides Function CanPerform(character As ICharacter) As Boolean
         Dim bumpLocation = character.GetBumpLocation()
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso

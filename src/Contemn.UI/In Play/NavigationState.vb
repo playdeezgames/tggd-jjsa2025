@@ -87,13 +87,13 @@ Friend Class NavigationState
             Case UI.Command.Red
                 Return New GameMenuState(Buffer, World, PlaySfx)
             Case UI.Command.Up
-                Return HandleMove(VerbType.MoveNorth)
+                Return HandleMove(NameOf(MoveNorthVerbTypeDescriptor))
             Case UI.Command.Down
-                Return HandleMove(VerbType.MoveSouth)
+                Return HandleMove(NameOf(MoveSouthVerbTypeDescriptor))
             Case UI.Command.Left
-                Return HandleMove(VerbType.MoveWest)
+                Return HandleMove(NameOf(MoveWestVerbTypeDescriptor))
             Case UI.Command.Right
-                Return HandleMove(VerbType.MoveEast)
+                Return HandleMove(NameOf(MoveEastVerbTypeDescriptor))
             Case UI.Command.Green
                 Return New DialogState(Buffer, World, PlaySfx, CharacterActionsDialog.LaunchMenu(World.Avatar).Invoke())
             Case Else
