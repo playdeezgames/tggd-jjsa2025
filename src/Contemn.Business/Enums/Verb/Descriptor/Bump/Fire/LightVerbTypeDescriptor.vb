@@ -4,12 +4,22 @@ Friend Class LightVerbTypeDescriptor
     Inherits VerbTypeDescriptor
 
     Public Sub New()
-        MyBase.New(NameOf(LightVerbTypeDescriptor), Business.VerbCategoryType.Bump, "Light")
+        MyBase.New(
+            NameOf(LightVerbTypeDescriptor),
+            Business.VerbCategoryType.Bump,
+            "Light")
     End Sub
 
     Friend Overrides Function Perform(character As ICharacter) As IDialog
-        character.GetBumpLocation.SetTag(TagType.IsLit, True)
-        Return BumpDialog.LaunchMenu(character).Invoke
+        Dim bumpLocation = character.GetBumpLocation
+        Dim item = character.Items.First(Function(x) x.GetTag(TagType.CanLight))
+        Dim messageLines = character.World.ProcessTurn().
+            Concat(item.Deplete(character)).
+            Append(New DialogLine(MoodType.Info, $"You light the {bumpLocation.Name}"))
+        bumpLocation.SetTag(TagType.IsLit, True)
+        Return New OkDialog(
+            messageLines,
+            BumpDialog.LaunchMenu(character))
     End Function
 
     Friend Overrides Function CanPerform(character As ICharacter) As Boolean
