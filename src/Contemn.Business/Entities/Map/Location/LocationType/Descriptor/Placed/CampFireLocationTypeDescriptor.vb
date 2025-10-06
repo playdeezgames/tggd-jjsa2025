@@ -32,6 +32,10 @@ Public Class CampFireLocationTypeDescriptor
         End If
     End Sub
 
+    Friend Overrides Sub CleanUp(location As Location)
+        location.GetDismantleTable().Recycle()
+    End Sub
+
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
         Return New BumpDialog(character)
     End Function
@@ -52,4 +56,5 @@ Public Class CampFireLocationTypeDescriptor
     Friend Overrides Function CanSpawn(location As ILocation, itemType As String) As Boolean
         Return False
     End Function
+
 End Class

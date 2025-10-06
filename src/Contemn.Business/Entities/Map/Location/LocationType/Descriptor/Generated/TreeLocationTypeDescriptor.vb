@@ -44,4 +44,8 @@ Public Class TreeLocationTypeDescriptor
     Friend Overrides Sub OnProcessTurn(location As Location)
         Throw New NotImplementedException()
     End Sub
+
+    Friend Overrides Sub CleanUp(location As Location)
+        location.GetDismantleTable().Recycle()
+    End Sub
 End Class

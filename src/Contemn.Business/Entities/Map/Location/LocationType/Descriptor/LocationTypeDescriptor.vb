@@ -22,4 +22,6 @@ Public MustInherit Class LocationTypeDescriptor
     Friend Overridable Function GenerateBumpLines(location As Location, character As ICharacter) As IEnumerable(Of IDialogLine)
         Return Array.Empty(Of IDialogLine)
     End Function
+
+    Friend MustOverride Sub CleanUp(location As Location)
 End Class

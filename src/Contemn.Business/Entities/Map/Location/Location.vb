@@ -23,6 +23,7 @@ Friend Class Location
         End Get
         Set(value As String)
             If value <> EntityData.LocationType Then
+                Descriptor.CleanUp(Me)
                 World.DeactivateLocation(Me)
                 EntityData.Statistics.Clear()
                 EntityData.StatisticMinimums.Clear()

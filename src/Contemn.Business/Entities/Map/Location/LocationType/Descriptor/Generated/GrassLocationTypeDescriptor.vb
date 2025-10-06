@@ -33,4 +33,8 @@ Public Class GrassLocationTypeDescriptor
     Friend Overrides Sub OnProcessTurn(location As Location)
         Throw New NotImplementedException()
     End Sub
+
+    Friend Overrides Sub CleanUp(location As Location)
+        location.GetForageGenerator()?.Recycle()
+    End Sub
 End Class
