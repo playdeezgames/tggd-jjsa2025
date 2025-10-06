@@ -4,7 +4,6 @@ Friend Class ItemsOfTypeDialog
     Inherits BaseDialog
 
     Private ReadOnly character As ICharacter
-    Private ReadOnly itemType As String
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
@@ -12,11 +11,12 @@ Friend Class ItemsOfTypeDialog
             GenerateChoices(character, itemType),
             GenerateLines(character, itemType))
         Me.character = character
-        Me.itemType = itemType
     End Sub
 
     Private Shared Function GenerateLines(character As ICharacter, itemType As String) As IEnumerable(Of IDialogLine)
-        Return Array.Empty(Of IDialogLine)
+        Return {
+            New DialogLine(MoodType.Info, $"You have {character.GetCountOfItemType(itemType)}.")
+            }
     End Function
 
     Private Shared Function GenerateChoices(character As ICharacter, itemType As String) As IEnumerable(Of IDialogChoice)
