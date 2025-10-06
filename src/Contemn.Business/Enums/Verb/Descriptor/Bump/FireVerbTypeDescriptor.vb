@@ -28,7 +28,7 @@ Friend Class FireVerbTypeDescriptor
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso
             bumpLocation.GetTag(TagType.IsKiln) AndAlso
-            Not bumpLocation.IsStatisticAtMinimum(StatisticType.Fuel) AndAlso
+            bumpLocation.GetTag(TagType.IsLit) AndAlso
             character.Items.Any(Function(x) x.GetTag(TagType.CanKiln))
     End Function
 End Class

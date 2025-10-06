@@ -24,11 +24,15 @@ Public Class CampFireLocationTypeDescriptor
         location.SetMetadata(MetadataType.DismantledLocationType, NameOf(DirtLocationTypeDescriptor))
         location.SetTag(TagType.CanDismantle, True)
         location.SetDismantleTable(location.World.CreateGenerator(NameOf(DismantleCampFireGeneratorType)))
+        location.SetTag(TagType.IsLightable, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)
-        If Not location.IsStatisticAtMinimum(StatisticType.Fuel) Then
+        If location.GetTag(TagType.IsLit) Then
             location.ChangeStatistic(StatisticType.Fuel, -1)
+            If location.IsStatisticAtMinimum(StatisticType.Fuel) Then
+                location.SetTag(TagType.IsLit, False)
+            End If
         End If
     End Sub
 
@@ -42,7 +46,7 @@ Public Class CampFireLocationTypeDescriptor
     Friend Overrides Function GenerateBumpLines(location As Location, character As ICharacter) As IEnumerable(Of IDialogLine)
         Return {
             New DialogLine(MoodType.Info, location.FormatStatistic(StatisticType.Fuel))
-            }
+            }.AppendIf(location.GetTag(TagType.IsLit), New DialogLine(MoodType.Info, "Is burning."))
     End Function
 
     Friend Overrides Function OnEnter(location As ILocation, character As ICharacter) As IDialog

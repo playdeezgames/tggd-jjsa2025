@@ -24,7 +24,7 @@ Friend Class BoilVerbTypeDescriptor
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso
             bumpLocation.GetTag(TagType.CanBoil) AndAlso
-            Not bumpLocation.IsStatisticAtMinimum(StatisticType.Fuel) AndAlso
+            bumpLocation.GetTag(TagType.IsLit) AndAlso
             character.Items.Any(AddressOf IsBoilableItem)
     End Function
 

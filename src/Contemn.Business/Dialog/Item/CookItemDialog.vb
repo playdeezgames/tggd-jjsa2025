@@ -67,7 +67,8 @@ Public Class CookItemDialog
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
         Dim bumpLocation = character.GetBumpLocation
         Return Function() If(
-            character.Items.Any(Function(x) x.GetTag(TagType.IsCookable)) AndAlso Not bumpLocation.IsStatisticAtMinimum(StatisticType.Fuel),
+            character.Items.Any(Function(x) x.GetTag(TagType.IsCookable)) AndAlso
+                bumpLocation.GetTag(TagType.IsLit),
             CType(New CookItemDialog(character), IDialog),
             CType(New BumpDialog(character), IDialog))
     End Function

@@ -49,6 +49,7 @@ Friend Class DismantleVerbTypeDescriptor
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso
             bumpLocation.GetTag(TagType.CanDismantle) AndAlso
-            bumpLocation.IsStatisticAtMinimum(StatisticType.Fuel)
+            bumpLocation.IsStatisticAtMinimum(StatisticType.Fuel) AndAlso
+            Not bumpLocation.GetTag(TagType.IsLit)
     End Function
 End Class

@@ -20,6 +20,8 @@
     Friend ReadOnly IsFillable As String = NameOf(IsFillable)
     Friend ReadOnly IsFishable As String = NameOf(IsFishable)
     Friend ReadOnly IsKiln As String = NameOf(IsKiln)
+    Friend ReadOnly IsLightable As String = NameOf(IsLightable)
+    Public ReadOnly IsLit As String = NameOf(IsLit)
     Friend ReadOnly IsPlaceable As String = NameOf(IsPlaceable)
     Friend ReadOnly IsRefuelable As String = NameOf(IsRefuelable)
     Friend ReadOnly Safe As String = NameOf(Safe)

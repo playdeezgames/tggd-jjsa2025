@@ -19,7 +19,7 @@ Friend Class CookVerbTypeDescriptor
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso
             bumpLocation.GetTag(TagType.CanCook) AndAlso
-            Not bumpLocation.IsStatisticAtMinimum(StatisticType.Fuel) AndAlso
+            bumpLocation.GetTag(TagType.IsLit) AndAlso
             character.Items.Any(Function(x) x.GetTag(TagType.IsCookable))
     End Function
 End Class
