@@ -60,6 +60,12 @@ Friend Class Character
         End Get
     End Property
 
+    Public ReadOnly Property HasAvailableRecipes As Boolean Implements ICharacter.HasAvailableRecipes
+        Get
+            Return RecipeTypes.Descriptors.Any(Function(x) x.Value.CanCraft(Me))
+        End Get
+    End Property
+
     Private Function CanPerform(verbType As String) As Boolean
         Return verbType.ToVerbTypeDescriptor.CanChoose(Me)
     End Function

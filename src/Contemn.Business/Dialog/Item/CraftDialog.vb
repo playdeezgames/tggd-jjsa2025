@@ -29,13 +29,15 @@ Friend Class CraftDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return character.CraftRecipe(choice, LaunchMenu(character))
+                Return character.CraftRecipe(
+                    choice,
+                    LaunchMenu(character))
         End Select
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
         Return Function() If(
-            RecipeTypes.Descriptors.Values.Any(Function(x) x.CanCraft(character)),
+            character.HasAvailableRecipes,
             New CraftDialog(character),
             CharacterActionsDialog.LaunchMenu(character).Invoke)
     End Function

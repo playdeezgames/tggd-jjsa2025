@@ -6,10 +6,10 @@
     End Sub
 
     Friend Overrides Function Perform(character As ICharacter) As TGGD.Business.IDialog
-        Return New CraftDialog(character)
+        Return CraftDialog.LaunchMenu(character).Invoke
     End Function
 
     Friend Overrides Function CanPerform(character As ICharacter) As Boolean
-        Return MyBase.CanPerform(character) AndAlso RecipeTypes.Descriptors.Any(Function(x) x.Value.CanCraft(character))
+        Return MyBase.CanPerform(character) AndAlso character.HasAvailableRecipes
     End Function
 End Class

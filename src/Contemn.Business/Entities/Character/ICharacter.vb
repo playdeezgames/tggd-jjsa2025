@@ -14,4 +14,5 @@ Public Interface ICharacter
     ReadOnly Property Column As Integer
     ReadOnly Property Row As Integer
     Function ProcessTurn() As IEnumerable(Of IDialogLine)
+    ReadOnly Property HasAvailableRecipes As Boolean
 End Interface
