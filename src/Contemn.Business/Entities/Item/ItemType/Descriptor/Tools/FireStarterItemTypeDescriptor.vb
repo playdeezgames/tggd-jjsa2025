@@ -46,7 +46,8 @@ Friend Class FireStarterItemTypeDescriptor
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
         Return {
             New DialogLine(MoodType.Info, "It's a fire starter."),
-            New DialogLine(MoodType.Info, "For starting fires. Please be responsible."),
+            New DialogLine(MoodType.Info, "For starting fires."),
+            New DialogLine(MoodType.Info, "Please be responsible."),
             New DialogLine(MoodType.Info, item.FormatStatistic(StatisticType.Durability))
         }
     End Function
