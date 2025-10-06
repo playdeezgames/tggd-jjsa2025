@@ -24,7 +24,7 @@ Public Class CampFireLocationTypeDescriptor
         location.SetMetadata(MetadataType.DismantledLocationType, NameOf(DirtLocationTypeDescriptor))
         location.SetTag(TagType.CanDismantle, True)
         location.SetDismantleTable(location.World.CreateGenerator(NameOf(DismantleCampFireGeneratorType)))
-        location.SetTag(TagType.IsLightable, True)
+        location.SetTag(TagType.IsIgnitable, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

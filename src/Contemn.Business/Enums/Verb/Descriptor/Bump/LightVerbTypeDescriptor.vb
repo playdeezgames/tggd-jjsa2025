@@ -16,7 +16,7 @@ Friend Class LightVerbTypeDescriptor
         Dim bumpLocation = character.GetBumpLocation
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso
-            bumpLocation.GetTag(TagType.IsLightable) AndAlso
+            bumpLocation.GetTag(TagType.IsIgnitable) AndAlso
             Not bumpLocation.GetTag(TagType.IsLit) AndAlso
             Not bumpLocation.IsStatisticAtMinimum(StatisticType.Fuel)
     End Function

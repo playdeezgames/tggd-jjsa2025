@@ -21,7 +21,7 @@ Public Class KilnLocationTypeDescriptor
         location.SetMetadata(MetadataType.DismantledLocationType, NameOf(DirtLocationTypeDescriptor))
         location.SetTag(TagType.CanDismantle, True)
         location.SetDismantleTable(location.World.CreateGenerator(NameOf(DismantleKilnGeneratorType)))
-        location.SetTag(TagType.IsLightable, True)
+        location.SetTag(TagType.IsIgnitable, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)

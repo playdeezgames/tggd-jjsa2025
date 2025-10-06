@@ -19,6 +19,7 @@ Friend Class FishingNetItemTypeDescriptor
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
         Return {
             New DialogLine(MoodType.Info, "It's a fishing net."),
+            New DialogLine(MoodType.Info, "For fishing, not wearing."),
             New DialogLine(MoodType.Info, item.FormatStatistic(StatisticType.Durability))
         }
     End Function
