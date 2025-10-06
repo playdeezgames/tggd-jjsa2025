@@ -18,6 +18,7 @@ Friend Class LightVerbTypeDescriptor
             bumpLocation IsNot Nothing AndAlso
             bumpLocation.GetTag(TagType.IsIgnitable) AndAlso
             Not bumpLocation.GetTag(TagType.IsLit) AndAlso
-            Not bumpLocation.IsStatisticAtMinimum(StatisticType.Fuel)
+            Not bumpLocation.IsStatisticAtMinimum(StatisticType.Fuel) AndAlso
+            character.Items.Any(Function(x) x.GetTag(TagType.CanLight))
     End Function
 End Class

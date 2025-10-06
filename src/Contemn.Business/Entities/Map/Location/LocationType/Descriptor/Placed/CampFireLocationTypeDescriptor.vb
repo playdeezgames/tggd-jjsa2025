@@ -46,7 +46,8 @@ Public Class CampFireLocationTypeDescriptor
     Friend Overrides Function GenerateBumpLines(location As Location, character As ICharacter) As IEnumerable(Of IDialogLine)
         Return {
             New DialogLine(MoodType.Info, location.FormatStatistic(StatisticType.Fuel))
-            }.AppendIf(location.GetTag(TagType.IsLit), New DialogLine(MoodType.Info, "Is burning."))
+            }.
+            Append(If(location.GetTag(TagType.IsLit), New DialogLine(MoodType.Info, "Is burning."), New DialogLine(MoodType.Info, "Is not burning.")))
     End Function
 
     Friend Overrides Function OnEnter(location As ILocation, character As ICharacter) As IDialog
