@@ -57,16 +57,23 @@ Public Class World
         MyBase.Clear()
         Data.Maps.Clear()
         Data.RecycledMaps.Clear()
+
         Data.Locations.Clear()
         Data.RecycledLocations.Clear()
+        Data.ActiveLocations.Clear()
+
         Data.Characters.Clear()
         Data.RecycledCharacters.Clear()
+        Data.AvatarCharacterId = Nothing
+        Data.ActiveCharacters.Clear()
+
         Data.Messages.Clear()
+
         Data.Items.Clear()
         Data.RecycledItems.Clear()
+
         Data.Generators.Clear()
-        Data.AvatarCharacterId = Nothing
-        Data.ActiveLocations.Clear()
+        Data.RecycledGenerators.Clear()
     End Sub
     Public Overrides Sub Initialize()
         MyBase.Initialize()
