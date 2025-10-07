@@ -3,6 +3,8 @@
 Friend Class TorchItemTypeDescriptor
     Inherits ItemTypeDescriptor
     Const MAXIMUM_FUEL = 5
+    Shared ReadOnly EXTINGUISH_CHOICE As String = NameOf(EXTINGUISH_CHOICE)
+    Const EXTINGUISH_TEXT = "Extinguish"
     Public Sub New()
         MyBase.New(
             NameOf(TorchItemTypeDescriptor),
@@ -42,11 +44,28 @@ Friend Class TorchItemTypeDescriptor
     End Function
 
     Friend Overrides Function Choose(item As IItem, character As ICharacter, choice As String) As IDialog
-        Throw New NotImplementedException()
+        Select Case choice
+            Case EXTINGUISH_CHOICE
+                Return Extinguish(item, character)
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+
+    Private Function Extinguish(item As IItem, character As ICharacter) As IDialog
+        item.SetTag(TagType.IsLit, False)
+        Return New OkDialog(
+            {
+                New DialogLine(MoodType.Info, $"You extinguish {item.Name}.")
+            },
+            Function() New ItemOfTypeDialog(character, item))
     End Function
 
     Friend Overrides Function GetAvailableChoices(item As IItem, character As ICharacter) As IEnumerable(Of IDialogChoice)
         Dim result As New List(Of IDialogChoice)
+        If item.GetTag(TagType.IsLit) Then
+            result.Add(New DialogChoice(EXTINGUISH_CHOICE, EXTINGUISH_TEXT))
+        End If
         Return result
     End Function
 
@@ -56,13 +75,15 @@ Friend Class TorchItemTypeDescriptor
             }
     End Function
 
-    Friend Overrides Sub OnProcessTurn(item As Item)
-        MyBase.OnProcessTurn(item)
+    Friend Overrides Function OnProcessTurn(item As IItem) As IEnumerable(Of IDialogLine)
+        Dim result = MyBase.OnProcessTurn(item).ToList
         If item.GetTag(TagType.IsLit) Then
             item.ChangeStatistic(StatisticType.Fuel, -1)
             If item.IsStatisticAtMinimum(StatisticType.Fuel) Then
                 item.SetTag(TagType.IsLit, False)
+                result.Add(New DialogLine(MoodType.Info, $"{item.Name} has gone out."))
             End If
         End If
-    End Sub
+        Return result
+    End Function
 End Class

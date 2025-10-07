@@ -67,7 +67,7 @@ Friend Class Item
         EntityData.ItemType = Nothing
     End Sub
 
-    Public Sub ProcessTurn() Implements IItem.ProcessTurn
-        Descriptor.OnProcessTurn(Me)
-    End Sub
+    Public Function ProcessTurn() As IEnumerable(Of IDialogLine) Implements IItem.ProcessTurn
+        Return Descriptor.OnProcessTurn(Me)
+    End Function
 End Class

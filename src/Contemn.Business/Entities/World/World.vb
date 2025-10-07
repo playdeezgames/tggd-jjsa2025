@@ -232,10 +232,13 @@ Public Class World
         For Each location In ActiveLocations
             location.ProcessTurn()
         Next
-        For Each item In ActiveItems
-            item.ProcessTurn()
-        Next
         Dim result As New List(Of IDialogLine)
+        For Each item In ActiveItems
+            Dim lines = item.ProcessTurn()
+            If Avatar.HasItem(item) Then
+                result.AddRange(lines)
+            End If
+        Next
         For Each character In ActiveCharacters
             Dim lines = character.ProcessTurn()
             If character.IsAvatar Then

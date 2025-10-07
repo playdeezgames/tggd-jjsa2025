@@ -8,4 +8,5 @@
     Function GetItemOfType(itemType As String) As IItem
     Function HasItemsOfType(itemType As String) As Boolean
     Function ItemsOfType(itemType As String) As IEnumerable(Of IItem)
+    Function HasItem(item As IItem) As Boolean
 End Interface
