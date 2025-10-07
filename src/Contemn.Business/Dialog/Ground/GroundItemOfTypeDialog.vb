@@ -1,9 +1,9 @@
 ﻿Imports TGGD.Business
 
-Friend Class ItemOfTypeDialog
+Friend Class GroundItemOfTypeDialog
     Inherits BaseDialog
-    Shared ReadOnly DROP_CHOICE As String = NameOf(DROP_CHOICE)
-    Const DROP_TEXT = "Drop"
+    Shared ReadOnly TAKE_CHOICE As String = NameOf(TAKE_CHOICE)
+    Const TAKE_TEXT = "Take"
 
     Private ReadOnly character As ICharacter
     Private ReadOnly item As IItem
@@ -27,9 +27,8 @@ Friend Class ItemOfTypeDialog
         Dim result As New List(Of IDialogChoice) From
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT),
-                New DialogChoice(DROP_CHOICE, DROP_TEXT)
+                New DialogChoice(TAKE_CHOICE, TAKE_TEXT)
             }
-        result.AddRange(item.GetAvailableChoices(character))
         Return result
     End Function
 
@@ -41,20 +40,20 @@ Friend Class ItemOfTypeDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
-            Case DROP_CHOICE
-                Return Drop()
+            Case TAKE_CHOICE
+                Return Take()
             Case Else
-                Return item.MakeChoice(character, choice)
+                Throw New NotImplementedException
         End Select
     End Function
 
-    Private Function Drop() As IDialog
-        character.RemoveItem(item)
-        character.Location.AddItem(item)
-        Return ItemsOfTypeDialog.LaunchMenu(character, item.ItemType).Invoke()
+    Private Function Take() As IDialog
+        character.Location.RemoveItem(item)
+        character.AddItem(item)
+        Return GroundItemsOfTypeDialog.LaunchMenu(character, item.ItemType).Invoke()
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return ItemsOfTypeDialog.LaunchMenu(Character, Item.ItemType).Invoke()
+        Return GroundItemsOfTypeDialog.LaunchMenu(character, item.ItemType).Invoke()
     End Function
 End Class

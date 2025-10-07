@@ -9,7 +9,11 @@ Friend Module ItemExtensions
 
     <Extension>
     Friend Function ToPixel(item As IItem) As Integer
-        Return itemPixelTable(item.ItemType)(item)
+        Dim pixelFunction As Func(Of IItem, Integer) = Nothing
+        If itemPixelTable.TryGetValue(item.ItemType, pixelFunction) Then
+            Return pixelFunction(item)
+        End If
+        Return UIBufferExtensions.ToPixel(Asc("?"), Hue.DarkGray, Hue.Black)
     End Function
 
 End Module

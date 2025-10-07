@@ -32,8 +32,17 @@ Friend Class NavigationState
         y += 1
         y = RenderIllness(x, y, avatar)
         Buffer.Write(x, y, $"Terrain: {avatar.Location.Name}", Hue.LightGray, Hue.Black)
-
+        y += 1
+        y = RenderGroundItems(x, y, avatar)
     End Sub
+
+    Private Function RenderGroundItems(x As Integer, y As Integer, character As ICharacter) As Integer
+        If character.Location.HasItems Then
+            Buffer.Write(x, y, $"Ground Items", Hue.Black, Hue.Yellow)
+            y += 1
+        End If
+        Return y
+    End Function
 
     Private Function RenderIllness(x As Integer, y As Integer, character As ICharacter) As Integer
         If character.GetStatistic(StatisticType.Illness) > character.GetStatisticMinimum(StatisticType.Illness) Then

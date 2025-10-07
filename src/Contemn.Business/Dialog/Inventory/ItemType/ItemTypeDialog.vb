@@ -7,6 +7,12 @@ Friend Class ItemTypeDialog
     Private ReadOnly itemType As String
     Private Shared ReadOnly CRAFT_CHOICE As String = NameOf(CRAFT_CHOICE)
     Private Const CRAFT_TEXT = "Craft..."
+    Shared ReadOnly DROP_ONE_CHOICE As String = NameOf(DROP_ONE_CHOICE)
+    Const DROP_ONE_TEXT = "Drop One"
+    Shared ReadOnly DROP_HALF_CHOICE As String = NameOf(DROP_HALF_CHOICE)
+    Const DROP_HALF_TEXT = "Drop Half"
+    Shared ReadOnly DROP_ALL_CHOICE As String = NameOf(DROP_ALL_CHOICE)
+    Const DROP_ALL_TEXT = "Drop All"
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
@@ -22,10 +28,18 @@ Friend Class ItemTypeDialog
     End Function
 
     Private Shared Function GenerateChoices(character As ICharacter, itemType As String) As IEnumerable(Of IDialogChoice)
+        Dim itemCount = character.GetCountOfItemType(itemType)
         Dim result As New List(Of IDialogChoice) From
             {
-                New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
+                New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT),
+                New DialogChoice(DROP_ONE_CHOICE, DROP_ONE_TEXT)
             }
+        If itemCount \ 2 > 0 Then
+            result.Add(New DialogChoice(DROP_HALF_CHOICE, $"{DROP_HALF_TEXT}({itemCount \ 2})"))
+        End If
+        If itemCount > 1 Then
+            result.Add(New DialogChoice(DROP_ALL_CHOICE, DROP_ALL_TEXT))
+        End If
         If RecipeTypes.Descriptors.Any(Function(x) x.Value.HasInput(itemType) AndAlso x.Value.CanCraft(character)) Then
             result.Add(New DialogChoice(CRAFT_CHOICE, CRAFT_TEXT))
         End If
@@ -39,9 +53,36 @@ Friend Class ItemTypeDialog
                 Return VerbTypes.Descriptors(NameOf(InventoryVerbTypeDescriptor)).Perform(character)
             Case CRAFT_CHOICE
                 Return New ItemTypeCraftDialog(character, itemType)
+            Case DROP_ONE_CHOICE
+                Return DropOne()
+            Case DROP_HALF_CHOICE
+                Return DropHalf()
+            Case DROP_ALL_CHOICE
+                Return DropAll()
             Case Else
                 Return character.GetItemOfType(itemType).MakeChoice(character, choice)
         End Select
+    End Function
+
+    Private Function DropAll() As IDialog
+        Return Drop(character.GetCountOfItemType(itemType))
+    End Function
+
+    Private Function Drop(itemCount As Integer) As IDialog
+        Dim descriptor = ItemTypes.Descriptors(itemType)
+        For Each item In character.ItemsOfType(itemType).Take(itemCount)
+            character.RemoveItem(item)
+            character.Location.AddItem(item)
+        Next
+        Return New OkDialog({New DialogLine(MoodType.Info, $"You drop {itemCount} {descriptor.ItemTypeName}.")}, ItemTypeDialog.LaunchMenu(character, itemType))
+    End Function
+
+    Private Function DropHalf() As IDialog
+        Return Drop(character.GetCountOfItemType(itemType) \ 2)
+    End Function
+
+    Private Function DropOne() As IDialog
+        Return Drop(1)
     End Function
 
     Public Overrides Function CancelDialog() As IDialog

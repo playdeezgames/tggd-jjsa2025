@@ -34,12 +34,6 @@ public Class N00bCharacterTypeDescriptor
         For Each line In character.World.ProcessTurn()
             character.World.AddMessage(line.Mood, line.Text)
         Next
-        Dim items = location.Items
-        For Each item In items
-            location.RemoveItem(item)
-            character.World.AddMessage(MoodType.Info, $"You pick up {item.Name}.")
-            character.AddItem(item)
-        Next
     End Sub
 
     Friend Overrides Function OnProcessTurn(character As ICharacter) As IEnumerable(Of IDialogLine)

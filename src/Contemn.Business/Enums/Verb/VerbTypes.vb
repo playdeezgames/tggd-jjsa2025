@@ -26,7 +26,8 @@ Friend Module VerbTypes
             New DismantleVerbTypeDescriptor(),
             New LightVerbTypeDescriptor(),
             New ExtinguishVerbTypeDescriptor(),
-            New LightTorchVerbTypeDescriptor()
+            New LightTorchVerbTypeDescriptor(),
+            New GroundVerbTypeDescriptor()
         }
         Return result
     End Function
