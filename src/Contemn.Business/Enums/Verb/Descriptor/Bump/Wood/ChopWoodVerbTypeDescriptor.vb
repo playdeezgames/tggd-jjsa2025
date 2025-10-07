@@ -25,7 +25,7 @@ Friend Class ChopWoodVerbTypeDescriptor
                         Concat(character.Items.First(Function(x) x.GetTag(TagType.CanChop)).Deplete(character)).
                         Concat(TreeLocationTypeDescriptor.DepleteTree(bumpLocation)),
                     {
-                        (OK_CHOICE, OK_TEXT, Function() New BumpDialog(character), True),
+                        (OK_CHOICE, OK_TEXT, BumpDialog.LaunchMenu(character), True),
                         (TRY_AGAIN_CHOICE, CHOP_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
                     },
                     Function() Nothing)

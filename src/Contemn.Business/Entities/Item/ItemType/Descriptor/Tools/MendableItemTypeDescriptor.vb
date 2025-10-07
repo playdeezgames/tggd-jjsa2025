@@ -71,9 +71,8 @@ Friend MustInherit Class MendableItemTypeDescriptor
     End Function
 
     Private Function Mend(item As IItem, character As ICharacter) As IDialog
-        Return New MessageDialog(
+        Return New OkDialog(
             GenerateMendLines(item, character),
-            {(OK_CHOICE, OK_TEXT, Function() New ItemOfTypeDialog(character, item), True)},
             Function() New ItemOfTypeDialog(character, item))
     End Function
 
