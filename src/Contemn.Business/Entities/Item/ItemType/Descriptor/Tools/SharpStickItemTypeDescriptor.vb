@@ -26,6 +26,8 @@ Friend Class SharpStickItemTypeDescriptor
             0,
             maximumDurability)
         item.SetTag(TagType.CanDig, True)
+        item.SetStatistic(StatisticType.Fuel, 1)
+        item.SetTag(TagType.CanRefuel, True)
     End Sub
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)

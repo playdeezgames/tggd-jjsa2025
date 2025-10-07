@@ -2,7 +2,7 @@
 
 Friend Class TorchItemTypeDescriptor
     Inherits ItemTypeDescriptor
-    Const MAXIMUM_FUEL = 20
+    Const MAXIMUM_FUEL = 5
     Public Sub New()
         MyBase.New(
             NameOf(TorchItemTypeDescriptor),
@@ -20,6 +20,7 @@ Friend Class TorchItemTypeDescriptor
     Friend Overrides Sub HandleInitialize(item As IItem)
         item.World.ActivateItem(item)
         item.SetTag(TagType.IsIgnitable, True)
+        item.SetTag(TagType.CanRefuel, True)
         item.SetTag(TagType.CanLight, True)
         item.SetStatisticRange(
             StatisticType.Fuel,

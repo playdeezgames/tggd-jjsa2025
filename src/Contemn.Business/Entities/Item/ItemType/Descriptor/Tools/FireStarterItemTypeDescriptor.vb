@@ -21,6 +21,8 @@ Friend Class FireStarterItemTypeDescriptor
     Friend Overrides Sub HandleInitialize(item As IItem)
         item.SetStatisticRange(StatisticType.Durability, MAXIMUM_DURABILITY, 0, MAXIMUM_DURABILITY)
         item.SetTag(TagType.CanLight, True)
+        item.SetStatistic(StatisticType.Fuel, 2)
+        item.SetTag(TagType.CanRefuel, True)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

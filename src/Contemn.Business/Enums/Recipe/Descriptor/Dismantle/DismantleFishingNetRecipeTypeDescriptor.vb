@@ -1,17 +1,16 @@
-﻿Friend Class TorchRecipeTypeDescriptor
+﻿Friend Class DismantleFishingNetRecipeTypeDescriptor
     Inherits RecipeTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            NameOf(TorchRecipeTypeDescriptor),
+            NameOf(DismantleFishingNetRecipeTypeDescriptor),
             New Dictionary(Of String, Integer) From
             {
-                {NameOf(StickItemTypeDescriptor), 1},
-                {NameOf(PlantFiberItemTypeDescriptor), 5}
+                {NameOf(FishingNetItemTypeDescriptor), 1}
             },
             New Dictionary(Of String, Integer) From
             {
-                {NameOf(TorchItemTypeDescriptor), 1}
+                {NameOf(TwineItemTypeDescriptor), 2}
             },
             New Dictionary(Of String, Integer))
     End Sub
