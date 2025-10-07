@@ -66,4 +66,8 @@ Friend Class Item
         MyBase.Clear()
         EntityData.ItemType = Nothing
     End Sub
+
+    Public Sub ProcessTurn() Implements IItem.ProcessTurn
+        Descriptor.OnProcessTurn(Me)
+    End Sub
 End Class

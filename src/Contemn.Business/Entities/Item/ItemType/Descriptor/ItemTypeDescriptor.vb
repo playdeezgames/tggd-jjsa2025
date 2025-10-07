@@ -24,4 +24,7 @@ Public MustInherit Class ItemTypeDescriptor
     Friend MustOverride Sub HandleRemoveItem(item As IItem, character As ICharacter)
     Friend MustOverride Sub HandleInitialize(item As IItem)
     Friend MustOverride Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
+    Friend Overridable Sub OnProcessTurn(item As Item)
+        'nothing by default
+    End Sub
 End Class

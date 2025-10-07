@@ -19,7 +19,7 @@ Friend Class TorchItemTypeDescriptor
 
     Friend Overrides Sub HandleInitialize(item As IItem)
         item.World.ActivateItem(item)
-        item.SetTag(TagType.CanLight, True)
+        item.SetTag(TagType.IsIgnitable, True)
         item.SetStatisticRange(
             StatisticType.Fuel,
             MAXIMUM_FUEL,
@@ -53,4 +53,14 @@ Friend Class TorchItemTypeDescriptor
             New DialogLine(MoodType.Info, "It's a torch.")
             }
     End Function
+
+    Friend Overrides Sub OnProcessTurn(item As Item)
+        MyBase.OnProcessTurn(item)
+        If item.GetTag(TagType.IsLit) Then
+            item.ChangeStatistic(StatisticType.Fuel, -1)
+            If item.IsStatisticAtMinimum(StatisticType.Fuel) Then
+                item.SetTag(TagType.IsLit, False)
+            End If
+        End If
+    End Sub
 End Class

@@ -232,6 +232,9 @@ Public Class World
         For Each location In ActiveLocations
             location.ProcessTurn()
         Next
+        For Each item In ActiveItems
+            item.ProcessTurn()
+        Next
         Dim result As New List(Of IDialogLine)
         For Each character In ActiveCharacters
             Dim lines = character.ProcessTurn()
@@ -259,10 +262,10 @@ Public Class World
     End Sub
 
     Public Sub ActivateItem(item As IItem) Implements IWorldItems.ActivateItem
-        Throw New NotImplementedException()
+        EntityData.ActiveItems.Add(item.ItemId)
     End Sub
 
     Public Sub DeactivateItem(item As IItem) Implements IWorldItems.DeactivateItem
-        Throw New NotImplementedException()
+        EntityData.ActiveItems.Remove(item.ItemId)
     End Sub
 End Class
