@@ -40,8 +40,4 @@ Friend Module VerbTypes
     Friend Function AllOfCategory(verbCategoryType As String) As IEnumerable(Of String)
         Return Descriptors.Values.Where(Function(x) x.VerbCategoryType = verbCategoryType).Select(Function(x) x.VerbType)
     End Function
-    <Extension>
-    Function ToVerbTypeDescriptor(verbType As String) As VerbTypeDescriptor
-        Return Descriptors(verbType)
-    End Function
 End Module

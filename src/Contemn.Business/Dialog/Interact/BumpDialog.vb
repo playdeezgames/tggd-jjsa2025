@@ -24,7 +24,7 @@ Friend Class BumpDialog
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         For Each verbType In VerbTypes.AllOfCategory(VerbCategoryType.Bump)
-            Dim descriptor = verbType.ToVerbTypeDescriptor
+            Dim descriptor = VerbTypes.Descriptors(verbType)
             If descriptor.CanPerform(character) Then
                 result.Add(New DialogChoice(verbType, descriptor.VerbTypeName))
             End If
@@ -37,7 +37,7 @@ Friend Class BumpDialog
             Case NEVER_MIND_CHOICE
                 Return Nothing
             Case Else
-                Return choice.ToVerbTypeDescriptor.Perform(character)
+                Return VerbTypes.Descriptors(choice).Perform(character)
         End Select
     End Function
 

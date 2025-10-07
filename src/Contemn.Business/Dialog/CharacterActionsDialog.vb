@@ -21,7 +21,7 @@ Public Class CharacterActionsDialog
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         For Each verbType In character.AvailableVerbsOfCategory(verbCategoryType)
-            Dim descriptor = verbType.ToVerbTypeDescriptor
+            Dim descriptor = VerbTypes.Descriptors(verbType)
             result.Add(New DialogChoice(verbType, descriptor.VerbTypeName))
         Next
         Return result
@@ -31,7 +31,7 @@ Public Class CharacterActionsDialog
             Case NEVER_MIND_CHOICE
                 Return Nothing
             Case Else
-                Return choice.ToVerbTypeDescriptor.Perform(character)
+                Return VerbTypes.Descriptors(choice).Perform(character)
         End Select
     End Function
 

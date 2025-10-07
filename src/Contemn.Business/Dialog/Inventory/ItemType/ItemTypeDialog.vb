@@ -36,7 +36,7 @@ Friend Class ItemTypeDialog
     Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
-                Return NameOf(InventoryVerbTypeDescriptor).ToVerbTypeDescriptor.Perform(character)
+                Return VerbTypes.Descriptors(NameOf(InventoryVerbTypeDescriptor)).Perform(character)
             Case CRAFT_CHOICE
                 Return New ItemTypeCraftDialog(character, itemType)
             Case Else
@@ -45,7 +45,7 @@ Friend Class ItemTypeDialog
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return NameOf(InventoryVerbTypeDescriptor).ToVerbTypeDescriptor.Perform(character)
+        Return VerbTypes.Descriptors(NameOf(InventoryVerbTypeDescriptor)).Perform(character)
     End Function
 
 
