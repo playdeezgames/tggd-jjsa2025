@@ -17,7 +17,8 @@ Friend Module RecipeTypes
             New CampFireRecipeTypeDescriptor(),
             New KilnRecipeTypeDescriptor(),
             New FireStarterRecipeTypeDescriptor(),
-            New TorchRecipeTypeDescriptor()
+            New TorchRecipeTypeDescriptor(),
+            New DismantleFireStarterRecipeTypeDescriptor()
         }.ToDictionary(
             Function(x) x.RecipeType,
             Function(x) x)

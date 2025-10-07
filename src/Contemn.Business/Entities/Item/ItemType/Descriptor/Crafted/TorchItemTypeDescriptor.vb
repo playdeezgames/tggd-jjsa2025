@@ -20,6 +20,7 @@ Friend Class TorchItemTypeDescriptor
     Friend Overrides Sub HandleInitialize(item As IItem)
         item.World.ActivateItem(item)
         item.SetTag(TagType.IsIgnitable, True)
+        item.SetTag(TagType.CanLight, True)
         item.SetStatisticRange(
             StatisticType.Fuel,
             MAXIMUM_FUEL,

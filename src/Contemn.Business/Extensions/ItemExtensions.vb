@@ -9,6 +9,9 @@ Friend Module ItemExtensions
     <Extension>
     Friend Function Deplete(tool As IItem, character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim lines As New List(Of IDialogLine)
+        If Not tool.HasStatistic(StatisticType.Durability) Then
+            Return lines
+        End If
         tool.ChangeStatistic(StatisticType.Durability, -1)
         Dim netRuined = tool.IsStatisticAtMinimum(StatisticType.Durability)
         If netRuined Then
