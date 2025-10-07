@@ -15,7 +15,6 @@ Public Interface ICharacter
     ReadOnly Property AvailableVerbs As IEnumerable(Of String)
     Function AvailableVerbsOfCategory(verbCategoryType As String) As IEnumerable(Of String)
     Function MoveTo(destination As ILocation) As IDialog
-    Function Interact(initiator As ICharacter) As IDialog
     Function ProcessTurn() As IEnumerable(Of IDialogLine)
 
     ReadOnly Property HasAvailableRecipes As Boolean

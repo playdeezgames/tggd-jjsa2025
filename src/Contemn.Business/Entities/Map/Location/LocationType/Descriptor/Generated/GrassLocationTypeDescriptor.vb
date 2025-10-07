@@ -7,7 +7,7 @@ Public Class GrassLocationTypeDescriptor
     End Sub
 
     Friend Overrides Function OnBump(location As ILocation, character As ICharacter) As IDialog
-        Return location.Character.Interact(character)
+        Return Nothing
     End Function
 
     Friend Overrides Sub OnLeave(location As ILocation, character As ICharacter)

@@ -140,10 +140,6 @@ Friend Class Character
         Descriptor.HandleRemoveItem(Me, item)
     End Sub
 
-    Public Function Interact(initiator As ICharacter) As IDialog Implements ICharacter.Interact
-        Return Descriptor.OnInteract(Me, initiator)
-    End Function
-
     Public Function AvailableVerbsOfCategory(verbCategoryType As String) As IEnumerable(Of String) Implements ICharacter.AvailableVerbsOfCategory
         Return VerbTypes.AllOfCategory(verbCategoryType).Where(Function(x) CanPerform(x))
     End Function
