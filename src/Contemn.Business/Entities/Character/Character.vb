@@ -5,8 +5,13 @@ Friend Class Character
     Inherits InventoryEntity(Of CharacterData, CharacterTypeDescriptor)
     Implements ICharacter
 
-    Public Sub New(data As WorldData, characterId As Integer, playSfx As Action(Of String))
-        MyBase.New(data, playSfx)
+    Public Sub New(
+                  data As WorldData,
+                  characterId As Integer,
+                  playSfx As Action(Of String))
+        MyBase.New(
+            data,
+            playSfx)
         Me.CharacterId = characterId
     End Sub
 
@@ -66,8 +71,15 @@ Friend Class Character
         End Get
     End Property
 
+    Public ReadOnly Property IsAvatar As Boolean Implements ICharacter.IsAvatar
+        Get
+            Return Data.AvatarCharacterId.HasValue AndAlso
+                Data.AvatarCharacterId.Value = CharacterId
+        End Get
+    End Property
+
     Private Function CanPerform(verbType As String) As Boolean
-        Return verbType.ToVerbTypeDescriptor.CanChoose(Me)
+        Return verbType.ToVerbTypeDescriptor.CanPerform(Me)
     End Function
 
     Public Overrides Sub Initialize()
@@ -115,6 +127,7 @@ Friend Class Character
     End Function
 
     Public Overrides Sub Recycle()
+        World.DeactivateCharacter(Me)
         Clear()
         Data.RecycledCharacters.Add(CharacterId)
     End Sub

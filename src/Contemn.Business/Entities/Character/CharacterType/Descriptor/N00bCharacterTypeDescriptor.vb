@@ -16,6 +16,7 @@ public Class N00bCharacterTypeDescriptor
 
     Friend Overrides Sub OnInitialize(character As ICharacter)
         character.World.Avatar = character
+        character.World.ActivateCharacter(character)
 
         character.SetStatisticRange(StatisticType.Health, MAXIMUM_HEALTH, 0, MAXIMUM_HEALTH)
         character.SetStatisticRange(StatisticType.Satiety, MAXIMUM_SATIETY, 0, MAXIMUM_SATIETY)

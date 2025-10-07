@@ -13,7 +13,4 @@ Public MustInherit Class VerbTypeDescriptor
     Friend Overridable Function CanPerform(character As ICharacter) As Boolean
         Return Not character.IsDead
     End Function
-    Friend Function CanChoose(character As ICharacter) As Boolean
-        Return Not String.IsNullOrEmpty(VerbTypeName) AndAlso CanPerform(character)
-    End Function
 End Class

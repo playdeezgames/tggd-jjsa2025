@@ -47,6 +47,12 @@ Public Class World
         End Get
     End Property
 
+    Public ReadOnly Property ActiveCharacters As IEnumerable(Of ICharacter) Implements IWorld.ActiveCharacters
+        Get
+            Throw New NotImplementedException()
+        End Get
+    End Property
+
     Public Overrides Sub Clear()
         MyBase.Clear()
         Data.Maps.Clear()
@@ -214,7 +220,12 @@ Public Class World
             location.ProcessTurn()
         Next
         Dim result As New List(Of IDialogLine)
-        result.AddRange(Avatar.ProcessTurn())
+        For Each character In ActiveCharacters
+            Dim lines = character.ProcessTurn()
+            If character.IsAvatar Then
+                result.AddRange(lines)
+            End If
+        Next
         Return result
     End Function
 
@@ -224,5 +235,13 @@ Public Class World
 
     Public Sub DeactivateLocation(location As ILocation) Implements IWorld.DeactivateLocation
         EntityData.ActiveLocations.Remove(location.LocationId)
+    End Sub
+
+    Public Sub ActivateCharacter(character As ICharacter) Implements IWorld.ActivateCharacter
+        EntityData.ActiveCharacters.Add(character.CharacterId)
+    End Sub
+
+    Public Sub DeactivateCharacter(character As ICharacter) Implements IWorld.DeactivateCharacter
+        EntityData.ActiveCharacters.Remove(character.CharacterId)
     End Sub
 End Class
