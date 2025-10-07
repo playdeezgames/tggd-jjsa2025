@@ -43,13 +43,19 @@ Public Class World
 
     Public ReadOnly Property ActiveLocations As IEnumerable(Of ILocation) Implements IWorld.ActiveLocations
         Get
-            Return EntityData.ActiveLocations.Select(Function(x) New Location(Data, x, AddressOf PlaySfx))
+            Return EntityData.ActiveLocations.Select(AddressOf GetLocation)
         End Get
     End Property
 
     Public ReadOnly Property ActiveCharacters As IEnumerable(Of ICharacter) Implements IWorld.ActiveCharacters
         Get
-            Throw New NotImplementedException()
+            Return EntityData.ActiveCharacters.Select(AddressOf GetCharacter)
+        End Get
+    End Property
+
+    Public ReadOnly Property ActiveItems As IEnumerable(Of IItem) Implements IWorldItems.ActiveItems
+        Get
+            Return EntityData.ActiveItems.Select(AddressOf GetItem)
         End Get
     End Property
 
@@ -250,5 +256,13 @@ Public Class World
 
     Public Sub DeactivateCharacter(character As ICharacter) Implements IWorld.DeactivateCharacter
         EntityData.ActiveCharacters.Remove(character.CharacterId)
+    End Sub
+
+    Public Sub ActivateItem(item As IItem) Implements IWorldItems.ActivateItem
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Sub DeactivateItem(item As IItem) Implements IWorldItems.DeactivateItem
+        Throw New NotImplementedException()
     End Sub
 End Class

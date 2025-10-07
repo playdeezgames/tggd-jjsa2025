@@ -26,6 +26,7 @@ Friend Module ItemTypes
             New CookedFishFiletItemTypeDescriptor(),
             New CharcoalItemTypeDescriptor(),
             New FiredPotItemTypeDescriptor(),
-            New FireStarterItemTypeDescriptor()
+            New FireStarterItemTypeDescriptor(),
+            New TorchItemTypeDescriptor()
         }.ToDictionary(Function(x) x.ItemType, Function(x) x)
 End Module

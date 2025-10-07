@@ -40,6 +40,7 @@ Friend Class Item
     End Property
 
     Public Overrides Sub Recycle()
+        Data.ActiveItems.Remove(ItemId)
         Clear()
         Data.RecycledItems.Add(ItemId)
     End Sub
