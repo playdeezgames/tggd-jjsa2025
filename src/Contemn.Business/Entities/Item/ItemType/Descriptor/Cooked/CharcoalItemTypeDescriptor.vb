@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class CharcoalItemTypeDescriptor
+Public Class CharcoalItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

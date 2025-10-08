@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class TwineItemTypeDescriptor
+Public Class TwineItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

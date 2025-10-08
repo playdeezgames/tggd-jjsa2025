@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class RockItemTypeDescriptor
+Public Class RockItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

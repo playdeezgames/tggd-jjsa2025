@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class CarrotItemTypeDescriptor
+Public Class CarrotItemTypeDescriptor
     Inherits ConsumableItemTypeDescriptor
 
     Public Sub New()

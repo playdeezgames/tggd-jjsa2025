@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class AxeItemTypeDescriptor
+Public Class AxeItemTypeDescriptor
     Inherits MendableItemTypeDescriptor
     Const MAXIMUM_DURABILITY = 20
 

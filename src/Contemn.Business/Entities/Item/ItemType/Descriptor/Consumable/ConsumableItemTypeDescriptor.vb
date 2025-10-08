@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend MustInherit Class ConsumableItemTypeDescriptor
+Public MustInherit Class ConsumableItemTypeDescriptor
     Inherits ItemTypeDescriptor
     Private Shared ReadOnly EAT_ANOTHER_CHOICE As String = NameOf(EAT_ANOTHER_CHOICE)
     Private Const EAT_ANOTHER_TEXT = "Eat Another..."

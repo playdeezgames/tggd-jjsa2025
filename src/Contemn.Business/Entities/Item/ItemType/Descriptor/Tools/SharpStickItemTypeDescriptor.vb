@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class SharpStickItemTypeDescriptor
+Public Class SharpStickItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

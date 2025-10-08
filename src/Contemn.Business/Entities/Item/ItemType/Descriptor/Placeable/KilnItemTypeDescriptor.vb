@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class KilnItemTypeDescriptor
+Public Class KilnItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

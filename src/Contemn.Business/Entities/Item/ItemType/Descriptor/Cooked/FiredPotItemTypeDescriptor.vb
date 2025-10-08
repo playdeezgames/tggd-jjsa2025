@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class FiredPotItemTypeDescriptor
+Public Class FiredPotItemTypeDescriptor
     Inherits ItemTypeDescriptor
     Const MAXIMUM_WATER = 10
     Shared ReadOnly DRINK_CHOICE As String = NameOf(DRINK_CHOICE)

@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class UnfiredPotItemTypeDescriptor
+Public Class UnfiredPotItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

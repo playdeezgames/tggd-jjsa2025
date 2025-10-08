@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class PlantFiberItemTypeDescriptor
+Public Class PlantFiberItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

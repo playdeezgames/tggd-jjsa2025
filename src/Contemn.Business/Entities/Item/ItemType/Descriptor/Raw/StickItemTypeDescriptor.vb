@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class StickItemTypeDescriptor
+Public Class StickItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

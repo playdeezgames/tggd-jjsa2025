@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class CookedFishFiletItemTypeDescriptor
+Public Class CookedFishFiletItemTypeDescriptor
     Inherits ConsumableItemTypeDescriptor
 
     Public Sub New()

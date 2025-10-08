@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class FishingNetItemTypeDescriptor
+Public Class FishingNetItemTypeDescriptor
     Inherits MendableItemTypeDescriptor
     Const MAXIMUM_DURABILITY = 20
 

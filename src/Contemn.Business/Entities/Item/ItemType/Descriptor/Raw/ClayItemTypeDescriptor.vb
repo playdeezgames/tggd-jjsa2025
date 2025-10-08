@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class ClayItemTypeDescriptor
+Public Class ClayItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

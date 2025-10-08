@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class FireStarterItemTypeDescriptor
+Public Class FireStarterItemTypeDescriptor
     Inherits ItemTypeDescriptor
     Const MAXIMUM_DURABILITY = 20
 

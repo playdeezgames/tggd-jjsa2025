@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class HammerItemTypeDescriptor
+Public Class HammerItemTypeDescriptor
     Inherits MendableItemTypeDescriptor
     Const MAXIMUM_DURABILITY = 20
 

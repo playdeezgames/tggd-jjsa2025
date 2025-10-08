@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class CampFireItemTypeDescriptor
+Public Class CampFireItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

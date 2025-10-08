@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class BladeItemTypeDescriptor
+Public Class BladeItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

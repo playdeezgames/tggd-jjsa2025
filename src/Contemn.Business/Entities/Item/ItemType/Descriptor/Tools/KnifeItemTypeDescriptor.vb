@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class KnifeItemTypeDescriptor
+Public Class KnifeItemTypeDescriptor
     Inherits MendableItemTypeDescriptor
     Const MAXIMUM_DURABILITY = 20
 

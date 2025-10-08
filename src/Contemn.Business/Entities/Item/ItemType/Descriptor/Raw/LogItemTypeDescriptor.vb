@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class LogItemTypeDescriptor
+Public Class LogItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

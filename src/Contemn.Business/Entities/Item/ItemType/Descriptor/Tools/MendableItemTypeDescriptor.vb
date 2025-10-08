@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend MustInherit Class MendableItemTypeDescriptor
+Public MustInherit Class MendableItemTypeDescriptor
     Inherits ItemTypeDescriptor
     ReadOnly maximumDurability As Integer
     ReadOnly tags As IEnumerable(Of String)

@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class TorchItemTypeDescriptor
+Public Class TorchItemTypeDescriptor
     Inherits ItemTypeDescriptor
     Const MAXIMUM_FUEL = 5
     Shared ReadOnly EXTINGUISH_CHOICE As String = NameOf(EXTINGUISH_CHOICE)

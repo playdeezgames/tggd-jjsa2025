@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class FishItemTypeDescriptor
+Public Class FishItemTypeDescriptor
     Inherits ConsumableItemTypeDescriptor
 
     Public Sub New()
