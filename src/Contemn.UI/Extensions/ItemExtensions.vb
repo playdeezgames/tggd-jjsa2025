@@ -5,9 +5,9 @@ Friend Module ItemExtensions
     Private ReadOnly itemPixelTable As IReadOnlyDictionary(Of String, Func(Of IItem, Integer)) =
         New Dictionary(Of String, Func(Of IItem, Integer)) From
         {
-            {NameOf(PlantFiberItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(TwineItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(FishingNetItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(PlantFiberItemTypeDescriptor), AddressOf PlantFiberToPixel},
+            {NameOf(TwineItemTypeDescriptor), AddressOf TwineToPixel},
+            {NameOf(FishingNetItemTypeDescriptor), AddressOf FishingNetToPixel},
             {NameOf(FishItemTypeDescriptor), AddressOf FishToPixel},
             {NameOf(RockItemTypeDescriptor), AddressOf EliminateMe},
             {NameOf(SharpRockItemTypeDescriptor), AddressOf EliminateMe},
@@ -30,6 +30,27 @@ Friend Module ItemExtensions
             {NameOf(FireStarterItemTypeDescriptor), AddressOf FireStarterToPixel},
             {NameOf(TorchItemTypeDescriptor), AddressOf TorchToPixel}
         }
+
+    Private Function FishingNetToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("#"),
+            Hue.Green,
+            Hue.Black)
+    End Function
+
+    Private Function TwineToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            &HB3,
+            Hue.Green,
+            Hue.Black)
+    End Function
+
+    Private Function PlantFiberToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("~"),
+            Hue.Green,
+            Hue.Black)
+    End Function
 
     Private Function CookedFishFiletToPixel(item As IItem) As Integer
         Return UIBufferExtensions.ToPixel(
