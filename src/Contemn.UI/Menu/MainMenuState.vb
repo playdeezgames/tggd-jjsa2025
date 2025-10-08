@@ -35,8 +35,7 @@ Friend Class MainMenuState
     End Function
 
     Private Function HandleEmbarkation() As IUIState
-        World.Initialize()
-        Return NeutralState.DetermineState(Buffer, World, PlaySfx)
+        Return New EmbarkationState(Buffer, World, PlaySfx)
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState

@@ -18,4 +18,11 @@
     Function GetTag(tagType As String) As Boolean
     Function FormatStatistic(statisticType As String) As String
     Function ChangeStatistic(statisticType As String, delta As Integer) As Integer
+    Function IsStatisticAtMinimum(statisticType As String) As Boolean
+    Function IsStatisticAtMaximum(statisticType As String) As Boolean
+    Sub SetStatisticRange(
+                        statisticType As String,
+                        statisticValue As Integer,
+                        statisticMinimum As Integer,
+                        statisticMaximum As Integer)
 End Interface

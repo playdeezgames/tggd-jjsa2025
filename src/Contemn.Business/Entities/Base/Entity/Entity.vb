@@ -125,4 +125,18 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     Public Function HasStatistic(statisticType As String) As Boolean Implements IEntity.HasStatistic
         Return EntityData.Statistics.ContainsKey(statisticType)
     End Function
+
+    Public Function IsStatisticAtMinimum(statisticType As String) As Boolean Implements IEntity.IsStatisticAtMinimum
+        Return GetStatistic(statisticType) = GetStatisticMinimum(statisticType)
+    End Function
+
+    Public Function IsStatisticAtMaximum(statisticType As String) As Boolean Implements IEntity.IsStatisticAtMaximum
+        Return GetStatistic(statisticType) = GetStatisticMaximum(statisticType)
+    End Function
+
+    Public Sub SetStatisticRange(statisticType As String, statisticValue As Integer, statisticMinimum As Integer, statisticMaximum As Integer) Implements IEntity.SetStatisticRange
+        SetStatisticMinimum(statisticType, statisticMinimum)
+        SetStatisticMaximum(statisticType, statisticMaximum)
+        SetStatistic(statisticType, statisticValue)
+    End Sub
 End Class
