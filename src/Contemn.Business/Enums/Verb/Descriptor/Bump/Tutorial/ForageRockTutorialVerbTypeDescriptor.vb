@@ -7,6 +7,7 @@
             "Tutorial: Forage for Rock",
             NameOf(RockItemTypeDescriptor),
             TagType.CompletedForageRockTutorial,
+            Function(x) True,
             {
                 New DialogLine(MoodType.Info, "Forage for Rock!"),
                 New DialogLine(MoodType.Info, "1. Move onto Rock"),

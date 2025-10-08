@@ -14,6 +14,7 @@
     Friend ReadOnly CanRecover As String = NameOf(CanRecover)
     Friend ReadOnly CanRefuel As String = NameOf(CanRefuel)
     Friend ReadOnly CanSharpen As String = NameOf(CanSharpen)
+    Friend ReadOnly CompletedForageCarrotTutorial As String = NameOf(CompletedForageCarrotTutorial)
     Friend ReadOnly CompletedForagePlantFiberTutorial As String = NameOf(CompletedForagePlantFiberTutorial)
     Friend ReadOnly CompletedForageRockTutorial As String = NameOf(CompletedForageRockTutorial)
     Friend ReadOnly IsBoilable As String = NameOf(IsBoilable)

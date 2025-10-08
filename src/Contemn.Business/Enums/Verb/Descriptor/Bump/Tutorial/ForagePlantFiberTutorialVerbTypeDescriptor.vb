@@ -9,6 +9,7 @@ Friend Class ForagePlantFiberTutorialVerbTypeDescriptor
             "Tutorial: Forage for Plant Fiber",
             NameOf(PlantFiberItemTypeDescriptor),
             TagType.CompletedForagePlantFiberTutorial,
+            Function(x) True,
             {
                 New DialogLine(MoodType.Info, "Forage for Plant Fiber!"),
                 New DialogLine(MoodType.Info, "1. Move onto Grass"),

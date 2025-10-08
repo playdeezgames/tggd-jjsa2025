@@ -7,12 +7,14 @@ Friend Class ForageTutorialVerbTypeDescriptor
     Private ReadOnly tagType As String
     Private ReadOnly failureLines As IEnumerable(Of IDialogLine)
     Private ReadOnly successLines As IEnumerable(Of IDialogLine)
+    Private ReadOnly checkPrerequisites As Func(Of ICharacter, Boolean)
 
     Public Sub New(
                   verbType As String,
                   verbTypeName As String,
                   itemType As String,
                   tagType As String,
+                  checkPrerequisites As Func(Of ICharacter, Boolean),
                   failureLines As IEnumerable(Of IDialogLine),
                   successLines As IEnumerable(Of IDialogLine))
         MyBase.New(
@@ -23,6 +25,7 @@ Friend Class ForageTutorialVerbTypeDescriptor
         Me.failureLines = failureLines
         Me.successLines = successLines
         Me.tagType = tagType
+        Me.checkPrerequisites = checkPrerequisites
     End Sub
 
     Friend Overrides Function Perform(character As ICharacter) As IDialog
@@ -66,6 +69,7 @@ Friend Class ForageTutorialVerbTypeDescriptor
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso
             bumpLocation.GetTag(Business.TagType.IsTutorialHouse) AndAlso
-            Not character.GetTag(tagType)
+            Not character.GetTag(tagType) AndAlso
+            checkPrerequisites(character)
     End Function
 End Class
