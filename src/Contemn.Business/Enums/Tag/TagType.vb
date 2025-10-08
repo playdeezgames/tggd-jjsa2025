@@ -14,6 +14,7 @@
     Friend ReadOnly CanRecover As String = NameOf(CanRecover)
     Friend ReadOnly CanRefuel As String = NameOf(CanRefuel)
     Friend ReadOnly CanSharpen As String = NameOf(CanSharpen)
+    Friend ReadOnly CompletedForagePlantFiberTutorial As String = NameOf(CompletedForagePlantFiberTutorial)
     Friend ReadOnly IsBoilable As String = NameOf(IsBoilable)
     Friend ReadOnly IsChoppable As String = NameOf(IsChoppable)
     Friend ReadOnly IsCookable As String = NameOf(IsCookable)
@@ -25,5 +26,6 @@
     Public ReadOnly IsLit As String = NameOf(IsLit)
     Friend ReadOnly IsPlaceable As String = NameOf(IsPlaceable)
     Friend ReadOnly IsRefuelable As String = NameOf(IsRefuelable)
+    Friend ReadOnly IsTutorialHouse As String = NameOf(IsTutorialHouse)
     Public ReadOnly Safe As String = NameOf(Safe)
 End Module

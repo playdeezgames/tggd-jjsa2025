@@ -14,6 +14,7 @@ Public Class TutorialHouseLocationTypeDescriptor
     End Sub
 
     Friend Overrides Sub OnInitialize(location As Location)
+        location.SetTag(TagType.IsTutorialHouse, True)
     End Sub
 
     Friend Overrides Sub OnProcessTurn(location As Location)
