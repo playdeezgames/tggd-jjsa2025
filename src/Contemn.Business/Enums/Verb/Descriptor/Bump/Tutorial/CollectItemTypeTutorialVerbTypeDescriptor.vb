@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class ForageTutorialVerbTypeDescriptor
+Friend Class CollectItemTypeTutorialVerbTypeDescriptor
     Inherits VerbTypeDescriptor
 
     Private ReadOnly itemType As String

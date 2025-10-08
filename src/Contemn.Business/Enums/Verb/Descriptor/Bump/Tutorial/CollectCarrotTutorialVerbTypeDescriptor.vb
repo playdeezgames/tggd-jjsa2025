@@ -1,12 +1,12 @@
-﻿Friend Class ForageCarrotTutorialVerbTypeDescriptor
-    Inherits ForageTutorialVerbTypeDescriptor
+﻿Friend Class CollectCarrotTutorialVerbTypeDescriptor
+    Inherits CollectItemTypeTutorialVerbTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            NameOf(ForageCarrotTutorialVerbTypeDescriptor),
+            NameOf(CollectCarrotTutorialVerbTypeDescriptor),
             "Tutorial: Forage for Carrot",
             NameOf(CarrotItemTypeDescriptor),
-            TagType.CompletedForageCarrotTutorial,
+            TagType.CompletedCollectCarrotTutorial,
             Function(x) True,
             {
                 New DialogLine(MoodType.Info, "Forage for Carrot!"),

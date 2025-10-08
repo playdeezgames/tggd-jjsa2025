@@ -1,14 +1,14 @@
 ﻿Imports TGGD.Business
 
-Friend Class ForagePlantFiberTutorialVerbTypeDescriptor
-    Inherits ForageTutorialVerbTypeDescriptor
+Friend Class CollectPlantFiberTutorialVerbTypeDescriptor
+    Inherits CollectItemTypeTutorialVerbTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            NameOf(ForagePlantFiberTutorialVerbTypeDescriptor),
+            NameOf(CollectPlantFiberTutorialVerbTypeDescriptor),
             "Tutorial: Forage for Plant Fiber",
             NameOf(PlantFiberItemTypeDescriptor),
-            TagType.CompletedForagePlantFiberTutorial,
+            TagType.CompletedCollectPlantFiberTutorial,
             Function(x) True,
             {
                 New DialogLine(MoodType.Info, "Forage for Plant Fiber!"),
