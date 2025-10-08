@@ -9,27 +9,118 @@ Friend Module ItemExtensions
             {NameOf(TwineItemTypeDescriptor), AddressOf TwineToPixel},
             {NameOf(FishingNetItemTypeDescriptor), AddressOf FishingNetToPixel},
             {NameOf(FishItemTypeDescriptor), AddressOf FishToPixel},
-            {NameOf(RockItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(SharpRockItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(StickItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(AxeItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(LogItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(BladeItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(KnifeItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(RockItemTypeDescriptor), AddressOf RockToPixel},
+            {NameOf(SharpRockItemTypeDescriptor), AddressOf SharpRockToPixel},
+            {NameOf(StickItemTypeDescriptor), AddressOf StickToPixel},
+            {NameOf(AxeItemTypeDescriptor), AddressOf AxeToPixel},
+            {NameOf(LogItemTypeDescriptor), AddressOf LogToPixel},
+            {NameOf(BladeItemTypeDescriptor), AddressOf BladeToPixel},
+            {NameOf(KnifeItemTypeDescriptor), AddressOf KnifeToPixel},
             {NameOf(RawFishFiletItemTypeDescriptor), AddressOf RawFishFiletToPixel},
-            {NameOf(HammerItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(CarrotItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(SharpStickItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(ClayItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(HammerItemTypeDescriptor), AddressOf HammerToPixel},
+            {NameOf(CarrotItemTypeDescriptor), AddressOf CarrotToPixel},
+            {NameOf(SharpStickItemTypeDescriptor), AddressOf SharpStickToPixel},
+            {NameOf(ClayItemTypeDescriptor), AddressOf ClayToPixel},
             {NameOf(UnfiredPotItemTypeDescriptor), AddressOf UnfiredPotToPixel},
-            {NameOf(CampFireItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(KilnItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(CampFireItemTypeDescriptor), AddressOf CampFireToPixel},
+            {NameOf(KilnItemTypeDescriptor), AddressOf KilnToPixel},
             {NameOf(CookedFishFiletItemTypeDescriptor), AddressOf CookedFishFiletToPixel},
             {NameOf(CharcoalItemTypeDescriptor), AddressOf CharcoalToPixel},
             {NameOf(FiredPotItemTypeDescriptor), AddressOf FiredPotToPixel},
             {NameOf(FireStarterItemTypeDescriptor), AddressOf FireStarterToPixel},
             {NameOf(TorchItemTypeDescriptor), AddressOf TorchToPixel}
         }
+
+    Private Function CampFireToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            15,
+            Hue.Brown,
+            Hue.Black)
+    End Function
+
+    Private Function KilnToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            8,
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
+
+    Private Function ClayToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            &HFE,
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
+
+    Private Function SharpStickToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("l"),
+            Hue.Brown,
+            Hue.Black)
+    End Function
+
+    Private Function CarrotToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("^"),
+            Hue.Brown,
+            Hue.Black)
+    End Function
+
+    Private Function HammerToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("T"),
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
+
+    Private Function KnifeToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("l"),
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
+
+    Private Function BladeToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("`"),
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
+
+    Private Function LogToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            &H7,
+            Hue.Brown,
+            Hue.Black)
+    End Function
+
+    Private Function AxeToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            &HE2,
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
+
+    Private Function StickToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("/"),
+            Hue.Brown,
+            Hue.Black)
+    End Function
+
+    Private Function SharpRockToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("'"),
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
+
+    Private Function RockToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("."),
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
 
     Private Function FishingNetToPixel(item As IItem) As Integer
         Return UIBufferExtensions.ToPixel(
@@ -115,10 +206,6 @@ Friend Module ItemExtensions
                     Hue.DarkGray,
                     Hue.Brown)),
             Hue.Black)
-    End Function
-
-    Private Function EliminateMe(item As IItem) As Integer
-        Return UIBufferExtensions.ToPixel(Asc("?"), Hue.DarkGray, Hue.Black)
     End Function
 
     <Extension>
