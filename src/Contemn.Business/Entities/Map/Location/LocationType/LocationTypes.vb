@@ -1,6 +1,4 @@
-﻿Imports System.Runtime.CompilerServices
-
-Friend Module LocationTypes
+﻿Friend Module LocationTypes
     Friend ReadOnly Descriptors As IReadOnlyDictionary(Of String, LocationTypeDescriptor) =
         New List(Of LocationTypeDescriptor) From
         {
@@ -10,6 +8,7 @@ Friend Module LocationTypes
             New DirtLocationTypeDescriptor(),
             New RockLocationTypeDescriptor(),
             New CampFireLocationTypeDescriptor(),
-            New KilnLocationTypeDescriptor()
+            New KilnLocationTypeDescriptor(),
+            New TutorialHouseLocationTypeDescriptor()
         }.ToDictionary(Function(x) x.LocationType, Function(x) x)
 End Module

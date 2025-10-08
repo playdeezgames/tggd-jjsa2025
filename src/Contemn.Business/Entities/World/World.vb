@@ -90,10 +90,26 @@ Public Class World
         CreateMaps()
         CreateCharacters()
         CreateItems()
+        If GetMetadata(MetadataType.Difficulty) = TUTORIAL_DIFFICULTY Then
+            InitializeTutorial()
+        End If
         AddMessage(MoodType.Info, "Welcome to Grubstaker of SPLORR!!")
         AddMessage(MoodType.Info, "MOVE: Arrows, WASD, ZQSD")
         AddMessage(MoodType.Info, "ACTION MENU: Space")
         AddMessage(MoodType.Info, "GAME MENU: Backspace")
+    End Sub
+
+    Private Sub InitializeTutorial()
+        Dim avatarLocation = Avatar.Location
+        Dim avatarMap = avatarLocation.Map
+        Dim location = RNG.FromEnumerable(DirectionTypes.All.Select(
+            Function(x)
+                Dim descriptor = DirectionTypes.Descriptors(x)
+                Return avatarMap.GetLocation(
+                    descriptor.GetNextColumn(avatarLocation.Column),
+                    descriptor.GetNextRow(avatarLocation.Row))
+            End Function).Where(Function(x) x IsNot Nothing))
+        location.LocationType = NameOf(TutorialHouseLocationTypeDescriptor)
     End Sub
 
     Private Sub CreateItems()

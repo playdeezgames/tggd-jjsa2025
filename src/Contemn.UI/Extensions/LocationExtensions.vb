@@ -11,8 +11,16 @@ Friend Module LocationExtensions
             {NameOf(DirtLocationTypeDescriptor), AddressOf DirtToPixel},
             {NameOf(RockLocationTypeDescriptor), AddressOf RockToPixel},
             {NameOf(CampFireLocationTypeDescriptor), AddressOf CampFireToPixel},
-            {NameOf(KilnLocationTypeDescriptor), AddressOf KilnToPixel}
+            {NameOf(KilnLocationTypeDescriptor), AddressOf KilnToPixel},
+            {NameOf(TutorialHouseLocationTypeDescriptor), AddressOf TutorialHouseToPixel}
         }
+
+    Private Function TutorialHouseToPixel(location As ILocation) As Integer
+        Return UIBufferExtensions.ToPixel(
+            127,
+            Hue.White,
+            Hue.Black)
+    End Function
 
     Private Function KilnToPixel(location As ILocation) As Integer
         Return UIBufferExtensions.ToPixel(
