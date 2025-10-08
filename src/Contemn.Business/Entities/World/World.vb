@@ -83,6 +83,10 @@ Public Class World
     End Sub
     Public Overrides Sub Initialize()
         MyBase.Initialize()
+        DoInitialization()
+    End Sub
+
+    Private Sub DoInitialization()
         CreateMaps()
         CreateCharacters()
         CreateItems()
@@ -270,5 +274,11 @@ Public Class World
 
     Public Sub DeactivateItem(item As IItem) Implements IWorldItems.DeactivateItem
         EntityData.ActiveItems.Remove(item.ItemId)
+    End Sub
+
+    Public Sub PrepareAndInitialize(preparation As Action(Of IWorld)) Implements IWorld.PrepareAndInitialize
+        MyBase.Initialize()
+        preparation(Me)
+        DoInitialization()
     End Sub
 End Class

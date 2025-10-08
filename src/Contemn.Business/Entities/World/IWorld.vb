@@ -10,4 +10,5 @@ Public Interface IWorld
         IWorldMessages,
         IWorldGenerators
     Function ProcessTurn() As IEnumerable(Of IDialogLine)
+    Sub PrepareAndInitialize(preparation As Action(Of IWorld))
 End Interface

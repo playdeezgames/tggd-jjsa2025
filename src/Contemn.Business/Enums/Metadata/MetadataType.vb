@@ -3,4 +3,5 @@
     Public ReadOnly FiredItemType As String = NameOf(FiredItemType)
     Public ReadOnly ForageTable As String = NameOf(ForageTable)
     Public ReadOnly PlaceLocationType As String = NameOf(PlaceLocationType)
+    Public ReadOnly Difficulty As String = NameOf(Difficulty)
 End Module

@@ -49,22 +49,22 @@ Friend Class EmbarkationState
     End Function
 
     Private Function HandleHard() As IUIState
-        World.Initialize()
+        World.PrepareAndInitialize(Sub(x) x.SetMetadata(MetadataType.Difficulty, HARD_DIFFICULTY))
         Return NeutralState.DetermineState(Buffer, World, PlaySfx)
     End Function
 
     Private Function HandleNormal() As IUIState
-        World.Initialize()
+        World.PrepareAndInitialize(Sub(x) x.SetMetadata(MetadataType.Difficulty, NORMAL_DIFFICULTY))
         Return NeutralState.DetermineState(Buffer, World, PlaySfx)
     End Function
 
     Private Function HandleEasy() As IUIState
-        World.Initialize()
+        World.PrepareAndInitialize(Sub(x) x.SetMetadata(MetadataType.Difficulty, EASY_DIFFICULTY))
         Return NeutralState.DetermineState(Buffer, World, PlaySfx)
     End Function
 
     Private Function HandleTutorial() As IUIState
-        World.Initialize()
+        World.PrepareAndInitialize(Sub(x) x.SetMetadata(MetadataType.Difficulty, TUTORIAL_DIFFICULTY))
         Return NeutralState.DetermineState(Buffer, World, PlaySfx)
     End Function
 End Class
