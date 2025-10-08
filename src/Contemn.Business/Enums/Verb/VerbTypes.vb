@@ -28,7 +28,8 @@ Friend Module VerbTypes
             New ExtinguishVerbTypeDescriptor(),
             New LightTorchVerbTypeDescriptor(),
             New GroundVerbTypeDescriptor(),
-            New ForagePlantFiberTutorialVerbTypeDescriptor()
+            New ForagePlantFiberTutorialVerbTypeDescriptor(),
+            New ForageRockTutorialVerbTypeDescriptor()
         }
         Return result
     End Function
