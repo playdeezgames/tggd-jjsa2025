@@ -13,7 +13,7 @@ Public Module EntityExtensions
         entity.SetStatistic(statisticType, statisticValue)
     End Sub
     <Extension>
-    Friend Function IsStatisticAtMinimum(entity As IEntity, statisticType As String) As Boolean
+    Public Function IsStatisticAtMinimum(entity As IEntity, statisticType As String) As Boolean
         Return entity.GetStatistic(statisticType) = entity.GetStatisticMinimum(statisticType)
     End Function
     <Extension>

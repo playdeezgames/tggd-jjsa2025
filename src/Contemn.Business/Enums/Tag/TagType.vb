@@ -25,5 +25,5 @@
     Public ReadOnly IsLit As String = NameOf(IsLit)
     Friend ReadOnly IsPlaceable As String = NameOf(IsPlaceable)
     Friend ReadOnly IsRefuelable As String = NameOf(IsRefuelable)
-    Friend ReadOnly Safe As String = NameOf(Safe)
+    Public ReadOnly Safe As String = NameOf(Safe)
 End Module

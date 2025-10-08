@@ -5,33 +5,77 @@ Friend Module ItemExtensions
     Private ReadOnly itemPixelTable As IReadOnlyDictionary(Of String, Func(Of IItem, Integer)) =
         New Dictionary(Of String, Func(Of IItem, Integer)) From
         {
-            {NameOf(PlantFiberItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(TwineItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(FishingNetItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(FishItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(RockItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(SharpRockItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(StickItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(AxeItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(LogItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(BladeItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(KnifeItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(RawFishFiletItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(HammerItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(CarrotItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(SharpStickItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(ClayItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(UnfiredPotItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(CampFireItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(KilnItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(CookedFishFiletItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(CharcoalItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(FiredPotItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(FireStarterItemTypeDescriptor), AddressOf N00bToPixel},
-            {NameOf(TorchItemTypeDescriptor), AddressOf N00bToPixel}
+            {NameOf(PlantFiberItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(TwineItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(FishingNetItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(FishItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(RockItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(SharpRockItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(StickItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(AxeItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(LogItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(BladeItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(KnifeItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(RawFishFiletItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(HammerItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(CarrotItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(SharpStickItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(ClayItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(UnfiredPotItemTypeDescriptor), AddressOf UnfiredPotToPixel},
+            {NameOf(CampFireItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(KilnItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(CookedFishFiletItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(CharcoalItemTypeDescriptor), AddressOf CharcoalToPixel},
+            {NameOf(FiredPotItemTypeDescriptor), AddressOf FiredPotToPixel},
+            {NameOf(FireStarterItemTypeDescriptor), AddressOf FireStarterToPixel},
+            {NameOf(TorchItemTypeDescriptor), AddressOf TorchToPixel}
         }
 
-    Private Function N00bToPixel(item As IItem) As Integer
+    Private Function CharcoalToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            &HF9,
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
+
+    Private Function UnfiredPotToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("U"),
+            Hue.DarkGray,
+            Hue.Black)
+    End Function
+
+    Private Function FiredPotToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("U"),
+            If(
+                item.IsStatisticAtMinimum(StatisticType.Water),
+                Hue.LightGray,
+                If(
+                    item.GetTag(TagType.Safe),
+                    Hue.LightBlue,
+                    Hue.Blue)),
+            Hue.Black)
+    End Function
+
+    Private Function FireStarterToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(&HE7, Hue.Brown, Hue.Black)
+    End Function
+
+    Private Function TorchToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            Asc("!"),
+            If(
+                item.GetTag(TagType.IsLit),
+                Hue.Red,
+                If(
+                    item.IsStatisticAtMinimum(StatisticType.Fuel),
+                    Hue.DarkGray,
+                    Hue.Brown)),
+            Hue.Black)
+    End Function
+
+    Private Function EliminateMe(item As IItem) As Integer
         Return UIBufferExtensions.ToPixel(Asc("?"), Hue.DarkGray, Hue.Black)
     End Function
 
