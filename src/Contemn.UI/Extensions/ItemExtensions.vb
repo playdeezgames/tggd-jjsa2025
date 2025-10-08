@@ -8,7 +8,7 @@ Friend Module ItemExtensions
             {NameOf(PlantFiberItemTypeDescriptor), AddressOf EliminateMe},
             {NameOf(TwineItemTypeDescriptor), AddressOf EliminateMe},
             {NameOf(FishingNetItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(FishItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(FishItemTypeDescriptor), AddressOf FishToPixel},
             {NameOf(RockItemTypeDescriptor), AddressOf EliminateMe},
             {NameOf(SharpRockItemTypeDescriptor), AddressOf EliminateMe},
             {NameOf(StickItemTypeDescriptor), AddressOf EliminateMe},
@@ -16,7 +16,7 @@ Friend Module ItemExtensions
             {NameOf(LogItemTypeDescriptor), AddressOf EliminateMe},
             {NameOf(BladeItemTypeDescriptor), AddressOf EliminateMe},
             {NameOf(KnifeItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(RawFishFiletItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(RawFishFiletItemTypeDescriptor), AddressOf RawFishFiletToPixel},
             {NameOf(HammerItemTypeDescriptor), AddressOf EliminateMe},
             {NameOf(CarrotItemTypeDescriptor), AddressOf EliminateMe},
             {NameOf(SharpStickItemTypeDescriptor), AddressOf EliminateMe},
@@ -24,12 +24,33 @@ Friend Module ItemExtensions
             {NameOf(UnfiredPotItemTypeDescriptor), AddressOf UnfiredPotToPixel},
             {NameOf(CampFireItemTypeDescriptor), AddressOf EliminateMe},
             {NameOf(KilnItemTypeDescriptor), AddressOf EliminateMe},
-            {NameOf(CookedFishFiletItemTypeDescriptor), AddressOf EliminateMe},
+            {NameOf(CookedFishFiletItemTypeDescriptor), AddressOf CookedFishFiletToPixel},
             {NameOf(CharcoalItemTypeDescriptor), AddressOf CharcoalToPixel},
             {NameOf(FiredPotItemTypeDescriptor), AddressOf FiredPotToPixel},
             {NameOf(FireStarterItemTypeDescriptor), AddressOf FireStarterToPixel},
             {NameOf(TorchItemTypeDescriptor), AddressOf TorchToPixel}
         }
+
+    Private Function CookedFishFiletToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            &HE0,
+            Hue.Brown,
+            Hue.Black)
+    End Function
+
+    Private Function RawFishFiletToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            &HE0,
+            Hue.LightRed,
+            Hue.Black)
+    End Function
+
+    Private Function FishToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(
+            &HE0,
+            Hue.LightGray,
+            Hue.Black)
+    End Function
 
     Private Function CharcoalToPixel(item As IItem) As Integer
         Return UIBufferExtensions.ToPixel(
