@@ -8,6 +8,7 @@ Friend Module VerbTypes
             New ChopWoodVerbTypeDescriptor(),
             New CollectCarrotTutorialVerbTypeDescriptor(),
             New CollectFishTutorialVerbTypeDescriptor(),
+            New CollectHammerTutorialVerbTypeDescriptor(),
             New CollectNetTutorialVerbTypeDescriptor(),
             New CollectPlantFiberTutorialVerbTypeDescriptor(),
             New CollectRockTutorialVerbTypeDescriptor(),

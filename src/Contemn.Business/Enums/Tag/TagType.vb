@@ -17,6 +17,7 @@
     Friend ReadOnly CompletedCollectTwineTutorial As String = NameOf(CompletedCollectTwineTutorial)
     Friend ReadOnly CompletedCollectCarrotTutorial As String = NameOf(CompletedCollectCarrotTutorial)
     Friend ReadOnly CompletedCollectFishTutorial As String = NameOf(CompletedCollectFishTutorial)
+    Friend ReadOnly CompletedCollectHammerTutorial As String = NameOf(CompletedCollectHammerTutorial)
     Friend ReadOnly CompletedCollectNetTutorial As String = NameOf(CompletedCollectNetTutorial)
     Friend ReadOnly CompletedCollectPlantFiberTutorial As String = NameOf(CompletedCollectPlantFiberTutorial)
     Friend ReadOnly CompletedCollectRockTutorial As String = NameOf(CompletedCollectRockTutorial)
