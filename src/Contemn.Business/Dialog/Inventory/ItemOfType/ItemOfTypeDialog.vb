@@ -14,12 +14,12 @@ Friend Class ItemOfTypeDialog
         MyBase.New(
             GenerateCaption(item),
             GenerateChoices(character, item),
-            GenerateLines(character, item))
+            GenerateLines(item))
         Me.character = character
         Me.item = item
     End Sub
 
-    Private Shared Function GenerateLines(character As ICharacter, item As IItem) As IEnumerable(Of IDialogLine)
+    Private Shared Function GenerateLines(item As IItem) As IEnumerable(Of IDialogLine)
         Return item.Describe()
     End Function
 

@@ -3,19 +3,19 @@
 Public MustInherit Class Entity(Of TEntityData As EntityData)
     Implements IEntity
 
-    Private ReadOnly Property _playSfx As Action(Of String)
+    Private ReadOnly Property doPlaySfx As Action(Of String)
     Protected ReadOnly Data As WorldData
     Protected MustOverride ReadOnly Property EntityData As TEntityData
 
     Public ReadOnly Property World As IWorld Implements IEntity.World
         Get
-            Return New World(Data, _playSfx)
+            Return New World(Data, doPlaySfx)
         End Get
     End Property
 
     Sub New(data As WorldData, playSfx As Action(Of String))
         Me.Data = data
-        Me._playSfx = playSfx
+        Me.doPlaySfx = playSfx
     End Sub
     Public Overridable Sub Clear() Implements IEntity.Clear
         EntityData.Statistics.Clear()
@@ -115,7 +115,7 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     Public MustOverride Sub Recycle() Implements IEntity.Recycle
 
     Public Sub PlaySfx(sfx As String) Implements IEntity.PlaySfx
-        _playSfx.Invoke(sfx)
+        doPlaySfx.Invoke(sfx)
     End Sub
 
     Public Function HasMetadata(metadataType As String) As Boolean Implements IEntity.HasMetadata

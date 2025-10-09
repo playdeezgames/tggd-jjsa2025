@@ -6,17 +6,17 @@ Friend Class HowToCraftListDialog
 
     Public Sub New(character As ICharacter)
         MyBase.New(
-            GenerateCaption(character),
-            GenerateChoices(character),
-            GenerateLines(character))
+            GenerateCaption(),
+            GenerateChoices(),
+            GenerateLines())
         Me.character = character
     End Sub
 
-    Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
+    Private Shared Function GenerateLines() As IEnumerable(Of IDialogLine)
         Return Array.Empty(Of IDialogLine)
     End Function
 
-    Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
+    Private Shared Function GenerateChoices() As IEnumerable(Of IDialogChoice)
         Dim result As New List(Of IDialogChoice) From
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
@@ -26,7 +26,7 @@ Friend Class HowToCraftListDialog
         Return result
     End Function
 
-    Private Shared Function GenerateCaption(character As ICharacter) As String
+    Private Shared Function GenerateCaption() As String
         Return "How to craft...?"
     End Function
 

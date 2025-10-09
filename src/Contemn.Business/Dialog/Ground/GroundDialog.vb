@@ -7,15 +7,11 @@ Public Class GroundDialog
 
     Public Sub New(character As ICharacter)
         MyBase.New(
-            GenerateCaption(character),
+            "Ground",
             GenerateChoices(character),
-            GenerateLines(character))
+            Array.Empty(Of IDialogLine))
         Me.character = character
     End Sub
-
-    Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
-        Return Array.Empty(Of IDialogLine)
-    End Function
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
         Dim result As New List(Of IDialogChoice) From
@@ -26,10 +22,6 @@ Public Class GroundDialog
             result.Add(New DialogChoice(itemStack.Key, $"{itemStack.First.Descriptor.ItemTypeName}({itemStack.Count})"))
         Next
         Return result
-    End Function
-
-    Private Shared Function GenerateCaption(character As ICharacter) As String
-        Return "Ground"
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)

@@ -6,13 +6,13 @@ Public Class PlaceItemDialog
 
     Public Sub New(character As ICharacter)
         MyBase.New(
-            GenerateCaption(character),
+            GenerateCaption(),
             GenerateChoices(character),
-            GenerateLines(character))
+            GenerateLines())
         Me.character = character
     End Sub
 
-    Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
+    Private Shared Function GenerateLines() As IEnumerable(Of IDialogLine)
         Return Array.Empty(Of IDialogLine)
     End Function
 
@@ -27,7 +27,7 @@ Public Class PlaceItemDialog
         Return result
     End Function
 
-    Private Shared Function GenerateCaption(character As ICharacter) As String
+    Private Shared Function GenerateCaption() As String
         Return "Place..."
     End Function
 

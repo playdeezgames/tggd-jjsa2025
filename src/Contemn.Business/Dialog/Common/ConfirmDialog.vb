@@ -4,10 +4,11 @@ Public Class ConfirmDialog
     Inherits BaseDialog
 
     Private Shared ReadOnly NO_CHOICE As String = NameOf(NO_CHOICE)
-    Private Shared ReadOnly YES_CHOICE As String = NameOf(YES_CHOICE)
     Const NO_TEXT = "No"
-    Const YES_TEXT = "Yes"
     Private ReadOnly noDialog As Func(Of IDialog)
+
+    Private Shared ReadOnly YES_CHOICE As String = NameOf(YES_CHOICE)
+    Const YES_TEXT = "Yes"
     Private ReadOnly yesDialog As Func(Of IDialog)
 
     Public Sub New(

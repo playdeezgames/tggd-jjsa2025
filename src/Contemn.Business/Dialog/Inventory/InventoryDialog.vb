@@ -3,14 +3,14 @@
 Friend Class InventoryDialog
     Inherits BaseDialog
 
-    Private character As ICharacter
+    Private ReadOnly character As ICharacter
 
     Public Sub New(character As ICharacter)
-        MyBase.New("Inventory", GenerateChoices(character), GenerateLines(character))
+        MyBase.New("Inventory", GenerateChoices(character), GenerateLines())
         Me.character = character
     End Sub
 
-    Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
+    Private Shared Function GenerateLines() As IEnumerable(Of IDialogLine)
         Return Array.Empty(Of IDialogLine)
     End Function
 

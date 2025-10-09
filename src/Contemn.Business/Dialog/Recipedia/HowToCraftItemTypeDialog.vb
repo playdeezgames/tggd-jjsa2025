@@ -8,21 +8,18 @@ Friend Class HowToCraftItemTypeDialog
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
-            GenerateCaption(character, itemType),
-            GenerateChoices(character, itemType),
-            GenerateLines(character, itemType))
+            GenerateCaption(itemType),
+            GenerateChoices(itemType),
+            GenerateLines())
         Me.character = character
         Me.itemType = itemType
     End Sub
 
-    Private Shared Function GenerateLines(
-                                         character As ICharacter,
-                                         itemType As String) As IEnumerable(Of IDialogLine)
+    Private Shared Function GenerateLines() As IEnumerable(Of IDialogLine)
         Return Array.Empty(Of IDialogLine)
     End Function
 
     Private Shared Function GenerateChoices(
-                                           character As ICharacter,
                                            itemType As String) As IEnumerable(Of IDialogChoice)
         Dim result As New List(Of IDialogChoice) From
             {
@@ -34,7 +31,6 @@ Friend Class HowToCraftItemTypeDialog
     End Function
 
     Private Shared Function GenerateCaption(
-                                           character As ICharacter,
                                            itemType As String) As String
         Return $"How to craft {ItemTypes.Descriptors(itemType).ItemTypeName}?"
     End Function

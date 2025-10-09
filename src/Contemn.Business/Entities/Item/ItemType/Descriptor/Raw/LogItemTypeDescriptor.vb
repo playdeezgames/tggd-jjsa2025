@@ -21,6 +21,7 @@ Public Class LogItemTypeDescriptor
         item.SetStatistic(StatisticType.Fuel, 5)
         item.SetTag(TagType.CanRefuel, True)
         item.SetTag(TagType.IsCookable, True)
+        item.SetMetadata(MetadataType.CookedItemType, NameOf(CharcoalItemTypeDescriptor))
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

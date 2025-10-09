@@ -3,13 +3,6 @@
 Public Class CookItemDialog
     Inherits BaseDialog
 
-    Private Shared cookTable As IReadOnlyDictionary(Of String, String) =
-        New Dictionary(Of String, String) From
-        {
-            {NameOf(RawFishFiletItemTypeDescriptor), NameOf(CookedFishFiletItemTypeDescriptor)},
-            {NameOf(LogItemTypeDescriptor), NameOf(CharcoalItemTypeDescriptor)}
-        }
-
     ReadOnly character As ICharacter
 
     Public Sub New(character As ICharacter)
@@ -50,7 +43,7 @@ Public Class CookItemDialog
 
     Private Function DoCook(item As IItem) As IDialog
         Dim itemType = item.ItemType
-        Dim cookedItemType = cookTable(itemType)
+        Dim cookedItemType = item.GetMetadata(MetadataType.CookedItemType)
         Dim cookedItem = character.World.CreateItem(cookedItemType, character)
         character.RemoveItem(item)
         Dim messageLines = character.World.ProcessTurn().

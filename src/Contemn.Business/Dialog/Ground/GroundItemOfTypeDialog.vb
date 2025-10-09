@@ -13,17 +13,17 @@ Friend Class GroundItemOfTypeDialog
                   item As IItem)
         MyBase.New(
             GenerateCaption(item),
-            GenerateChoices(character, item),
-            GenerateLines(character, item))
+            GenerateChoices(),
+            GenerateLines(item))
         Me.character = character
         Me.item = item
     End Sub
 
-    Private Shared Function GenerateLines(character As ICharacter, item As IItem) As IEnumerable(Of IDialogLine)
+    Private Shared Function GenerateLines(item As IItem) As IEnumerable(Of IDialogLine)
         Return item.Describe()
     End Function
 
-    Private Shared Function GenerateChoices(character As ICharacter, item As IItem) As IEnumerable(Of IDialogChoice)
+    Private Shared Function GenerateChoices() As IEnumerable(Of IDialogChoice)
         Dim result As New List(Of IDialogChoice) From
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT),
