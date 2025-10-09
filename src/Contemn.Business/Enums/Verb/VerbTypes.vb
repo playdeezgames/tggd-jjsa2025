@@ -24,6 +24,7 @@ Friend Module VerbTypes
             New FireVerbTypeDescriptor(),
             New FishVerbTypeDescriptor(),
             New ForageVerbTypeDescriptor(),
+            New GroundVerbTypeDescriptor(),
             New InventoryVerbTypeDescriptor(),
             New LightTorchVerbTypeDescriptor(),
             New LightVerbTypeDescriptor(),
@@ -33,8 +34,7 @@ Friend Module VerbTypes
             New MoveWestVerbTypeDescriptor(),
             New PlaceVerbTypeDescriptor(),
             New RecipediaVerbTypeDescriptor(),
-            New RefuelVerbTypeDescriptor(),
-            New GroundVerbTypeDescriptor(),
+            New RefuelVerbTypeDescriptor()
         }
         Return result
     End Function
