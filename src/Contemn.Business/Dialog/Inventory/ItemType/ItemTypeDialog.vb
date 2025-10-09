@@ -11,8 +11,6 @@ Friend Class ItemTypeDialog
     Const DROP_ONE_TEXT = "Drop One"
     Shared ReadOnly DROP_HALF_CHOICE As String = NameOf(DROP_HALF_CHOICE)
     Const DROP_HALF_TEXT = "Drop Half"
-    Shared ReadOnly DROP_ALL_CHOICE As String = NameOf(DROP_ALL_CHOICE)
-    Const DROP_ALL_TEXT = "Drop All"
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(

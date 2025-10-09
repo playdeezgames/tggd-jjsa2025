@@ -46,6 +46,5 @@ Public Class TreeLocationTypeDescriptor
     End Sub
 
     Friend Overrides Sub CleanUp(location As Location)
-        location.GetDismantleTable().Recycle()
     End Sub
 End Class

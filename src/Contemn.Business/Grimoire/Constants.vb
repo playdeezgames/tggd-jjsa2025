@@ -13,4 +13,6 @@
     Public ReadOnly NORMAL_DIFFICULTY As String = NameOf(NORMAL_DIFFICULTY)
     Public ReadOnly EASY_DIFFICULTY As String = NameOf(EASY_DIFFICULTY)
     Public ReadOnly TUTORIAL_DIFFICULTY As String = NameOf(TUTORIAL_DIFFICULTY)
+    Public ReadOnly DROP_ALL_CHOICE As String = NameOf(DROP_ALL_CHOICE)
+    Public Const DROP_ALL_TEXT = "Drop All"
 End Module
