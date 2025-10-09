@@ -104,4 +104,10 @@ Friend MustInherit Class RecipeTypeDescriptor
         End If
         Return result
     End Function
+
+    Friend ReadOnly Property OutputItemTypes As IEnumerable(Of String)
+        Get
+            Return outputs.Keys
+        End Get
+    End Property
 End Class

@@ -3,14 +3,14 @@
 Friend Class RecipeDetailDialog
     Inherits BaseDialog
 
-    Private ReadOnly character As ICharacter
+    Private ReadOnly nextDialog As Func(Of IDialog)
 
-    Public Sub New(character As ICharacter, descriptor As RecipeTypeDescriptor)
-        MyBase.New(descriptor.Name, {New DialogChoice(OK_CHOICE, OK_TEXT)}, GenerateLines(character, descriptor))
-        Me.character = character
+    Public Sub New(descriptor As RecipeTypeDescriptor, nextDialog As Func(Of IDialog))
+        MyBase.New(descriptor.Name, {New DialogChoice(OK_CHOICE, OK_TEXT)}, GenerateLines(descriptor))
+        Me.nextDialog = nextDialog
     End Sub
 
-    Private Shared Function GenerateLines(character As ICharacter, descriptor As RecipeTypeDescriptor) As IEnumerable(Of IDialogLine)
+    Private Shared Function GenerateLines(descriptor As RecipeTypeDescriptor) As IEnumerable(Of IDialogLine)
         Return descriptor.Describe()
     End Function
 
@@ -19,6 +19,6 @@ Friend Class RecipeDetailDialog
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return New RecipediaDialog(character)
+        Return nextDialog.Invoke
     End Function
 End Class
