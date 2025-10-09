@@ -4,6 +4,7 @@ Friend Class GroundItemsOfTypeDialog
     Inherits BaseDialog
 
     Private ReadOnly character As ICharacter
+    Private ReadOnly itemType As String
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
@@ -11,6 +12,7 @@ Friend Class GroundItemsOfTypeDialog
             GenerateChoices(character, itemType),
             GenerateLines(character, itemType))
         Me.character = character
+        Me.itemType = itemType
     End Sub
 
     Private Shared Function GenerateLines(character As ICharacter, itemType As String) As IEnumerable(Of IDialogLine)
@@ -24,6 +26,9 @@ Friend Class GroundItemsOfTypeDialog
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
+        If character.Location.GetCountOfItemType(itemType) > 1 Then
+            result.Add(New DialogChoice(TAKE_ALL_CHOICE, TAKE_ALL_TEXT))
+        End If
         result.AddRange(character.Location.ItemsOfType(itemType).Select(Function(x) New DialogChoice(x.ItemId.ToString, x.Name)))
         Return result
     End Function
@@ -32,9 +37,19 @@ Friend Class GroundItemsOfTypeDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
+            Case TAKE_ALL_CHOICE
+                Return TakeAll()
             Case Else
                 Return ItemOfType(CInt(choice))
         End Select
+    End Function
+
+    Private Function TakeAll() As IDialog
+        For Each item In character.Location.ItemsOfType(itemType)
+            character.Location.RemoveItem(item)
+            character.AddItem(item)
+        Next
+        Return GroundDialog.LaunchMenu(character).Invoke()
     End Function
 
     Private Function ItemOfType(itemId As Integer) As IDialog

@@ -9,8 +9,6 @@ Friend Class GroundItemTypeDialog
     Const TAKE_ONE_TEXT = "Take One"
     Shared ReadOnly TAKE_HALF_CHOICE As String = NameOf(TAKE_HALF_CHOICE)
     Const TAKE_HALF_TEXT = "Take Half"
-    Shared ReadOnly TAKE_ALL_CHOICE As String = NameOf(TAKE_ALL_CHOICE)
-    Const TAKE_ALL_TEXT = "Take All"
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
