@@ -61,6 +61,7 @@ Public Class FiredPotItemTypeDescriptor
             character.ChangeStatistic(StatisticType.Illness, illness)
         End If
         Return New OkDialog(
+            "You drank it!",
             messageLines.
             Append(New DialogLine(MoodType.Info, $"+{hydrationDelta} {character.FormatStatistic(StatisticType.Hydration)}")).
             Append(New DialogLine(MoodType.Info, $"-1 {item.FormatStatistic(StatisticType.Water)}")).

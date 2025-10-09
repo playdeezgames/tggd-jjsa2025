@@ -15,6 +15,7 @@ Friend Class LightTorchVerbTypeDescriptor
         Dim item = character.Items.First(Function(x) x.GetTag(TagType.IsIgnitable) AndAlso Not x.GetTag(TagType.IsLit))
         item.SetTag(TagType.IsLit, True)
         Return New OkDialog(
+            "You lit it!",
             messageLines.
             Append(New DialogLine(MoodType.Info, $"You light {item.Name}.")),
             BumpDialog.LaunchMenu(character))

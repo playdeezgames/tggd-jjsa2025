@@ -31,6 +31,7 @@ Friend Class ForageVerbTypeDescriptor
             }
         character.PlaySfx(Sfx.Shucks)
         Return New MessageDialog(
+            "Shucks!",
             messageLines,
             messageChoices,
             CharacterActionsDialog.LaunchMenu(character))
@@ -56,6 +57,7 @@ Friend Class ForageVerbTypeDescriptor
             generator.Recycle()
         End If
         Return New MessageDialog(
+            "Woo-hoo!",
             messageLines,
             messageChoices,
             CharacterActionsDialog.LaunchMenu(character))

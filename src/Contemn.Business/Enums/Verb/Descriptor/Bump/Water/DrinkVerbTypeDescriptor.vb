@@ -22,7 +22,7 @@ Friend Class DrinkVerbTypeDescriptor
             messageLines.Add(New DialogLine(MoodType.Info, $"+{illness} illness"))
         End If
         character.ChangeStatistic(StatisticType.Hydration, hydrationDelta)
-        Return New OkDialog(messageLines, Function() Nothing)
+        Return New OkDialog("You drank it!", messageLines, Function() Nothing)
     End Function
 
     Friend Overrides Function CanPerform(character As ICharacter) As Boolean

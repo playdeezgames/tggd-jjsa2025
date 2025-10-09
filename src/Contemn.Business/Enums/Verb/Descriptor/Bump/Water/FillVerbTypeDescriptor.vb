@@ -15,6 +15,7 @@ Friend Class FillVerbTypeDescriptor
         item.SetStatistic(StatisticType.Water, item.GetStatisticMaximum(StatisticType.Water))
         item.SetTag(TagType.Safe, False)
         Return New OkDialog(
+            "You filled it!",
             character.World.ProcessTurn().
             Append(New DialogLine(MoodType.Info, $"Filled {item.Name}")),
             CharacterActionsDialog.LaunchMenu(character))

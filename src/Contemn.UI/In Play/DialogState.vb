@@ -31,7 +31,7 @@ Friend Class DialogState
         Buffer.Fill(0, centerRow, Buffer.Columns, 1, 0, Hue.Black, Hue.LightGray)
         Dim row = centerRow - choiceIndex
         For Each choice In dialog.Choices
-            If row >= topRow AndAlso row < Buffer.Rows - 1 Then
+            If row >= topRow AndAlso row < Buffer.Rows Then
                 If row = centerRow Then
                     Buffer.WriteCentered(row, choice.Text, Hue.Black, Hue.LightGray)
                 Else

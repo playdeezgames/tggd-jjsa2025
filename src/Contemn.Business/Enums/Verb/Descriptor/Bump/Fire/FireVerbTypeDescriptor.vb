@@ -17,6 +17,7 @@ Friend Class FireVerbTypeDescriptor
         Dim firedItem = character.World.CreateItem(unfiredItem.GetMetadata(MetadataType.FiredItemType), character)
         character.RemoveAndRecycleItem(unfiredItem)
         Return New OkDialog(
+            "You fired it!",
             character.World.ProcessTurn().
             Append(New DialogLine(MoodType.Info, $"-1 {ItemTypes.Descriptors(unfiredItemType).ItemTypeName}({character.GetCountOfItemType(unfiredItemType)})")).
             Append(New DialogLine(MoodType.Info, $"+1 {firedItem.Name}({character.GetCountOfItemType(firedItem.ItemType)})")),

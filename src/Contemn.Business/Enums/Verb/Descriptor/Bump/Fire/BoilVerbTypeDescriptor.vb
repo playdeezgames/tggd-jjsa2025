@@ -15,6 +15,7 @@ Friend Class BoilVerbTypeDescriptor
         Dim item = character.Items.First(AddressOf IsBoilableItem)
         item.SetTag(TagType.Safe, True)
         Return New OkDialog(
+            "You boiled it!",
             messageLines.Append(New DialogLine(MoodType.Info, "You boil one pot of water.")),
             Function() New BumpDialog(character))
     End Function

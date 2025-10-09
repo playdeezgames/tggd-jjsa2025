@@ -37,6 +37,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
 
     Private Function Failure(character As ICharacter) As IDialog
         Return New OkDialog(
+            "Fail",
             failureLines,
             BumpDialog.LaunchMenu(character))
     End Function
@@ -45,6 +46,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
         character.SetTag(tagType, True)
 
         Return New OkDialog(
+            "Success",
             successLines.
             Concat(RestoreStats(character)),
             BumpDialog.LaunchMenu(character))

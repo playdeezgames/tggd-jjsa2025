@@ -66,7 +66,7 @@ Friend Class GroundItemTypeDialog
             character.Location.RemoveItem(item)
             character.AddItem(item)
         Next
-        Return New OkDialog({New DialogLine(MoodType.Info, $"You take {itemCount} {descriptor.ItemTypeName}.")}, GroundItemTypeDialog.LaunchMenu(character, itemType))
+        Return New OkDialog("You took em!", {New DialogLine(MoodType.Info, $"You take {itemCount} {descriptor.ItemTypeName}.")}, GroundItemTypeDialog.LaunchMenu(character, itemType))
     End Function
 
     Private Function TakeHalf() As IDialog

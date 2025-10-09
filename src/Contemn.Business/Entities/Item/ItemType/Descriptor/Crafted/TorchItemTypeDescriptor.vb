@@ -55,6 +55,7 @@ Public Class TorchItemTypeDescriptor
     Private Function Extinguish(item As IItem, character As ICharacter) As IDialog
         item.SetTag(TagType.IsLit, False)
         Return New OkDialog(
+            "Sizzle!",
             {
                 New DialogLine(MoodType.Info, $"You extinguish {item.Name}.")
             },

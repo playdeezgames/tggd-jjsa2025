@@ -60,6 +60,7 @@ Friend Module CharacterExtensions
         character.PlaySfx(Sfx.Craft)
         character.ChangeStatistic(StatisticType.Score, 1)
         Return New MessageDialog(
+            "Behold!",
             messageLines,
             {
                 (OK_CHOICE, OK_TEXT, nextDialog, True),

@@ -18,6 +18,7 @@ Friend Class LightVerbTypeDescriptor
             Append(New DialogLine(MoodType.Info, $"You light the {bumpLocation.Name}"))
         bumpLocation.SetTag(TagType.IsLit, True)
         Return New OkDialog(
+            "You lit it!",
             messageLines,
             BumpDialog.LaunchMenu(character))
     End Function

@@ -42,9 +42,11 @@ Public MustInherit Class ConsumableItemTypeDescriptor
         End If
         character.RemoveItem(item)
         lines.Add(New DialogLine(MoodType.Info, $"-1 {item.Name}({character.GetCountOfItemType(ItemType)})"))
+        Dim caption = $"Ate {item.Name}"
         item.Recycle()
         character.PlaySfx(Sfx.Eat)
         Return New MessageDialog(
+            caption,
             lines,
             {
                 (NEVER_MIND_CHOICE, NEVER_MIND_TEXT, ItemTypeDialog.LaunchMenu(character, ItemType), True),

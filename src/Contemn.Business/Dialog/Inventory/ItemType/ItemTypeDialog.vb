@@ -74,7 +74,7 @@ Friend Class ItemTypeDialog
             character.RemoveItem(item)
             character.Location.AddItem(item)
         Next
-        Return New OkDialog({New DialogLine(MoodType.Info, $"You drop {itemCount} {descriptor.ItemTypeName}.")}, ItemTypeDialog.LaunchMenu(character, itemType))
+        Return New OkDialog("You dropped em!", {New DialogLine(MoodType.Info, $"You drop {itemCount} {descriptor.ItemTypeName}.")}, ItemTypeDialog.LaunchMenu(character, itemType))
     End Function
 
     Private Function DropHalf() As IDialog

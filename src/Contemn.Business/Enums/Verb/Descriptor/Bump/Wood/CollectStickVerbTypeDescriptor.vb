@@ -11,6 +11,7 @@ Friend Class CollectStickVerbTypeDescriptor
 
     Friend Overrides Function Perform(character As ICharacter) As IDialog
         Return New MessageDialog(
+            "Take that, stick!",
             character.
                 World.
                 ProcessTurn().

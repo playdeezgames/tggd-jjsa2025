@@ -58,6 +58,7 @@ Public Class CookItemDialog
             Append(New DialogLine(MoodType.Info, $"+1 {cookedItem.Descriptor.ItemTypeName}({character.GetCountOfItemType(cookedItemType)})"))
         item.Recycle()
         Return New OkDialog(
+            "You cooked it!",
             messageLines,
             LaunchMenu(character))
     End Function

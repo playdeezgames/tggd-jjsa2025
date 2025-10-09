@@ -23,6 +23,7 @@ Friend Class DismantleVerbTypeDescriptor
 
     Private Function ConfirmDismantle(character As ICharacter) As Func(Of IDialog)
         Return Function() New OkDialog(
+            "You dismantled it!",
             character.World.ProcessTurn().Concat(DoDismantle(character)),
             Function() Nothing)
     End Function

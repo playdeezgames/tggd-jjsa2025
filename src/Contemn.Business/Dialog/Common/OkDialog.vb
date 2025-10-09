@@ -5,9 +5,11 @@ Friend Class OkDialog
 
 
     Public Sub New(
+                  caption As String,
                   lines As IEnumerable(Of IDialogLine),
                   nextDialog As Func(Of IDialog))
         MyBase.New(
+            caption,
             lines,
             {
                 (OK_CHOICE, OK_TEXT, nextDialog, True)

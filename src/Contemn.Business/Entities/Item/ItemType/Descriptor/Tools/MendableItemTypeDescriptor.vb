@@ -72,6 +72,7 @@ Public MustInherit Class MendableItemTypeDescriptor
 
     Private Function Mend(item As IItem, character As ICharacter) As IDialog
         Return New OkDialog(
+            "You mended it!",
             GenerateMendLines(item, character),
             Function() New ItemOfTypeDialog(character, item))
     End Function
