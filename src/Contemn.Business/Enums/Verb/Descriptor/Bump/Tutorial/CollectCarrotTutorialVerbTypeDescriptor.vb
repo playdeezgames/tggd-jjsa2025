@@ -7,7 +7,7 @@
             "Forage for Carrot",
             NameOf(CarrotItemTypeDescriptor),
             TagType.CompletedCollectCarrotTutorial,
-            Function(x) True,
+            Array.Empty(Of String),
             {
                 "Move onto Grass",
                 "Press <ACTION>",

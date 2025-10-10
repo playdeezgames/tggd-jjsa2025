@@ -7,7 +7,7 @@
             "Forage for Rock",
             NameOf(RockItemTypeDescriptor),
             TagType.CompletedCollectRockTutorial,
-            Function(x) True,
+            Array.Empty(Of String),
             {
                 "Move onto Rock",
                 "Press <ACTION>",

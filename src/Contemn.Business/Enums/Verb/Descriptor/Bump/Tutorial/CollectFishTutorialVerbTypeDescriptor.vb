@@ -7,7 +7,7 @@
             "Catch Fish!",
             NameOf(FishItemTypeDescriptor),
             TagType.CompletedCollectFishTutorial,
-            AddressOf HasPrerequisites,
+            {TagType.CompletedCollectNetTutorial},
             {
                 "Craft a Net",
                 "Go to water",
@@ -21,8 +21,4 @@
                 "Proper preparation and cooking is key."
             })
     End Sub
-
-    Private Shared Function HasPrerequisites(character As ICharacter) As Boolean
-        Return character.GetTag(TagType.CompletedCollectNetTutorial)
-    End Function
 End Class

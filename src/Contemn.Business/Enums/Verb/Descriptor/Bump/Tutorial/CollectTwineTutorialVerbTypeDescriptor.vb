@@ -7,7 +7,7 @@
             "Craft Twine",
             NameOf(TwineItemTypeDescriptor),
             TagType.CompletedCollectTwineTutorial,
-            AddressOf HasPrerequisites,
+            {TagType.CompletedCollectPlantFiberTutorial},
             {
                 "Gather sufficient Plant Fiber",
                 "Press <ACTION>",
@@ -19,8 +19,4 @@
                 "Twine is used to Craft."
             })
     End Sub
-
-    Private Shared Function HasPrerequisites(character As ICharacter) As Boolean
-        Return character.GetTag(TagType.CompletedCollectPlantFiberTutorial)
-    End Function
 End Class

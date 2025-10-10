@@ -7,7 +7,7 @@
             "Craft Blade",
             NameOf(BladeItemTypeDescriptor),
             TagType.CompletedCollectBladeTutorial,
-            AddressOf HasPrerequisites,
+            {TagType.CompletedCollectSharpRockTutorial},
             {
                 "Gather Sharp Rock and Hammer",
                 "Press <ACTION>",
@@ -19,8 +19,4 @@
                 "Blade is used to Craft."
             })
     End Sub
-
-    Private Shared Function HasPrerequisites(character As ICharacter) As Boolean
-        Return character.GetTag(TagType.CompletedCollectSharpRockTutorial)
-    End Function
 End Class

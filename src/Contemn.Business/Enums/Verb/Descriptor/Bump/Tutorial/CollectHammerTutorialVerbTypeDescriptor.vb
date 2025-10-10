@@ -7,7 +7,11 @@
             "Craft Hammer",
             NameOf(HammerItemTypeDescriptor),
             TagType.CompletedCollectHammerTutorial,
-            AddressOf HasPrerequisites,
+            {
+                TagType.CompletedCollectTwineTutorial,
+                TagType.CompletedCollectRockTutorial,
+                TagType.CompletedCollectStickTutorial
+            },
             {
                 "Gather Stick, Rock, Twine",
                 "Press <ACTION>",
@@ -19,10 +23,4 @@
                 "Hammer is used to Craft."
             })
     End Sub
-
-    Private Shared Function HasPrerequisites(character As ICharacter) As Boolean
-        Return character.GetTag(TagType.CompletedCollectTwineTutorial) AndAlso
-            character.GetTag(TagType.CompletedCollectRockTutorial) AndAlso
-            character.GetTag(TagType.CompletedCollectStickTutorial)
-    End Function
 End Class

@@ -7,7 +7,7 @@
             "Craft Filet",
             NameOf(RawFishFiletItemTypeDescriptor),
             TagType.CompletedCollectRawFishFiletTutorial,
-            AddressOf HasPrerequisites,
+            {TagType.CompletedCollectKnifeTutorial, TagType.CompletedCollectFishTutorial},
             {
                 "Gather Knife and Fish",
                 "Press <ACTION>",
@@ -19,9 +19,4 @@
                 "Filet can be cooked."
             })
     End Sub
-
-    Private Shared Function HasPrerequisites(character As ICharacter) As Boolean
-        Return character.GetTag(TagType.CompletedCollectKnifeTutorial) AndAlso
-            character.GetTag(TagType.CompletedCollectFishTutorial)
-    End Function
 End Class

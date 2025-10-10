@@ -7,7 +7,7 @@
             "Craft Net",
             NameOf(FishingNetItemTypeDescriptor),
             TagType.CompletedCollectNetTutorial,
-            AddressOf HasPrerequisites,
+            {TagType.CompletedCollectTwineTutorial},
             {
                 "Gather sufficient Twine",
                 "Press <ACTION>",
@@ -19,8 +19,4 @@
                 "Net is used to Fish."
             })
     End Sub
-
-    Private Shared Function HasPrerequisites(character As ICharacter) As Boolean
-        Return character.GetTag(TagType.CompletedCollectTwineTutorial)
-    End Function
 End Class

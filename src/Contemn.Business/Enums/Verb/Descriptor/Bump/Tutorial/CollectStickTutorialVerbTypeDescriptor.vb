@@ -7,7 +7,7 @@
             "Collect Stick",
             NameOf(StickItemTypeDescriptor),
             TagType.CompletedCollectStickTutorial,
-            Function(x) True,
+            Array.Empty(Of String),
             {
                 "Move into Tree",
                 "Select ""Collect Stick""",

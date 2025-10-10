@@ -9,7 +9,7 @@ Friend Class CollectPlantFiberTutorialVerbTypeDescriptor
             "Forage for Plant Fiber",
             NameOf(PlantFiberItemTypeDescriptor),
             TagType.CompletedCollectPlantFiberTutorial,
-            Function(x) True,
+            Array.Empty(Of String),
             {
                 "Move onto Grass",
                 "Press <ACTION>",
