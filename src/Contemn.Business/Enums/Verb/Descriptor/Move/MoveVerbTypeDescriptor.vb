@@ -9,7 +9,7 @@ Public MustInherit Class MoveVerbTypeDescriptor
     End Sub
 
     Friend Overrides Function Perform(character As ICharacter) As IDialog
-        Dim descriptor = directionType.ToDirectionTypeDescriptor
+        Dim descriptor = DirectionTypes.Descriptors(directionType)
         Dim nextColumn = descriptor.GetNextColumn(character.Column)
         Dim nextRow = descriptor.GetNextRow(character.Row)
         Dim nextLocation = character.Map.GetLocation(nextColumn, nextRow)

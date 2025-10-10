@@ -14,8 +14,4 @@ Friend Module DirectionTypes
             Return Descriptors.Keys
         End Get
     End Property
-    <Extension>
-    Function ToDirectionTypeDescriptor(directionType As String) As DirectionTypeDescriptor
-        Return Descriptors(directionType)
-    End Function
 End Module

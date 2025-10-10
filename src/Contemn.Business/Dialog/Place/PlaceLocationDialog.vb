@@ -25,8 +25,7 @@ Friend Class PlaceLocationDialog
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         Dim location = character.Location
-        For Each direction In DirectionTypes.All
-            Dim descriptor = direction.ToDirectionTypeDescriptor
+        For Each descriptor In DirectionTypes.Descriptors.Values
             Dim nextColumn = descriptor.GetNextColumn(location.Column)
             Dim nextRow = descriptor.GetNextRow(location.Row)
             Dim nextLocation = character.Map.GetLocation(nextColumn, nextRow)
