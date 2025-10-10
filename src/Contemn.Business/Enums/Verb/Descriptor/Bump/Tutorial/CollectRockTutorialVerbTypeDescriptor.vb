@@ -4,7 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(CollectRockTutorialVerbTypeDescriptor),
-            "Tutorial: Forage for Rock",
+            "Forage for Rock",
             NameOf(RockItemTypeDescriptor),
             TagType.CompletedCollectRockTutorial,
             Function(x) True,

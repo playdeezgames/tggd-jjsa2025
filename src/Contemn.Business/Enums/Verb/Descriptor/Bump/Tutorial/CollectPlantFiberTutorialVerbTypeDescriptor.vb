@@ -6,7 +6,7 @@ Friend Class CollectPlantFiberTutorialVerbTypeDescriptor
     Public Sub New()
         MyBase.New(
             NameOf(CollectPlantFiberTutorialVerbTypeDescriptor),
-            "Tutorial: Forage for Plant Fiber",
+            "Forage for Plant Fiber",
             NameOf(PlantFiberItemTypeDescriptor),
             TagType.CompletedCollectPlantFiberTutorial,
             Function(x) True,

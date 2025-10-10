@@ -4,7 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(CollectFishTutorialVerbTypeDescriptor),
-            "Tutorial: Catch Fish!",
+            "Catch Fish!",
             NameOf(FishItemTypeDescriptor),
             TagType.CompletedCollectFishTutorial,
             AddressOf HasPrerequisites,

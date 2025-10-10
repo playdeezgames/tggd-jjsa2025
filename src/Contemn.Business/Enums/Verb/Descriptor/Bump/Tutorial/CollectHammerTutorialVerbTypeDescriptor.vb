@@ -4,7 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(CollectHammerTutorialVerbTypeDescriptor),
-            "Tutorial: Craft Hammer",
+            "Craft Hammer",
             NameOf(HammerItemTypeDescriptor),
             TagType.CompletedCollectHammerTutorial,
             AddressOf HasPrerequisites,

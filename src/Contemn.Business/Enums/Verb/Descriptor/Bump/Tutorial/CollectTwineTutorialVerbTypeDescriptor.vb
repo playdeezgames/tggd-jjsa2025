@@ -4,7 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(CollectTwineTutorialVerbTypeDescriptor),
-            "Tutorial: Craft Twine",
+            "Craft Twine",
             NameOf(TwineItemTypeDescriptor),
             TagType.CompletedCollectTwineTutorial,
             AddressOf HasPrerequisites,

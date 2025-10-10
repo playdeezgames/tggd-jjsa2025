@@ -20,7 +20,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
         MyBase.New(
             verbType,
             Business.VerbCategoryType.Bump,
-            verbTypeName)
+            $"Tutorial: {verbTypeName}")
         Me.itemType = itemType
         Me.failureLines = failureLines
         Me.successLines = successLines
@@ -37,7 +37,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
 
     Private Function Failure(character As ICharacter) As IDialog
         Return New OkDialog(
-            "Fail",
+            VerbTypeName,
             failureLines,
             BumpDialog.LaunchMenu(character))
     End Function
@@ -46,7 +46,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
         character.SetTag(tagType, True)
 
         Return New OkDialog(
-            "Success",
+            VerbTypeName,
             successLines.
             Concat(RestoreStats(character)),
             BumpDialog.LaunchMenu(character))

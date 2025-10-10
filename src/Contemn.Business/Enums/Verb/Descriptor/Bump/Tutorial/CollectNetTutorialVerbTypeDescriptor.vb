@@ -4,7 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(CollectNetTutorialVerbTypeDescriptor),
-            "Tutorial: Craft Net",
+            "Craft Net",
             NameOf(FishingNetItemTypeDescriptor),
             TagType.CompletedCollectNetTutorial,
             AddressOf HasPrerequisites,
