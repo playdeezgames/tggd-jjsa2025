@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.CompilerServices
+Imports System.Threading
 
 Friend Module VerbTypes
     Private Function GenerateDescriptors() As IList(Of VerbTypeDescriptor)
@@ -46,9 +47,7 @@ Friend Module VerbTypes
                         "Select Blade recipe",
                         "Come Back"
                     },
-                    {
-                        "Blade is used to Craft."
-                    }),
+                    {"Blade is used to Craft."}),
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Forage for Carrot",
                     NameOf(CarrotItemTypeDescriptor),
@@ -60,9 +59,7 @@ Friend Module VerbTypes
                         "Repeat until you get some Carrot",
                         "Come back"
                     },
-                    {
-                        "You can eat carrots."
-                    }),
+                    {"You can eat carrots."}),
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Catch Fish!",
                     NameOf(FishItemTypeDescriptor),
@@ -94,9 +91,7 @@ Friend Module VerbTypes
                         "Select Hammer recipe",
                         "Come Back"
                     },
-                    {
-                        "Hammer is used to Craft."
-                    }),
+                    {"Hammer is used to Craft."}),
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Craft Knife",
                     NameOf(KnifeItemTypeDescriptor),
@@ -108,9 +103,7 @@ Friend Module VerbTypes
                         "Select Knife recipe",
                         "Come Back"
                     },
-                    {
-                        "Knife is used to Craft."
-                    }),
+                    {"Knife is used to Craft."}),
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Forage for Plant Fiber",
                     NameOf(PlantFiberItemTypeDescriptor),
@@ -122,9 +115,7 @@ Friend Module VerbTypes
                         "Repeat until you get some Plant Fiber",
                         "Come back"
                     },
-                    {
-                        "Plant Fiber is used to Craft things."
-                    }),
+                    {"Plant Fiber is used to Craft things."}),
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Craft Filet",
                     NameOf(RawFishFiletItemTypeDescriptor),
@@ -136,9 +127,7 @@ Friend Module VerbTypes
                         "Select Filet recipe",
                         "Come Back"
                     },
-                    {
-                        "Filet can be cooked."
-                    }),
+                    {"Filet can be cooked."}),
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Forage for Rock",
                     NameOf(RockItemTypeDescriptor),
@@ -150,9 +139,7 @@ Friend Module VerbTypes
                         "Repeat until you get some Rock",
                         "Come back"
                     },
-                    {
-                        "Rocks are used to Craft."
-                    }),
+                    {"Rocks are used to Craft."}),
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Craft Sharp Rock",
                     NameOf(SharpRockItemTypeDescriptor),
@@ -164,9 +151,7 @@ Friend Module VerbTypes
                         "Select Sharp Rock recipe",
                         "Come Back"
                     },
-                    {
-                        "Sharp Rock is used to Craft."
-                    }),
+                    {"Sharp Rock is used to Craft."}),
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Collect Stick",
                     NameOf(StickItemTypeDescriptor),
@@ -191,9 +176,7 @@ Friend Module VerbTypes
                         "Select Twine recipe",
                         "Come Back"
                     },
-                    {
-                        "Twine is used to Craft."
-                    }),
+                    {"Twine is used to Craft."}),
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Craft Axe",
                     NameOf(AxeItemTypeDescriptor),
@@ -208,7 +191,162 @@ Friend Module VerbTypes
                     {
                         "Axe is used to Craft.",
                         "Also good for chopping."
-                    })
+                    }),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Camp Fire",
+                    NameOf(CampFireItemTypeDescriptor),
+                    {NameOf(RockItemTypeDescriptor), NameOf(StickItemTypeDescriptor)},
+                    {
+                        "Gather Sticks and Rocks",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select Camp Fire recipe",
+                        "Come Back"
+                    },
+                    {
+                        "Camp Fire is placeable.",
+                        "You can use it to cook stuff."
+                    }),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Dig Clay",
+                    NameOf(ClayItemTypeDescriptor),
+                    {NameOf(SharpStickItemTypeDescriptor)},
+                    {
+                        "Gather Sharp Stick",
+                        "Go to water",
+                        "Select Dig Clay",
+                        "(repeat as needed)",
+                        "Come Back"
+                    },
+                    {"Clay is used to craft."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Sharp Stick",
+                    NameOf(SharpStickItemTypeDescriptor),
+                    {NameOf(AxeItemTypeDescriptor)},
+                    {
+                        "Gather Axe and Stick",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select Sharp Stick recipe",
+                        "Come Back"
+                    },
+                    {"Sharp Stick is used to dig clay."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Torch",
+                    NameOf(TorchItemTypeDescriptor),
+                    {NameOf(StickItemTypeDescriptor), NameOf(PlantFiberItemTypeDescriptor)},
+                    {
+                        "Gather Stick and Fiber",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select Torch recipe",
+                        "Come Back"
+                    },
+                    {
+                        "Torches are the most",
+                        "useless things in this game."
+                    }),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Cook Fish Filet",
+                    NameOf(CookedFishFiletItemTypeDescriptor),
+                    {
+                        NameOf(CampFireItemTypeDescriptor),
+                        NameOf(RawFishFiletItemTypeDescriptor),
+                        NameOf(FireStarterItemTypeDescriptor)
+                    },
+                    {
+                        "Gather Raw Filet",
+                        "Place and light camp fire",
+                        "Interact with camp fire",
+                        "Select ""Cook...""",
+                        "Select Raw Filet",
+                        "Come Back"
+                    },
+                    {"Cooked fish filet are safe to eat."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Cook Charcoal",
+                    NameOf(CharcoalItemTypeDescriptor),
+                    {
+                        NameOf(CampFireItemTypeDescriptor),
+                        NameOf(LogItemTypeDescriptor),
+                        NameOf(FireStarterItemTypeDescriptor)
+                    },
+                    {
+                        "Gather Raw Filet",
+                        "Place and light camp fire",
+                        "Interact with camp fire",
+                        "Select ""Cook...""",
+                        "Select Log",
+                        "Come Back"
+                    },
+                    {"Charcoal is the best fuel."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Unfired Pot",
+                    NameOf(UnfiredPotItemTypeDescriptor),
+                    {NameOf(ClayItemTypeDescriptor)},
+                    {
+                        "Gather Clay",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select Unfired Pot recipe",
+                        "Come Back"
+                    },
+                    {"Unfired pots can be fired in a kiln."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Kiln",
+                    NameOf(KilnItemTypeDescriptor),
+                    {NameOf(ClayItemTypeDescriptor), NameOf(RockItemTypeDescriptor)},
+                    {
+                        "Gather Clay and Rocks",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select Kiln recipe",
+                        "Come Back"
+                    },
+                    {"A kiln can be used to fire a clay pot."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Chop Wood",
+                    NameOf(LogItemTypeDescriptor),
+                    {NameOf(ClayItemTypeDescriptor), NameOf(RockItemTypeDescriptor)},
+                    {
+                        "Make an Axe",
+                        "Interact with a Tree",
+                        "Select Chop Wood",
+                        "Come Back"
+                    },
+                    {"Logs can fuel fires."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Fire Pot",
+                    NameOf(FiredPotItemTypeDescriptor),
+                    {
+                        NameOf(KilnItemTypeDescriptor),
+                        NameOf(FireStarterItemTypeDescriptor),
+                        NameOf(UnfiredPotItemTypeDescriptor)
+                    },
+                    {
+                        "Gather unfired pot",
+                        "Place Kiln",
+                        "Fuel and Light Kiln",
+                        "Interact with kiln",
+                        "Select Fire Pot",
+                        "Come Back"
+                    },
+                    {"Clay pots can hold water."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Firestarter",
+                    NameOf(FireStarterItemTypeDescriptor),
+                    {
+                        NameOf(StickItemTypeDescriptor),
+                        NameOf(PlantFiberItemTypeDescriptor)
+                    },
+                    {
+                        "Gather sticks and plant fiber",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select fire starter recipe",
+                        "Come Back"
+                    },
+                    {"Fire starters can start fires."})
             }
     End Function
 
