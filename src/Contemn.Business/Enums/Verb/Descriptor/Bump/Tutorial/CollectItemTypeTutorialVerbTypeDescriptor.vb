@@ -12,8 +12,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
     Public Sub New(
                   verbTypeName As String,
                   requiredItemType As String,
-                  achievementTagType As String,
-                  prerequisiteTagTypes As IEnumerable(Of String),
+                  prerequisiteItemTypes As IEnumerable(Of String),
                   failureLines As IEnumerable(Of String),
                   successLines As IEnumerable(Of String))
         MyBase.New(
@@ -27,8 +26,8 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
         Me.failureLines = Enumerable.Range(0, failureLines.Count).
             Select(Function(x) New DialogLine(MoodType.Info, $"{x + 1}. {failureLines.ToArray(x)}"))
         Me.successLines = successLines.Select(Function(x) New DialogLine(MoodType.Info, x))
-        Me.achievementTagType = achievementTagType
-        Me.prerequisiteTagTypes = New HashSet(Of String)(prerequisiteTagTypes)
+        Me.achievementTagType = TagType.CompletedCollectTutorial(requiredItemType)
+        Me.prerequisiteTagTypes = New HashSet(Of String)(prerequisiteItemTypes.Select(AddressOf TagType.CompletedCollectTutorial))
     End Sub
 
     Friend Overrides Function Perform(character As ICharacter) As IDialog
@@ -75,7 +74,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
             bumpLocation IsNot Nothing AndAlso
             bumpLocation.GetTag(Business.TagType.IsTutorialHouse) AndAlso
             Not character.GetTag(achievementTagType) AndAlso
-            checkPrerequisites(character)
+            CheckPrerequisites(character)
     End Function
 
     Private Function CheckPrerequisites(character As ICharacter) As Boolean
