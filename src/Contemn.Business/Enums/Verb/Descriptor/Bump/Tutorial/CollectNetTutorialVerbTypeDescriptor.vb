@@ -16,7 +16,7 @@
                 "Come Back"
             },
             {
-                New DialogLine(MoodType.Info, "Net is used to Fish.")
+                "Net is used to Fish."
             })
     End Sub
 

@@ -16,7 +16,7 @@
                 "Come Back"
             },
             {
-                New DialogLine(MoodType.Info, "Hammer is used to Craft.")
+                "Hammer is used to Craft."
             })
     End Sub
 

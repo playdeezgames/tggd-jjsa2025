@@ -16,7 +16,7 @@
                 "Come back"
             },
             {
-                New DialogLine(MoodType.Info, "You can eat carrots.")
+                "You can eat carrots."
             })
     End Sub
 End Class

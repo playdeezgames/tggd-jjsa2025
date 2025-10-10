@@ -16,9 +16,9 @@
                 "Come Back"
             },
             {
-                New DialogLine(MoodType.Info, "Fish is food, not friends."),
-                New DialogLine(MoodType.Info, "Raw fish may cause food poisoning."),
-                New DialogLine(MoodType.Info, "Proper preparation and cooking is key.")
+                "Fish is food, not friends.",
+                "Raw fish may cause food poisoning.",
+                "Proper preparation and cooking is key."
             })
     End Sub
 

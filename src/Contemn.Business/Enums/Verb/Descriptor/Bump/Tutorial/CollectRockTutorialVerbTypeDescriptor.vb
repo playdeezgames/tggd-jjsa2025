@@ -16,7 +16,7 @@
                 "Come back"
             },
             {
-                New DialogLine(MoodType.Info, "Rocks are used to Craft.")
+                "Rocks are used to Craft."
             })
     End Sub
 End Class

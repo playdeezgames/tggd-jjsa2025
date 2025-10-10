@@ -16,7 +16,7 @@
                 "Come Back"
             },
             {
-                New DialogLine(MoodType.Info, "Sharp Rock is used to Craft.")
+                "Sharp Rock is used to Craft."
             })
     End Sub
 

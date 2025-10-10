@@ -14,8 +14,8 @@
                 "Come back"
             },
             {
-                New DialogLine(MoodType.Info, "Stick are used to Craft."),
-                New DialogLine(MoodType.Info, "They may be used as fuel.")
+                "Stick are used to Craft.",
+                "They may be used as fuel."
             })
     End Sub
 End Class

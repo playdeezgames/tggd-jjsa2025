@@ -16,7 +16,7 @@
                 "Come Back"
             },
             {
-                New DialogLine(MoodType.Info, "Filet can be cooked.")
+                "Filet can be cooked."
             })
     End Sub
 

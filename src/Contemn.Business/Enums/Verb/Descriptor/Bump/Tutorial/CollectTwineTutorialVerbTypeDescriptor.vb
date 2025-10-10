@@ -16,7 +16,7 @@
                 "Come Back"
             },
             {
-                New DialogLine(MoodType.Info, "Twine is used to Craft.")
+                "Twine is used to Craft."
             })
     End Sub
 

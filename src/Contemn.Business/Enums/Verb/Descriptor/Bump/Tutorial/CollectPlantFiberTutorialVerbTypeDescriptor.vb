@@ -18,7 +18,7 @@ Friend Class CollectPlantFiberTutorialVerbTypeDescriptor
                 "Come back"
             },
             {
-                New DialogLine(MoodType.Info, "Plant Fiber is used to Craft things.")
+                "Plant Fiber is used to Craft things."
             })
     End Sub
 End Class

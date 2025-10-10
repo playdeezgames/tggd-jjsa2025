@@ -3,8 +3,8 @@
 Friend Class CollectItemTypeTutorialVerbTypeDescriptor
     Inherits VerbTypeDescriptor
 
-    Private ReadOnly itemType As String
-    Private ReadOnly tagType As String
+    Private ReadOnly requiredItemType As String
+    Private ReadOnly achievementTagType As String
     Private ReadOnly failureLines As IEnumerable(Of IDialogLine)
     Private ReadOnly successLines As IEnumerable(Of IDialogLine)
     Private ReadOnly checkPrerequisites As Func(Of ICharacter, Boolean)
@@ -12,25 +12,25 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
     Public Sub New(
                   verbType As String,
                   verbTypeName As String,
-                  itemType As String,
-                  tagType As String,
+                  requiredItemType As String,
+                  achievementTagType As String,
                   checkPrerequisites As Func(Of ICharacter, Boolean),
                   failureLines As IEnumerable(Of String),
-                  successLines As IEnumerable(Of IDialogLine))
+                  successLines As IEnumerable(Of String))
         MyBase.New(
             verbType,
             Business.VerbCategoryType.Bump,
             $"Tutorial: {verbTypeName}")
-        Me.itemType = itemType
+        Me.requiredItemType = requiredItemType
         Me.failureLines = Enumerable.Range(0, failureLines.Count).
             Select(Function(x) New DialogLine(MoodType.Info, $"{x + 1}. {failureLines.ToArray(x)}"))
-        Me.successLines = successLines
-        Me.tagType = tagType
+        Me.successLines = successLines.Select(Function(x) New DialogLine(MoodType.Info, x))
+        Me.achievementTagType = achievementTagType
         Me.checkPrerequisites = checkPrerequisites
     End Sub
 
     Friend Overrides Function Perform(character As ICharacter) As IDialog
-        If character.HasItemsOfType(itemType) Then
+        If character.HasItemsOfType(requiredItemType) Then
             Return Success(character)
         End If
         Return Failure(character)
@@ -44,7 +44,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
     End Function
 
     Private Function Success(character As ICharacter) As IDialog
-        character.SetTag(tagType, True)
+        character.SetTag(achievementTagType, True)
 
         Return New OkDialog(
             VerbTypeName,
@@ -72,7 +72,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso
             bumpLocation.GetTag(Business.TagType.IsTutorialHouse) AndAlso
-            Not character.GetTag(tagType) AndAlso
+            Not character.GetTag(achievementTagType) AndAlso
             checkPrerequisites(character)
     End Function
 End Class
