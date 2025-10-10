@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectRockTutorialVerbTypeDescriptor),
             "Forage for Rock",
             NameOf(RockItemTypeDescriptor),
             TagType.CompletedCollectRockTutorial,

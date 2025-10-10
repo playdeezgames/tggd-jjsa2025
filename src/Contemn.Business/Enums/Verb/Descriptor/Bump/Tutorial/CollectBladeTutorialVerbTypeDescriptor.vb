@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectBladeTutorialVerbTypeDescriptor),
             "Craft Blade",
             NameOf(BladeItemTypeDescriptor),
             TagType.CompletedCollectBladeTutorial,

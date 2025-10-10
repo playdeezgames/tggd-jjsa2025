@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectTwineTutorialVerbTypeDescriptor),
             "Craft Twine",
             NameOf(TwineItemTypeDescriptor),
             TagType.CompletedCollectTwineTutorial,

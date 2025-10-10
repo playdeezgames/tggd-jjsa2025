@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectHammerTutorialVerbTypeDescriptor),
             "Craft Hammer",
             NameOf(HammerItemTypeDescriptor),
             TagType.CompletedCollectHammerTutorial,

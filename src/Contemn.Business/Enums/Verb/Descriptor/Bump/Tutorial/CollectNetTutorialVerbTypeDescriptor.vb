@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectNetTutorialVerbTypeDescriptor),
             "Craft Net",
             NameOf(FishingNetItemTypeDescriptor),
             TagType.CompletedCollectNetTutorial,

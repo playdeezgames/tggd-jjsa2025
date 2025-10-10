@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectRawFishFiletTutorialVerbTypeDescriptor),
             "Craft Filet",
             NameOf(RawFishFiletItemTypeDescriptor),
             TagType.CompletedCollectRawFishFiletTutorial,

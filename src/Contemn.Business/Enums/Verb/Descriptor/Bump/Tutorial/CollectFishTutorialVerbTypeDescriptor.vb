@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectFishTutorialVerbTypeDescriptor),
             "Catch Fish!",
             NameOf(FishItemTypeDescriptor),
             TagType.CompletedCollectFishTutorial,

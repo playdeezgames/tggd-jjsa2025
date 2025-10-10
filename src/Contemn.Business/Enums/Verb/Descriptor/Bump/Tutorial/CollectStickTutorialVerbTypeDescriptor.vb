@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectStickTutorialVerbTypeDescriptor),
             "Collect Stick",
             NameOf(StickItemTypeDescriptor),
             TagType.CompletedCollectStickTutorial,

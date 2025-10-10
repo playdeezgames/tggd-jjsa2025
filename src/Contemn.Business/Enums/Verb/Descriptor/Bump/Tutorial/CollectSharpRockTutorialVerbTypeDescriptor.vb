@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectSharpRockTutorialVerbTypeDescriptor),
             "Craft Sharp Rock",
             NameOf(SharpRockItemTypeDescriptor),
             TagType.CompletedCollectSharpRockTutorial,

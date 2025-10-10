@@ -10,7 +10,6 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
     Private ReadOnly prerequisiteTagTypes As HashSet(Of String)
 
     Public Sub New(
-                  verbType As String,
                   verbTypeName As String,
                   requiredItemType As String,
                   achievementTagType As String,
@@ -18,7 +17,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
                   failureLines As IEnumerable(Of String),
                   successLines As IEnumerable(Of String))
         MyBase.New(
-            verbType,
+            $"Collect{requiredItemType}TutorialVerbTypeDescriptor",
             Business.VerbCategoryType.Bump,
             $"Tutorial: {verbTypeName}")
         Me.requiredItemType = requiredItemType

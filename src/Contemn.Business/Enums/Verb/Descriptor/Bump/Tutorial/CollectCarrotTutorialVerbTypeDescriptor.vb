@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectCarrotTutorialVerbTypeDescriptor),
             "Forage for Carrot",
             NameOf(CarrotItemTypeDescriptor),
             TagType.CompletedCollectCarrotTutorial,

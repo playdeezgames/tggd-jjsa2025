@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(CollectKnifeTutorialVerbTypeDescriptor),
             "Craft Knife",
             NameOf(KnifeItemTypeDescriptor),
             TagType.CompletedCollectKnifeTutorial,
