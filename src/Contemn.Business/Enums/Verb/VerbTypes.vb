@@ -193,6 +193,21 @@ Friend Module VerbTypes
                     },
                     {
                         "Twine is used to Craft."
+                    }),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Axe",
+                    NameOf(AxeItemTypeDescriptor),
+                    {NameOf(SharpRockItemTypeDescriptor)},
+                    {
+                        "Gather Sharp Rock, Stick and Twine",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select Axe recipe",
+                        "Come Back"
+                    },
+                    {
+                        "Axe is used to Craft.",
+                        "Also good for chopping."
                     })
             }
     End Function
