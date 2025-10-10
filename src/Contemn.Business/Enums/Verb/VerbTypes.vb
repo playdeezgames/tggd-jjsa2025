@@ -12,6 +12,7 @@ Friend Module VerbTypes
             New CollectNetTutorialVerbTypeDescriptor(),
             New CollectPlantFiberTutorialVerbTypeDescriptor(),
             New CollectRockTutorialVerbTypeDescriptor(),
+            New CollectSharpRockTutorialVerbTypeDescriptor(),
             New CollectStickTutorialVerbTypeDescriptor(),
             New CollectStickVerbTypeDescriptor(),
             New CollectTwineTutorialVerbTypeDescriptor(),
