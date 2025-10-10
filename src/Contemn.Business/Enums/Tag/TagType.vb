@@ -1,4 +1,7 @@
 ﻿Public Module TagType
+    Friend Function CompletedCollectTutorial(itemType As String) As String
+        Return $"CompletedCollect{itemType.Replace("ItemTypeDescriptor", String.Empty)}Tutorial"
+    End Function
     Friend ReadOnly CanBoil As String = NameOf(CanBoil)
     Friend ReadOnly CanChop As String = NameOf(CanChop)
     Friend ReadOnly CanCook As String = NameOf(CanCook)

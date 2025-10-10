@@ -7,3 +7,4 @@ Imports System.Diagnostics.CodeAnalysis
 
 <Assembly: SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance")>
 <Assembly: SuppressMessage("Performance", "CA1860:Avoid using 'Enumerable.Any()' extension method")>
+<Assembly: SuppressMessage("Performance", "CA1861:Avoid constant arrays as arguments")>
