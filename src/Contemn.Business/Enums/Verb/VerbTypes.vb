@@ -1,7 +1,4 @@
-﻿Imports System.Runtime.CompilerServices
-Imports System.Threading
-
-Friend Module VerbTypes
+﻿Friend Module VerbTypes
     Private Function GenerateDescriptors() As IList(Of VerbTypeDescriptor)
         Dim result = New List(Of VerbTypeDescriptor) From
         {
