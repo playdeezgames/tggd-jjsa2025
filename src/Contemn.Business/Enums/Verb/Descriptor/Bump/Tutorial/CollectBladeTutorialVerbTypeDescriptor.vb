@@ -9,12 +9,11 @@
             TagType.CompletedCollectBladeTutorial,
             AddressOf HasPrerequisites,
             {
-                New DialogLine(MoodType.Info, "Craft Blade!"),
-                New DialogLine(MoodType.Info, "1. Gather Sharp Rock and Hammer"),
-                New DialogLine(MoodType.Info, "2. Press <ACTION>"),
-                New DialogLine(MoodType.Info, "3. Select ""Craft..."""),
-                New DialogLine(MoodType.Info, "4. Select Blade recipe"),
-                New DialogLine(MoodType.Info, "5. Come Back")
+                "Gather Sharp Rock and Hammer",
+                "Press <ACTION>",
+                "Select ""Craft...""",
+                "Select Blade recipe",
+                "Come Back"
             },
             {
                 New DialogLine(MoodType.Info, "Blade is used to Craft.")

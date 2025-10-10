@@ -9,12 +9,11 @@
             TagType.CompletedCollectSharpRockTutorial,
             AddressOf HasPrerequisites,
             {
-                New DialogLine(MoodType.Info, "Craft Sharp Rock!"),
-                New DialogLine(MoodType.Info, "1. Gather Rock and Hammer"),
-                New DialogLine(MoodType.Info, "2. Press <ACTION>"),
-                New DialogLine(MoodType.Info, "3. Select ""Craft..."""),
-                New DialogLine(MoodType.Info, "4. Select Sharp Rock recipe"),
-                New DialogLine(MoodType.Info, "5. Come Back")
+                "Gather Rock and Hammer",
+                "Press <ACTION>",
+                "Select ""Craft...""",
+                "Select Sharp Rock recipe",
+                "Come Back"
             },
             {
                 New DialogLine(MoodType.Info, "Sharp Rock is used to Craft.")

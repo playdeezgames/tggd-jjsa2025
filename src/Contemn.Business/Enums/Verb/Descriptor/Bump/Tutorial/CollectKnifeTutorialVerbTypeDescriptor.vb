@@ -9,12 +9,11 @@
             TagType.CompletedCollectKnifeTutorial,
             AddressOf HasPrerequisites,
             {
-                New DialogLine(MoodType.Info, "Craft Knife!"),
-                New DialogLine(MoodType.Info, "1. Gather Blade, Stick, and Twine"),
-                New DialogLine(MoodType.Info, "2. Press <ACTION>"),
-                New DialogLine(MoodType.Info, "3. Select ""Craft..."""),
-                New DialogLine(MoodType.Info, "4. Select Knife recipe"),
-                New DialogLine(MoodType.Info, "5. Come Back")
+                "Gather Blade, Stick, and Twine",
+                "Press <ACTION>",
+                "Select ""Craft...""",
+                "Select Knife recipe",
+                "Come Back"
             },
             {
                 New DialogLine(MoodType.Info, "Knife is used to Craft.")

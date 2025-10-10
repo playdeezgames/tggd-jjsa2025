@@ -9,10 +9,9 @@
             TagType.CompletedCollectStickTutorial,
             Function(x) True,
             {
-                New DialogLine(MoodType.Info, "Collect Stick!"),
-                New DialogLine(MoodType.Info, "1. Move into Tree"),
-                New DialogLine(MoodType.Info, "2. Select ""Collect Stick"""),
-                New DialogLine(MoodType.Info, "3. Come back")
+                "Move into Tree",
+                "Select ""Collect Stick""",
+                "Come back"
             },
             {
                 New DialogLine(MoodType.Info, "Stick are used to Craft."),

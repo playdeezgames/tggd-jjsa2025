@@ -9,12 +9,11 @@
             TagType.CompletedCollectTwineTutorial,
             AddressOf HasPrerequisites,
             {
-                New DialogLine(MoodType.Info, "Craft Twine!"),
-                New DialogLine(MoodType.Info, "1. Gather sufficient Plant Fiber"),
-                New DialogLine(MoodType.Info, "2. Press <ACTION>"),
-                New DialogLine(MoodType.Info, "3. Select ""Craft..."""),
-                New DialogLine(MoodType.Info, "4. Select Twine recipe"),
-                New DialogLine(MoodType.Info, "5. Come Back")
+                "Gather sufficient Plant Fiber",
+                "Press <ACTION>",
+                "Select ""Craft...""",
+                "Select Twine recipe",
+                "Come Back"
             },
             {
                 New DialogLine(MoodType.Info, "Twine is used to Craft.")

@@ -9,12 +9,11 @@
             TagType.CompletedCollectRawFishFiletTutorial,
             AddressOf HasPrerequisites,
             {
-                New DialogLine(MoodType.Info, "Craft Filet!"),
-                New DialogLine(MoodType.Info, "1. Gather Knife and Fish"),
-                New DialogLine(MoodType.Info, "2. Press <ACTION>"),
-                New DialogLine(MoodType.Info, "3. Select ""Craft..."""),
-                New DialogLine(MoodType.Info, "4. Select Filet recipe"),
-                New DialogLine(MoodType.Info, "5. Come Back")
+                "Gather Knife and Fish",
+                "Press <ACTION>",
+                "Select ""Craft...""",
+                "Select Filet recipe",
+                "Come Back"
             },
             {
                 New DialogLine(MoodType.Info, "Filet can be cooked.")

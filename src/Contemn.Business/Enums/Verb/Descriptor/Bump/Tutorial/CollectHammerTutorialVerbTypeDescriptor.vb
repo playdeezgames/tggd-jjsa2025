@@ -9,12 +9,11 @@
             TagType.CompletedCollectHammerTutorial,
             AddressOf HasPrerequisites,
             {
-                New DialogLine(MoodType.Info, "Craft Hammer!"),
-                New DialogLine(MoodType.Info, "1. Gather Stick, Rock, Twine"),
-                New DialogLine(MoodType.Info, "2. Press <ACTION>"),
-                New DialogLine(MoodType.Info, "3. Select ""Craft..."""),
-                New DialogLine(MoodType.Info, "4. Select Hammer recipe"),
-                New DialogLine(MoodType.Info, "5. Come Back")
+                "Gather Stick, Rock, Twine",
+                "Press <ACTION>",
+                "Select ""Craft...""",
+                "Select Hammer recipe",
+                "Come Back"
             },
             {
                 New DialogLine(MoodType.Info, "Hammer is used to Craft.")

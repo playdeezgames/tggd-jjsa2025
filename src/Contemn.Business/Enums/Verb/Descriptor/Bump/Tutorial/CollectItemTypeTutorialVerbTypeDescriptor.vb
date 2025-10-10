@@ -15,14 +15,15 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
                   itemType As String,
                   tagType As String,
                   checkPrerequisites As Func(Of ICharacter, Boolean),
-                  failureLines As IEnumerable(Of IDialogLine),
+                  failureLines As IEnumerable(Of String),
                   successLines As IEnumerable(Of IDialogLine))
         MyBase.New(
             verbType,
             Business.VerbCategoryType.Bump,
             $"Tutorial: {verbTypeName}")
         Me.itemType = itemType
-        Me.failureLines = failureLines
+        Me.failureLines = Enumerable.Range(0, failureLines.Count).
+            Select(Function(x) New DialogLine(MoodType.Info, $"{x + 1}. {failureLines.ToArray(x)}"))
         Me.successLines = successLines
         Me.tagType = tagType
         Me.checkPrerequisites = checkPrerequisites
