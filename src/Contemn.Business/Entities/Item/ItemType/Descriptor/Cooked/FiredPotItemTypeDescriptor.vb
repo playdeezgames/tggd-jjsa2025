@@ -10,7 +10,8 @@ Public Class FiredPotItemTypeDescriptor
             NameOf(FiredPotItemTypeDescriptor),
             "Clay Pot",
             0,
-            False)
+            False,
+            {TagType.IsFillable, TagType.IsBoilable})
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -20,9 +21,8 @@ Public Class FiredPotItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatisticRange(StatisticType.Water, 0, 0, MAXIMUM_WATER)
-        item.SetTag(TagType.IsFillable, True)
-        item.SetTag(TagType.IsBoilable, True)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

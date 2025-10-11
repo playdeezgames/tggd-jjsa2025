@@ -10,7 +10,12 @@ Public Class TorchItemTypeDescriptor
             NameOf(TorchItemTypeDescriptor),
             "Torch",
             0,
-            False)
+            False,
+            {
+                TagType.IsIgnitable,
+                TagType.CanRefuel,
+                TagType.CanLight
+            })
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -20,10 +25,8 @@ Public Class TorchItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.World.ActivateItem(item)
-        item.SetTag(TagType.IsIgnitable, True)
-        item.SetTag(TagType.CanRefuel, True)
-        item.SetTag(TagType.CanLight, True)
         item.SetStatisticRange(
             StatisticType.Fuel,
             MAXIMUM_FUEL,

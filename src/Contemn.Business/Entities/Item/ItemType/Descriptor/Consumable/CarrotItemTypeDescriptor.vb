@@ -19,6 +19,7 @@ Public Class CarrotItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatistic(StatisticType.Satiety, 10)
     End Sub
 

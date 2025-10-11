@@ -8,7 +8,8 @@ Public Class SharpStickItemTypeDescriptor
             NameOf(SharpStickItemTypeDescriptor),
             "Sharp Stick",
             0,
-            False)
+            False,
+            {TagType.CanDig, TagType.CanRefuel})
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -20,14 +21,13 @@ Public Class SharpStickItemTypeDescriptor
     Const maximumDurability = 20
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatisticRange(
             StatisticType.Durability,
             maximumDurability,
             0,
             maximumDurability)
-        item.SetTag(TagType.CanDig, True)
         item.SetStatistic(StatisticType.Fuel, 1)
-        item.SetTag(TagType.CanRefuel, True)
     End Sub
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)

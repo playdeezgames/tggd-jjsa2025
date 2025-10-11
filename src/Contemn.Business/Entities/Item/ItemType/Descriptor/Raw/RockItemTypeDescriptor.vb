@@ -4,16 +4,18 @@ Public Class RockItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
-        MyBase.New(NameOf(RockItemTypeDescriptor), "Rock", 0, True)
+        MyBase.New(
+            NameOf(RockItemTypeDescriptor),
+            "Rock",
+            0,
+            True,
+            Array.Empty(Of String))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
     End Sub
 
     Friend Overrides Sub HandleRemoveItem(item As IItem, character As ICharacter)
-    End Sub
-
-    Friend Overrides Sub HandleInitialize(item As IItem)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

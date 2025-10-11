@@ -8,7 +8,8 @@ Public Class LogItemTypeDescriptor
             NameOf(LogItemTypeDescriptor),
             "Log",
             0,
-            True)
+            True,
+            {TagType.CanRefuel, TagType.IsCookable})
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -18,9 +19,8 @@ Public Class LogItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatistic(StatisticType.Fuel, 5)
-        item.SetTag(TagType.CanRefuel, True)
-        item.SetTag(TagType.IsCookable, True)
         item.SetMetadata(MetadataType.CookedItemType, NameOf(CharcoalItemTypeDescriptor))
     End Sub
 

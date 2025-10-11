@@ -15,7 +15,8 @@ Public MustInherit Class ConsumableItemTypeDescriptor
         MyBase.New(itemType,
                    itemTypeName,
                    itemCount,
-                   isAggregate)
+                   isAggregate,
+                   Array.Empty(Of String))
         Me.foodPoisoningStats = foodPoisoningStats
     End Sub
 

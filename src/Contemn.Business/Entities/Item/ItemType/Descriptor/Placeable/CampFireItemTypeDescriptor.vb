@@ -8,7 +8,8 @@ Public Class CampFireItemTypeDescriptor
             NameOf(CampFireItemTypeDescriptor),
             "Camp Fire",
             0,
-            True)
+            True,
+            {TagType.CanPlace})
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -18,7 +19,7 @@ Public Class CampFireItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
-        item.SetTag(TagType.CanPlace, True)
+        MyBase.HandleInitialize(item)
         item.SetMetadata(MetadataType.PlaceLocationType, NameOf(CampFireLocationTypeDescriptor))
     End Sub
 

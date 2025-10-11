@@ -19,6 +19,7 @@ Public Class RawFishFiletItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatistic(StatisticType.Satiety, 15)
         item.SetTag(TagType.IsCookable, True)
         item.SetMetadata(MetadataType.CookedItemType, NameOf(CookedFishFiletItemTypeDescriptor))

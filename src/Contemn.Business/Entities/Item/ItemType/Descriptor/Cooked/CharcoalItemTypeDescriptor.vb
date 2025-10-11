@@ -8,7 +8,8 @@ Public Class CharcoalItemTypeDescriptor
             NameOf(CharcoalItemTypeDescriptor),
             "Charcoal",
             0,
-            True)
+            True,
+            {TagType.CanRefuel})
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -18,8 +19,8 @@ Public Class CharcoalItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatistic(StatisticType.Fuel, 10)
-        item.SetTag(TagType.CanRefuel, True)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

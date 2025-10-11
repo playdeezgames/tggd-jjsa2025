@@ -4,7 +4,12 @@ Public Class PlantFiberItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
-        MyBase.New(NameOf(PlantFiberItemTypeDescriptor), "Fiber", 0, True)
+        MyBase.New(
+            NameOf(PlantFiberItemTypeDescriptor),
+            "Fiber",
+            0,
+            True,
+            {TagType.CanRefuel})
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -14,8 +19,8 @@ Public Class PlantFiberItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatistic(StatisticType.Fuel, 1)
-        item.SetTag(TagType.CanRefuel, True)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

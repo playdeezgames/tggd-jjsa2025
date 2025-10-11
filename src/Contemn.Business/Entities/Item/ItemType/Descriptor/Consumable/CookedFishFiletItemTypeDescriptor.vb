@@ -18,6 +18,7 @@ Public Class CookedFishFiletItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatistic(StatisticType.Satiety, 25)
     End Sub
 

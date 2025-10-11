@@ -8,16 +8,14 @@ Public Class ClayItemTypeDescriptor
             NameOf(ClayItemTypeDescriptor),
             "Clay",
             0,
-            True)
+            True,
+            Array.Empty(Of String))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
     End Sub
 
     Friend Overrides Sub HandleRemoveItem(item As IItem, character As ICharacter)
-    End Sub
-
-    Friend Overrides Sub HandleInitialize(item As IItem)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

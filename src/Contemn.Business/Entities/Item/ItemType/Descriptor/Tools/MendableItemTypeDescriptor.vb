@@ -3,7 +3,6 @@
 Public MustInherit Class MendableItemTypeDescriptor
     Inherits ItemTypeDescriptor
     ReadOnly maximumDurability As Integer
-    ReadOnly tags As IEnumerable(Of String)
     ReadOnly mendConsumptionItemType As String
     Private ReadOnly durabilityRepaired As Integer
     Private ReadOnly MendChoice As IDialogChoice = New DialogChoice("MEND_CHOICE", "Mend")
@@ -14,16 +13,16 @@ Public MustInherit Class MendableItemTypeDescriptor
                      itemCount As Integer,
                      isAggregate As Boolean,
                      maximumDurability As Integer,
-                     tags As IEnumerable(Of String),
+                     autoTags As IEnumerable(Of String),
                      mendConsumptionItemType As String,
                      durabilityRepaired As Integer)
         MyBase.New(
             itemType,
             itemTypeName,
             itemCount,
-            isAggregate)
+            isAggregate,
+            autoTags)
         Me.maximumDurability = maximumDurability
-        Me.tags = tags
         Me.mendConsumptionItemType = mendConsumptionItemType
         Me.durabilityRepaired = durabilityRepaired
     End Sub
@@ -43,14 +42,12 @@ Public MustInherit Class MendableItemTypeDescriptor
     End Function
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatisticRange(
             StatisticType.Durability,
             maximumDurability,
             0,
             maximumDurability)
-        For Each tag In tags
-            item.SetTag(tag, True)
-        Next
     End Sub
     Friend Overrides Function GetName(item As IItem) As String
         Return $"{ItemTypeName}({item.GetStatistic(StatisticType.Durability)}/{item.GetStatisticMaximum(StatisticType.Durability)})"

@@ -9,7 +9,8 @@ Public Class FireStarterItemTypeDescriptor
             NameOf(FireStarterItemTypeDescriptor),
             "Fire Starter",
             0,
-            False)
+            False,
+            {TagType.CanLight, TagType.CanRefuel})
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -19,10 +20,9 @@ Public Class FireStarterItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatisticRange(StatisticType.Durability, MAXIMUM_DURABILITY, 0, MAXIMUM_DURABILITY)
-        item.SetTag(TagType.CanLight, True)
         item.SetStatistic(StatisticType.Fuel, 2)
-        item.SetTag(TagType.CanRefuel, True)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

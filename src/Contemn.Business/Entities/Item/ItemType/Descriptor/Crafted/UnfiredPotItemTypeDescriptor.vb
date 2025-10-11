@@ -8,7 +8,8 @@ Public Class UnfiredPotItemTypeDescriptor
             NameOf(UnfiredPotItemTypeDescriptor),
             "Unfired Pot",
             0,
-            True)
+            True,
+            {TagType.CanKiln})
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -18,7 +19,7 @@ Public Class UnfiredPotItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
-        item.SetTag(TagType.CanKiln, True)
+        MyBase.HandleInitialize(item)
         item.SetMetadata(MetadataType.FiredItemType, NameOf(FiredPotItemTypeDescriptor))
     End Sub
 

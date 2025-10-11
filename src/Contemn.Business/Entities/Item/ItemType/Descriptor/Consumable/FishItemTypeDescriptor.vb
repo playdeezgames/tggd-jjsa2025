@@ -19,6 +19,7 @@ Public Class FishItemTypeDescriptor
     End Sub
 
     Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
         item.SetStatistic(StatisticType.Satiety, 20)
     End Sub
 
