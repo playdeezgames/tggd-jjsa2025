@@ -304,7 +304,7 @@
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Chop Wood",
                     NameOf(LogItemTypeDescriptor),
-                    {NameOf(ClayItemTypeDescriptor), NameOf(RockItemTypeDescriptor)},
+                    {NameOf(AxeItemTypeDescriptor)},
                     {
                         "Make an Axe",
                         "Interact with a Tree",
@@ -321,7 +321,7 @@
                         NameOf(UnfiredPotItemTypeDescriptor)
                     },
                     {
-                        "Gather unfired pot",
+                        "Craft unfired pot",
                         "Place Kiln",
                         "Fuel and Light Kiln",
                         "Interact with kiln",
