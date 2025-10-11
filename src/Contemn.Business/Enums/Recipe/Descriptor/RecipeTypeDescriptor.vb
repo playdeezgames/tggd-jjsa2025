@@ -5,6 +5,7 @@ Friend MustInherit Class RecipeTypeDescriptor
     Private ReadOnly inputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly durabilities As IReadOnlyDictionary(Of String, Integer)
+    Friend ReadOnly Property IsDestructive As Boolean
     Private Shared ReadOnly tagTypeName As IReadOnlyDictionary(Of String, String) =
         New Dictionary(Of String, String) From
         {
@@ -16,6 +17,7 @@ Friend MustInherit Class RecipeTypeDescriptor
         }
     Sub New(
            recipeType As String,
+           isDestructive As Boolean,
            inputs As IReadOnlyDictionary(Of String, Integer),
            outputs As IReadOnlyDictionary(Of String, Integer),
            durabilities As IReadOnlyDictionary(Of String, Integer))
@@ -23,6 +25,7 @@ Friend MustInherit Class RecipeTypeDescriptor
         Me.inputs = inputs
         Me.outputs = outputs
         Me.durabilities = durabilities
+        Me.IsDestructive = isDestructive
     End Sub
     Friend Overridable Function CanCraft(character As ICharacter) As Boolean
         Return inputs.All(Function(x) character.GetCountOfItemType(x.Key) >= x.Value) AndAlso

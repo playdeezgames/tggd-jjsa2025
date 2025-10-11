@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(RawFishFiletRecipeTypeDescriptor),
+            False,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(FishItemTypeDescriptor), 1}

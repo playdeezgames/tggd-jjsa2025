@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(BladeRecipeTypeDescriptor),
+            False,
             New Dictionary(Of String, Integer) From {
                 {NameOf(SharpRockItemTypeDescriptor), 1}
             },

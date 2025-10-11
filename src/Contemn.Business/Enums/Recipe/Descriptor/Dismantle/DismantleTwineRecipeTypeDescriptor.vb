@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(DismantleTwineRecipeTypeDescriptor),
+            True,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(TwineItemTypeDescriptor), 1}

@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(DismantleKnifeRecipeTypeDescriptor),
+            True,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(KnifeItemTypeDescriptor), 1}

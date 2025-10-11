@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(FishingNetRecipeTypeDescriptor),
+            False,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(TwineItemTypeDescriptor), 4}

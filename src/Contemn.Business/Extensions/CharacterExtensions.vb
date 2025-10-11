@@ -52,21 +52,33 @@ Friend Module CharacterExtensions
     Friend Function CraftRecipe(
                                character As ICharacter,
                                recipeType As String,
-                               nextDialog As Func(Of IDialog)) As IDialog
-        Dim CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
-        Const CRAFT_ANOTHER_TEXT = "Craft Another"
-        Dim descriptor = recipeType.ToRecipeTypeDescriptor
-        Dim messageLines = descriptor.Craft(character)
-        character.PlaySfx(Sfx.Craft)
-        character.ChangeStatistic(StatisticType.Score, 1)
-        Return New MessageDialog(
+                               nextDialog As Func(Of IDialog),
+                               confirmed As Boolean) As IDialog
+        Dim descriptor = RecipeTypes.Descriptors(recipeType)
+        If descriptor.IsDestructive AndAlso Not confirmed Then
+            Return New ConfirmDialog(
+                "Are you sure?",
+                {
+                    New DialogLine(MoodType.Warning, "This recipe is destructive."),
+                    New DialogLine(MoodType.Info, "Please confirm.")
+                },
+                Function() character.CraftRecipe(recipeType, nextDialog, True),
+                nextDialog)
+        Else
+            Dim CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
+            Const CRAFT_ANOTHER_TEXT = "Craft Another"
+            Dim messageLines = descriptor.Craft(character)
+            character.PlaySfx(Sfx.Craft)
+            character.ChangeStatistic(StatisticType.Score, 1)
+            Return New MessageDialog(
             "Behold!",
             messageLines,
             {
                 (OK_CHOICE, OK_TEXT, nextDialog, True),
-                (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, Function() character.CraftRecipe(recipeType, nextDialog), descriptor.CanCraft(character))
+                (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, Function() character.CraftRecipe(recipeType, nextDialog, True), descriptor.CanCraft(character))
             },
             nextDialog)
+        End If
     End Function
     <Extension>
     Friend Function GetDurabilityTotal(

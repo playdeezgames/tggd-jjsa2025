@@ -31,7 +31,8 @@ Friend Class CraftDialog
             Case Else
                 Return character.CraftRecipe(
                     choice,
-                    LaunchMenu(character))
+                    LaunchMenu(character),
+                    False)
         End Select
     End Function
 

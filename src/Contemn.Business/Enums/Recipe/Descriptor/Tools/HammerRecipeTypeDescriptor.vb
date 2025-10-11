@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(HammerRecipeTypeDescriptor),
+            False,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(StickItemTypeDescriptor), 1},

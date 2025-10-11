@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(TwineRecipeTypeDescriptor),
+            False,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(PlantFiberItemTypeDescriptor), 2}

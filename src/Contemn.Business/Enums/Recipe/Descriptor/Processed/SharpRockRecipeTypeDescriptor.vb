@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(SharpRockRecipeTypeDescriptor),
+            False,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(RockItemTypeDescriptor), 1}

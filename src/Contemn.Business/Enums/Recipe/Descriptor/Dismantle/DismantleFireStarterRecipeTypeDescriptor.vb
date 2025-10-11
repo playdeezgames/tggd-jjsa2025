@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(DismantleFireStarterRecipeTypeDescriptor),
+            True,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(FireStarterItemTypeDescriptor), 1}

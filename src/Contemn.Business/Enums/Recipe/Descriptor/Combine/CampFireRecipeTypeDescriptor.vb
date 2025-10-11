@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(CampFireRecipeTypeDescriptor),
+            False,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(StickItemTypeDescriptor), 8},

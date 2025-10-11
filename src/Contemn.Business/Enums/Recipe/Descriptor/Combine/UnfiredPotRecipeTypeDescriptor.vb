@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(UnfiredPotRecipeTypeDescriptor),
+            False,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(ClayItemTypeDescriptor), 3}

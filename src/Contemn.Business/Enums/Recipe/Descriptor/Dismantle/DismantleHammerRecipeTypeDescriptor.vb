@@ -4,6 +4,7 @@
     Public Sub New()
         MyBase.New(
             NameOf(DismantleHammerRecipeTypeDescriptor),
+            True,
             New Dictionary(Of String, Integer) From
             {
                 {NameOf(HammerItemTypeDescriptor), 1}
