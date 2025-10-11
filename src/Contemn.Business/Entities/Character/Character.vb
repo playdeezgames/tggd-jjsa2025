@@ -67,7 +67,7 @@ Friend Class Character
 
     Public ReadOnly Property HasAvailableRecipes As Boolean Implements ICharacter.HasAvailableRecipes
         Get
-            Return RecipeTypes.Descriptors.Any(Function(x) x.Value.CanCraft(Me))
+            Return RecipeTypes.Descriptors.Any(Function(x) x.CanCraft(Me))
         End Get
     End Property
 

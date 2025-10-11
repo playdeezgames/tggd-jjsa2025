@@ -21,7 +21,7 @@ Friend Class HowToCraftListDialog
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
-        Dim outputs = New HashSet(Of String)(RecipeTypes.Descriptors.Values.SelectMany(Function(x) x.OutputItemTypes))
+        Dim outputs = New HashSet(Of String)(RecipeTypes.Descriptors.SelectMany(Function(x) x.OutputItemTypes))
         result.AddRange(outputs.Select(Function(x) New DialogChoice(x, ItemTypes.Descriptors(x).ItemTypeName)).OrderBy(Function(x) x.Text))
         Return result
     End Function

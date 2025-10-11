@@ -22,8 +22,8 @@ Friend Class ItemTypeCraftDialog
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
-        For Each entry In RecipeTypes.Descriptors.Where(Function(x) x.Value.HasInput(itemType) AndAlso x.Value.CanCraft(character))
-            choices.Add(New DialogChoice(entry.Key, entry.Value.Name))
+        For Each entry In RecipeTypes.Descriptors.Where(Function(x) x.HasInput(itemType) AndAlso x.CanCraft(character))
+            choices.Add(New DialogChoice(entry.RecipeType, entry.Name))
         Next
         Return choices
     End Function
@@ -37,7 +37,7 @@ Friend Class ItemTypeCraftDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return character.CraftRecipe(choice, ItemTypeDialog.LaunchMenu(character, itemType), False)
+                Return character.CraftRecipe(RecipeTypes.Descriptors.Single(Function(x) x.RecipeType = choice), ItemTypeDialog.LaunchMenu(character, itemType), False)
         End Select
     End Function
 

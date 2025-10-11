@@ -38,7 +38,7 @@ Friend Class ItemTypeDialog
         If itemCount > 1 Then
             result.Add(New DialogChoice(DROP_ALL_CHOICE, DROP_ALL_TEXT))
         End If
-        If RecipeTypes.Descriptors.Any(Function(x) x.Value.HasInput(itemType) AndAlso x.Value.CanCraft(character)) Then
+        If RecipeTypes.Descriptors.Any(Function(x) x.HasInput(itemType) AndAlso x.CanCraft(character)) Then
             result.Add(New DialogChoice(CRAFT_CHOICE, CRAFT_TEXT))
         End If
         result.AddRange(character.GetItemOfType(itemType).GetAvailableChoices(character))

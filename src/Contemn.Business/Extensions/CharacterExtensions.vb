@@ -51,10 +51,9 @@ Friend Module CharacterExtensions
     <Extension>
     Friend Function CraftRecipe(
                                character As ICharacter,
-                               recipeType As String,
+                               descriptor As RecipeTypeDescriptor,
                                nextDialog As Func(Of IDialog),
                                confirmed As Boolean) As IDialog
-        Dim descriptor = RecipeTypes.Descriptors(recipeType)
         If descriptor.IsDestructive AndAlso Not confirmed Then
             Return New ConfirmDialog(
                 "Are you sure?",
@@ -62,7 +61,7 @@ Friend Module CharacterExtensions
                     New DialogLine(MoodType.Warning, "This recipe is destructive."),
                     New DialogLine(MoodType.Info, "Please confirm.")
                 },
-                Function() character.CraftRecipe(recipeType, nextDialog, True),
+                Function() character.CraftRecipe(descriptor, nextDialog, True),
                 nextDialog)
         Else
             Dim CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
@@ -75,7 +74,7 @@ Friend Module CharacterExtensions
             messageLines,
             {
                 (OK_CHOICE, OK_TEXT, nextDialog, True),
-                (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, Function() character.CraftRecipe(recipeType, nextDialog, True), descriptor.CanCraft(character))
+                (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, Function() character.CraftRecipe(descriptor, nextDialog, True), descriptor.CanCraft(character))
             },
             nextDialog)
         End If
