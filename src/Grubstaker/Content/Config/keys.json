@@ -1,0 +1,20 @@
+﻿{
+  "Space": "Green",
+  "Enter": "Green",
+  "Escape": "Red",
+  "NumPad0": "Red",
+  "Up": "Up",
+  "NumPad8": "Up",
+  "W": "Up",
+  "Z": "Up",
+  "Left": "Left",
+  "NumPad4": "Left",
+  "A": "Left",
+  "Q": "Left",
+  "Down": "Down",
+  "NumPad2": "Down",
+  "S": "Down",
+  "Right": "Right",
+  "D": "Right",
+  "NumPad6": "Right"
+}        
