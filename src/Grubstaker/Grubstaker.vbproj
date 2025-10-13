@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>Grubstaker</RootNamespace>
     <TargetFramework>net9.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
@@ -14,6 +14,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Content\Config\font.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Content\Audio\Craft.wav">
@@ -29,6 +33,9 @@
     <Content Include="Content\Audio\EnemyDeath.wav">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Config\font.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Config\mux.json">

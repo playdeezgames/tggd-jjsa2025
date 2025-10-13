@@ -1,5 +1,6 @@
-﻿Imports Contemn.UI
-Imports TGGD.UI
+﻿Imports System.IO
+Imports System.Text.Json
+Imports Contemn.UI
 
 Public Class PresentationContext
     Inherits UIContext
@@ -9,15 +10,15 @@ Public Class PresentationContext
     Private MuxVolumeHook As Action(Of Single)
     Private SfxHook As Action(Of String)
     Private MuxHook As Action(Of String)
+    Private ReadOnly font As Font
 
-    Public Sub New(
-                  columns As Integer,
-                  rows As Integer,
-                  frameBuffer() As Integer)
+    Public Sub New(frameBuffer() As Integer, fontFilename As String)
         MyBase.New(
-            columns,
-            rows,
+            VIEW_COLUMNS,
+            VIEW_ROWS,
             frameBuffer)
+        Size = (VIEW_WIDTH * 4, VIEW_HEIGHT * 4)
+        font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(fontFilename)))
     End Sub
 
     Public Property Size As (Integer, Integer) Implements IPresentationContext.Size
@@ -47,10 +48,19 @@ Public Class PresentationContext
     End Sub
 
     Public Sub Update(elapsedGameTime As TimeSpan) Implements IPresentationContext.Update
-        Throw New NotImplementedException()
+        Refresh()
     End Sub
 
     Public Sub Render(displayBuffer As IDisplayBuffer) Implements IPresentationContext.Render
-        Throw New NotImplementedException()
+        For Each column In Enumerable.Range(0, VIEW_COLUMNS)
+            For Each row In Enumerable.Range(0, VIEW_ROWS)
+                Dim cell = buffer.GetPixel(column, row)
+                Dim foreground = (cell \ 256) Mod 16
+                Dim background = (cell \ 4096) Mod 16
+                Dim character = cell Mod 256
+                displayBuffer.Fill((column * CELL_WIDTH, row * CELL_HEIGHT), (CELL_WIDTH, CELL_HEIGHT), background)
+                font.WriteText(displayBuffer, (column * CELL_WIDTH, row * CELL_HEIGHT), character, foreground)
+            Next
+        Next
     End Sub
 End Class

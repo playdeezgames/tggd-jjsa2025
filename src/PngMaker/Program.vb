@@ -26,6 +26,11 @@ Module Program
             Color.FromArgb(255, 255, 255)
         }
     Sub Main(args As String())
+        FontMaker.MakeFont()
+        'MakeBigTexture()
+    End Sub
+
+    Private Sub MakeBigTexture()
         Dim sourceBmp As New Bitmap(InputFilename)
         Dim sourceCellColumns = sourceBmp.Width \ CellWidth
         Dim sourceCellRows = sourceBmp.Height \ CellHeight

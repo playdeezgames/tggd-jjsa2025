@@ -1,11 +1,10 @@
-Imports TGGD.Business
-Imports TGGD.UI
 Imports Contemn.Business
 Imports Contemn.Data
+Imports TGGD.UI
 
 Public Class UIContext
     Implements IUIContext
-    ReadOnly buffer As IUIBuffer(Of Integer)
+    Protected ReadOnly buffer As IUIBuffer(Of Integer)
     Private state As IUIState = Nothing
     Private ReadOnly eventQueue As New Queue(Of IEnumerable(Of String))
     Private ReadOnly worldData As New WorldData
