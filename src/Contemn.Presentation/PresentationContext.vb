@@ -19,6 +19,7 @@ Public Class PresentationContext
             frameBuffer)
         Size = (VIEW_WIDTH * 4, VIEW_HEIGHT * 4)
         font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(fontFilename)))
+        SfxVolume = 1.0
     End Sub
 
     Public Property Size As (Integer, Integer) Implements IPresentationContext.Size
@@ -48,7 +49,22 @@ Public Class PresentationContext
     End Sub
 
     Public Sub Update(elapsedGameTime As TimeSpan) Implements IPresentationContext.Update
+        While [Event] IsNot Nothing
+            HandleEvent([Event])
+            NextEvent()
+        End While
         Refresh()
+    End Sub
+
+    Private Sub HandleEvent([event] As IEnumerable(Of String))
+        Select Case [event].First
+            Case "PlaySfx"
+                HandlePlaySfx([event].Skip(1))
+        End Select
+    End Sub
+
+    Private Sub HandlePlaySfx(parameters As IEnumerable(Of String))
+        SfxHook(parameters.First)
     End Sub
 
     Public Sub Render(displayBuffer As IDisplayBuffer) Implements IPresentationContext.Render
