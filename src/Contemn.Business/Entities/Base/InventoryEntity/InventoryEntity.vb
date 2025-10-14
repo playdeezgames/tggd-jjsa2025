@@ -1,11 +1,15 @@
 ﻿Imports Contemn.Data
+Imports TGGD.Business
 
 Friend MustInherit Class InventoryEntity(Of TEntityData As InventoryEntityData, TDescriptor)
     Inherits DescribedEntity(Of TEntityData, TDescriptor)
     Implements IInventoryEntity(Of TDescriptor)
 
-    Protected Sub New(data As WorldData, playSfx As Action(Of String))
-        MyBase.New(data, playSfx)
+    Protected Sub New(
+                     data As WorldData,
+                     playSfx As Action(Of String),
+                     platform As IPlatform)
+        MyBase.New(data, playSfx, platform)
     End Sub
 
     Public ReadOnly Property HasItems As Boolean Implements IInventoryEntity(Of TDescriptor).HasItems

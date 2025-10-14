@@ -5,8 +5,12 @@ Friend Class Location
     Inherits InventoryEntity(Of LocationData, LocationTypeDescriptor)
     Implements ILocation
 
-    Public Sub New(data As WorldData, locationId As Integer, playSfx As Action(Of String))
-        MyBase.New(data, playSfx)
+    Public Sub New(
+                  data As WorldData,
+                  locationId As Integer,
+                  playSfx As Action(Of String),
+                  platform As IPlatform)
+        MyBase.New(data, playSfx, platform)
         Me.LocationId = locationId
     End Sub
 
@@ -60,7 +64,7 @@ Friend Class Location
 
     Public ReadOnly Property Map As IMap Implements ILocation.Map
         Get
-            Return New Map(Data, EntityData.MapId, AddressOf PlaySfx)
+            Return New Map(Data, EntityData.MapId, AddressOf PlaySfx, Platform)
         End Get
     End Property
 

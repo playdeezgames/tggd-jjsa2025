@@ -8,8 +8,9 @@ Friend Class Item
     Public Sub New(
                   data As WorldData,
                   itemId As Integer,
-                  playSfx As Action(Of String))
-        MyBase.New(data, playSfx)
+                  playSfx As Action(Of String),
+                  platform As IPlatform)
+        MyBase.New(data, playSfx, platform)
         Me.ItemId = itemId
     End Sub
 

@@ -5,15 +5,18 @@ Imports Contemn.Data
 Public Class World
     Inherits Entity(Of WorldData)
     Implements IWorld
-    Sub New(data As WorldData, playSfx As Action(Of String))
-        MyBase.New(data, playSfx)
+    Sub New(
+           data As WorldData,
+           playSfx As Action(Of String),
+           platform As IPlatform)
+        MyBase.New(data, playSfx, platform)
     End Sub
 
     Public ReadOnly Property Maps As IEnumerable(Of IMap) Implements IWorld.Maps
         Get
             Return Enumerable.
                 Range(0, Data.Maps.Count).
-                Select(Function(x) New Business.Map(Data, x, AddressOf PlaySfx))
+                Select(Function(x) New Business.Map(Data, x, AddressOf PlaySfx, Platform))
         End Get
     End Property
 
@@ -21,7 +24,7 @@ Public Class World
         Get
             Return If(
                 Data.AvatarCharacterId.HasValue,
-                New Character(Data, Data.AvatarCharacterId.Value, AddressOf PlaySfx),
+                New Character(Data, Data.AvatarCharacterId.Value, AddressOf PlaySfx, Platform),
                 Nothing)
         End Get
         Set(value As ICharacter)
@@ -155,7 +158,7 @@ Public Class World
     Public Function CreateMap(mapType As String) As IMap Implements IWorld.CreateMap
         Dim mapId = Data.Maps.Count
         Data.Maps.Add(New MapData With {.MapType = mapType})
-        Dim result = New Map(Data, mapId, AddressOf PlaySfx)
+        Dim result = New Map(Data, mapId, AddressOf PlaySfx, Platform)
         result.Initialize()
         Return result
     End Function
@@ -170,7 +173,8 @@ Public Class World
         Dim result = New Location(
             Data,
             locationId,
-            AddressOf PlaySfx)
+            AddressOf PlaySfx,
+            Platform)
         map.SetLocation(column, row, result)
         result.Initialize()
         Return result
@@ -184,7 +188,8 @@ Public Class World
         Dim result = New Character(
             Data,
             characterId,
-            AddressOf PlaySfx)
+            AddressOf PlaySfx,
+            Platform)
         result.Initialize()
         Return result
     End Function
@@ -199,18 +204,18 @@ Public Class World
             itemId = Data.Items.Count
             Data.Items.Add(New ItemData With {.ItemType = itemType})
         End If
-        Dim result = New Item(Data, itemId, AddressOf PlaySfx)
+        Dim result = New Item(Data, itemId, AddressOf PlaySfx, Platform)
         result.Initialize()
         entity.AddItem(result)
         Return result
     End Function
 
     Public Function GetMap(mapId As Integer) As IMap Implements IWorld.GetMap
-        Return New Map(Data, mapId, AddressOf PlaySfx)
+        Return New Map(Data, mapId, AddressOf PlaySfx, Platform)
     End Function
 
     Public Function GetLocation(locationId As Integer) As ILocation Implements IWorld.GetLocation
-        Return New Location(Data, locationId, AddressOf PlaySfx)
+        Return New Location(Data, locationId, AddressOf PlaySfx, Platform)
     End Function
 
     Public Function GetMessage(line As Integer) As IMessage Implements IWorld.GetMessage
@@ -218,7 +223,7 @@ Public Class World
     End Function
 
     Public Function GetItem(itemId As Integer) As IItem Implements IWorld.GetItem
-        Return New Item(Data, itemId, AddressOf PlaySfx)
+        Return New Item(Data, itemId, AddressOf PlaySfx, Platform)
     End Function
 
     Public Overrides Sub Recycle()
@@ -245,7 +250,7 @@ Public Class World
     End Function
 
     Public Function GetCharacter(characterId As Integer) As ICharacter Implements IWorld.GetCharacter
-        Return New Character(Data, characterId, AddressOf PlaySfx)
+        Return New Character(Data, characterId, AddressOf PlaySfx, Platform)
     End Function
 
     Public Function ProcessTurn() As IEnumerable(Of IDialogLine) Implements IWorld.ProcessTurn

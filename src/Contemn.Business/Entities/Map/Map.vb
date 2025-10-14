@@ -1,10 +1,15 @@
 ﻿Imports Contemn.Data
+Imports TGGD.Business
 
 Friend Class Map
     Inherits Entity(Of MapData)
     Implements IMap
-    Public Sub New(data As WorldData, mapId As Integer, playSfx As Action(Of String))
-        MyBase.New(data, playSfx)
+    Public Sub New(
+                  data As WorldData,
+                  mapId As Integer,
+                  playSfx As Action(Of String),
+                  platform As IPlatform)
+        MyBase.New(data, playSfx, platform)
         Me.MapId = mapId
     End Sub
     Public ReadOnly Property MapId As Integer Implements IMap.MapId
@@ -36,7 +41,7 @@ Friend Class Map
                 Aggregate(
                     Array.Empty(Of Integer).AsEnumerable,
                     Function(x, y) Enumerable.Concat(x, y.Value.Values)).
-                Select(Function(x) New Location(Data, x, AddressOf PlaySfx))
+                Select(Function(x) New Location(Data, x, AddressOf PlaySfx, Platform))
         End Get
     End Property
     Protected Overrides ReadOnly Property EntityData As MapData
@@ -80,7 +85,7 @@ Friend Class Map
         If EntityData.Locations.TryGetValue(column, mapColumn) Then
             Dim locationId As Integer = 0
             If mapColumn.TryGetValue(row, locationId) Then
-                Return New Location(Data, locationId, AddressOf PlaySfx)
+                Return New Location(Data, locationId, AddressOf PlaySfx, Platform)
             End If
         End If
         Return Nothing
