@@ -7,9 +7,8 @@ Friend Class NavigationState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String),
                   settings As ISettings)
-        MyBase.New(buffer, world, playSfx, settings)
+        MyBase.New(buffer, world, settings)
     End Sub
 
     Public Overrides Sub Refresh()
@@ -95,7 +94,7 @@ Friend Class NavigationState
     Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
             Case UI.Command.Red
-                Return New GameMenuState(Buffer, World, PlaySfx, Settings)
+                Return New GameMenuState(Buffer, World, Settings)
             Case UI.Command.Up
                 Return HandleMove(NameOf(MoveNorthVerbTypeDescriptor))
             Case UI.Command.Down
@@ -105,7 +104,7 @@ Friend Class NavigationState
             Case UI.Command.Right
                 Return HandleMove(NameOf(MoveEastVerbTypeDescriptor))
             Case UI.Command.Green
-                Return New DialogState(Buffer, World, PlaySfx, Settings, CharacterActionsDialog.LaunchMenu(World.Avatar).Invoke())
+                Return New DialogState(Buffer, World, Settings, CharacterActionsDialog.LaunchMenu(World.Avatar).Invoke())
             Case Else
                 Return Me
         End Select
@@ -114,8 +113,8 @@ Friend Class NavigationState
     Private Function HandleMove(verbType As String) As IUIState
         Dim dialog = World.Avatar.Perform(verbType)
         If dialog IsNot Nothing Then
-            Return New DialogState(Buffer, World, PlaySfx, Settings, dialog)
+            Return New DialogState(Buffer, World, Settings, dialog)
         End If
-        Return NeutralState.DetermineState(Buffer, World, PlaySfx, Settings)
+        Return NeutralState.DetermineState(Buffer, World, Settings)
     End Function
 End Class

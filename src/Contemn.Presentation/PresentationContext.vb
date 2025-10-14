@@ -16,9 +16,11 @@ Public Class PresentationContext
         MyBase.New(
             VIEW_COLUMNS,
             VIEW_ROWS,
-            frameBuffer,
-            Presentation.Settings.Load(settingsFilename))
+            frameBuffer)
         font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(fontFilename)))
+        Quit = False
+        SfxVolume = 0.5
+        MuxVolume = 0.5
     End Sub
 
     Public ReadOnly Property Size As (Integer, Integer) Implements IPresentationContext.Size
@@ -33,23 +35,29 @@ Public Class PresentationContext
         End Get
     End Property
 
-    Public ReadOnly Property SfxVolume As Single Implements IPresentationContext.SfxVolume
+    Private ReadOnly Property IPresentationContext_SfxVolume As Single Implements IPresentationContext.SfxVolume
         Get
-            Return settings.SfxVolume
+            Return SfxVolume
         End Get
     End Property
 
-    Public ReadOnly Property MuxVolume As Single Implements IPresentationContext.MuxVolume
+    Private ReadOnly Property IPresentationContext_MuxVolume As Single Implements IPresentationContext.MuxVolume
         Get
-            Return settings.MuxVolume
+            Return MuxVolume
         End Get
     End Property
 
     Public ReadOnly Property QuitRequested As Boolean Implements IPresentationContext.QuitRequested
         Get
-            Return Me.settings.Quit
+            Return Me.Quit
         End Get
     End Property
+
+    Public Overrides Property Quit As Boolean
+
+    Public Overrides Property SfxVolume As Single
+
+    Public Overrides Property MuxVolume As Single
 
     Public Sub SetSizeHook(value As Action(Of (Integer, Integer), Boolean)) Implements IPresentationContext.SetSizeHook
         Me.SizeHook = value

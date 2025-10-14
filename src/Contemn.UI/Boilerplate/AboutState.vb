@@ -7,9 +7,8 @@ Friend Class AboutState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String),
                   settings As ISettings)
-        MyBase.New(buffer, world, playSfx, settings)
+        MyBase.New(buffer, world, settings)
     End Sub
 
     Public Overrides Sub Refresh()
@@ -36,6 +35,6 @@ Friend Class AboutState
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState
-        Return New MainMenuState(Buffer, World, PlaySfx, Settings)
+        Return New MainMenuState(Buffer, World, Settings)
     End Function
 End Class

@@ -38,7 +38,7 @@
 <audio id="PlayerMiss" src="sfx/PlayerMiss.wav"></audio>
 <audio id="PlayerDeath" src="sfx/PlayerDeath.wav"></audio>
 @code{
-	IUIContext context = new UIContext(CHARACTER_COLUMNS, CHARACTER_ROWS, FrameBuffer, null);
+	IUIContext context = new WebUIContext(CHARACTER_COLUMNS, CHARACTER_ROWS, FrameBuffer);
 	const int CHARACTER_COLUMNS = 40;
 	const int CHARACTER_ROWS = 25;
 	const int CHARACTER_WIDTH = 24;

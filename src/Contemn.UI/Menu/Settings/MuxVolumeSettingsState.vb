@@ -8,12 +8,10 @@ Friend Class MuxVolumeSettingsState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String),
                   settings As ISettings)
         MyBase.New(
             buffer,
             world,
-            playSfx,
             settings,
             GenerateTitle(settings),
             Hue.Brown,
@@ -31,16 +29,16 @@ Friend Class MuxVolumeSettingsState
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState
-        Return New SettingsState(Buffer, World, PlaySfx, Settings)
+        Return New SettingsState(Buffer, World, Settings)
     End Function
 
     Protected Overrides Function HandleMenuItem(identifier As String) As IUIState
         Select Case identifier
             Case LEAVE_IT_IDENTIFIER
-                Return New SettingsState(Buffer, World, PlaySfx, Settings)
+                Return New SettingsState(Buffer, World, Settings)
             Case Else
                 Settings.MuxVolume = CSng(CInt(identifier) / 10)
-                Return New MuxVolumeSettingsState(Buffer, World, PlaySfx, Settings)
+                Return New MuxVolumeSettingsState(Buffer, World, Settings)
         End Select
     End Function
 End Class

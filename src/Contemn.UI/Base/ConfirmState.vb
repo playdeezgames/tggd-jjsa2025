@@ -10,14 +10,12 @@ Friend MustInherit Class ConfirmState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String),
                   settings As ISettings,
                   title As String,
                   titleForegroundColor As Integer)
         MyBase.New(
             buffer,
             world,
-            playSfx,
             settings,
             title,
             titleForegroundColor,

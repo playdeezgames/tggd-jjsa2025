@@ -7,12 +7,10 @@ Friend Class ConfirmQuitState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String),
                   settings As ISettings)
         MyBase.New(
             buffer,
             world,
-            playSfx,
             settings,
             "Are you sure you want to quit?",
             Hue.Red)
@@ -28,6 +26,6 @@ Friend Class ConfirmQuitState
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState
-        Return New MainMenuState(Buffer, World, PlaySfx, Settings)
+        Return New MainMenuState(Buffer, World, Settings)
     End Function
 End Class

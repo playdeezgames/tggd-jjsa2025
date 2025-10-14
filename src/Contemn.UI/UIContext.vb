@@ -3,12 +3,12 @@ Imports Contemn.Data
 Imports TGGD.Business
 Imports TGGD.UI
 
-Public Class UIContext
+Public MustInherit Class UIContext
     Implements IUIContext
     Implements IPlatform
+    Implements ISettings
     Protected ReadOnly buffer As IUIBuffer(Of Integer)
     Private state As IUIState = Nothing
-    Protected ReadOnly settings As ISettings
     Private ReadOnly eventQueue As New Queue(Of IEnumerable(Of String))
     Private ReadOnly worldData As New WorldData
     Private ReadOnly Property World As IWorld
@@ -20,10 +20,9 @@ Public Class UIContext
     Public Sub PlaySfx(sfx As String) Implements IPlatform.PlaySfx
         eventQueue.Enqueue({EVENT_PLAY_SFX, sfx})
     End Sub
-    Sub New(columns As Integer, rows As Integer, frameBuffer As Integer(), settings As ISettings)
+    Sub New(columns As Integer, rows As Integer, frameBuffer As Integer())
         Me.buffer = New UIBuffer(Of Integer)(columns, rows, frameBuffer)
-        Me.settings = settings
-        state = New TitleState(buffer, World, AddressOf PlaySfx, settings)
+        state = New TitleState(buffer, World, Me)
     End Sub
 
     Public ReadOnly Property [Event] As IEnumerable(Of String) Implements IUIContext.Event
@@ -31,6 +30,10 @@ Public Class UIContext
             Return If(eventQueue.Any, eventQueue.Peek, Nothing)
         End Get
     End Property
+
+    Public MustOverride Property Quit As Boolean Implements ISettings.Quit
+    Public MustOverride Property SfxVolume As Single Implements ISettings.SfxVolume
+    Public MustOverride Property MuxVolume As Single Implements ISettings.MuxVolume
 
     Public Sub NextEvent() Implements IUIContext.NextEvent
         If eventQueue.Any Then

@@ -11,12 +11,11 @@ Friend MustInherit Class PickerState
     Protected Sub New(
                      buffer As IUIBuffer(Of Integer),
                      world As Business.IWorld,
-                     playSfx As Action(Of String),
                      settings As ISettings,
                      title As String,
                      titleForegroundColor As Integer,
                      menuItems As IEnumerable(Of (Identifier As String, Text As String)))
-        MyBase.New(buffer, world, playSfx, settings)
+        MyBase.New(buffer, world, settings)
         Me.menuItems = menuItems.ToList
         Me.title = title
         Me.titleForegroundColor = titleForegroundColor

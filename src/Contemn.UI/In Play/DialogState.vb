@@ -11,10 +11,9 @@ Friend Class DialogState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String),
                   settings As ISettings,
                   dialog As IDialog)
-        MyBase.New(buffer, world, playSfx, settings)
+        MyBase.New(buffer, world, settings)
         Me.dialog = dialog
         choiceIndex = 0
     End Sub
@@ -63,9 +62,9 @@ Friend Class DialogState
 
     Private Function SetNextDialog(nextDialog As IDialog) As IUIState
         If nextDialog IsNot Nothing Then
-            Return New DialogState(Buffer, World, PlaySfx, Settings, nextDialog)
+            Return New DialogState(Buffer, World, Settings, nextDialog)
         Else
-            Return NeutralState.DetermineState(Buffer, World, PlaySfx, Settings)
+            Return NeutralState.DetermineState(Buffer, World, Settings)
         End If
     End Function
 End Class

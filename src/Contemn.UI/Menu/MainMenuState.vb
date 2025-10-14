@@ -14,12 +14,10 @@ Friend Class MainMenuState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String),
                   settings As ISettings)
         MyBase.New(
             buffer,
             world,
-            playSfx,
             settings,
             "Main Menu",
             Hue.Magenta,
@@ -44,11 +42,11 @@ Friend Class MainMenuState
             Case EMBARK_IDENTIFIER
                 Return HandleEmbarkation()
             Case ABOUT_IDENTIFIER
-                Return New AboutState(Buffer, World, PlaySfx, Settings)
+                Return New AboutState(Buffer, World, Settings)
             Case SETTINGS_IDENTIFIER
-                Return New SettingsState(Buffer, World, PlaySfx, Settings)
+                Return New SettingsState(Buffer, World, Settings)
             Case QUIT_IDENTIFIER
-                Return New ConfirmQuitState(Buffer, World, PlaySfx, Settings)
+                Return New ConfirmQuitState(Buffer, World, Settings)
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -58,7 +56,6 @@ Friend Class MainMenuState
         Return New EmbarkationState(
             Buffer,
             World,
-            PlaySfx,
             Settings)
     End Function
 

@@ -12,12 +12,10 @@ Friend Class SettingsState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String),
                   settings As ISettings)
         MyBase.New(
             buffer,
             world,
-            playSfx,
             settings,
             "Settings",
             Hue.Brown,
@@ -36,9 +34,9 @@ Friend Class SettingsState
 
     Protected Overrides Function HandleCancel() As IUIState
         If World.Avatar IsNot Nothing Then
-            Return New GameMenuState(Buffer, World, PlaySfx, Settings)
+            Return New GameMenuState(Buffer, World, Settings)
         End If
-        Return New MainMenuState(Buffer, World, PlaySfx, Settings)
+        Return New MainMenuState(Buffer, World, Settings)
     End Function
 
     Protected Overrides Function HandleMenuItem(identifier As String) As IUIState
@@ -46,9 +44,9 @@ Friend Class SettingsState
             Case GO_BACK_IDENTIFIER
                 Return HandleCancel()
             Case SFX_VOLUME_IDENTIFIER
-                Return New SfxVolumeSettingsState(Buffer, World, PlaySfx, Settings)
+                Return New SfxVolumeSettingsState(Buffer, World, Settings)
             Case MUX_VOLUME_IDENTIFIER
-                Return New MuxVolumeSettingsState(Buffer, World, PlaySfx, Settings)
+                Return New MuxVolumeSettingsState(Buffer, World, Settings)
             Case Else
                 Throw New NotImplementedException
         End Select

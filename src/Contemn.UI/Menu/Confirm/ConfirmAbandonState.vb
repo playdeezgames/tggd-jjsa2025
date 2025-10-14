@@ -7,27 +7,25 @@ Friend Class ConfirmAbandonState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String),
                   settings As ISettings)
         MyBase.New(
             buffer,
             world,
-            playSfx,
             settings,
             "Confirm Abandon?",
             Hue.Red)
     End Sub
 
     Protected Overrides Function OnCancel() As IUIState
-        Return New GameMenuState(Buffer, World, PlaySfx, Settings)
+        Return New GameMenuState(Buffer, World, Settings)
     End Function
 
     Protected Overrides Function OnConfirm() As IUIState
         World.Clear()
-        Return New MainMenuState(Buffer, World, PlaySfx, Settings)
+        Return New MainMenuState(Buffer, World, Settings)
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState
-        Return New GameMenuState(Buffer, World, PlaySfx, Settings)
+        Return New GameMenuState(Buffer, World, Settings)
     End Function
 End Class
