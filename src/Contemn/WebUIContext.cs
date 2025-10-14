@@ -8,5 +8,6 @@ namespace Contemn
         public override float SfxVolume { get => 1.0f; set { } }
         public override float MuxVolume { get => 1.0f; set { } }
         public override bool HasSettings => false;
+        public override int Zoom { get => 1; set { } }
     }
 }

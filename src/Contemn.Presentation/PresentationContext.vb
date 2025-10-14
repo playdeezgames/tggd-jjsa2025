@@ -22,11 +22,12 @@ Public Class PresentationContext
         Quit = False
         SfxVolume = 0.5
         _muxVolume = 0.5
+        Zoom = 4
     End Sub
 
     Public ReadOnly Property Size As (Integer, Integer) Implements IPresentationContext.Size
         Get
-            Return (VIEW_WIDTH * 4, VIEW_HEIGHT * 4)
+            Return (VIEW_WIDTH * Zoom, VIEW_HEIGHT * Zoom)
         End Get
     End Property
 
@@ -73,6 +74,8 @@ Public Class PresentationContext
             Return True
         End Get
     End Property
+
+    Public Overrides Property Zoom As Integer
 
     Public Sub SetSizeHook(value As Action(Of (Integer, Integer), Boolean)) Implements IPresentationContext.SetSizeHook
         Me.SizeHook = value
