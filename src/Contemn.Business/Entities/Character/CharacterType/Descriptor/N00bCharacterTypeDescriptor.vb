@@ -70,7 +70,7 @@ public Class N00bCharacterTypeDescriptor
             character.SetTag(TagType.CanRecover, False)
             Dim illness = character.GetStatistic(StatisticType.Illness)
             result.Add(New DialogLine(MoodType.Danger, $"-{illness} HLT due to illness."))
-            character.PlaySfx(Sfx.PlayerHit)
+            character.Platform.PlaySfx(Sfx.PlayerHit)
             character.ChangeStatistic(StatisticType.Health, -illness)
             character.ChangeStatistic(StatisticType.Illness, -1)
         End If
@@ -104,7 +104,7 @@ public Class N00bCharacterTypeDescriptor
     Private Shared Function ProcessStarvation(character As ICharacter) As IEnumerable(Of IDialogLine)
         If character.IsStatisticAtMinimum(StatisticType.Satiety) OrElse
             character.IsStatisticAtMinimum(StatisticType.Hydration) Then
-            character.PlaySfx(Sfx.PlayerHit)
+            character.Platform.PlaySfx(Sfx.PlayerHit)
             character.SetTag(TagType.CanRecover, False)
             character.ChangeStatistic(StatisticType.Health, -1)
         End If

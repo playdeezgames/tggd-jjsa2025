@@ -67,7 +67,7 @@ Friend Module CharacterExtensions
             Dim CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
             Const CRAFT_ANOTHER_TEXT = "Craft Another"
             Dim messageLines = descriptor.Craft(character)
-            character.PlaySfx(Sfx.Craft)
+            character.Platform.PlaySfx(Sfx.Craft)
             character.ChangeStatistic(StatisticType.Score, 1)
             Return New MessageDialog(
             "Behold!",

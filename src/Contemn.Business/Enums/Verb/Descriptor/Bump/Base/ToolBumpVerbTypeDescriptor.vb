@@ -37,7 +37,7 @@ Friend MustInherit Class ToolBumpVerbTypeDescriptor
     End Function
 
     Private Function HandleFailure(character As ICharacter) As IDialog
-        character.PlaySfx(Sfx.Shucks)
+        character.Platform.PlaySfx(Sfx.Shucks)
         Return New MessageDialog(
             "Fail",
             character.World.ProcessTurn().
@@ -54,7 +54,7 @@ Friend MustInherit Class ToolBumpVerbTypeDescriptor
         bumpLocation.ChangeStatistic(StatisticType.Depletion, 1)
         bumpLocation.ChangeStatistic(StatisticType.Resource, -1)
         character.ChangeStatistic(StatisticType.Score, 1)
-        character.PlaySfx(Sfx.WooHoo)
+        character.Platform.PlaySfx(Sfx.WooHoo)
         Return New MessageDialog(
                     "Yay!",
                     character.World.ProcessTurn().

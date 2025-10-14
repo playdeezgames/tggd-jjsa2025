@@ -1,6 +1,8 @@
-﻿Public Interface IEntity
+﻿Imports TGGD.Business
+
+Public Interface IEntity
     ReadOnly Property World As IWorld
-    Sub PlaySfx(sfx As String)
+    ReadOnly Property Platform As IPlatform
     Sub Clear()
     Sub Recycle()
     Sub Initialize()

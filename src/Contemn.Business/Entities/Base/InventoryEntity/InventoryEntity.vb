@@ -7,9 +7,8 @@ Friend MustInherit Class InventoryEntity(Of TEntityData As InventoryEntityData, 
 
     Protected Sub New(
                      data As WorldData,
-                     playSfx As Action(Of String),
                      platform As IPlatform)
-        MyBase.New(data, playSfx, platform)
+        MyBase.New(data, platform)
     End Sub
 
     Public ReadOnly Property HasItems As Boolean Implements IInventoryEntity(Of TDescriptor).HasItems

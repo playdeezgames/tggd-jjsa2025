@@ -25,7 +25,7 @@ Friend Class CollectStickVerbTypeDescriptor
 
     Private Function HandlePerform(character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim bumpLocation = character.GetBumpLocation()
-        character.PlaySfx(Sfx.WooHoo)
+        character.Platform.PlaySfx(Sfx.WooHoo)
         Dim result As New List(Of IDialogLine)
         Dim stick = character.World.CreateItem(NameOf(StickItemTypeDescriptor), character)
         bumpLocation.ChangeStatistic(StatisticType.Resource, -1)

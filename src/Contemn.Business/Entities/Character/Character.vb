@@ -8,11 +8,9 @@ Friend Class Character
     Public Sub New(
                   data As WorldData,
                   characterId As Integer,
-                  playSfx As Action(Of String),
                   platform As IPlatform)
         MyBase.New(
             data,
-            playSfx,
             platform)
         Me.CharacterId = characterId
     End Sub
@@ -27,7 +25,7 @@ Friend Class Character
 
     Public ReadOnly Property Location As ILocation Implements ICharacter.Location
         Get
-            Return New Location(Data, EntityData.LocationId, AddressOf PlaySfx, Platform)
+            Return New Location(Data, EntityData.LocationId, Platform)
         End Get
     End Property
 

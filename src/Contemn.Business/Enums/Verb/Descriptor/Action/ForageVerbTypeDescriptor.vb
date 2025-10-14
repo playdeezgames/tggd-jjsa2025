@@ -29,7 +29,7 @@ Friend Class ForageVerbTypeDescriptor
                 (OK_CHOICE, OK_TEXT, CharacterActionsDialog.LaunchMenu(character), True),
                 (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
             }
-        character.PlaySfx(Sfx.Shucks)
+        character.Platform.PlaySfx(Sfx.Shucks)
         Return New MessageDialog(
             "Shucks!",
             messageLines,
@@ -44,7 +44,7 @@ Friend Class ForageVerbTypeDescriptor
                 New DialogLine(MoodType.Info, $"+1 {item.Name}({itemCount})")
             }
         character.ChangeStatistic(StatisticType.Score, 1)
-        character.PlaySfx(Sfx.WooHoo)
+        character.Platform.PlaySfx(Sfx.WooHoo)
         messageLines.AddRange(lines)
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {

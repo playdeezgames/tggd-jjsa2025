@@ -13,7 +13,7 @@ Public Class UIContext
     Private ReadOnly worldData As New WorldData
     Private ReadOnly Property World As IWorld
         Get
-            Return New Business.World(worldData, AddressOf PlaySfx, Me)
+            Return New Business.World(worldData, Me)
         End Get
     End Property
     Const EVENT_PLAY_SFX = "PlaySfx"

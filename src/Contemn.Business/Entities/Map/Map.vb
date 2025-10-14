@@ -7,9 +7,8 @@ Friend Class Map
     Public Sub New(
                   data As WorldData,
                   mapId As Integer,
-                  playSfx As Action(Of String),
                   platform As IPlatform)
-        MyBase.New(data, playSfx, platform)
+        MyBase.New(data, platform)
         Me.MapId = mapId
     End Sub
     Public ReadOnly Property MapId As Integer Implements IMap.MapId
@@ -41,7 +40,7 @@ Friend Class Map
                 Aggregate(
                     Array.Empty(Of Integer).AsEnumerable,
                     Function(x, y) Enumerable.Concat(x, y.Value.Values)).
-                Select(Function(x) New Location(Data, x, AddressOf PlaySfx, Platform))
+                Select(Function(x) New Location(Data, x, Platform))
         End Get
     End Property
     Protected Overrides ReadOnly Property EntityData As MapData
@@ -85,7 +84,7 @@ Friend Class Map
         If EntityData.Locations.TryGetValue(column, mapColumn) Then
             Dim locationId As Integer = 0
             If mapColumn.TryGetValue(row, locationId) Then
-                Return New Location(Data, locationId, AddressOf PlaySfx, Platform)
+                Return New Location(Data, locationId, Platform)
             End If
         End If
         Return Nothing

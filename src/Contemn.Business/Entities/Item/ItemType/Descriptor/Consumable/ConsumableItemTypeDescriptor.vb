@@ -45,7 +45,7 @@ Public MustInherit Class ConsumableItemTypeDescriptor
         lines.Add(New DialogLine(MoodType.Info, $"-1 {item.Name}({character.GetCountOfItemType(ItemType)})"))
         Dim caption = $"Ate {item.Name}"
         item.Recycle()
-        character.PlaySfx(Sfx.Eat)
+        character.Platform.PlaySfx(Sfx.Eat)
         Return New MessageDialog(
             caption,
             lines,

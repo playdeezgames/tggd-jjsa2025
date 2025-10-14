@@ -8,9 +8,8 @@ Friend Class Location
     Public Sub New(
                   data As WorldData,
                   locationId As Integer,
-                  playSfx As Action(Of String),
                   platform As IPlatform)
-        MyBase.New(data, playSfx, platform)
+        MyBase.New(data, platform)
         Me.LocationId = locationId
     End Sub
 
@@ -64,7 +63,7 @@ Friend Class Location
 
     Public ReadOnly Property Map As IMap Implements ILocation.Map
         Get
-            Return New Map(Data, EntityData.MapId, AddressOf PlaySfx, Platform)
+            Return New Map(Data, EntityData.MapId, Platform)
         End Get
     End Property
 

@@ -4,23 +4,21 @@ Imports TGGD.Business
 Public MustInherit Class Entity(Of TEntityData As EntityData)
     Implements IEntity
 
-    Private ReadOnly Property doPlaySfx As Action(Of String)
-    Protected ReadOnly Platform As IPlatform
+    Public ReadOnly Property Platform As IPlatform Implements IEntity.Platform
     Protected ReadOnly Data As WorldData
     Protected MustOverride ReadOnly Property EntityData As TEntityData
 
     Public ReadOnly Property World As IWorld Implements IEntity.World
         Get
-            Return New World(Data, doPlaySfx, Platform)
+            Return New World(Data, Platform)
         End Get
     End Property
 
     Sub New(
            data As WorldData,
-           playSfx As Action(Of String),
            platform As IPlatform)
         Me.Data = data
-        Me.doPlaySfx = playSfx
+        Me.Platform = platform
     End Sub
     Public Overridable Sub Clear() Implements IEntity.Clear
         EntityData.Statistics.Clear()
@@ -118,10 +116,6 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     End Function
 
     Public MustOverride Sub Recycle() Implements IEntity.Recycle
-
-    Public Sub PlaySfx(sfx As String) Implements IEntity.PlaySfx
-        doPlaySfx.Invoke(sfx)
-    End Sub
 
     Public Function HasMetadata(metadataType As String) As Boolean Implements IEntity.HasMetadata
         Return EntityData.Metadatas.ContainsKey(metadataType)

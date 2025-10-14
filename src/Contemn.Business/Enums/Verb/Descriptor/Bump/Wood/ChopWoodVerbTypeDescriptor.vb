@@ -18,7 +18,7 @@ Friend Class ChopWoodVerbTypeDescriptor
         Dim tool = character.World.CreateItem(NameOf(LogItemTypeDescriptor), character)
         bumpLocation.ChangeStatistic(StatisticType.Resource, -RESOURCE_PER_LOG)
         character.ChangeStatistic(StatisticType.Score, 1)
-        character.PlaySfx(Sfx.WooHoo)
+        character.Platform.PlaySfx(Sfx.WooHoo)
         Return New MessageDialog(
                     "Get so chopped!",
                     character.World.ProcessTurn().
