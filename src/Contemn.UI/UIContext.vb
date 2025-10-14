@@ -17,7 +17,7 @@ Public Class UIContext
         End Get
     End Property
     Const EVENT_PLAY_SFX = "PlaySfx"
-    Private Sub PlaySfx(sfx As String)
+    Public Sub PlaySfx(sfx As String) Implements IPlatform.PlaySfx
         eventQueue.Enqueue({EVENT_PLAY_SFX, sfx})
     End Sub
     Sub New(columns As Integer, rows As Integer, frameBuffer As Integer(), settings As ISettings)
