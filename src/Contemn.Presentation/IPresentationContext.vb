@@ -9,9 +9,9 @@ Public Interface IPresentationContext
     Sub SetMuxHook(value As Action(Of String))
     Sub Update(elapsedGameTime As TimeSpan)
     Sub Render(displayBuffer As IDisplayBuffer)
-    Property Size As (Integer, Integer)
-    Property FullScreen As Boolean
-    Property SfxVolume As Single
-    Property MuxVolume As Single
+    ReadOnly Property Size As (Integer, Integer)
+    ReadOnly Property FullScreen As Boolean
+    ReadOnly Property SfxVolume As Single
+    ReadOnly Property MuxVolume As Single
     ReadOnly Property QuitRequested As Boolean
 End Interface

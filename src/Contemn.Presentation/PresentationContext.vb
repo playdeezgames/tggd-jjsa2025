@@ -18,18 +18,28 @@ Public Class PresentationContext
             VIEW_ROWS,
             frameBuffer,
             Presentation.Settings.Load(settingsFilename))
-        Size = (VIEW_WIDTH * 4, VIEW_HEIGHT * 4)
         font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(fontFilename)))
-        SfxVolume = 1.0
     End Sub
 
-    Public Property Size As (Integer, Integer) Implements IPresentationContext.Size
+    Public ReadOnly Property Size As (Integer, Integer) Implements IPresentationContext.Size
+        Get
+            Return (VIEW_WIDTH * 4, VIEW_HEIGHT * 4)
+        End Get
+    End Property
 
-    Public Property FullScreen As Boolean Implements IPresentationContext.FullScreen
+    Public ReadOnly Property FullScreen As Boolean Implements IPresentationContext.FullScreen
+        Get
+            Return False
+        End Get
+    End Property
 
-    Public Property SfxVolume As Single Implements IPresentationContext.SfxVolume
+    Public ReadOnly Property SfxVolume As Single Implements IPresentationContext.SfxVolume
+        Get
+            Return 1.0
+        End Get
+    End Property
 
-    Public Property MuxVolume As Single Implements IPresentationContext.MuxVolume
+    Public ReadOnly Property MuxVolume As Single Implements IPresentationContext.MuxVolume
 
     Public ReadOnly Property QuitRequested As Boolean Implements IPresentationContext.QuitRequested
         Get
