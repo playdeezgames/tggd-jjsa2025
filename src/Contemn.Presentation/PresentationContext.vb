@@ -11,6 +11,7 @@ Public Class PresentationContext
     Private SfxHook As Action(Of String)
     Private MuxHook As Action(Of String)
     Private ReadOnly font As Font
+    Private _muxVolume As Single
 
     Public Sub New(frameBuffer() As Integer, fontFilename As String, settingsFilename As String)
         MyBase.New(
@@ -20,7 +21,7 @@ Public Class PresentationContext
         font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(fontFilename)))
         Quit = False
         SfxVolume = 0.5
-        MuxVolume = 0.5
+        _muxVolume = 0.5
     End Sub
 
     Public ReadOnly Property Size As (Integer, Integer) Implements IPresentationContext.Size
@@ -58,6 +59,14 @@ Public Class PresentationContext
     Public Overrides Property SfxVolume As Single
 
     Public Overrides Property MuxVolume As Single
+        Get
+            Return _muxVolume
+        End Get
+        Set(value As Single)
+            _muxVolume = value
+            MuxVolumeHook(value)
+        End Set
+    End Property
 
     Public Overrides ReadOnly Property HasSettings As Boolean
         Get
