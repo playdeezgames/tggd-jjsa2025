@@ -23,7 +23,8 @@ Friend Class ConfirmQuitState
     End Function
 
     Protected Overrides Function OnConfirm() As IUIState
-        Return New MainMenuState(Buffer, World, PlaySfx, Settings)
+        Settings.SignalQuit()
+        Return Nothing
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState
