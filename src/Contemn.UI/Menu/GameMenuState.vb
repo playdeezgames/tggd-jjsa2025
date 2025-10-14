@@ -8,6 +8,8 @@ Friend Class GameMenuState
     Const CONTINUE_TEXT = "Continue"
     Shared ReadOnly ABANDON_IDENTIFIER As String = NameOf(ABANDON_IDENTIFIER)
     Const ABANDON_TEXT = "Abandon"
+    Shared ReadOnly SETTINGS_IDENTIFIER As String = NameOf(SETTINGS_IDENTIFIER)
+    Const SETTINGS_TEXT = "Settings"
 
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
@@ -21,11 +23,20 @@ Friend Class GameMenuState
             settings,
             "Game Menu",
             Hue.Magenta,
+            GenerateMenuItems(settings))
+    End Sub
+
+    Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
+        Dim result As New List(Of (Identifier As String, Text As String)) From
             {
                 (CONTINUE_IDENTIFIER, CONTINUE_TEXT),
                 (ABANDON_IDENTIFIER, ABANDON_TEXT)
-            })
-    End Sub
+            }
+        If settings IsNot Nothing Then
+            result.Add((SETTINGS_IDENTIFIER, SETTINGS_TEXT))
+        End If
+        Return result
+    End Function
 
     Protected Overrides Function HandleMenuItem(identifier As String) As IUIState
         Select Case identifier
@@ -33,6 +44,8 @@ Friend Class GameMenuState
                 Return NeutralState.DetermineState(Buffer, World, PlaySfx, Settings)
             Case ABANDON_IDENTIFIER
                 Return New ConfirmAbandonState(Buffer, World, PlaySfx, Settings)
+            Case SETTINGS_IDENTIFIER
+                Return New SettingsState(Buffer, World, PlaySfx, Settings)
             Case Else
                 Throw New NotImplementedException
         End Select

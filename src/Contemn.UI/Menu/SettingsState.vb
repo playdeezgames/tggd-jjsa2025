@@ -23,6 +23,9 @@ Friend Class SettingsState
     End Sub
 
     Protected Overrides Function HandleCancel() As IUIState
+        If World.Avatar IsNot Nothing Then
+            Return New GameMenuState(Buffer, World, PlaySfx, Settings)
+        End If
         Return New MainMenuState(Buffer, World, PlaySfx, Settings)
     End Function
 
