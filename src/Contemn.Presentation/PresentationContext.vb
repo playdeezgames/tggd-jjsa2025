@@ -35,7 +35,7 @@ Public Class PresentationContext
 
     Public ReadOnly Property SfxVolume As Single Implements IPresentationContext.SfxVolume
         Get
-            Return 1.0
+            Return settings.SfxVolume
         End Get
     End Property
 

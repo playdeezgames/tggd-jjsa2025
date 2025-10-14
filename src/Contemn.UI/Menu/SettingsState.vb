@@ -5,6 +5,8 @@ Friend Class SettingsState
     Inherits PickerState
     Private Shared ReadOnly GO_BACK_IDENTIFIER As String = NameOf(GO_BACK_IDENTIFIER)
     Const GO_BACK_TEXT = "Go Back"
+    Private Shared ReadOnly SFX_VOLUME_IDENTIFIER As String = NameOf(SFX_VOLUME_IDENTIFIER)
+    Const SFX_VOLUME_TEXT = "SFX Volume"
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
@@ -17,10 +19,17 @@ Friend Class SettingsState
             settings,
             "Settings",
             Hue.Brown,
-            {
-                (GO_BACK_IDENTIFIER, GO_BACK_TEXT)
-            })
+            GenerateMenuItems(settings))
     End Sub
+
+    Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
+        Dim result As New List(Of (Identifier As String, Text As String)) From
+            {
+                (GO_BACK_IDENTIFIER, GO_BACK_TEXT),
+                (SFX_VOLUME_IDENTIFIER, $"{SFX_VOLUME_TEXT}({CInt(settings.SfxVolume * 100)}%)")
+            }
+        Return result
+    End Function
 
     Protected Overrides Function HandleCancel() As IUIState
         If World.Avatar IsNot Nothing Then
@@ -33,6 +42,8 @@ Friend Class SettingsState
         Select Case identifier
             Case GO_BACK_IDENTIFIER
                 Return HandleCancel()
+            Case SFX_VOLUME_IDENTIFIER
+                Return New SfxVolumeSettingsState(Buffer, World, PlaySfx, Settings)
             Case Else
                 Throw New NotImplementedException
         End Select
