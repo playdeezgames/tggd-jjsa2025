@@ -31,7 +31,11 @@ Public Class PresentationContext
 
     Public Property MuxVolume As Single Implements IPresentationContext.MuxVolume
 
-    Public Property QuitRequested As Boolean Implements IPresentationContext.QuitRequested
+    Public ReadOnly Property QuitRequested As Boolean Implements IPresentationContext.QuitRequested
+        Get
+            Return Me.settings.Quit
+        End Get
+    End Property
 
     Public Sub SetSizeHook(value As Action(Of (Integer, Integer), Boolean)) Implements IPresentationContext.SetSizeHook
         Me.SizeHook = value

@@ -1,3 +1,3 @@
 ﻿Public Interface ISettings
-    Sub SignalQuit()
+    Property Quit As Boolean
 End Interface

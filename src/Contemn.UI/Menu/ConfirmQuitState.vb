@@ -23,7 +23,7 @@ Friend Class ConfirmQuitState
     End Function
 
     Protected Overrides Function OnConfirm() As IUIState
-        Settings.SignalQuit()
+        Settings.Quit = True
         Return Nothing
     End Function
 

@@ -6,7 +6,7 @@ Public Class UIContext
     Implements IUIContext
     Protected ReadOnly buffer As IUIBuffer(Of Integer)
     Private state As IUIState = Nothing
-    Private ReadOnly settings As ISettings
+    Protected ReadOnly settings As ISettings
     Private ReadOnly eventQueue As New Queue(Of IEnumerable(Of String))
     Private ReadOnly worldData As New WorldData
     Private ReadOnly Property World As IWorld

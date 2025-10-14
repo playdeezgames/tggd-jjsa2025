@@ -3,9 +3,11 @@
 Friend Class Settings
     Implements ISettings
 
-    Public Sub SignalQuit() Implements ISettings.SignalQuit
-        Throw New NotImplementedException()
+    Sub New()
+        Quit = False
     End Sub
+
+    Public Property Quit As Boolean Implements ISettings.Quit
 
     Friend Shared Function Load(settingsFilename As String) As ISettings
         Return New Settings

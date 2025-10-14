@@ -13,5 +13,5 @@ Public Interface IPresentationContext
     Property FullScreen As Boolean
     Property SfxVolume As Single
     Property MuxVolume As Single
-    Property QuitRequested As Boolean
+    ReadOnly Property QuitRequested As Boolean
 End Interface
