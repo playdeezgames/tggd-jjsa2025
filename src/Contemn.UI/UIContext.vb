@@ -6,6 +6,7 @@ Public Class UIContext
     Implements IUIContext
     Protected ReadOnly buffer As IUIBuffer(Of Integer)
     Private state As IUIState = Nothing
+    Private ReadOnly settings As ISettings
     Private ReadOnly eventQueue As New Queue(Of IEnumerable(Of String))
     Private ReadOnly worldData As New WorldData
     Private ReadOnly Property World As IWorld
@@ -17,9 +18,10 @@ Public Class UIContext
     Private Sub PlaySfx(sfx As String)
         eventQueue.Enqueue({EVENT_PLAY_SFX, sfx})
     End Sub
-    Sub New(columns As Integer, rows As Integer, frameBuffer As Integer())
+    Sub New(columns As Integer, rows As Integer, frameBuffer As Integer(), settings As ISettings)
         Me.buffer = New UIBuffer(Of Integer)(columns, rows, frameBuffer)
-        state = New TitleState(buffer, World, AddressOf PlaySfx)
+        Me.settings = settings
+        state = New TitleState(buffer, World, AddressOf PlaySfx, settings)
     End Sub
 
     Public ReadOnly Property [Event] As IEnumerable(Of String) Implements IUIContext.Event

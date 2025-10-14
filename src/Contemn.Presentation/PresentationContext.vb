@@ -12,11 +12,12 @@ Public Class PresentationContext
     Private MuxHook As Action(Of String)
     Private ReadOnly font As Font
 
-    Public Sub New(frameBuffer() As Integer, fontFilename As String)
+    Public Sub New(frameBuffer() As Integer, fontFilename As String, settingsFilename As String)
         MyBase.New(
             VIEW_COLUMNS,
             VIEW_ROWS,
-            frameBuffer)
+            frameBuffer,
+            Presentation.Settings.Load(settingsFilename))
         Size = (VIEW_WIDTH * 4, VIEW_HEIGHT * 4)
         font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(fontFilename)))
         SfxVolume = 1.0

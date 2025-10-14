@@ -15,8 +15,17 @@ Friend Class EmbarkationState
     Const NORMAL_TEXT = "Normal"
     Const HARD_TEXT = "Hard"
 
-    Public Sub New(buffer As IUIBuffer(Of Integer), world As Business.IWorld, playSfx As Action(Of String))
-        MyBase.New(buffer, world, playSfx, "Choose Difficulty",
+    Public Sub New(
+                  buffer As IUIBuffer(Of Integer),
+                  world As Business.IWorld,
+                  playSfx As Action(Of String),
+                  settings As ISettings)
+        MyBase.New(
+            buffer,
+            world,
+            playSfx,
+            settings,
+            "Choose Difficulty",
             Hue.Magenta,
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT),
@@ -28,7 +37,7 @@ Friend Class EmbarkationState
     End Sub
 
     Protected Overrides Function HandleCancel() As IUIState
-        Return New MainMenuState(Buffer, World, PlaySfx)
+        Return New MainMenuState(Buffer, World, PlaySfx, Settings)
     End Function
 
     Protected Overrides Function HandleMenuItem(identifier As String) As IUIState
@@ -50,21 +59,21 @@ Friend Class EmbarkationState
 
     Private Function HandleHard() As IUIState
         World.PrepareAndInitialize(Sub(x) x.SetMetadata(MetadataType.Difficulty, HARD_DIFFICULTY))
-        Return NeutralState.DetermineState(Buffer, World, PlaySfx)
+        Return NeutralState.DetermineState(Buffer, World, PlaySfx, Settings)
     End Function
 
     Private Function HandleNormal() As IUIState
         World.PrepareAndInitialize(Sub(x) x.SetMetadata(MetadataType.Difficulty, NORMAL_DIFFICULTY))
-        Return NeutralState.DetermineState(Buffer, World, PlaySfx)
+        Return NeutralState.DetermineState(Buffer, World, PlaySfx, Settings)
     End Function
 
     Private Function HandleEasy() As IUIState
         World.PrepareAndInitialize(Sub(x) x.SetMetadata(MetadataType.Difficulty, EASY_DIFFICULTY))
-        Return NeutralState.DetermineState(Buffer, World, PlaySfx)
+        Return NeutralState.DetermineState(Buffer, World, PlaySfx, Settings)
     End Function
 
     Private Function HandleTutorial() As IUIState
         World.PrepareAndInitialize(Sub(x) x.SetMetadata(MetadataType.Difficulty, TUTORIAL_DIFFICULTY))
-        Return NeutralState.DetermineState(Buffer, World, PlaySfx)
+        Return NeutralState.DetermineState(Buffer, World, PlaySfx, Settings)
     End Function
 End Class

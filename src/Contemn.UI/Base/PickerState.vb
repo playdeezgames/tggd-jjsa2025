@@ -12,13 +12,14 @@ Friend MustInherit Class PickerState
                      buffer As IUIBuffer(Of Integer),
                      world As Business.IWorld,
                      playSfx As Action(Of String),
+                     settings As ISettings,
                      title As String,
                      titleForegroundColor As Integer,
                      menuItems As IEnumerable(Of (Identifier As String, Text As String)))
-        MyBase.New(buffer, world, playSfx)
+        MyBase.New(buffer, world, playSfx, settings)
         Me.menuItems = menuItems.ToList
         Me.title = title
-        Me.titleforegroundcolor = titleForegroundColor
+        Me.titleForegroundColor = titleForegroundColor
     End Sub
 
     Public Overrides Sub Refresh()

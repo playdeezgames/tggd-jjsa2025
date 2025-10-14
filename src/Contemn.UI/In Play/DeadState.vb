@@ -4,8 +4,12 @@ Imports TGGD.UI
 Friend Class DeadState
     Inherits BaseState
 
-    Public Sub New(buffer As IUIBuffer(Of Integer), world As Business.IWorld, playSfx As Action(Of String))
-        MyBase.New(buffer, world, playSfx)
+    Public Sub New(
+                  buffer As IUIBuffer(Of Integer),
+                  world As Business.IWorld,
+                  playSfx As Action(Of String),
+                  settings As ISettings)
+        MyBase.New(buffer, world, playSfx, settings)
     End Sub
 
     Public Overrides Sub Refresh()
@@ -19,6 +23,6 @@ Friend Class DeadState
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState
-        Return New MainMenuState(Buffer, World, PlaySfx)
+        Return New MainMenuState(Buffer, World, PlaySfx, Settings)
     End Function
 End Class

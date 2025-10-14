@@ -7,8 +7,9 @@ Friend Class TitleState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String))
-        MyBase.New(buffer, world, playSfx)
+                  playSfx As Action(Of String),
+                  settings As ISettings)
+        MyBase.New(buffer, world, playSfx, settings)
     End Sub
 
     Public Overrides Sub Refresh()
@@ -24,7 +25,7 @@ Friend Class TitleState
 
     Public Overrides Function HandleCommand(command As String) As IUIState
         If command = UI.Command.Green Then
-            Return New MainMenuState(Buffer, World, PlaySfx)
+            Return New MainMenuState(Buffer, World, PlaySfx, Settings)
         End If
         Return Me
     End Function

@@ -12,11 +12,13 @@ Friend Class GameMenuState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  playSfx As Action(Of String))
+                  playSfx As Action(Of String),
+                  settings As ISettings)
         MyBase.New(
             buffer,
             world,
             playSfx,
+            settings,
             "Game Menu",
             Hue.Magenta,
             {
@@ -28,15 +30,15 @@ Friend Class GameMenuState
     Protected Overrides Function HandleMenuItem(identifier As String) As IUIState
         Select Case identifier
             Case CONTINUE_IDENTIFIER
-                Return NeutralState.DetermineState(Buffer, World, PlaySfx)
+                Return NeutralState.DetermineState(Buffer, World, PlaySfx, Settings)
             Case ABANDON_IDENTIFIER
-                Return New ConfirmAbandonState(Buffer, World, PlaySfx)
+                Return New ConfirmAbandonState(Buffer, World, PlaySfx, Settings)
             Case Else
                 Throw New NotImplementedException
         End Select
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState
-        Return NeutralState.DetermineState(Buffer, World, PlaySfx)
+        Return NeutralState.DetermineState(Buffer, World, PlaySfx, Settings)
     End Function
 End Class
