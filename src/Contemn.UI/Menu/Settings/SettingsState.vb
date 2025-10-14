@@ -7,6 +7,8 @@ Friend Class SettingsState
     Const GO_BACK_TEXT = "Go Back"
     Private Shared ReadOnly SFX_VOLUME_IDENTIFIER As String = NameOf(SFX_VOLUME_IDENTIFIER)
     Const SFX_VOLUME_TEXT = "SFX Volume"
+    Private Shared ReadOnly MUX_VOLUME_IDENTIFIER As String = NameOf(MUX_VOLUME_IDENTIFIER)
+    Const MUX_VOLUME_TEXT = "MUX Volume"
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
@@ -26,7 +28,8 @@ Friend Class SettingsState
         Dim result As New List(Of (Identifier As String, Text As String)) From
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT),
-                (SFX_VOLUME_IDENTIFIER, $"{SFX_VOLUME_TEXT}({CInt(settings.SfxVolume * 100)}%)")
+                (SFX_VOLUME_IDENTIFIER, $"{SFX_VOLUME_TEXT}({CInt(settings.SfxVolume * 100)}%)"),
+                (MUX_VOLUME_IDENTIFIER, $"{MUX_VOLUME_TEXT}({CInt(settings.MuxVolume * 100)}%)")
             }
         Return result
     End Function
@@ -44,6 +47,8 @@ Friend Class SettingsState
                 Return HandleCancel()
             Case SFX_VOLUME_IDENTIFIER
                 Return New SfxVolumeSettingsState(Buffer, World, PlaySfx, Settings)
+            Case MUX_VOLUME_IDENTIFIER
+                Return New MuxVolumeSettingsState(Buffer, World, PlaySfx, Settings)
             Case Else
                 Throw New NotImplementedException
         End Select

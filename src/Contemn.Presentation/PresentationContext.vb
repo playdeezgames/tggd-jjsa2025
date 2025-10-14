@@ -40,6 +40,10 @@ Public Class PresentationContext
     End Property
 
     Public ReadOnly Property MuxVolume As Single Implements IPresentationContext.MuxVolume
+        Get
+            Return settings.MuxVolume
+        End Get
+    End Property
 
     Public ReadOnly Property QuitRequested As Boolean Implements IPresentationContext.QuitRequested
         Get
