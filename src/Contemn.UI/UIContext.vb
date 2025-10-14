@@ -1,9 +1,11 @@
 Imports Contemn.Business
 Imports Contemn.Data
+Imports TGGD.Business
 Imports TGGD.UI
 
 Public Class UIContext
     Implements IUIContext
+    Implements IPlatform
     Protected ReadOnly buffer As IUIBuffer(Of Integer)
     Private state As IUIState = Nothing
     Protected ReadOnly settings As ISettings

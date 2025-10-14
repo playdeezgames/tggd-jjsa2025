@@ -1,8 +1,9 @@
-﻿Imports TGGD.UI
+﻿Imports TGGD.Business
+Imports TGGD.UI
 
 Public Interface IPresentationContext
     Inherits IUIContext
-
+    Inherits IPlatform
     Sub SetSizeHook(value As Action(Of (Integer, Integer), Boolean))
     Sub SetMuxVolumeHook(value As Action(Of Single))
     Sub SetSfxHook(value As Action(Of String))
