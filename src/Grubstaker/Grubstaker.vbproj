@@ -121,7 +121,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contemn.Presentation\Contemn.Presentation.vbproj" />
-    <ProjectReference Include="..\Contemn.UI\Contemn.UI.vbproj" />
   </ItemGroup>
 
 </Project>
