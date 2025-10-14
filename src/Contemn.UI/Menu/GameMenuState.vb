@@ -30,7 +30,7 @@ Friend Class GameMenuState
                 (CONTINUE_IDENTIFIER, CONTINUE_TEXT),
                 (ABANDON_IDENTIFIER, ABANDON_TEXT)
             }
-        If settings IsNot Nothing Then
+        If settings.HasSettings Then
             result.Add((SETTINGS_IDENTIFIER, SETTINGS_TEXT))
         End If
         Return result

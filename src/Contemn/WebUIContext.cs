@@ -2,14 +2,11 @@
 
 namespace Contemn
 {
-    public class WebUIContext : UIContext
+    public class WebUIContext(int columns, int rows, int[] frameBuffer) : UIContext(columns, rows, frameBuffer)
     {
-        public WebUIContext(int columns, int rows, int[] frameBuffer) : base(columns, rows, frameBuffer)
-        {
-        }
-
-        public override bool Quit { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override float SfxVolume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override float MuxVolume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override bool Quit { get => false; set { } }
+        public override float SfxVolume { get => 1.0f; set { } }
+        public override float MuxVolume { get => 1.0f; set { } }
+        public override bool HasSettings => false;
     }
 }

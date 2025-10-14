@@ -34,6 +34,7 @@ Public MustInherit Class UIContext
     Public MustOverride Property Quit As Boolean Implements ISettings.Quit
     Public MustOverride Property SfxVolume As Single Implements ISettings.SfxVolume
     Public MustOverride Property MuxVolume As Single Implements ISettings.MuxVolume
+    Public MustOverride ReadOnly Property HasSettings As Boolean Implements ISettings.HasSettings
 
     Public Sub NextEvent() Implements IUIContext.NextEvent
         If eventQueue.Any Then

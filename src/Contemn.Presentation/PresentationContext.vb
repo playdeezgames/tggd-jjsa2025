@@ -59,6 +59,12 @@ Public Class PresentationContext
 
     Public Overrides Property MuxVolume As Single
 
+    Public Overrides ReadOnly Property HasSettings As Boolean
+        Get
+            Return True
+        End Get
+    End Property
+
     Public Sub SetSizeHook(value As Action(Of (Integer, Integer), Boolean)) Implements IPresentationContext.SetSizeHook
         Me.SizeHook = value
     End Sub

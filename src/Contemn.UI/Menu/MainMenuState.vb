@@ -30,7 +30,7 @@ Friend Class MainMenuState
                 (EMBARK_IDENTIFIER, EMBARK_TEXT),
                 (ABOUT_IDENTIFIER, ABOUT_TEXT)
             }
-        If settings IsNot Nothing Then
+        If settings.HasSettings Then
             result.Add((SETTINGS_IDENTIFIER, SETTINGS_TEXT))
             result.Add((QUIT_IDENTIFIER, QUIT_TEXT))
         End If
