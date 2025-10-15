@@ -7,6 +7,8 @@ Friend Class SettingsState
     Const GO_BACK_TEXT = "Go Back"
     Private Shared ReadOnly WINDOW_SIZE_IDENTIFIER As String = NameOf(WINDOW_SIZE_IDENTIFIER)
     Const WINDOW_SIZE_TEXT = "Window Size"
+    Private Shared ReadOnly FULL_SCREEN_IDENTIFIER As String = NameOf(FULL_SCREEN_IDENTIFIER)
+    Const FULL_SCREEN_TEXT = "Toggle Full Screen"
     Private Shared ReadOnly SFX_VOLUME_IDENTIFIER As String = NameOf(SFX_VOLUME_IDENTIFIER)
     Const SFX_VOLUME_TEXT = "SFX Volume"
     Private Shared ReadOnly MUX_VOLUME_IDENTIFIER As String = NameOf(MUX_VOLUME_IDENTIFIER)
@@ -29,6 +31,7 @@ Friend Class SettingsState
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT),
                 (WINDOW_SIZE_IDENTIFIER, $"{WINDOW_SIZE_TEXT}: {settings.ScreenWidth}x{settings.ScreenHeight}"),
+                (FULL_SCREEN_IDENTIFIER, FULL_SCREEN_TEXT),
                 (SFX_VOLUME_IDENTIFIER, $"{SFX_VOLUME_TEXT}: {CInt(settings.SfxVolume * 100)}%"),
                 (MUX_VOLUME_IDENTIFIER, $"{MUX_VOLUME_TEXT}: {CInt(settings.MuxVolume * 100)}%")
             }
@@ -52,6 +55,9 @@ Friend Class SettingsState
                 Return New MuxVolumeSettingsState(Buffer, World, Settings)
             Case WINDOW_SIZE_IDENTIFIER
                 Return New WindowSizeSettingsState(Buffer, World, Settings)
+            Case FULL_SCREEN_IDENTIFIER
+                Me.Settings.FullScreen = Not Me.Settings.FullScreen
+                Return New SettingsState(Buffer, World, Settings)
             Case Else
                 Throw New NotImplementedException
         End Select

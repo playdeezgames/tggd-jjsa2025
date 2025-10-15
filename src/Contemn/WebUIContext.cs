@@ -17,5 +17,7 @@ namespace Contemn
         public override int ViewWidth => 320;
 
         public override int ViewHeight => 200;
+
+        public override bool FullScreen { get => false; set { } }
     }
 }

@@ -13,6 +13,7 @@ Public Class PresentationContext
     Private ReadOnly font As Font
     Private _muxVolume As Single
     Private _zoom As Integer
+    Private _fullScreen As Boolean
 
     Public Sub New(frameBuffer() As Integer, fontFilename As String, settingsFilename As String)
         MyBase.New(
@@ -24,17 +25,12 @@ Public Class PresentationContext
         SfxVolume = 0.5
         _muxVolume = 0.1
         _zoom = 4
+        _fullScreen = False
     End Sub
 
     Public ReadOnly Property Size As (Integer, Integer) Implements IPresentationContext.Size
         Get
             Return (VIEW_WIDTH * Zoom, VIEW_HEIGHT * Zoom)
-        End Get
-    End Property
-
-    Public ReadOnly Property FullScreen As Boolean Implements IPresentationContext.FullScreen
-        Get
-            Return False
         End Get
     End Property
 
@@ -107,6 +103,22 @@ Public Class PresentationContext
     Public Overrides ReadOnly Property ViewHeight As Integer
         Get
             Return VIEW_HEIGHT
+        End Get
+    End Property
+
+    Public Overrides Property FullScreen As Boolean
+        Get
+            Return _fullScreen
+        End Get
+        Set(value As Boolean)
+            _fullScreen = value
+            SizeHook((ScreenWidth, ScreenHeight), FullScreen)
+        End Set
+    End Property
+
+    Private ReadOnly Property IPresentationContext_FullScreen As Boolean Implements IPresentationContext.FullScreen
+        Get
+            Return FullScreen
         End Get
     End Property
 

@@ -3,6 +3,7 @@
     Property SfxVolume As Single
     Property MuxVolume As Single
     Property Zoom As Integer
+    Property FullScreen As Boolean
     ReadOnly Property HasSettings As Boolean
     ReadOnly Property ScreenWidth As Integer
     ReadOnly Property ScreenHeight As Integer
