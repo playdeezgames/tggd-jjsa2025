@@ -5,12 +5,14 @@ Imports Contemn.UI
 Public Class PresentationContext
     Inherits UIContext
     Implements IPresentationContext
+    Const SettingsFilename = "Content/Config/Settings.json"
 
     Private SizeHook As Action(Of (Integer, Integer), Boolean)
     Private MuxVolumeHook As Action(Of Single)
     Private SfxHook As Action(Of String)
     Private MuxHook As Action(Of String)
     Private ReadOnly font As Font
+    Private _sfxVolume As Single
     Private _muxVolume As Single
     Private _zoom As Integer
     Private _fullScreen As Boolean
@@ -22,10 +24,22 @@ Public Class PresentationContext
             frameBuffer)
         font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(fontFilename)))
         Quit = False
-        SfxVolume = 0.5
-        _muxVolume = 0.1
-        _zoom = 4
-        _fullScreen = False
+        LoadInitialSettings()
+    End Sub
+
+    Private Sub LoadInitialSettings()
+        Try
+            Dim settingsData As SettingsData = JsonSerializer.Deserialize(Of SettingsData)(File.ReadAllText(SettingsFilename))
+            _sfxVolume = settingsData.SfxVolume
+            _muxVolume = settingsData.MuxVolume
+            _zoom = settingsData.Zoom
+            _fullScreen = settingsData.FullScreen
+        Catch ex As Exception
+            _sfxVolume = 0.5
+            _muxVolume = 0.1
+            _zoom = 4
+            _fullScreen = False
+        End Try
     End Sub
 
     Public ReadOnly Property Size As (Integer, Integer) Implements IPresentationContext.Size
@@ -55,6 +69,14 @@ Public Class PresentationContext
     Public Overrides Property Quit As Boolean
 
     Public Overrides Property SfxVolume As Single
+        Get
+            Return _sfxVolume
+        End Get
+        Set(value As Single)
+            _sfxVolume = value
+            SaveSettings()
+        End Set
+    End Property
 
     Public Overrides Property MuxVolume As Single
         Get
@@ -63,6 +85,7 @@ Public Class PresentationContext
         Set(value As Single)
             _muxVolume = value
             MuxVolumeHook(value)
+            SaveSettings()
         End Set
     End Property
 
@@ -79,6 +102,7 @@ Public Class PresentationContext
         Set(value As Integer)
             _zoom = value
             SizeHook((ScreenWidth, ScreenHeight), FullScreen)
+            SaveSettings()
         End Set
     End Property
 
@@ -113,8 +137,20 @@ Public Class PresentationContext
         Set(value As Boolean)
             _fullScreen = value
             SizeHook((ScreenWidth, ScreenHeight), FullScreen)
+            SaveSettings()
         End Set
     End Property
+
+    Private Sub SaveSettings()
+        Dim settingsData As New SettingsData With
+            {
+                .FullScreen = _fullScreen,
+                .MuxVolume = _muxVolume,
+                .SfxVolume = _sfxVolume,
+                .Zoom = _zoom
+            }
+        File.WriteAllText(SettingsFilename, JsonSerializer.Serialize(settingsData))
+    End Sub
 
     Private ReadOnly Property IPresentationContext_FullScreen As Boolean Implements IPresentationContext.FullScreen
         Get
