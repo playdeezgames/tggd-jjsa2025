@@ -1,3 +1,4 @@
+Imports Contemn.Business
 Imports Microsoft.Xna.Framework
 Imports Microsoft.Xna.Framework.Audio
 Imports Microsoft.Xna.Framework.Graphics
@@ -52,6 +53,7 @@ Public Class Host
         Next
         _controller.SetSfxHook(AddressOf OnSfx)
         _controller.SetMuxHook(AddressOf OnMux)
+        OnMux(Mux.Song)
         MediaPlayer.IsRepeating = True
         MyBase.Initialize()
     End Sub

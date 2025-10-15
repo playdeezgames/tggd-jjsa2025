@@ -21,7 +21,7 @@ Public Class PresentationContext
         font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(fontFilename)))
         Quit = False
         SfxVolume = 0.5
-        _muxVolume = 0.5
+        _muxVolume = 0.1
         Zoom = 4
     End Sub
 
