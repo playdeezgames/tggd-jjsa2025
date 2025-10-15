@@ -36,6 +36,10 @@ Public MustInherit Class UIContext
     Public MustOverride Property MuxVolume As Single Implements ISettings.MuxVolume
     Public MustOverride ReadOnly Property HasSettings As Boolean Implements ISettings.HasSettings
     Public MustOverride Property Zoom As Integer Implements ISettings.Zoom
+    Public MustOverride ReadOnly Property ScreenWidth As Integer Implements ISettings.ScreenWidth
+    Public MustOverride ReadOnly Property ScreenHeight As Integer Implements ISettings.ScreenHeight
+    Public MustOverride ReadOnly Property ViewWidth As Integer Implements ISettings.ViewWidth
+    Public MustOverride ReadOnly Property ViewHeight As Integer Implements ISettings.ViewHeight
 
     Public Sub NextEvent() Implements IUIContext.NextEvent
         If eventQueue.Any Then

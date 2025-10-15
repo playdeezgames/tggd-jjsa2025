@@ -12,6 +12,7 @@ Public Class PresentationContext
     Private MuxHook As Action(Of String)
     Private ReadOnly font As Font
     Private _muxVolume As Single
+    Private _zoom As Integer
 
     Public Sub New(frameBuffer() As Integer, fontFilename As String, settingsFilename As String)
         MyBase.New(
@@ -22,7 +23,7 @@ Public Class PresentationContext
         Quit = False
         SfxVolume = 0.5
         _muxVolume = 0.1
-        Zoom = 4
+        _zoom = 4
     End Sub
 
     Public ReadOnly Property Size As (Integer, Integer) Implements IPresentationContext.Size
@@ -76,6 +77,38 @@ Public Class PresentationContext
     End Property
 
     Public Overrides Property Zoom As Integer
+        Get
+            Return _zoom
+        End Get
+        Set(value As Integer)
+            _zoom = value
+            SizeHook((ScreenWidth, ScreenHeight), FullScreen)
+        End Set
+    End Property
+
+    Public Overrides ReadOnly Property ScreenWidth As Integer
+        Get
+            Return VIEW_WIDTH * Zoom
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property ScreenHeight As Integer
+        Get
+            Return VIEW_HEIGHT * Zoom
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property ViewWidth As Integer
+        Get
+            Return VIEW_WIDTH
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property ViewHeight As Integer
+        Get
+            Return VIEW_HEIGHT
+        End Get
+    End Property
 
     Public Sub SetSizeHook(value As Action(Of (Integer, Integer), Boolean)) Implements IPresentationContext.SetSizeHook
         Me.SizeHook = value

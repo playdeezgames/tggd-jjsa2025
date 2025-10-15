@@ -9,5 +9,13 @@ namespace Contemn
         public override float MuxVolume { get => 1.0f; set { } }
         public override bool HasSettings => false;
         public override int Zoom { get => 1; set { } }
+
+        public override int ScreenWidth => ViewWidth;
+
+        public override int ScreenHeight => ViewHeight;
+
+        public override int ViewWidth => 320;
+
+        public override int ViewHeight => 200;
     }
 }
