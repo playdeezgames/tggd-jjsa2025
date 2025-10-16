@@ -1,5 +1,6 @@
 ﻿Imports TGGD.UI
 Imports Contemn.Business
+Imports System.IO
 
 Friend Class ConfirmAbandonState
     Inherits ConfirmState
@@ -21,6 +22,9 @@ Friend Class ConfirmAbandonState
     End Function
 
     Protected Overrides Function OnConfirm() As IUIState
+        If Settings.HasSettings Then
+            File.Delete(World.GetMetadata(MetadataType.SaveSlot))
+        End If
         World.Clear()
         Return New MainMenuState(Buffer, World, Settings)
     End Function
