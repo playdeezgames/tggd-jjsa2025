@@ -30,6 +30,11 @@ Friend Class KeyBindingState
     End Function
 
     Protected Overrides Function HandleMenuItem(identifier As String) As IUIState
-        Throw New NotImplementedException()
+        Select Case identifier
+            Case GO_BACK_IDENTIFIER
+                Return HandleCancel()
+            Case Else
+                Throw New NotImplementedException
+        End Select
     End Function
 End Class
