@@ -16,12 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Content\Audio\Song.mp3" />
-    <None Remove="Content\Audio\Song.ogg" />
-    <None Remove="Content\Config\font.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Content\Audio\Craft.wav">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
