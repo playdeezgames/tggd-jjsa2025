@@ -11,8 +11,12 @@ Friend Class GameMenuState
     Const ABANDON_TEXT = "Abandon"
     Shared ReadOnly SETTINGS_IDENTIFIER As String = NameOf(SETTINGS_IDENTIFIER)
     Const SETTINGS_TEXT = "Settings"
-    Shared ReadOnly SAVE_GAME_IDENTIFIER As String = NameOf(SAVE_GAME_IDENTIFIER)
-    Const SAVE_GAME_TEXT = "Save Game"
+    Shared ReadOnly SAVE_AND_CONTINUE_IDENTIFIER As String = NameOf(SAVE_AND_CONTINUE_IDENTIFIER)
+    Const SAVE_AND_CONTINUE_TEXT = "Save and Continue"
+    Shared ReadOnly QUICK_LOAD_IDENTIFIER As String = NameOf(QUICK_LOAD_IDENTIFIER)
+    Const QUICK_LOAD_TEXT = "Quick Load"
+    Shared ReadOnly SAVE_AND_EXIT_IDENTIFIER As String = NameOf(SAVE_AND_EXIT_IDENTIFIER)
+    Const SAVE_AND_EXIT_TEXT = "Save and Exit"
 
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
@@ -35,7 +39,9 @@ Friend Class GameMenuState
             }
         If settings.HasSettings Then
             result.Add((SETTINGS_IDENTIFIER, SETTINGS_TEXT))
-            result.Add((SAVE_GAME_IDENTIFIER, SAVE_GAME_TEXT))
+            result.Add((SAVE_AND_CONTINUE_IDENTIFIER, SAVE_AND_CONTINUE_TEXT))
+            result.Add((SAVE_AND_EXIT_IDENTIFIER, SAVE_AND_EXIT_TEXT))
+            result.Add((QUICK_LOAD_IDENTIFIER, QUICK_LOAD_TEXT))
         End If
         Return result
     End Function
@@ -48,9 +54,18 @@ Friend Class GameMenuState
                 Return New ConfirmAbandonState(Buffer, World, Settings)
             Case SETTINGS_IDENTIFIER
                 Return New SettingsState(Buffer, World, Settings)
-            Case SAVE_GAME_IDENTIFIER
+            Case SAVE_AND_EXIT_IDENTIFIER
+                World.AddMessage(MoodType.Info, $"Saved game {DateTime.Now}")
                 World.Save()
-                Return Me
+                Return New MainMenuState(Buffer, World, Settings)
+            Case SAVE_AND_CONTINUE_IDENTIFIER
+                World.AddMessage(MoodType.Info, $"Saved game {DateTime.Now}")
+                World.Save()
+                Return NeutralState.DetermineState(Buffer, World, Settings)
+            Case QUICK_LOAD_IDENTIFIER
+                Dim nextWorld = Business.World.Load(World.GetMetadata(MetadataType.SaveSlot), World.Platform)
+                nextWorld.AddMessage(MoodType.Info, $"Quick Load {DateTime.Now}")
+                Return NeutralState.DetermineState(Buffer, nextWorld, Settings)
             Case Else
                 Throw New NotImplementedException
         End Select
