@@ -26,10 +26,17 @@ Friend Class GameMenuState
             buffer,
             world,
             settings,
-            "Game Menu",
+            GenerateTitle(world, settings),
             Hue.Magenta,
             GenerateMenuItems(settings))
     End Sub
+
+    Private Shared Function GenerateTitle(world As IWorld, settings As ISettings) As String
+        If settings.HasSettings Then
+            Return world.GetMetadata(MetadataType.SaveSlot)
+        End If
+        Return "Game Menu"
+    End Function
 
     Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
         Dim result As New List(Of (Identifier As String, Text As String)) From
