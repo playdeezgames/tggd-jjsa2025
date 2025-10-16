@@ -28,7 +28,8 @@ Friend Class GameMenuState
             settings,
             GenerateTitle(world, settings),
             Hue.Magenta,
-            GenerateMenuItems(settings))
+            GenerateMenuItems(settings),
+            CONTINUE_IDENTIFIER)
     End Sub
 
     Private Shared Function GenerateTitle(world As IWorld, settings As ISettings) As String
@@ -60,7 +61,7 @@ Friend Class GameMenuState
             Case ABANDON_IDENTIFIER
                 Return New ConfirmAbandonState(Buffer, World, Settings)
             Case SETTINGS_IDENTIFIER
-                Return New SettingsState(Buffer, World, Settings)
+                Return New SettingsState(Buffer, World, Settings, GO_BACK_IDENTIFIER)
             Case SAVE_AND_EXIT_IDENTIFIER
                 World.AddMessage(MoodType.Info, $"Saved game {DateTime.Now}")
                 World.Save()

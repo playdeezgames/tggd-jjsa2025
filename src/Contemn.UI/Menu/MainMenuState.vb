@@ -21,7 +21,8 @@ Friend Class MainMenuState
             settings,
             "Main Menu",
             Hue.Magenta,
-            GenerateMenuItems(settings))
+            GenerateMenuItems(settings),
+            EMBARK_IDENTIFIER)
     End Sub
 
     Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
@@ -44,7 +45,7 @@ Friend Class MainMenuState
             Case ABOUT_IDENTIFIER
                 Return New AboutState(Buffer, World, Settings)
             Case SETTINGS_IDENTIFIER
-                Return New SettingsState(Buffer, World, Settings)
+                Return New SettingsState(Buffer, World, Settings, GO_BACK_IDENTIFIER)
             Case QUIT_IDENTIFIER
                 Return New ConfirmQuitState(Buffer, World, Settings)
             Case Else

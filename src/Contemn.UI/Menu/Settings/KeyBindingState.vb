@@ -14,7 +14,8 @@ Friend Class KeyBindingState
             settings,
             "Key Bindings",
             Hue.Brown,
-            GenerateMenuItems(settings))
+            GenerateMenuItems(settings),
+            GO_BACK_IDENTIFIER)
     End Sub
 
     Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
@@ -26,7 +27,7 @@ Friend Class KeyBindingState
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState
-        Return New SettingsState(Buffer, World, Settings)
+        Return New SettingsState(Buffer, World, Settings, SettingsState.KEY_BINDING_IDENTIFIER)
     End Function
 
     Protected Overrides Function HandleMenuItem(identifier As String) As IUIState

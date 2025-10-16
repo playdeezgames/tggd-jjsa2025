@@ -3,8 +3,6 @@ Imports TGGD.UI
 
 Friend Class SfxVolumeSettingsState
     Inherits PickerState
-    Shared ReadOnly LEAVE_IT_IDENTIFIER As String = NameOf(LEAVE_IT_IDENTIFIER)
-    Const LEAVE_IT_TEXT = "Leave It!"
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
@@ -15,13 +13,12 @@ Friend Class SfxVolumeSettingsState
             settings,
             GenerateTitle(settings),
             Hue.Brown,
-            GenerateMenuItems(settings))
+            GenerateMenuItems(settings),
+            CInt(10 * settings.SfxVolume).ToString)
     End Sub
 
     Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
-        Return {
-                (LEAVE_IT_IDENTIFIER, LEAVE_IT_TEXT)
-            }.Concat(Enumerable.Range(0, 11).Select(Function(x) (x.ToString(), $"{x * 10}%")))
+        Return Enumerable.Range(0, 11).Select(Function(x) (x.ToString(), $"{x * 10}%"))
     End Function
 
     Private Shared Function GenerateTitle(settings As ISettings) As String
@@ -29,17 +26,20 @@ Friend Class SfxVolumeSettingsState
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState
-        Return New SettingsState(Buffer, World, Settings)
+        Return New SettingsState(Buffer, World, Settings, SettingsState.SFX_VOLUME_IDENTIFIER)
     End Function
 
     Protected Overrides Function HandleMenuItem(identifier As String) As IUIState
         Select Case identifier
-            Case LEAVE_IT_IDENTIFIER
-                Return New SettingsState(Buffer, World, Settings)
             Case Else
-                Settings.SfxVolume = CSng(CInt(identifier) / 10)
-                World.Platform.PlaySfx(Sfx.WooHoo)
-                Return New SfxVolumeSettingsState(Buffer, World, Settings)
+                Dim newVolume = CSng(CInt(identifier) / 10)
+                If Settings.SfxVolume = newVolume Then
+                    Return New SettingsState(Buffer, World, Settings, SettingsState.SFX_VOLUME_IDENTIFIER)
+                Else
+                    Settings.SfxVolume = newVolume
+                    World.Platform.PlaySfx(Sfx.WooHoo)
+                    Return New SfxVolumeSettingsState(Buffer, World, Settings)
+                End If
         End Select
     End Function
 End Class

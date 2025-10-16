@@ -3,27 +3,29 @@ Imports TGGD.UI
 
 Friend Class SettingsState
     Inherits PickerState
-    Private Shared ReadOnly WINDOW_SIZE_IDENTIFIER As String = NameOf(WINDOW_SIZE_IDENTIFIER)
+    Friend Shared ReadOnly WINDOW_SIZE_IDENTIFIER As String = NameOf(WINDOW_SIZE_IDENTIFIER)
     Const WINDOW_SIZE_TEXT = "Window Size"
     Private Shared ReadOnly FULL_SCREEN_IDENTIFIER As String = NameOf(FULL_SCREEN_IDENTIFIER)
     Const FULL_SCREEN_TEXT = "Toggle Full Screen"
-    Private Shared ReadOnly SFX_VOLUME_IDENTIFIER As String = NameOf(SFX_VOLUME_IDENTIFIER)
+    Friend Shared ReadOnly SFX_VOLUME_IDENTIFIER As String = NameOf(SFX_VOLUME_IDENTIFIER)
     Const SFX_VOLUME_TEXT = "SFX Volume"
-    Private Shared ReadOnly MUX_VOLUME_IDENTIFIER As String = NameOf(MUX_VOLUME_IDENTIFIER)
+    Friend Shared ReadOnly MUX_VOLUME_IDENTIFIER As String = NameOf(MUX_VOLUME_IDENTIFIER)
     Const MUX_VOLUME_TEXT = "MUX Volume"
-    Private Shared ReadOnly KEY_BINDING_IDENTIFIER As String = NameOf(KEY_BINDING_IDENTIFIER)
+    Friend Shared ReadOnly KEY_BINDING_IDENTIFIER As String = NameOf(KEY_BINDING_IDENTIFIER)
     Const KEY_BINDING_TEXT = "Key Binding"
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  settings As ISettings)
+                  settings As ISettings,
+                  currentIdentifier As String)
         MyBase.New(
             buffer,
             world,
             settings,
             "Settings",
             Hue.Brown,
-            GenerateMenuItems(settings))
+            GenerateMenuItems(settings),
+            currentIdentifier)
     End Sub
 
     Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
@@ -58,7 +60,7 @@ Friend Class SettingsState
                 Return New WindowSizeSettingsState(Buffer, World, Settings)
             Case FULL_SCREEN_IDENTIFIER
                 Me.Settings.FullScreen = Not Me.Settings.FullScreen
-                Return New SettingsState(Buffer, World, Settings)
+                Return New SettingsState(Buffer, World, Settings, FULL_SCREEN_IDENTIFIER)
             Case KEY_BINDING_IDENTIFIER
                 Return New KeyBindingState(Buffer, World, Settings)
             Case Else

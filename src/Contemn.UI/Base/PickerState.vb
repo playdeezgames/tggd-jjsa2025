@@ -14,9 +14,16 @@ Friend MustInherit Class PickerState
                      settings As ISettings,
                      title As String,
                      titleForegroundColor As Integer,
-                     menuItems As IEnumerable(Of (Identifier As String, Text As String)))
+                     menuItems As IEnumerable(Of (Identifier As String, Text As String)),
+                     currentIdentifier As String)
         MyBase.New(buffer, world, settings)
         Me.menuItems = menuItems.ToList
+        For Each index In Enumerable.Range(0, Me.menuItems.Count)
+            If Me.menuItems(index).Identifier = currentIdentifier Then
+                menuItemIndex = index
+                Exit For
+            End If
+        Next
         Me.title = title
         Me.titleForegroundColor = titleForegroundColor
     End Sub

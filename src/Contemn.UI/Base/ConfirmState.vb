@@ -22,7 +22,8 @@ Friend MustInherit Class ConfirmState
             {
                 (NO_IDENTIFIER, NO_TEXT),
                 (YES_IDENTIFIER, YES_TEXT)
-            })
+            },
+            NO_IDENTIFIER)
     End Sub
 
     Protected Overrides Function HandleMenuItem(identifier As String) As IUIState

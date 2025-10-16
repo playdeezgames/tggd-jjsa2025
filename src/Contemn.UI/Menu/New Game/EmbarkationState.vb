@@ -29,7 +29,8 @@ Friend Class EmbarkationState
                 (EASY_IDENTIFIER, EASY_TEXT),
                 (NORMAL_IDENTIFIER, NORMAL_TEXT),
                 (HARD_IDENTIFIER, HARD_TEXT)
-            })
+            },
+            NORMAL_IDENTIFIER)
     End Sub
 
     Protected Overrides Function HandleCancel() As IUIState

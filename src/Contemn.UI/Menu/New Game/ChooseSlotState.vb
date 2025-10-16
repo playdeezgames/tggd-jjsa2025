@@ -17,7 +17,8 @@ Friend Class ChooseSlotState
             settings,
             "Choose Save Slot",
             Hue.Brown,
-            GenerateMenuItems())
+            GenerateMenuItems(),
+            GO_BACK_IDENTIFIER)
     End Sub
 
     Private Shared Function GenerateMenuItems() As IEnumerable(Of (Identifier As String, Text As String))
