@@ -3,8 +3,6 @@ Imports TGGD.UI
 
 Friend Class SettingsState
     Inherits PickerState
-    Private Shared ReadOnly GO_BACK_IDENTIFIER As String = NameOf(GO_BACK_IDENTIFIER)
-    Const GO_BACK_TEXT = "Go Back"
     Private Shared ReadOnly WINDOW_SIZE_IDENTIFIER As String = NameOf(WINDOW_SIZE_IDENTIFIER)
     Const WINDOW_SIZE_TEXT = "Window Size"
     Private Shared ReadOnly FULL_SCREEN_IDENTIFIER As String = NameOf(FULL_SCREEN_IDENTIFIER)
@@ -13,6 +11,8 @@ Friend Class SettingsState
     Const SFX_VOLUME_TEXT = "SFX Volume"
     Private Shared ReadOnly MUX_VOLUME_IDENTIFIER As String = NameOf(MUX_VOLUME_IDENTIFIER)
     Const MUX_VOLUME_TEXT = "MUX Volume"
+    Private Shared ReadOnly KEY_BINDING_IDENTIFIER As String = NameOf(KEY_BINDING_IDENTIFIER)
+    Const KEY_BINDING_TEXT = "Key Binding"
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
@@ -33,7 +33,8 @@ Friend Class SettingsState
                 (WINDOW_SIZE_IDENTIFIER, $"{WINDOW_SIZE_TEXT}: {settings.ScreenWidth}x{settings.ScreenHeight}"),
                 (FULL_SCREEN_IDENTIFIER, FULL_SCREEN_TEXT),
                 (SFX_VOLUME_IDENTIFIER, $"{SFX_VOLUME_TEXT}: {CInt(settings.SfxVolume * 100)}%"),
-                (MUX_VOLUME_IDENTIFIER, $"{MUX_VOLUME_TEXT}: {CInt(settings.MuxVolume * 100)}%")
+                (MUX_VOLUME_IDENTIFIER, $"{MUX_VOLUME_TEXT}: {CInt(settings.MuxVolume * 100)}%"),
+                (KEY_BINDING_IDENTIFIER, KEY_BINDING_TEXT)
             }
         Return result
     End Function
@@ -58,6 +59,8 @@ Friend Class SettingsState
             Case FULL_SCREEN_IDENTIFIER
                 Me.Settings.FullScreen = Not Me.Settings.FullScreen
                 Return New SettingsState(Buffer, World, Settings)
+            Case KEY_BINDING_IDENTIFIER
+                Return New KeyBindingState(Buffer, World, Settings)
             Case Else
                 Throw New NotImplementedException
         End Select

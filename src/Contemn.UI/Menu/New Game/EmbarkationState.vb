@@ -4,12 +4,10 @@ Imports TGGD.UI
 Friend Class EmbarkationState
     Inherits PickerState
 
-    Shared ReadOnly GO_BACK_IDENTIFIER As String = NameOf(GO_BACK_IDENTIFIER)
     Shared ReadOnly TUTORIAL_IDENTIFIER As String = NameOf(TUTORIAL_IDENTIFIER)
     Shared ReadOnly EASY_IDENTIFIER As String = NameOf(EASY_IDENTIFIER)
     Shared ReadOnly NORMAL_IDENTIFIER As String = NameOf(NORMAL_IDENTIFIER)
     Shared ReadOnly HARD_IDENTIFIER As String = NameOf(HARD_IDENTIFIER)
-    Const GO_BACK_TEXT = "Go Back"
     Const TUTORIAL_TEXT = "Tutorial"
     Const EASY_TEXT = "Easy"
     Const NORMAL_TEXT = "Normal"

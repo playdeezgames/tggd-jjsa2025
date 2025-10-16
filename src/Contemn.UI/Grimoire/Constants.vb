@@ -6,6 +6,9 @@ Friend Module Constants
     Friend Const MESSAGE_LINES = 4
     Friend Const VIEW_WIDTH = 25
     Friend Const VIEW_HEIGHT = SCREEN_HEIGHT - MESSAGE_LINES
+    Friend ReadOnly GO_BACK_IDENTIFIER As String = NameOf(GO_BACK_IDENTIFIER)
+    Friend Const GO_BACK_TEXT = "Go Back"
+
 
 
     Friend ReadOnly MoodColors As IReadOnlyDictionary(Of String, (ForegroundColor As Integer, BackgroundColor As Integer)) =

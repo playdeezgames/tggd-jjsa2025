@@ -5,8 +5,6 @@ Imports TGGD.UI
 
 Friend Class ChooseSlotState
     Inherits PickerState
-    Private Shared ReadOnly GO_BACK_IDENTIFIER As String = NameOf(GO_BACK_IDENTIFIER)
-    Const GO_BACK_TEXT = "Go Back"
     Const SLOT_COUNT = 5
 
     Public Sub New(
