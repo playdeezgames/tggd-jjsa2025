@@ -53,6 +53,12 @@ Friend Class MainMenuState
     End Function
 
     Private Function HandleEmbarkation() As IUIState
+        If Settings.HasSettings Then
+            Return New ChooseSlotState(
+                Buffer,
+                World,
+                Settings)
+        End If
         Return New EmbarkationState(
             Buffer,
             World,
