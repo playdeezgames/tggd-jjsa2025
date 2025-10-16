@@ -1,4 +1,6 @@
-﻿Public Interface ISettings
+﻿Imports Contemn.Business
+
+Public Interface ISettings
     Property Quit As Boolean
     Property SfxVolume As Single
     Property MuxVolume As Single

@@ -1,4 +1,5 @@
-﻿using Contemn.UI;
+﻿using Contemn.Business;
+using Contemn.UI;
 
 namespace Contemn
 {

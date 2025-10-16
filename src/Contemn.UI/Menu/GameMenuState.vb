@@ -1,5 +1,6 @@
 ﻿Imports TGGD.UI
 Imports Contemn.Business
+Imports System.Runtime.CompilerServices
 
 Friend Class GameMenuState
     Inherits PickerState
@@ -10,6 +11,8 @@ Friend Class GameMenuState
     Const ABANDON_TEXT = "Abandon"
     Shared ReadOnly SETTINGS_IDENTIFIER As String = NameOf(SETTINGS_IDENTIFIER)
     Const SETTINGS_TEXT = "Settings"
+    Shared ReadOnly SAVE_GAME_IDENTIFIER As String = NameOf(SAVE_GAME_IDENTIFIER)
+    Const SAVE_GAME_TEXT = "Save Game"
 
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
@@ -32,6 +35,7 @@ Friend Class GameMenuState
             }
         If settings.HasSettings Then
             result.Add((SETTINGS_IDENTIFIER, SETTINGS_TEXT))
+            result.Add((SAVE_GAME_IDENTIFIER, SAVE_GAME_TEXT))
         End If
         Return result
     End Function
@@ -44,6 +48,9 @@ Friend Class GameMenuState
                 Return New ConfirmAbandonState(Buffer, World, Settings)
             Case SETTINGS_IDENTIFIER
                 Return New SettingsState(Buffer, World, Settings)
+            Case SAVE_GAME_IDENTIFIER
+                World.Save()
+                Return Me
             Case Else
                 Throw New NotImplementedException
         End Select

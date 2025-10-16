@@ -1,6 +1,8 @@
 Imports System.Data
 Imports TGGD.Business
 Imports Contemn.Data
+Imports System.IO
+Imports System.Text.Json
 
 Public Class World
     Inherits Entity(Of WorldData)
@@ -299,4 +301,15 @@ Public Class World
         preparation(Me)
         DoInitialization()
     End Sub
+
+    Public Sub Save() Implements IWorld.Save
+        File.WriteAllText(
+            Me.GetMetadata(MetadataType.SaveSlot),
+            JsonSerializer.Serialize(Data))
+    End Sub
+
+    Public Shared Function Load(filename As String, platform As IPlatform) As IWorld
+        Dim data = JsonSerializer.Deserialize(Of WorldData)(File.ReadAllText(filename))
+        Return New World(data, platform)
+    End Function
 End Class

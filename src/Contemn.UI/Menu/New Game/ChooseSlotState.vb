@@ -1,4 +1,5 @@
-﻿Imports System.Linq.Expressions
+﻿Imports System.IO
+Imports System.Linq.Expressions
 Imports Contemn.Business
 Imports TGGD.UI
 
@@ -27,7 +28,12 @@ Friend Class ChooseSlotState
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT)
             }
         For Each slot In Enumerable.Range(1, SLOT_COUNT)
-            result.Add((slot.ToString, $"Slot {slot}"))
+            Dim filename = GenerateSlotName(slot)
+            Dim text = $"Slot {slot}"
+            If File.Exists(filename) Then
+                text &= $"({File.GetLastWriteTime(filename)})"
+            End If
+            result.Add((slot.ToString, text))
         Next
         Return result
     End Function
@@ -41,9 +47,16 @@ Friend Class ChooseSlotState
             Case GO_BACK_IDENTIFIER
                 Return HandleCancel()
             Case Else
-                'TODO: check if the save slot already exists
-                World.SetMetadata(MetadataType.SaveSlot, $"SaveSlot{identifier}.json")
+                Dim filename = GenerateSlotName(CInt(identifier))
+                World.SetMetadata(MetadataType.SaveSlot, filename)
+                If File.Exists(filename) Then
+                    Return NeutralState.DetermineState(Buffer, Business.World.Load(filename, World.Platform), Settings)
+                End If
                 Return New EmbarkationState(Buffer, World, Settings)
         End Select
+    End Function
+
+    Private Shared Function GenerateSlotName(slot As Integer) As String
+        Return $"SaveSlot{slot}.json"
     End Function
 End Class
