@@ -6,15 +6,6 @@ Friend Class RecipeTypeDescriptor
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly durabilities As IReadOnlyDictionary(Of String, Integer)
     Friend ReadOnly Property IsDestructive As Boolean
-    Private Shared ReadOnly tagTypeName As IReadOnlyDictionary(Of String, String) =
-        New Dictionary(Of String, String) From
-        {
-            {TagType.CanChop, "(chopping item)"},
-            {TagType.CanCut, "(cutting item)"},
-            {TagType.CanDig, "(digging item)"},
-            {TagType.CanHammer, "(hammering item)"},
-            {TagType.CanSharpen, "(sharpening item)"}
-        }
     Sub New(
            recipeType As String,
            isDestructive As Boolean,

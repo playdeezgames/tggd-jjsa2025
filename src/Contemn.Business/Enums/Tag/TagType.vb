@@ -1,4 +1,14 @@
 ﻿Public Module TagType
+    Friend ReadOnly tagTypeName As IReadOnlyDictionary(Of String, String) =
+        New Dictionary(Of String, String) From
+        {
+            {TagType.CanChop, "(chopping item)"},
+            {TagType.CanCut, "(cutting item)"},
+            {TagType.CanDig, "(digging item)"},
+            {TagType.CanHammer, "(hammering item)"},
+            {TagType.CanSharpen, "(sharpening item)"}
+        }
+
     Friend Function CompletedCollectTutorial(itemType As String) As String
         Return $"CompletedCollect{itemType.Replace("ItemTypeDescriptor", String.Empty)}Tutorial"
     End Function
