@@ -6,12 +6,14 @@ Public MustInherit Class ItemTypeDescriptor
     Friend ReadOnly Property ItemCount As Integer
     Friend ReadOnly Property IsAggregate As Boolean
     Friend ReadOnly AutoTags As IEnumerable(Of String)
+    Friend ReadOnly DepletionTable As IReadOnlyDictionary(Of String, Integer)
     Sub New(
            itemType As String,
            itemTypeName As String,
            itemCount As Integer,
            isAggregate As Boolean,
-           autoTags As IEnumerable(Of String))
+           autoTags As IEnumerable(Of String),
+           depletionTable As IReadOnlyDictionary(Of String, Integer))
         Me.ItemType = itemType
         Me.ItemTypeName = itemTypeName
         Me.ItemCount = itemCount

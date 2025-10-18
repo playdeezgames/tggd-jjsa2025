@@ -13,7 +13,8 @@ Public Class AxeItemTypeDescriptor
             MAXIMUM_DURABILITY,
             {TagType.CanChop, TagType.CanSharpen},
             NameOf(SharpRockItemTypeDescriptor),
-            MAXIMUM_DURABILITY)
+            MAXIMUM_DURABILITY,
+                   New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)

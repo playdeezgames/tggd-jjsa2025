@@ -16,7 +16,8 @@ Public MustInherit Class ConsumableItemTypeDescriptor
                    itemTypeName,
                    itemCount,
                    isAggregate,
-                   Array.Empty(Of String))
+                   Array.Empty(Of String),
+                   New Dictionary(Of String, Integer))
         Me.foodPoisoningStats = foodPoisoningStats
     End Sub
 

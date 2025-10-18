@@ -13,7 +13,8 @@ Public Class KnifeItemTypeDescriptor
             MAXIMUM_DURABILITY,
             {TagType.CanCut, TagType.CanSharpen},
             NameOf(BladeItemTypeDescriptor),
-            MAXIMUM_DURABILITY)
+            MAXIMUM_DURABILITY,
+                   New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)

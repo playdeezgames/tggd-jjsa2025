@@ -9,7 +9,8 @@ Public Class UnfiredPotItemTypeDescriptor
             "Unfired Pot",
             0,
             True,
-            {TagType.CanKiln})
+            {TagType.CanKiln},
+                   New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

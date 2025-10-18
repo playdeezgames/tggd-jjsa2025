@@ -11,7 +11,8 @@ Public Class FiredPotItemTypeDescriptor
             "Clay Pot",
             0,
             False,
-            {TagType.IsFillable, TagType.IsBoilable})
+            {TagType.IsFillable, TagType.IsBoilable},
+                   New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

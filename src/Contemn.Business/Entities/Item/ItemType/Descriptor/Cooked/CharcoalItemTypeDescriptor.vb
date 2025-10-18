@@ -9,7 +9,8 @@ Public Class CharcoalItemTypeDescriptor
             "Charcoal",
             0,
             True,
-            {TagType.CanRefuel})
+            {TagType.CanRefuel},
+                   New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

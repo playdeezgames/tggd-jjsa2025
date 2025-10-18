@@ -9,7 +9,8 @@ Public Class CampFireItemTypeDescriptor
             "Camp Fire",
             0,
             True,
-            {TagType.CanPlace})
+            {TagType.CanPlace},
+                   New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

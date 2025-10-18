@@ -9,7 +9,8 @@ Public Class LogItemTypeDescriptor
             "Log",
             0,
             True,
-            {TagType.CanRefuel, TagType.IsCookable})
+            {TagType.CanRefuel, TagType.IsCookable},
+                   New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

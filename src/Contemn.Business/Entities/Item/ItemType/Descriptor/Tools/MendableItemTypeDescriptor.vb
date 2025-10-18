@@ -15,13 +15,15 @@ Public MustInherit Class MendableItemTypeDescriptor
                      maximumDurability As Integer,
                      autoTags As IEnumerable(Of String),
                      mendConsumptionItemType As String,
-                     durabilityRepaired As Integer)
+                     durabilityRepaired As Integer,
+                     depletionTable As IReadOnlyDictionary(Of String, Integer))
         MyBase.New(
             itemType,
             itemTypeName,
             itemCount,
             isAggregate,
-            autoTags)
+            autoTags,
+            depletionTable)
         Me.maximumDurability = maximumDurability
         Me.mendConsumptionItemType = mendConsumptionItemType
         Me.durabilityRepaired = durabilityRepaired

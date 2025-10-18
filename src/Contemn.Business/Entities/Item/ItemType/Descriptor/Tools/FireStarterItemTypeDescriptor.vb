@@ -2,7 +2,7 @@
 
 Public Class FireStarterItemTypeDescriptor
     Inherits ItemTypeDescriptor
-    Const MAXIMUM_DURABILITY = 20
+    Const MAXIMUM_DURABILITY = 1
 
     Public Sub New()
         MyBase.New(
@@ -10,7 +10,11 @@ Public Class FireStarterItemTypeDescriptor
             "Fire Starter",
             0,
             False,
-            {TagType.CanLight, TagType.CanRefuel})
+            {TagType.CanLight, TagType.CanRefuel},
+            New Dictionary(Of String, Integer) From
+            {
+                {NameOf(StickItemTypeDescriptor), 2}
+            })
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

@@ -15,7 +15,8 @@ Public Class TorchItemTypeDescriptor
                 TagType.IsIgnitable,
                 TagType.CanRefuel,
                 TagType.CanLight
-            })
+            },
+                   New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

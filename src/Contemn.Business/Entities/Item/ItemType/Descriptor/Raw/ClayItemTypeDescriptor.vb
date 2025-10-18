@@ -9,7 +9,8 @@ Public Class ClayItemTypeDescriptor
             "Clay",
             0,
             True,
-            Array.Empty(Of String))
+            Array.Empty(Of String),
+                   New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

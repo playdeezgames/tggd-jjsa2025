@@ -13,7 +13,8 @@ Public Class HammerItemTypeDescriptor
             MAXIMUM_DURABILITY,
             {TagType.CanHammer},
             NameOf(RockItemTypeDescriptor),
-            MAXIMUM_DURABILITY)
+            MAXIMUM_DURABILITY,
+                   New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)

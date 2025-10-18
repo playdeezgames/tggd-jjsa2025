@@ -9,7 +9,8 @@ Public Class SharpStickItemTypeDescriptor
             "Sharp Stick",
             0,
             False,
-            {TagType.CanDig, TagType.CanRefuel})
+            {TagType.CanDig, TagType.CanRefuel},
+            New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
