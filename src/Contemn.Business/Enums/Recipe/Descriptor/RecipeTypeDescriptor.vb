@@ -1,6 +1,15 @@
 ﻿Imports TGGD.Business
 
-Friend Class RecipeTypeDescriptor
+Friend MustInherit Class RecipeTypeDescriptor
+    'Dear Future Me,
+    'There are no MustOverride things in this class
+    'So you may think that you can eliminated the MustInherit
+    'And the RecipeType from the class
+    'But remember this: RecipeType is used as a unique identifier in order
+    'Pick the recipe in a dialog.
+    'So you can't.
+    'Love,
+    '-Past You
     Friend ReadOnly Property RecipeType As String
     Private ReadOnly inputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)
