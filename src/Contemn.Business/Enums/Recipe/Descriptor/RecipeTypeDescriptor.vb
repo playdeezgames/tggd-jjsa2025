@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend MustInherit Class RecipeTypeDescriptor
+Friend Class RecipeTypeDescriptor
     Friend ReadOnly Property RecipeType As String
     Private ReadOnly inputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)

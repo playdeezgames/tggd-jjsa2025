@@ -372,7 +372,21 @@
                         "Select short stick recipe",
                         "Come Back"
                     },
-                    {"Short sticks are used for crafting."})
+                    {"Short sticks are used for crafting."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Plank",
+                    NameOf(PlankItemTypeDescriptor),
+                    {
+                        NameOf(LogItemTypeDescriptor)
+                    },
+                    {
+                        "Gather log and axe",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select plank recipe",
+                        "Come Back"
+                    },
+                    {"Planks are used for crafting."})
             }
     End Function
 
