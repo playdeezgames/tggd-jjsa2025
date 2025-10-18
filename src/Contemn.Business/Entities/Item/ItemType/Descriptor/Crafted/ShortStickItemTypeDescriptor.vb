@@ -1,27 +1,27 @@
 ﻿Imports TGGD.Business
 
-Public Class StickItemTypeDescriptor
+Friend Class ShortStickItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
         MyBase.New(
-            NameOf(StickItemTypeDescriptor),
-            "Stick",
+            NameOf(ShortStickItemTypeDescriptor),
+            "Short Stick",
             0,
             True,
             {TagType.CanRefuel},
             New Dictionary(Of String, Integer))
     End Sub
 
+    Friend Overrides Sub HandleInitialize(item As IItem)
+        MyBase.HandleInitialize(item)
+        item.SetStatistic(StatisticType.Fuel, 1)
+    End Sub
+
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
     End Sub
 
     Friend Overrides Sub HandleRemoveItem(item As IItem, character As ICharacter)
-    End Sub
-
-    Friend Overrides Sub HandleInitialize(item As IItem)
-        MyBase.HandleInitialize(item)
-        item.SetStatistic(StatisticType.Fuel, 1)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
@@ -46,7 +46,7 @@ Public Class StickItemTypeDescriptor
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)
         Return {
-            New DialogLine(MoodType.Info, "It's a stick.")
-        }
+            New DialogLine(MoodType.Info, "Its a short stick!")
+            }
     End Function
 End Class

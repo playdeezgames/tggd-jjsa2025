@@ -27,6 +27,9 @@ Friend Module ItemTypes
             New CharcoalItemTypeDescriptor(),
             New FiredPotItemTypeDescriptor(),
             New FireStarterItemTypeDescriptor(),
-            New TorchItemTypeDescriptor()
+            New TorchItemTypeDescriptor(),
+            New PlankItemTypeDescriptor(),
+            New FireBowItemTypeDescriptor(),
+            New ShortStickItemTypeDescriptor()
         }.ToDictionary(Function(x) x.ItemType, Function(x) x)
 End Module

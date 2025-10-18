@@ -21,7 +21,7 @@ Public Class LogItemTypeDescriptor
 
     Friend Overrides Sub HandleInitialize(item As IItem)
         MyBase.HandleInitialize(item)
-        item.SetStatistic(StatisticType.Fuel, 5)
+        item.SetStatistic(StatisticType.Fuel, 8)
         item.SetMetadata(MetadataType.CookedItemType, NameOf(CharcoalItemTypeDescriptor))
     End Sub
 

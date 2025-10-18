@@ -13,12 +13,19 @@ Friend Module ItemExtensions
             Return lines
         End If
         tool.ChangeStatistic(StatisticType.Durability, -1)
-        Dim netRuined = tool.IsStatisticAtMinimum(StatisticType.Durability)
-        If netRuined Then
+        Dim itemRuined = tool.IsStatisticAtMinimum(StatisticType.Durability)
+        If itemRuined Then
             lines.Add(
             New DialogLine(
                 MoodType.Info,
                 $"Yer {tool.Name} is ruined!"))
+            For Each entry In tool.Descriptor.DepletionTable
+                Dim entryDescriptor = ItemTypes.Descriptors(entry.Key)
+                lines.Add(New DialogLine(MoodType.Info, $"+{entry.Value} {entryDescriptor.ItemTypeName}"))
+                For Each dummy In Enumerable.Range(0, entry.Value)
+                    tool.World.CreateItem(entry.Key, character)
+                Next
+            Next
             character.RemoveAndRecycleItem(tool)
         Else
             lines.Add(

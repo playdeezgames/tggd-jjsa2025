@@ -19,6 +19,7 @@ Public MustInherit Class ItemTypeDescriptor
         Me.ItemCount = itemCount
         Me.IsAggregate = isAggregate
         Me.AutoTags = autoTags
+        Me.DepletionTable = depletionTable
     End Sub
     Friend MustOverride Function CanSpawnMap(map As IMap) As Boolean
     Friend MustOverride Function CanSpawnLocation(location As ILocation) As Boolean

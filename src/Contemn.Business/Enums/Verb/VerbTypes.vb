@@ -343,7 +343,22 @@
                         "Select fire starter recipe",
                         "Come Back"
                     },
-                    {"Fire starters can start fires."})
+                    {"Fire starters can start fires."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Fire Bow",
+                    NameOf(FireBowItemTypeDescriptor),
+                    {
+                        NameOf(StickItemTypeDescriptor),
+                        NameOf(TwineItemTypeDescriptor)
+                    },
+                    {
+                        "Gather sticks and twine",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select fire bow recipe",
+                        "Come Back"
+                    },
+                    {"Fire bows are used for crafting."})
             }
     End Function
 
