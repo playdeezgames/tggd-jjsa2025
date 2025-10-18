@@ -358,7 +358,21 @@
                         "Select fire bow recipe",
                         "Come Back"
                     },
-                    {"Fire bows are used for crafting."})
+                    {"Fire bows are used for crafting."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Short Stick",
+                    NameOf(ShortStickItemTypeDescriptor),
+                    {
+                        NameOf(AxeItemTypeDescriptor)
+                    },
+                    {
+                        "Gather stick and axe",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select short stick recipe",
+                        "Come Back"
+                    },
+                    {"Short sticks are used for crafting."})
             }
     End Function
 

@@ -71,7 +71,7 @@ Friend MustInherit Class RecipeTypeDescriptor
         Get
             Dim inputList = inputs.Select(Function(x) $"{x.Value} {ItemTypes.Descriptors(x.Key).ItemTypeName}")
             Dim outputList = outputs.Select(Function(x) $"{x.Value} {ItemTypes.Descriptors(x.Key).ItemTypeName}")
-            Return $"{String.Join("+", inputList)}->{String.Join("+", outputList)}"
+            Return $"{String.Join("+", inputList)}{If(durabilities.Any, "*", "")}->{String.Join("+", outputList)}"
         End Get
     End Property
 

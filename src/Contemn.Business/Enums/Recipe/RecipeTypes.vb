@@ -22,6 +22,7 @@
             New DismantleHammerRecipeTypeDescriptor(),
             New DismantleKnifeRecipeTypeDescriptor(),
             New DismantleTwineRecipeTypeDescriptor(),
-            New FireBowRecipeTypeDescriptor()
+            New FireBowRecipeTypeDescriptor(),
+            New ShortStickRecipeTypeDescriptor()
         }
 End Module
