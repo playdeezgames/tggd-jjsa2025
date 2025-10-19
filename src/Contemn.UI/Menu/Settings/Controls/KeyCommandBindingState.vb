@@ -3,8 +3,8 @@ Imports TGGD.UI
 
 Friend Class KeyCommandBindingState
     Inherits PickerState
-    Private Shared ReadOnly ADD_CHOICE As String = NameOf(ADD_CHOICE)
-    Private Const ADD_TEXT = "Add..."
+    Private Shared ReadOnly BIND_CHOICE As String = NameOf(BIND_CHOICE)
+    Private Const BIND_TEXT = "Bind..."
     Private ReadOnly command As String
 
     Public Sub New(
@@ -27,9 +27,9 @@ Friend Class KeyCommandBindingState
         Dim result As New List(Of (Identifier As String, Text As String)) From
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT),
-                (ADD_CHOICE, ADD_TEXT)
+                (BIND_CHOICE, BIND_TEXT)
             }
-        For Each key In settings.KeyBindings.BoundKeys(command)
+        For Each key In settings.KeyBindings.BoundKeys(command).Order()
             result.Add((key, key))
         Next
         Return result
@@ -43,10 +43,10 @@ Friend Class KeyCommandBindingState
         Select Case identifier
             Case GO_BACK_IDENTIFIER
                 Return HandleCancel()
-            Case ADD_CHOICE
-                Return New AddKeyCommandState(Buffer, World, Settings, command)
+            Case BIND_CHOICE
+                Return New BindKeyCommandState(Buffer, World, Settings, command)
             Case Else
-                Return New RemoveKeyCommandState(Buffer, World, Settings, command, identifier)
+                Return New UnbindKeyCommandState(Buffer, World, Settings, command, identifier)
         End Select
     End Function
 End Class

@@ -1,37 +1,39 @@
 ﻿Imports Contemn.Business
 Imports TGGD.UI
 
-Friend Class KeyBindingState
+Friend Class BindKeyCommandState
     Inherits PickerState
+    Private ReadOnly command As String
 
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
                   settings As ISettings,
-                  identifier As String)
+                  command As String)
         MyBase.New(
             buffer,
             world,
             settings,
-            "Key Bindings",
+            $"Add Key For {command}...",
             Hue.Brown,
-            GenerateMenuItems(settings),
-            identifier)
+            GenerateMenuItems(settings, command),
+            GO_BACK_IDENTIFIER)
+        Me.command = command
     End Sub
 
-    Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
+    Private Shared Function GenerateMenuItems(settings As ISettings, command As String) As IEnumerable(Of (Identifier As String, Text As String))
         Dim result As New List(Of (Identifier As String, Text As String)) From
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT)
             }
-        For Each command In settings.KeyBindings.Commands
-            result.Add((command, command))
+        For Each key In settings.KeyBindings.UnboundKeys.Order()
+            result.Add((key, key))
         Next
         Return result
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState
-        Return New SettingsState(Buffer, World, Settings, SettingsState.KEY_BINDING_IDENTIFIER)
+        Return New KeyCommandBindingState(Buffer, World, Settings, command)
     End Function
 
     Protected Overrides Function HandleMenuItem(identifier As String) As IUIState
@@ -39,7 +41,9 @@ Friend Class KeyBindingState
             Case GO_BACK_IDENTIFIER
                 Return HandleCancel()
             Case Else
-                Return New KeyCommandBindingState(Buffer, World, Settings, identifier)
+                Settings.KeyBindings.Bind(command, identifier)
+                Settings.KeyBindings.Update()
+                Return HandleCancel()
         End Select
     End Function
 End Class

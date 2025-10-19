@@ -1,7 +1,7 @@
 ﻿Imports Contemn.Business
 Imports TGGD.UI
 
-Friend Class RemoveKeyCommandState
+Friend Class UnbindKeyCommandState
     Inherits PickerState
     Private ReadOnly command As String
     Private ReadOnly key As String
