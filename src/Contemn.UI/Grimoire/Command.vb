@@ -5,6 +5,4 @@
     Public ReadOnly Right As String = NameOf(Right)
     Public ReadOnly Green As String = NameOf(Green)
     Public ReadOnly Red As String = NameOf(Red)
-    Public ReadOnly Blue As String = NameOf(Blue)
-    Public ReadOnly Yellow As String = NameOf(Yellow)
 End Module
