@@ -46,6 +46,7 @@ Friend Class RemoveKeyCommandState
                 Return HandleCancel()
             Case UNBIND_IDENTIFIER
                 Settings.KeyBindings.Unbind(key)
+                Settings.KeyBindings.Update()
                 Return HandleCancel()
             Case Else
                 Throw New NotImplementedException

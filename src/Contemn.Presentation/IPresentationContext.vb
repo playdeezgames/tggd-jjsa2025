@@ -10,9 +10,11 @@ Public Interface IPresentationContext
     Sub SetMuxHook(value As Action(Of String))
     Sub Update(elapsedGameTime As TimeSpan)
     Sub Render(displayBuffer As IDisplayBuffer)
+    Sub SetCommandTableHook(value As Action)
     ReadOnly Property Size As (Integer, Integer)
     ReadOnly Property FullScreen As Boolean
     ReadOnly Property SfxVolume As Single
     ReadOnly Property MuxVolume As Single
     ReadOnly Property QuitRequested As Boolean
+    ReadOnly Property KeysFilename As String
 End Interface

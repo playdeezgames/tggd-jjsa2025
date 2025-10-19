@@ -42,6 +42,7 @@ Friend Class AddKeyCommandState
                 Return HandleCancel()
             Case Else
                 Settings.KeyBindings.Bind(command, identifier)
+                Settings.KeyBindings.Update()
                 Return HandleCancel()
         End Select
     End Function

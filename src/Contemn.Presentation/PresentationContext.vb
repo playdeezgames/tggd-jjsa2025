@@ -18,6 +18,7 @@ Public Class PresentationContext
     Private _muxVolume As Single
     Private _zoom As Integer
     Private _fullScreen As Boolean
+    Private CommandTableHook As Action
     Private ReadOnly keysFilename As String
 
     Public Sub New(frameBuffer() As Integer, fontFilename As String, settingsFilename As String, keysFilename As String)
@@ -181,6 +182,12 @@ Public Class PresentationContext
         End Get
     End Property
 
+    Private ReadOnly Property IPresentationContext_KeysFilename As String Implements IPresentationContext.KeysFilename
+        Get
+            Return keysFilename
+        End Get
+    End Property
+
     Private Function LoadCommandKeys() As Dictionary(Of Keys, String)
         Return JsonSerializer.Deserialize(Of Dictionary(Of Keys, String))(File.ReadAllText(keysFilename))
     End Function
@@ -251,5 +258,13 @@ Public Class PresentationContext
         Dim commandKeys = LoadCommandKeys()
         commandKeys.Add([Enum].Parse(Of Keys)(identifier), command)
         SaveCommandKeys(commandKeys)
+    End Sub
+
+    Public Sub SetCommandTableHook(value As Action) Implements IPresentationContext.SetCommandTableHook
+        Me.CommandTableHook = value
+    End Sub
+
+    Public Sub Update() Implements IKeyBindings.Update
+        CommandTableHook()
     End Sub
 End Class

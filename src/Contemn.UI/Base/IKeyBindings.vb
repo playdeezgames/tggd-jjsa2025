@@ -4,4 +4,5 @@
     ReadOnly Property UnboundKeys As IEnumerable(Of String)
     Sub Unbind(key As String)
     Sub Bind(command As String, identifier As String)
+    Sub Update()
 End Interface

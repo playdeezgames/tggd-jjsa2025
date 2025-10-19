@@ -1,3 +1,5 @@
+Imports System.IO
+Imports System.Text.Json
 Imports Contemn.Business
 Imports Microsoft.Xna.Framework
 Imports Microsoft.Xna.Framework.Audio
@@ -15,7 +17,7 @@ Public Class Host
     Private _texture As Texture2D
     Private _spriteBatch As SpriteBatch
     Private _displayBuffer As IDisplayBuffer
-    Private ReadOnly _commandTable As IReadOnlyDictionary(Of String, Func(Of KeyboardState, GamePadState, Boolean))
+    Private _commandTable As IReadOnlyDictionary(Of String, Func(Of KeyboardState, GamePadState, Boolean))
     Private ReadOnly _sfxSoundEffects As New Dictionary(Of String, SoundEffect)
     Private ReadOnly _sfxFilenames As IReadOnlyDictionary(Of String, String)
     Private ReadOnly _muxSongs As New Dictionary(Of String, Song)
@@ -27,20 +29,20 @@ Public Class Host
            controller As IPresentationContext,
            viewSize As (Integer, Integer),
            hueTable As IReadOnlyDictionary(Of Integer, Color),
-           commandTable As IReadOnlyDictionary(Of String, Func(Of KeyboardState, GamePadState, Boolean)),
            sfxFileNames As IReadOnlyDictionary(Of String, String),
            muxFileNames As IReadOnlyDictionary(Of String, String))
         _title = title
         _graphics = New GraphicsDeviceManager(Me)
         _controller = controller
         _viewSize = viewSize
-        _commandTable = commandTable
+
         _sfxFilenames = sfxFileNames
         _muxFilenames = muxFileNames
         _hueTable = hueTable
         Content.RootDirectory = "Content"
     End Sub
     Protected Overrides Sub Initialize()
+        UpdateCommandTable()
         _controller.SetSizeHook(AddressOf OnWindowSizeChange)
         _controller.SetMuxVolumeHook(AddressOf OnMuxVolumeChange)
         Window.Title = _title
@@ -53,9 +55,14 @@ Public Class Host
         Next
         _controller.SetSfxHook(AddressOf OnSfx)
         _controller.SetMuxHook(AddressOf OnMux)
+        _controller.SetCommandTableHook(AddressOf UpdateCommandTable)
         OnMux(Mux.Song)
         MediaPlayer.IsRepeating = True
         MyBase.Initialize()
+    End Sub
+
+    Private Sub UpdateCommandTable()
+        _commandTable = LoadCommands()
     End Sub
 
     Private Sub OnMuxVolumeChange(volume As Single)
@@ -135,4 +142,35 @@ Public Class Host
         _spriteBatch.End()
         MyBase.Draw(gameTime)
     End Sub
+
+    Private Function LoadCommands() As IReadOnlyDictionary(Of String, Func(Of KeyboardState, GamePadState, Boolean))
+        Dim keysTable = JsonSerializer.Deserialize(Of Dictionary(Of Keys, String))(File.ReadAllText(_controller.KeysFilename))
+        Dim keysForCommands = keysTable.
+            GroupBy(Function(x) x.Value).
+            ToDictionary(
+                Function(x) x.Key,
+                Function(x) x.Select(Function(y) y.Key).ToList())
+        Dim result = New Dictionary(Of String, Func(Of KeyboardState, GamePadState, Boolean))
+        For Each cmd In gamePadCommandTable.Keys
+            result.Add(cmd, MakeCommandHandler(If(keysForCommands.ContainsKey(cmd), keysForCommands(cmd), Array.Empty(Of Keys)().ToList), gamePadCommandTable(cmd)))
+        Next
+        Return result
+    End Function
+    Private ReadOnly gamePadCommandTable As IReadOnlyDictionary(Of String, Func(Of GamePadState, Boolean)) =
+    New Dictionary(Of String, Func(Of GamePadState, Boolean)) From
+    {
+        {UI.Command.Green, Function(gamePad) gamePad.IsButtonDown(Buttons.A)},
+        {UI.Command.Red, Function(gamePad) gamePad.IsButtonDown(Buttons.B)},
+        {UI.Command.Up, Function(gamePad) gamePad.DPad.Up = ButtonState.Pressed},
+        {UI.Command.Down, Function(gamePad) gamePad.DPad.Down = ButtonState.Pressed},
+        {UI.Command.Left, Function(gamePad) gamePad.DPad.Left = ButtonState.Pressed},
+        {UI.Command.Right, Function(gamePad) gamePad.DPad.Right = ButtonState.Pressed}
+    }
+
+    Private Function MakeCommandHandler(keys As List(Of Keys), func As Func(Of GamePadState, Boolean)) As Func(Of KeyboardState, GamePadState, Boolean)
+        Return Function(k, g)
+                   Return func(g) OrElse keys.Any(Function(x) k.IsKeyDown(x))
+               End Function
+    End Function
+
 End Class
