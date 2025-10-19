@@ -30,6 +30,7 @@ Friend Module ItemTypes
             New TorchItemTypeDescriptor(),
             New PlankItemTypeDescriptor(),
             New FireBowItemTypeDescriptor(),
-            New ShortStickItemTypeDescriptor()
+            New ShortStickItemTypeDescriptor(),
+            New BowDrillItemTypeDescriptor()
         }.ToDictionary(Function(x) x.ItemType, Function(x) x)
 End Module

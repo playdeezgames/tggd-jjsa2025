@@ -386,6 +386,22 @@
                         "Select plank recipe",
                         "Come Back"
                     },
+                    {"Planks are used for crafting."}),
+                New CollectItemTypeTutorialVerbTypeDescriptor(
+                    "Craft Bow Drill",
+                    NameOf(BowDrillItemTypeDescriptor),
+                    {
+                        NameOf(PlankItemTypeDescriptor),
+                        NameOf(ShortStickItemTypeDescriptor),
+                        NameOf(BowDrillItemTypeDescriptor)
+                    },
+                    {
+                        "Gather plank, firebow and short stick",
+                        "Press <ACTION>",
+                        "Select ""Craft...""",
+                        "Select bow drill recipe",
+                        "Come Back"
+                    },
                     {"Planks are used for crafting."})
             }
     End Function

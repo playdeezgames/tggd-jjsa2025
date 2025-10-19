@@ -24,6 +24,7 @@
             New DismantleTwineRecipeTypeDescriptor(),
             New FireBowRecipeTypeDescriptor(),
             New ShortStickRecipeTypeDescriptor(),
-            New PlankRecipeTypeDescriptor()
+            New PlankRecipeTypeDescriptor(),
+            New BowDrillRecipeTypeDescriptor()
         }
 End Module
