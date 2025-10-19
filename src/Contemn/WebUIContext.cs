@@ -23,14 +23,16 @@ namespace Contemn
 
         public override IEnumerable<string> Commands => [];
 
-        public override IEnumerable<string> AvailableKeys => [];
+        public override IEnumerable<string> UnboundKeys => [];
 
-        public override void AddKey(string command, string identifier)
+        public override IKeyBindings KeyBindings => throw new NotImplementedException();
+
+        public override void Bind(string command, string identifier)
         {
             //nothing
         }
 
-        public override IEnumerable<string> KeysForCommand(string command)
+        public override IEnumerable<string> BoundKeys(string command)
         {
             return [];
         }

@@ -30,7 +30,7 @@ Friend Class RemoveKeyCommandState
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT)
             }
-        If settings.KeysForCommand(command).Count > 1 Then
+        If settings.BoundKeys(command).Count > 1 Then
             result.Add((UNBIND_IDENTIFIER, UNBIND_TEXT))
         End If
         Return result
