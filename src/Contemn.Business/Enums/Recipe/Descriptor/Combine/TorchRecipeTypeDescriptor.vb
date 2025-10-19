@@ -7,7 +7,7 @@
             False,
             New Dictionary(Of String, Integer) From
             {
-                {NameOf(StickItemTypeDescriptor), 1},
+                {NameOf(ShortStickItemTypeDescriptor), 1},
                 {NameOf(PlantFiberItemTypeDescriptor), 5}
             },
             New Dictionary(Of String, Integer) From

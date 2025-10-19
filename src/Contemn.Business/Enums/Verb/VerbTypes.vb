@@ -231,9 +231,9 @@
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Craft Torch",
                     NameOf(TorchItemTypeDescriptor),
-                    {NameOf(StickItemTypeDescriptor), NameOf(PlantFiberItemTypeDescriptor)},
+                    {NameOf(ShortStickItemTypeDescriptor)},
                     {
-                        "Gather Stick and Fiber",
+                        "Gather Short Stick and Fiber",
                         "Press <ACTION>",
                         "Select ""Craft...""",
                         "Select Torch recipe",
