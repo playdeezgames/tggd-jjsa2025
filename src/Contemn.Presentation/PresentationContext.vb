@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Text.Json
 Imports Contemn.UI
+Imports Microsoft.Xna.Framework.Input
 
 Public Class PresentationContext
     Inherits UIContext
@@ -16,14 +17,16 @@ Public Class PresentationContext
     Private _muxVolume As Single
     Private _zoom As Integer
     Private _fullScreen As Boolean
+    Private ReadOnly keysFilename As String
 
-    Public Sub New(frameBuffer() As Integer, fontFilename As String, settingsFilename As String)
+    Public Sub New(frameBuffer() As Integer, fontFilename As String, settingsFilename As String, keysFilename As String)
         MyBase.New(
             VIEW_COLUMNS,
             VIEW_ROWS,
             frameBuffer)
         font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(fontFilename)))
         Quit = False
+        Me.keysFilename = keysFilename
         LoadInitialSettings()
     End Sub
 
@@ -158,6 +161,23 @@ Public Class PresentationContext
         End Get
     End Property
 
+    Public Overrides ReadOnly Property Commands As IEnumerable(Of String)
+        Get
+            Return LoadCommandKeys().Values.Distinct
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property AvailableKeys As IEnumerable(Of String)
+        Get
+            Dim commandKeys = New HashSet(Of Keys)(LoadCommandKeys().Keys)
+            Return [Enum].GetValues(Of Keys).Where(Function(x) x <> Keys.None AndAlso Not commandKeys.Contains(x)).Select(Function(x) x.ToString())
+        End Get
+    End Property
+
+    Private Function LoadCommandKeys() As Dictionary(Of Keys, String)
+        Return JsonSerializer.Deserialize(Of Dictionary(Of Keys, String))(File.ReadAllText(keysFilename))
+    End Function
+
     Public Sub SetSizeHook(value As Action(Of (Integer, Integer), Boolean)) Implements IPresentationContext.SetSizeHook
         Me.SizeHook = value
     End Sub
@@ -204,5 +224,25 @@ Public Class PresentationContext
                 font.WriteText(displayBuffer, (column * CELL_WIDTH, row * CELL_HEIGHT), character, foreground)
             Next
         Next
+    End Sub
+
+    Public Overrides Function KeysForCommand(command As String) As IEnumerable(Of String)
+        Return LoadCommandKeys().Where(Function(x) x.Value = command).Select(Function(x) x.Key.ToString)
+    End Function
+
+    Public Overrides Sub Unbind(key As String)
+        Dim commandKeys = LoadCommandKeys()
+        commandKeys.Remove([Enum].Parse(Of Keys)(key))
+        SaveCommandKeys(commandKeys)
+    End Sub
+
+    Private Sub SaveCommandKeys(commandKeys As Dictionary(Of Keys, String))
+        File.WriteAllText(keysFilename, JsonSerializer.Serialize(commandKeys))
+    End Sub
+
+    Public Overrides Sub AddKey(command As String, identifier As String)
+        Dim commandKeys = LoadCommandKeys()
+        commandKeys.Add([Enum].Parse(Of Keys)(identifier), command)
+        SaveCommandKeys(commandKeys)
     End Sub
 End Class

@@ -62,7 +62,7 @@ Friend Class SettingsState
                 Me.Settings.FullScreen = Not Me.Settings.FullScreen
                 Return New SettingsState(Buffer, World, Settings, FULL_SCREEN_IDENTIFIER)
             Case KEY_BINDING_IDENTIFIER
-                Return New KeyBindingState(Buffer, World, Settings)
+                Return New KeyBindingState(Buffer, World, Settings, GO_BACK_IDENTIFIER)
             Case Else
                 Throw New NotImplementedException
         End Select

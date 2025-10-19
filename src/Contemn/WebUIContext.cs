@@ -20,5 +20,24 @@ namespace Contemn
         public override int ViewHeight => 200;
 
         public override bool FullScreen { get => false; set { } }
+
+        public override IEnumerable<string> Commands => [];
+
+        public override IEnumerable<string> AvailableKeys => [];
+
+        public override void AddKey(string command, string identifier)
+        {
+            //nothing
+        }
+
+        public override IEnumerable<string> KeysForCommand(string command)
+        {
+            return [];
+        }
+
+        public override void Unbind(string key)
+        {
+            //nothing!
+        }
     }
 }

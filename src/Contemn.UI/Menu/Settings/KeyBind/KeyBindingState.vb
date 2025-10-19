@@ -7,7 +7,8 @@ Friend Class KeyBindingState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  settings As ISettings)
+                  settings As ISettings,
+                  identifier As String)
         MyBase.New(
             buffer,
             world,
@@ -15,7 +16,7 @@ Friend Class KeyBindingState
             "Key Bindings",
             Hue.Brown,
             GenerateMenuItems(settings),
-            GO_BACK_IDENTIFIER)
+            identifier)
     End Sub
 
     Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
@@ -23,6 +24,9 @@ Friend Class KeyBindingState
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT)
             }
+        For Each command In settings.Commands
+            result.Add((command, command))
+        Next
         Return result
     End Function
 
@@ -35,7 +39,7 @@ Friend Class KeyBindingState
             Case GO_BACK_IDENTIFIER
                 Return HandleCancel()
             Case Else
-                Throw New NotImplementedException
+                Return New KeyCommandBindingState(Buffer, World, Settings, identifier)
         End Select
     End Function
 End Class
