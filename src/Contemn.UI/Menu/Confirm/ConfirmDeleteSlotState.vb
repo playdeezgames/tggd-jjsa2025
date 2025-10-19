@@ -2,7 +2,7 @@
 Imports Contemn.Business
 Imports TGGD.UI
 
-Friend Class ConfirmAbandonState
+Friend Class ConfirmDeleteSlotState
     Inherits ConfirmState
 
     Public Sub New(
@@ -13,23 +13,22 @@ Friend Class ConfirmAbandonState
             buffer,
             world,
             settings,
-            "Confirm Abandon?",
+            "Delete Save Slot?",
             Hue.Red)
     End Sub
 
     Protected Overrides Function OnCancel() As IUIState
-        Return New GameMenuState(Buffer, World, Settings)
+        World.Clear()
+        Return New MainMenuState(Buffer, World, Settings)
     End Function
 
     Protected Overrides Function OnConfirm() As IUIState
-        If Settings.HasSettings AndAlso File.Exists(World.GetMetadata(MetadataType.SaveSlot)) Then
-            Return New ConfirmDeleteSlotState(Buffer, World, Settings)
-        End If
+        File.Delete(World.GetMetadata(MetadataType.SaveSlot))
         World.Clear()
         Return New MainMenuState(Buffer, World, Settings)
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState
-        Return New GameMenuState(Buffer, World, Settings)
+        Return OnCancel()
     End Function
 End Class
