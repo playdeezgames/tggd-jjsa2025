@@ -12,9 +12,4 @@ Public Interface ISettings
     ReadOnly Property ViewWidth As Integer
     ReadOnly Property ViewHeight As Integer
     ReadOnly Property KeyBindings As IKeyBindings
-    ReadOnly Property Commands As IEnumerable(Of String)
-    Function BoundKeys(command As String) As IEnumerable(Of String)
-    ReadOnly Property UnboundKeys As IEnumerable(Of String)
-    Sub Unbind(key As String)
-    Sub Bind(command As String, identifier As String)
 End Interface

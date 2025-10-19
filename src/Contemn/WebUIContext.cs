@@ -21,25 +21,6 @@ namespace Contemn
 
         public override bool FullScreen { get => false; set { } }
 
-        public override IEnumerable<string> Commands => [];
-
-        public override IEnumerable<string> UnboundKeys => [];
-
         public override IKeyBindings KeyBindings => throw new NotImplementedException();
-
-        public override void Bind(string command, string identifier)
-        {
-            //nothing
-        }
-
-        public override IEnumerable<string> BoundKeys(string command)
-        {
-            return [];
-        }
-
-        public override void Unbind(string key)
-        {
-            //nothing!
-        }
     }
 }

@@ -26,7 +26,7 @@ Friend Class AddKeyCommandState
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT)
             }
-        For Each key In settings.UnboundKeys
+        For Each key In settings.KeyBindings.UnboundKeys
             result.Add((key, key))
         Next
         Return result
@@ -41,7 +41,7 @@ Friend Class AddKeyCommandState
             Case GO_BACK_IDENTIFIER
                 Return HandleCancel()
             Case Else
-                Settings.Bind(command, identifier)
+                Settings.KeyBindings.Bind(command, identifier)
                 Return HandleCancel()
         End Select
     End Function

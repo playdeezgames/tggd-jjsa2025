@@ -30,7 +30,7 @@ Friend Class RemoveKeyCommandState
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT)
             }
-        If settings.BoundKeys(command).Count > 1 Then
+        If settings.KeyBindings.BoundKeys(command).Count > 1 Then
             result.Add((UNBIND_IDENTIFIER, UNBIND_TEXT))
         End If
         Return result
@@ -45,7 +45,7 @@ Friend Class RemoveKeyCommandState
             Case GO_BACK_IDENTIFIER
                 Return HandleCancel()
             Case UNBIND_IDENTIFIER
-                Settings.Unbind(key)
+                Settings.KeyBindings.Unbind(key)
                 Return HandleCancel()
             Case Else
                 Throw New NotImplementedException

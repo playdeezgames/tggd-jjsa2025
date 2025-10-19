@@ -24,7 +24,7 @@ Friend Class KeyBindingState
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT)
             }
-        For Each command In settings.Commands
+        For Each command In settings.KeyBindings.Commands
             result.Add((command, command))
         Next
         Return result

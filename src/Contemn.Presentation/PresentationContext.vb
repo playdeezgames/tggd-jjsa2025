@@ -162,13 +162,13 @@ Public Class PresentationContext
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Commands As IEnumerable(Of String)
+    Public ReadOnly Property Commands As IEnumerable(Of String) Implements IKeyBindings.Commands
         Get
             Return LoadCommandKeys().Values.Distinct
         End Get
     End Property
 
-    Public Overrides ReadOnly Property UnboundKeys As IEnumerable(Of String)
+    Public ReadOnly Property UnboundKeys As IEnumerable(Of String) Implements IKeyBindings.UnboundKeys
         Get
             Dim commandKeys = New HashSet(Of Keys)(LoadCommandKeys().Keys)
             Return [Enum].GetValues(Of Keys).Where(Function(x) x <> Keys.None AndAlso Not commandKeys.Contains(x)).Select(Function(x) x.ToString())
@@ -233,11 +233,11 @@ Public Class PresentationContext
         Next
     End Sub
 
-    Public Overrides Function BoundKeys(command As String) As IEnumerable(Of String)
+    Public Function BoundKeys(command As String) As IEnumerable(Of String) Implements IKeyBindings.BoundKeys
         Return LoadCommandKeys().Where(Function(x) x.Value = command).Select(Function(x) x.Key.ToString)
     End Function
 
-    Public Overrides Sub Unbind(key As String)
+    Public Sub Unbind(key As String) Implements IKeyBindings.Unbind
         Dim commandKeys = LoadCommandKeys()
         commandKeys.Remove([Enum].Parse(Of Keys)(key))
         SaveCommandKeys(commandKeys)
@@ -247,7 +247,7 @@ Public Class PresentationContext
         File.WriteAllText(keysFilename, JsonSerializer.Serialize(commandKeys))
     End Sub
 
-    Public Overrides Sub Bind(command As String, identifier As String)
+    Public Sub Bind(command As String, identifier As String) Implements IKeyBindings.Bind
         Dim commandKeys = LoadCommandKeys()
         commandKeys.Add([Enum].Parse(Of Keys)(identifier), command)
         SaveCommandKeys(commandKeys)

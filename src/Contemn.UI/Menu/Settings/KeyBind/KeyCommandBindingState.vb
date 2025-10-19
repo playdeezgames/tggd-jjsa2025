@@ -29,7 +29,7 @@ Friend Class KeyCommandBindingState
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT),
                 (ADD_CHOICE, ADD_TEXT)
             }
-        For Each key In settings.BoundKeys(command)
+        For Each key In settings.KeyBindings.BoundKeys(command)
             result.Add((key, key))
         Next
         Return result

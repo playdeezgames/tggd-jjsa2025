@@ -41,8 +41,6 @@ Public MustInherit Class UIContext
     Public MustOverride ReadOnly Property ViewWidth As Integer Implements ISettings.ViewWidth
     Public MustOverride ReadOnly Property ViewHeight As Integer Implements ISettings.ViewHeight
     Public MustOverride Property FullScreen As Boolean Implements ISettings.FullScreen
-    Public MustOverride ReadOnly Property Commands As IEnumerable(Of String) Implements ISettings.Commands
-    Public MustOverride ReadOnly Property UnboundKeys As IEnumerable(Of String) Implements ISettings.UnboundKeys
     Public MustOverride ReadOnly Property KeyBindings As IKeyBindings Implements ISettings.KeyBindings
 
     Public Sub NextEvent() Implements IUIContext.NextEvent
@@ -58,8 +56,4 @@ Public MustInherit Class UIContext
     Public Sub HandleCommand(command As String) Implements IUIContext.HandleCommand
         state = state.HandleCommand(command)
     End Sub
-
-    Public MustOverride Function BoundKeys(command As String) As IEnumerable(Of String) Implements ISettings.BoundKeys
-    Public MustOverride Sub Unbind(key As String) Implements ISettings.Unbind
-    Public MustOverride Sub Bind(command As String, identifier As String) Implements ISettings.Bind
 End Class
