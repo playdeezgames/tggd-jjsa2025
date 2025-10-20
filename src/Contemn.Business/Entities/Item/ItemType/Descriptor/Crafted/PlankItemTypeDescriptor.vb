@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class PlankItemTypeDescriptor
+Public Class PlankItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

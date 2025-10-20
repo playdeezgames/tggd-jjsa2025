@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class ShortStickItemTypeDescriptor
+Public Class ShortStickItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()

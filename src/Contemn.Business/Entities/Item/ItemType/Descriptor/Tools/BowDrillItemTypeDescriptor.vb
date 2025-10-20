@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class BowDrillItemTypeDescriptor
+Public Class BowDrillItemTypeDescriptor
     Inherits ItemTypeDescriptor
     Const MAXIMUM_DURABILITY = 20
 

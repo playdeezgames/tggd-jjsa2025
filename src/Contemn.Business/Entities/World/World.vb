@@ -98,9 +98,6 @@ Public Class World
             InitializeTutorial()
         End If
         AddMessage(MoodType.Info, "Welcome to Grubstaker of SPLORR!!")
-        AddMessage(MoodType.Info, "MOVE: Arrows, WASD, ZQSD")
-        AddMessage(MoodType.Info, "ACTION MENU: Space")
-        AddMessage(MoodType.Info, "GAME MENU: Backspace")
     End Sub
 
     Private Sub InitializeTutorial()

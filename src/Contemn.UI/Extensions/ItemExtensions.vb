@@ -28,8 +28,28 @@ Friend Module ItemExtensions
             {NameOf(CharcoalItemTypeDescriptor), AddressOf CharcoalToPixel},
             {NameOf(FiredPotItemTypeDescriptor), AddressOf FiredPotToPixel},
             {NameOf(FireStarterItemTypeDescriptor), AddressOf FireStarterToPixel},
-            {NameOf(TorchItemTypeDescriptor), AddressOf TorchToPixel}
+            {NameOf(TorchItemTypeDescriptor), AddressOf TorchToPixel},
+            {NameOf(PlankItemTypeDescriptor), AddressOf PlankToPixel},
+            {NameOf(FireBowItemTypeDescriptor), AddressOf FireBowToPixel},
+            {NameOf(ShortStickItemTypeDescriptor), AddressOf ShortStickToPixel},
+            {NameOf(BowDrillItemTypeDescriptor), AddressOf BowDrillToPixel}
         }
+
+    Private Function BowDrillToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(&HE4, Hue.DarkGray, Hue.Black)
+    End Function
+
+    Private Function ShortStickToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(Asc("-"), Hue.DarkGray, Hue.Black)
+    End Function
+
+    Private Function FireBowToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(Asc("D"), Hue.Brown, Hue.Black)
+    End Function
+
+    Private Function PlankToPixel(item As IItem) As Integer
+        Return UIBufferExtensions.ToPixel(254, Hue.Brown, Hue.Black)
+    End Function
 
     Private Function CampFireToPixel(item As IItem) As Integer
         Return UIBufferExtensions.ToPixel(

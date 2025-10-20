@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Friend Class FireBowItemTypeDescriptor
+Public Class FireBowItemTypeDescriptor
     Inherits ItemTypeDescriptor
 
     Public Sub New()
