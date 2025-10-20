@@ -26,10 +26,10 @@ Friend Class ItemsOfTypeDialog
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
+        result.AddRange(character.ItemsOfType(itemType).Select(Function(x) New DialogChoice(x.ItemId.ToString, x.Name)))
         If character.GetCountOfItemType(itemType) > 1 Then
             result.Add(New DialogChoice(DROP_ALL_CHOICE, DROP_ALL_TEXT))
         End If
-        result.AddRange(character.ItemsOfType(itemType).Select(Function(x) New DialogChoice(x.ItemId.ToString, x.Name)))
         Return result
     End Function
 

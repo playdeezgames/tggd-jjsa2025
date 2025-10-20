@@ -29,19 +29,19 @@ Friend Class ItemTypeDialog
         Dim itemCount = character.GetCountOfItemType(itemType)
         Dim result As New List(Of IDialogChoice) From
             {
-                New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT),
-                New DialogChoice(DROP_ONE_CHOICE, DROP_ONE_TEXT)
+                New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
+        result.AddRange(character.GetItemOfType(itemType).GetAvailableChoices(character))
+        If RecipeTypes.Descriptors.Any(Function(x) x.HasInput(itemType) AndAlso x.CanCraft(character)) Then
+            result.Add(New DialogChoice(CRAFT_CHOICE, CRAFT_TEXT))
+        End If
+        result.Add(New DialogChoice(DROP_ONE_CHOICE, DROP_ONE_TEXT))
         If itemCount \ 2 > 0 Then
             result.Add(New DialogChoice(DROP_HALF_CHOICE, $"{DROP_HALF_TEXT}({itemCount \ 2})"))
         End If
         If itemCount > 1 Then
             result.Add(New DialogChoice(DROP_ALL_CHOICE, DROP_ALL_TEXT))
         End If
-        If RecipeTypes.Descriptors.Any(Function(x) x.HasInput(itemType) AndAlso x.CanCraft(character)) Then
-            result.Add(New DialogChoice(CRAFT_CHOICE, CRAFT_TEXT))
-        End If
-        result.AddRange(character.GetItemOfType(itemType).GetAvailableChoices(character))
         Return result
     End Function
 
