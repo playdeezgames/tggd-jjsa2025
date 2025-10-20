@@ -153,4 +153,14 @@ Friend Class Character
         EntityData.LocationId = 0
         EntityData.CharacterType = Nothing
     End Sub
+
+    Public Sub Dismantle(item As IItem) Implements ICharacter.Dismantle
+        Dim descriptor = item.Descriptor
+        RemoveAndRecycleItem(item)
+        For Each entry In descriptor.DepletionTable
+            For Each dummy In Enumerable.Range(0, entry.Value)
+                World.CreateItem(entry.Key, Me)
+            Next
+        Next
+    End Sub
 End Class

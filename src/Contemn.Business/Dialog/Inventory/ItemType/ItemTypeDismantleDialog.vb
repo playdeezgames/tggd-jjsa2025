@@ -67,14 +67,11 @@ Friend Class ItemTypeDismantleDialog
                 New DialogLine(MoodType.Info, $"-{itemCount} {descriptor.ItemTypeName}")
             }
         For Each item In character.ItemsOfType(itemType).Take(itemCount).ToList
-            character.RemoveAndRecycleItem(item)
+            character.Dismantle(item)
         Next
         For Each entry In descriptor.DepletionTable.ToDictionary(Function(x) x.Key, Function(x) x.Value * itemCount)
             Dim entryDescriptor = ItemTypes.Descriptors(entry.Key)
             dialogLines.Add(New DialogLine(MoodType.Info, $"+{entry.Value} {entryDescriptor.ItemTypeName}"))
-            For Each dummy In Enumerable.Range(0, entry.Value)
-                character.World.CreateItem(entry.Key, character)
-            Next
         Next
         Return New OkDialog(
             "Get So Dismantled!",
