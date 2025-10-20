@@ -31,15 +31,21 @@ Public Class FishItemTypeDescriptor
     Protected Overrides Function OtherChoice(item As IItem, character As ICharacter, choice As String) As IDialog
         Select Case choice
             Case SLAP_CHOICE
-                Return New OkDialog(
-                    "SMACK!",
-                    {
-                        New DialogLine(MoodType.Info, "You slap that fish!")
-                    },
-                    Function() Nothing)
+                Return Slap(character)
             Case Else
                 Throw New NotImplementedException
         End Select
+    End Function
+
+    Private Shared Function Slap(character As ICharacter) As IDialog
+        Dim slapCount = character.ChangeStatistic(StatisticType.FishSlapCounter, 1)
+        Return New OkDialog(
+            "SMACK!",
+            {
+                New DialogLine(MoodType.Info, "You slap that fish!"),
+                New DialogLine(MoodType.Info, $"You have slapped fish {slapCount} times!")
+            },
+            Function() Nothing)
     End Function
 
     Friend Overrides Function GetAvailableChoices(item As IItem, character As ICharacter) As IEnumerable(Of IDialogChoice)

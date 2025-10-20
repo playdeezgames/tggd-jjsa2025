@@ -13,4 +13,5 @@
     Public ReadOnly Fuel As String = NameOf(Fuel)
     Public ReadOnly Recovery As String = NameOf(Recovery)
     Public ReadOnly Water As String = NameOf(Water)
+    Public ReadOnly FishSlapCounter As String = NameOf(FishSlapCounter)
 End Module

@@ -24,6 +24,7 @@ public Class N00bCharacterTypeDescriptor
         character.SetStatisticRange(StatisticType.Illness, 0, 0, Integer.MaxValue)
         character.SetStatisticRange(StatisticType.Score, 0, 0, Integer.MaxValue)
         character.SetStatisticRange(StatisticType.Recovery, 0, 0, MAXIMUM_RECOVERY)
+        character.SetStatisticRange(StatisticType.FishSlapCounter, 0, 0, Integer.MaxValue)
     End Sub
 
     Friend Overrides Function OnBump(character As ICharacter, location As ILocation) As IDialog
