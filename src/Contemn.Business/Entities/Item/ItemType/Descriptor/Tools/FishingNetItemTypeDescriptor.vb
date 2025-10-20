@@ -14,7 +14,10 @@ Public Class FishingNetItemTypeDescriptor
             {TagType.CanFish},
             NameOf(TwineItemTypeDescriptor),
             MAXIMUM_DURABILITY \ 2,
-                   New Dictionary(Of String, Integer))
+            New Dictionary(Of String, Integer) From
+            {
+                {NameOf(TwineItemTypeDescriptor), 2}
+            })
     End Sub
 
     Friend Overrides Function Describe(item As IItem) As IEnumerable(Of IDialogLine)

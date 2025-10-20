@@ -10,7 +10,10 @@ Public Class TwineItemTypeDescriptor
             0,
             True,
             {TagType.CanRefuel},
-                   New Dictionary(Of String, Integer))
+            New Dictionary(Of String, Integer) From
+            {
+                {NameOf(PlantFiberItemTypeDescriptor), 1}
+            })
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
