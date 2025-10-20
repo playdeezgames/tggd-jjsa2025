@@ -13,8 +13,18 @@
     Public ReadOnly NORMAL_DIFFICULTY As String = NameOf(NORMAL_DIFFICULTY)
     Public ReadOnly EASY_DIFFICULTY As String = NameOf(EASY_DIFFICULTY)
     Public ReadOnly TUTORIAL_DIFFICULTY As String = NameOf(TUTORIAL_DIFFICULTY)
-    Public ReadOnly DROP_ALL_CHOICE As String = NameOf(DROP_ALL_CHOICE)
-    Public Const DROP_ALL_TEXT = "Drop All"
     Public ReadOnly TAKE_ALL_CHOICE As String = NameOf(TAKE_ALL_CHOICE)
     Public Const TAKE_ALL_TEXT = "Take All"
+    Public ReadOnly DROP_ONE_CHOICE As String = NameOf(DROP_ONE_CHOICE)
+    Public Const DROP_ONE_TEXT = "Drop One"
+    Public ReadOnly DROP_HALF_CHOICE As String = NameOf(DROP_HALF_CHOICE)
+    Public Const DROP_HALF_TEXT = "Drop Half"
+    Public ReadOnly DROP_ALL_CHOICE As String = NameOf(DROP_ALL_CHOICE)
+    Public Const DROP_ALL_TEXT = "Drop All"
+    Public ReadOnly DISMANTLE_ONE_CHOICE As String = NameOf(DISMANTLE_ONE_CHOICE)
+    Public Const DISMANTLE_ONE_TEXT = "Dismantle One"
+    Public ReadOnly DISMANTLE_HALF_CHOICE As String = NameOf(DISMANTLE_HALF_CHOICE)
+    Public Const DISMANTLE_HALF_TEXT = "Dismantle Half"
+    Public ReadOnly DISMANTLE_ALL_CHOICE As String = NameOf(DISMANTLE_ALL_CHOICE)
+    Public Const DISMANTLE_ALL_TEXT = "Dismantle All"
 End Module

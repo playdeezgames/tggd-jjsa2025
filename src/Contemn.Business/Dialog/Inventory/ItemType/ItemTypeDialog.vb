@@ -7,10 +7,8 @@ Friend Class ItemTypeDialog
     Private ReadOnly itemType As String
     Private Shared ReadOnly CRAFT_CHOICE As String = NameOf(CRAFT_CHOICE)
     Private Const CRAFT_TEXT = "Craft..."
-    Shared ReadOnly DROP_ONE_CHOICE As String = NameOf(DROP_ONE_CHOICE)
-    Const DROP_ONE_TEXT = "Drop One"
-    Shared ReadOnly DROP_HALF_CHOICE As String = NameOf(DROP_HALF_CHOICE)
-    Const DROP_HALF_TEXT = "Drop Half"
+    Shared ReadOnly DISMANTLE_CHOICE As String = NameOf(DISMANTLE_CHOICE)
+    Const DISMANTLE_TEXT = "Dismantle..."
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
@@ -35,6 +33,9 @@ Friend Class ItemTypeDialog
         If RecipeTypes.Descriptors.Any(Function(x) x.HasInput(itemType) AndAlso x.CanCraft(character)) Then
             result.Add(New DialogChoice(CRAFT_CHOICE, CRAFT_TEXT))
         End If
+        If ItemTypes.Descriptors(itemType).DepletionTable.Any Then
+            result.Add(New DialogChoice(DISMANTLE_CHOICE, DISMANTLE_TEXT))
+        End If
         result.Add(New DialogChoice(DROP_ONE_CHOICE, DROP_ONE_TEXT))
         If itemCount \ 2 > 0 Then
             result.Add(New DialogChoice(DROP_HALF_CHOICE, $"{DROP_HALF_TEXT}({itemCount \ 2})"))
@@ -57,9 +58,15 @@ Friend Class ItemTypeDialog
                 Return DropHalf()
             Case DROP_ALL_CHOICE
                 Return DropAll()
+            Case DISMANTLE_CHOICE
+                Return Dismantle()
             Case Else
                 Return character.GetItemOfType(itemType).MakeChoice(character, choice)
         End Select
+    End Function
+
+    Private Function Dismantle() As IDialog
+        Return ItemTypeDismantleDialog.LaunchMenu(character, itemType).Invoke
     End Function
 
     Private Function DropAll() As IDialog
@@ -86,8 +93,6 @@ Friend Class ItemTypeDialog
     Public Overrides Function CancelDialog() As IDialog
         Return VerbTypes.Descriptors(NameOf(InventoryVerbTypeDescriptor)).Perform(character)
     End Function
-
-
     Friend Shared Function LaunchMenu(character As ICharacter, itemType As String) As Func(Of IDialog)
         Return Function() If(
             character.HasItemsOfType(itemType),

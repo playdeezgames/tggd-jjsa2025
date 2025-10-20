@@ -16,6 +16,5 @@ Public Interface ICharacter
     Function AvailableVerbsOfCategory(verbCategoryType As String) As IEnumerable(Of String)
     Function MoveTo(destination As ILocation) As IDialog
     Function ProcessTurn() As IEnumerable(Of IDialogLine)
-
     ReadOnly Property HasAvailableRecipes As Boolean
 End Interface
