@@ -39,6 +39,12 @@ Friend Class Item
         End Get
     End Property
 
+    Public ReadOnly Property CanDismantle As Boolean Implements IItem.CanDismantle
+        Get
+            Return Descriptor.DepletionTable.Any
+        End Get
+    End Property
+
     Public Overrides Sub Recycle()
         Data.ActiveItems.Remove(ItemId)
         Clear()
