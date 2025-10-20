@@ -24,7 +24,7 @@ Public Class TwineItemTypeDescriptor
 
     Friend Overrides Sub HandleInitialize(item As IItem)
         MyBase.HandleInitialize(item)
-        item.SetStatistic(StatisticType.Fuel, 1)
+        item.SetStatistic(StatisticType.Fuel, 0)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean

@@ -9,7 +9,9 @@ Public Class RawFishFiletItemTypeDescriptor
             "Raw Filet",
             0,
             True,
-            (1, 1, 4))
+            (1, 1, 4),
+            {TagType.CanRefuel},
+            New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -23,6 +25,7 @@ Public Class RawFishFiletItemTypeDescriptor
         item.SetStatistic(StatisticType.Satiety, 15)
         item.SetTag(TagType.IsCookable, True)
         item.SetMetadata(MetadataType.CookedItemType, NameOf(CookedFishFiletItemTypeDescriptor))
+        item.SetStatistic(StatisticType.Fuel, 0)
     End Sub
 
     Protected Overrides Function OtherChoice(item As IItem, character As ICharacter, choice As String) As IDialog

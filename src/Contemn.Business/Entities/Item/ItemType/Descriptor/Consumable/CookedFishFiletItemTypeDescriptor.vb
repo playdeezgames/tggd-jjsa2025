@@ -8,7 +8,9 @@ Public Class CookedFishFiletItemTypeDescriptor
             NameOf(CookedFishFiletItemTypeDescriptor),
             "Cooked Filet",
             0,
-            True, (0, 1, 0))
+            True, (0, 1, 0),
+            {TagType.CanRefuel},
+            New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -20,6 +22,7 @@ Public Class CookedFishFiletItemTypeDescriptor
     Friend Overrides Sub HandleInitialize(item As IItem)
         MyBase.HandleInitialize(item)
         item.SetStatistic(StatisticType.Satiety, 25)
+        item.SetStatistic(StatisticType.Fuel, 0)
     End Sub
 
     Protected Overrides Function OtherChoice(item As IItem, character As ICharacter, choice As String) As IDialog

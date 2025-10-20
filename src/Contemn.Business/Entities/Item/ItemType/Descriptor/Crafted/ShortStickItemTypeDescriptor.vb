@@ -15,7 +15,7 @@ Public Class ShortStickItemTypeDescriptor
 
     Friend Overrides Sub HandleInitialize(item As IItem)
         MyBase.HandleInitialize(item)
-        item.SetStatistic(StatisticType.Fuel, 1)
+        item.SetStatistic(StatisticType.Fuel, 0)
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)

@@ -11,13 +11,15 @@ Public MustInherit Class ConsumableItemTypeDescriptor
                      itemTypeName As String,
                      itemCount As Integer,
                      isAggregate As Boolean,
-                     foodPoisoningStats As (Hazard As Integer, Safety As Integer, Severity As Integer))
+                     foodPoisoningStats As (Hazard As Integer, Safety As Integer, Severity As Integer),
+                     autoTags As IEnumerable(Of String),
+                     depletionTable As IReadOnlyDictionary(Of String, Integer))
         MyBase.New(itemType,
                    itemTypeName,
                    itemCount,
                    isAggregate,
-                   Array.Empty(Of String),
-                   New Dictionary(Of String, Integer))
+                   autoTags,
+                   depletionTable)
         Me.foodPoisoningStats = foodPoisoningStats
     End Sub
 

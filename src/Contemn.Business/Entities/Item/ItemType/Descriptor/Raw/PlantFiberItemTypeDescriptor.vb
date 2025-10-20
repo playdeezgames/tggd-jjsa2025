@@ -10,7 +10,7 @@ Public Class PlantFiberItemTypeDescriptor
             0,
             True,
             {TagType.CanRefuel},
-                   New Dictionary(Of String, Integer))
+            New Dictionary(Of String, Integer))
     End Sub
 
     Friend Overrides Sub HandleAddItem(item As IItem, character As ICharacter)
@@ -21,7 +21,7 @@ Public Class PlantFiberItemTypeDescriptor
 
     Friend Overrides Sub HandleInitialize(item As IItem)
         MyBase.HandleInitialize(item)
-        item.SetStatistic(StatisticType.Fuel, 1)
+        item.SetStatistic(StatisticType.Fuel, 0)
     End Sub
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
