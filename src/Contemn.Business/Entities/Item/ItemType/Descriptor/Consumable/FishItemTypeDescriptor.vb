@@ -2,6 +2,8 @@
 
 Public Class FishItemTypeDescriptor
     Inherits ConsumableItemTypeDescriptor
+    Shared ReadOnly SLAP_CHOICE As String = NameOf(SLAP_CHOICE)
+    Const SLAP_TEXT = "Slap!"
 
     Public Sub New()
         MyBase.New(
@@ -27,7 +29,24 @@ Public Class FishItemTypeDescriptor
     End Sub
 
     Protected Overrides Function OtherChoice(item As IItem, character As ICharacter, choice As String) As IDialog
-        Throw New NotImplementedException()
+        Select Case choice
+            Case SLAP_CHOICE
+                Return New OkDialog(
+                    "SMACK!",
+                    {
+                        New DialogLine(MoodType.Info, "You slap that fish!")
+                    },
+                    Function() Nothing)
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+
+    Friend Overrides Function GetAvailableChoices(item As IItem, character As ICharacter) As IEnumerable(Of IDialogChoice)
+        Dim result As New List(Of IDialogChoice)(MyBase.GetAvailableChoices(item, character)) From {
+            New DialogChoice(SLAP_CHOICE, SLAP_TEXT)
+        }
+        Return result
     End Function
 
     Friend Overrides Function CanSpawnMap(map As IMap) As Boolean
