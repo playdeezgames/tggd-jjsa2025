@@ -33,8 +33,17 @@ Friend Class NavigationState
         y = RenderIllness(x, y, avatar)
         Buffer.Write(x, y, $"Terrain: {avatar.Location.Name}", Hue.LightGray, Hue.Black)
         y += 1
+        y = RenderToolTip(x, y, avatar)
         y = RenderGroundItems(x, y, avatar)
     End Sub
+
+    Private Function RenderToolTip(x As Integer, y As Integer, character As ICharacter) As Integer
+        If character.Location.HasMetadata(MetadataType.ForageTable) Then
+            Buffer.Write(x, y, $"(can forage)", Hue.DarkGray, Hue.Black)
+            y += 1
+        End If
+        Return y
+    End Function
 
     Private Function RenderGroundItems(x As Integer, y As Integer, character As ICharacter) As Integer
         If character.Location.HasItems Then
