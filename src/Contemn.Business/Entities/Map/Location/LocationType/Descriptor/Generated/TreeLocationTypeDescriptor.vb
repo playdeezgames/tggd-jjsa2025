@@ -47,4 +47,10 @@ Public Class TreeLocationTypeDescriptor
 
     Friend Overrides Sub CleanUp(location As Location)
     End Sub
+
+    Friend Overrides Function Describe(location As Location) As IEnumerable(Of IDialogLine)
+        Return {
+            New DialogLine(MoodType.Info, "It's woody.")
+            }
+    End Function
 End Class

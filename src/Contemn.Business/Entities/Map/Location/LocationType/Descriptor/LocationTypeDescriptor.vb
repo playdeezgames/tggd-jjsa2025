@@ -24,4 +24,5 @@ Public MustInherit Class LocationTypeDescriptor
     End Function
 
     Friend MustOverride Sub CleanUp(location As Location)
+    Friend MustOverride Function Describe(location As Location) As IEnumerable(Of IDialogLine)
 End Class

@@ -115,4 +115,8 @@ Friend Class Location
     Public Function GenerateBumpLines(character As ICharacter) As IEnumerable(Of IDialogLine) Implements ILocation.GenerateBumpLines
         Return Descriptor.GenerateBumpLines(Me, character)
     End Function
+
+    Public Function Describe() As IEnumerable(Of IDialogLine) Implements ILocation.Describe
+        Return Descriptor.Describe(Me)
+    End Function
 End Class

@@ -36,4 +36,10 @@ Public Class DirtLocationTypeDescriptor
     Friend Overrides Function CanSpawn(location As ILocation, itemType As String) As Boolean
         Return True
     End Function
+
+    Friend Overrides Function Describe(location As Location) As IEnumerable(Of IDialogLine)
+        Return {
+            New DialogLine(MoodType.Info, "It's dirty.")
+            }
+    End Function
 End Class

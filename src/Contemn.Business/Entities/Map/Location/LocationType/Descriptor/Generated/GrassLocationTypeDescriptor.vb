@@ -37,4 +37,10 @@ Public Class GrassLocationTypeDescriptor
     Friend Overrides Sub CleanUp(location As Location)
         location.GetForageGenerator()?.Recycle()
     End Sub
+
+    Friend Overrides Function Describe(location As Location) As IEnumerable(Of IDialogLine)
+        Return {
+            New DialogLine(MoodType.Info, "It's grassy.")
+            }
+    End Function
 End Class

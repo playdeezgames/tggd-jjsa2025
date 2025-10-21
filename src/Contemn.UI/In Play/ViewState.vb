@@ -81,9 +81,16 @@ Friend Class ViewState
                 Return HandleMove(-1, 0)
             Case UI.Command.Right
                 Return HandleMove(1, 0)
+            Case UI.Command.Green
+                Return HandleExamine()
             Case Else
                 Return Me
         End Select
+    End Function
+
+    Private Function HandleExamine() As IUIState
+        Dim location = World.Avatar.Map.GetLocation(World.GetStatistic(StatisticType.ViewColumn), World.GetStatistic(StatisticType.ViewRow))
+        Return New DialogState(Buffer, World, Settings, New ExamineLocationDialog(location))
     End Function
 
     Private Function HandleMove(deltaX As Integer, deltaY As Integer) As IUIState

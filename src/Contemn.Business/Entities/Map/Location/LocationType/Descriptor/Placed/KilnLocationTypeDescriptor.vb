@@ -59,4 +59,10 @@ Public Class KilnLocationTypeDescriptor
     Friend Overrides Function CanSpawn(location As ILocation, itemType As String) As Boolean
         Return False
     End Function
+
+    Friend Overrides Function Describe(location As Location) As IEnumerable(Of IDialogLine)
+        Return {
+            New DialogLine(MoodType.Info, "It's kilny.")
+            }
+    End Function
 End Class

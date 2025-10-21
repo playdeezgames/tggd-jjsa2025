@@ -62,4 +62,9 @@ Public Class CampFireLocationTypeDescriptor
         Return False
     End Function
 
+    Friend Overrides Function Describe(location As Location) As IEnumerable(Of IDialogLine)
+        Return {
+            New DialogLine(MoodType.Info, "It's campy.")
+            }
+    End Function
 End Class
