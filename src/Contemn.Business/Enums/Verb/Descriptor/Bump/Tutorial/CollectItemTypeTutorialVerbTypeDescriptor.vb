@@ -3,7 +3,6 @@
 Friend Class CollectItemTypeTutorialVerbTypeDescriptor
     Inherits VerbTypeDescriptor
 
-    Private ReadOnly rewardItemTypes As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly requiredItemType As String
     Private ReadOnly achievementTagType As String
     Private ReadOnly failureLines As IEnumerable(Of IDialogLine)
@@ -14,7 +13,6 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
                   verbTypeName As String,
                   requiredItemType As String,
                   prerequisiteItemTypes As IEnumerable(Of String),
-                  rewardItemTypes As IReadOnlyDictionary(Of String, Integer),
                   failureLines As IEnumerable(Of String),
                   successLines As IEnumerable(Of String))
         MyBase.New(
@@ -24,7 +22,6 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
                     requiredItemType.Replace("ItemTypeDescriptor", String.Empty)),
             Business.VerbCategoryType.Bump,
             $"Tutorial: {verbTypeName}")
-        Me.rewardItemTypes = rewardItemTypes
         Me.requiredItemType = requiredItemType
         Me.failureLines = Enumerable.Range(0, failureLines.Count).
             Select(Function(x) New DialogLine(MoodType.Info, $"{x + 1}. {failureLines.ToArray(x)}"))
@@ -53,18 +50,8 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
         Return New OkDialog(
             VerbTypeName,
             successLines.
-            Concat(RestoreStats(character)).
-            Concat(GiveRewardItemTypes(character)),
+            Concat(RestoreStats(character)),
             BumpDialog.LaunchMenu(character))
-    End Function
-
-    Private Function GiveRewardItemTypes(character As ICharacter) As IEnumerable(Of IDialogLine)
-        Dim result As New List(Of IDialogLine)
-        For Each entry In rewardItemTypes
-            entry.Value.Repeat(Sub() character.World.CreateItem(entry.Key, character))
-            result.Add(New DialogLine(MoodType.Info, $"+{entry.Value} {ItemTypes.Descriptors(entry.Key).ItemTypeName}({character.GetCountOfItemType(entry.Key)})"))
-        Next
-        Return result
     End Function
 
     Private Shared Function RestoreStats(character As ICharacter) As IEnumerable(Of DialogLine)
