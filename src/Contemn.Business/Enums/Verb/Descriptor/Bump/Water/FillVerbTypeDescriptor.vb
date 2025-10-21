@@ -11,14 +11,7 @@ Friend Class FillVerbTypeDescriptor
     End Sub
 
     Friend Overrides Function Perform(character As ICharacter) As IDialog
-        Dim item = character.Items.First(AddressOf GetFillableItem)
-        item.SetStatistic(StatisticType.Water, item.GetStatisticMaximum(StatisticType.Water))
-        item.SetTag(TagType.Safe, False)
-        Return New OkDialog(
-            "You filled it!",
-            character.World.ProcessTurn().
-            Append(New DialogLine(MoodType.Info, $"Filled {item.Name}")),
-            CharacterActionsDialog.LaunchMenu(character))
+        Return ChooseFillVesselDialog.LaunchMenu(character).Invoke
     End Function
 
     Friend Overrides Function CanPerform(character As ICharacter) As Boolean
@@ -26,10 +19,10 @@ Friend Class FillVerbTypeDescriptor
         Return MyBase.CanPerform(character) AndAlso
             bumpLocation IsNot Nothing AndAlso
             bumpLocation.GetTag(TagType.CanFill) AndAlso
-            character.Items.Any(AddressOf GetFillableItem)
+            character.Items.Any(AddressOf IsFillableItem)
     End Function
 
-    Private Function GetFillableItem(item As IItem) As Boolean
+    Private Function IsFillableItem(item As IItem) As Boolean
         Return item.GetTag(TagType.IsFillable) AndAlso Not item.IsStatisticAtMaximum(StatisticType.Water)
     End Function
 End Class
