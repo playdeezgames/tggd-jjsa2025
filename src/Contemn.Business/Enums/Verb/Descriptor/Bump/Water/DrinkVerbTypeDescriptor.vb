@@ -16,7 +16,7 @@ Friend Class DrinkVerbTypeDescriptor
             {
                 New DialogLine(MoodType.Info, $"+{hydrationDelta} hydration")
             }
-        If RNG.GenerateBoolean(1, 1) Then
+        If RNG.GenerateBoolean(1, 1, Nothing) Then
             Dim illness = RNG.RollXDY(1, 4)
             character.ChangeStatistic(StatisticType.Illness, illness)
             messageLines.Add(New DialogLine(MoodType.Info, $"+{illness} illness"))

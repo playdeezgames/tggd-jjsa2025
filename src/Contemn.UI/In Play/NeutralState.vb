@@ -11,6 +11,9 @@ Friend Module NeutralState
             world.Platform.PlaySfx(Sfx.PlayerDeath)
             Return New DeadState(buffer, world, settings)
         End If
+        If world.GetTag(TagType.ViewMode) Then
+            Return New ViewState(buffer, world, settings)
+        End If
         Return New NavigationState(buffer, world, settings)
     End Function
 End Module

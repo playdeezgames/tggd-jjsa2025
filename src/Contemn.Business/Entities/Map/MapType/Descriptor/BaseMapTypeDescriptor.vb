@@ -15,7 +15,7 @@ Friend MustInherit Class BaseMapTypeDescriptor
         map.Rows = RoomRows(map.World.GetMetadata(MetadataType.Difficulty))
         For Each column In Enumerable.Range(0, map.Columns)
             For Each row In Enumerable.Range(0, map.Rows)
-                Dim locationType = RNG.FromGenerator(terrainGenerator)
+                Dim locationType = RNG.FromGenerator(terrainGenerator, Nothing)
                 map.World.CreateLocation(locationType, map, column, row)
             Next
         Next

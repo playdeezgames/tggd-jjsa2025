@@ -27,7 +27,7 @@ Friend Class Generator
         Me.GeneratorId = generatorId
     End Sub
     Public Function Generate() As String Implements IGenerator.Generate
-        Return RNG.FromGenerator(GeneratorData)
+        Return RNG.FromGenerator(GeneratorData, Nothing)
     End Function
     Public Sub SetWeight(key As String, weight As Integer) Implements IGenerator.SetWeight
         If weight > 0 Then

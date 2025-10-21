@@ -3,7 +3,7 @@
 Public Module RNG
     Private ReadOnly random As New Random
     Const Zero = 0
-    Function FromGenerator(Of TGenerated)(table As IReadOnlyDictionary(Of TGenerated, Integer), Optional r As Random = Nothing) As TGenerated
+    Function FromGenerator(Of TGenerated)(table As IReadOnlyDictionary(Of TGenerated, Integer), r As Random) As TGenerated
         Dim generated = If(r, random).Next(table.Values.Sum)
         For Each entry In table
             generated -= entry.Value
@@ -13,15 +13,15 @@ Public Module RNG
         Next
         Throw New NotImplementedException()
     End Function
-    Function FromGenerator(Of TGenerated)(hashSet As HashSet(Of TGenerated)) As TGenerated
+    Function FromGenerator(Of TGenerated)(hashSet As HashSet(Of TGenerated), r As Random) As TGenerated
         Dim table As New Dictionary(Of TGenerated, Integer)
         For Each item In hashSet
             table.Add(item, 1)
         Next
-        Return FromGenerator(table)
+        Return FromGenerator(table, r)
     End Function
-    Function GenerateBoolean(falseWeight As Integer, trueWeight As Integer) As Boolean
-        Return FromGenerator(MakeBooleanGenerator(falseWeight, trueWeight))
+    Function GenerateBoolean(falseWeight As Integer, trueWeight As Integer, r As Random) As Boolean
+        Return FromGenerator(MakeBooleanGenerator(falseWeight, trueWeight), r)
     End Function
     Function MakeBooleanGenerator(falseWeight As Integer, trueWeight As Integer) As Dictionary(Of Boolean, Integer)
         Return New Dictionary(Of Boolean, Integer) From

@@ -2,8 +2,8 @@
 Imports Contemn.Business
 
 Friend Module LocationExtensions
-    Private ReadOnly locationPixelTable As IReadOnlyDictionary(Of String, Func(Of ILocation, Integer)) =
-        New Dictionary(Of String, Func(Of ILocation, Integer)) From
+    Private ReadOnly locationPixelTable As IReadOnlyDictionary(Of String, Func(Of ILocation, Boolean, Integer)) =
+        New Dictionary(Of String, Func(Of ILocation, Boolean, Integer)) From
         {
             {NameOf(GrassLocationTypeDescriptor), AddressOf GrassToPixel},
             {NameOf(TreeLocationTypeDescriptor), AddressOf TreeToPixel},
@@ -15,68 +15,72 @@ Friend Module LocationExtensions
             {NameOf(TutorialHouseLocationTypeDescriptor), AddressOf TutorialHouseToPixel}
         }
 
-    Private Function TutorialHouseToPixel(location As ILocation) As Integer
+    Private Function TutorialHouseToPixel(location As ILocation, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             127,
             Hue.White,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function KilnToPixel(location As ILocation) As Integer
+    Private Function KilnToPixel(location As ILocation, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             8,
             Hue.DarkGray,
-            If(location.GetTag(TagType.IsLit), Hue.Red, Hue.Black))
+            If(location.GetTag(TagType.IsLit), Hue.Red, Hue.Black),
+            invert)
     End Function
 
-    Private Function CampFireToPixel(location As ILocation) As Integer
+    Private Function CampFireToPixel(location As ILocation, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             15,
             If(location.GetTag(TagType.IsLit), Hue.Red, Hue.Brown),
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function RockToPixel(location As ILocation) As Integer
+    Private Function RockToPixel(location As ILocation, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             7,
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function DirtToPixel(location As ILocation) As Integer
+    Private Function DirtToPixel(location As ILocation, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("."),
             Hue.Brown,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function WaterToPixel(location As ILocation) As Integer
+    Private Function WaterToPixel(location As ILocation, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             &HF7,
             Hue.Black,
-            Hue.Blue)
+            Hue.Blue,
+            invert)
     End Function
 
-    Private Function TreeToPixel(location As ILocation) As Integer
+    Private Function TreeToPixel(location As ILocation, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             &H9D,
             Hue.LightGreen,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function GrassToPixel(location As ILocation) As Integer
+    Private Function GrassToPixel(location As ILocation, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("."),
             Hue.Green,
-            Hue.Black)
-    End Function
-
-    Private Function WallToPixel(location As ILocation) As Integer
-        Return UIBufferExtensions.ToPixel(Asc("#"), Hue.Black, Hue.Blue)
+            Hue.Black,
+            invert)
     End Function
 
     <Extension>
-    Friend Function ToPixel(location As ILocation) As Integer
-        Return locationPixelTable(location.LocationType)(location)
+    Friend Function ToPixel(location As ILocation, invert As Boolean) As Integer
+        Return locationPixelTable(location.LocationType)(location, invert)
     End Function
 End Module

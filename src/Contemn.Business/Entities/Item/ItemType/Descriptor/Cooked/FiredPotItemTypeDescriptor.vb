@@ -57,7 +57,7 @@ Public Class FiredPotItemTypeDescriptor
         character.ChangeStatistic(StatisticType.Hydration, hydrationDelta)
         item.ChangeStatistic(StatisticType.Water, -1)
         Dim illness = 0
-        If RNG.GenerateBoolean(1, If(item.GetTag(TagType.Safe), 0, 1)) Then
+        If RNG.GenerateBoolean(1, If(item.GetTag(TagType.Safe), 0, 1), Nothing) Then
             illness = RNG.RollXDY(1, 4)
             character.ChangeStatistic(StatisticType.Illness, illness)
         End If

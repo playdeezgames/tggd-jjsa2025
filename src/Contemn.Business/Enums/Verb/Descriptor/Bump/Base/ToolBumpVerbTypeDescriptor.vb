@@ -29,7 +29,7 @@ Friend MustInherit Class ToolBumpVerbTypeDescriptor
 
     Friend Overrides Function Perform(character As ICharacter) As IDialog
         Dim bumpLocation = character.GetBumpLocation()
-        Dim success = RNG.GenerateBoolean(bumpLocation.GetStatistic(StatisticType.Depletion), bumpLocation.GetStatistic(StatisticType.Resource))
+        Dim success = RNG.GenerateBoolean(bumpLocation.GetStatistic(StatisticType.Depletion), bumpLocation.GetStatistic(StatisticType.Resource), Nothing)
         If success Then
             Return HandleSuccess(character, bumpLocation)
         End If

@@ -2,8 +2,8 @@
 Imports Contemn.Business
 
 Friend Module ItemExtensions
-    Private ReadOnly itemPixelTable As IReadOnlyDictionary(Of String, Func(Of IItem, Integer)) =
-        New Dictionary(Of String, Func(Of IItem, Integer)) From
+    Private ReadOnly itemPixelTable As IReadOnlyDictionary(Of String, Func(Of IItem, Boolean, Integer)) =
+        New Dictionary(Of String, Func(Of IItem, Boolean, Integer)) From
         {
             {NameOf(PlantFiberItemTypeDescriptor), AddressOf PlantFiberToPixel},
             {NameOf(TwineItemTypeDescriptor), AddressOf TwineToPixel},
@@ -35,170 +35,191 @@ Friend Module ItemExtensions
             {NameOf(BowDrillItemTypeDescriptor), AddressOf BowDrillToPixel}
         }
 
-    Private Function BowDrillToPixel(item As IItem) As Integer
-        Return UIBufferExtensions.ToPixel(&HE4, Hue.DarkGray, Hue.Black)
+    Private Function BowDrillToPixel(item As IItem, invert As Boolean) As Integer
+        Return UIBufferExtensions.ToPixel(&HE4, Hue.DarkGray, Hue.Black, invert)
     End Function
 
-    Private Function ShortStickToPixel(item As IItem) As Integer
-        Return UIBufferExtensions.ToPixel(Asc("-"), Hue.DarkGray, Hue.Black)
+    Private Function ShortStickToPixel(item As IItem, invert As Boolean) As Integer
+        Return UIBufferExtensions.ToPixel(Asc("-"), Hue.DarkGray, Hue.Black, invert)
     End Function
 
-    Private Function FireBowToPixel(item As IItem) As Integer
-        Return UIBufferExtensions.ToPixel(Asc("D"), Hue.Brown, Hue.Black)
+    Private Function FireBowToPixel(item As IItem, invert As Boolean) As Integer
+        Return UIBufferExtensions.ToPixel(Asc("D"), Hue.Brown, Hue.Black, invert)
     End Function
 
-    Private Function PlankToPixel(item As IItem) As Integer
-        Return UIBufferExtensions.ToPixel(254, Hue.Brown, Hue.Black)
+    Private Function PlankToPixel(item As IItem, invert As Boolean) As Integer
+        Return UIBufferExtensions.ToPixel(254, Hue.Brown, Hue.Black, invert)
     End Function
 
-    Private Function CampFireToPixel(item As IItem) As Integer
+    Private Function CampFireToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             15,
             Hue.Brown,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function KilnToPixel(item As IItem) As Integer
+    Private Function KilnToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             8,
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function ClayToPixel(item As IItem) As Integer
+    Private Function ClayToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             &HFE,
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function SharpStickToPixel(item As IItem) As Integer
+    Private Function SharpStickToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("l"),
             Hue.Brown,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function CarrotToPixel(item As IItem) As Integer
+    Private Function CarrotToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("^"),
             Hue.Brown,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function HammerToPixel(item As IItem) As Integer
+    Private Function HammerToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("T"),
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function KnifeToPixel(item As IItem) As Integer
+    Private Function KnifeToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("l"),
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function BladeToPixel(item As IItem) As Integer
+    Private Function BladeToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("`"),
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function LogToPixel(item As IItem) As Integer
+    Private Function LogToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             &H7,
             Hue.Brown,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function AxeToPixel(item As IItem) As Integer
+    Private Function AxeToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             &HE2,
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function StickToPixel(item As IItem) As Integer
+    Private Function StickToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("/"),
             Hue.Brown,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function SharpRockToPixel(item As IItem) As Integer
+    Private Function SharpRockToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("'"),
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function RockToPixel(item As IItem) As Integer
+    Private Function RockToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("."),
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function FishingNetToPixel(item As IItem) As Integer
+    Private Function FishingNetToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("#"),
             Hue.Green,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function TwineToPixel(item As IItem) As Integer
+    Private Function TwineToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             &HB3,
             Hue.Green,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function PlantFiberToPixel(item As IItem) As Integer
+    Private Function PlantFiberToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("~"),
             Hue.Green,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function CookedFishFiletToPixel(item As IItem) As Integer
+    Private Function CookedFishFiletToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             &HE0,
             Hue.Brown,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function RawFishFiletToPixel(item As IItem) As Integer
+    Private Function RawFishFiletToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             &HE0,
             Hue.LightRed,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function FishToPixel(item As IItem) As Integer
+    Private Function FishToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             &HE0,
             Hue.LightGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function CharcoalToPixel(item As IItem) As Integer
+    Private Function CharcoalToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             &HF9,
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function UnfiredPotToPixel(item As IItem) As Integer
+    Private Function UnfiredPotToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("U"),
             Hue.DarkGray,
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function FiredPotToPixel(item As IItem) As Integer
+    Private Function FiredPotToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("U"),
             If(
@@ -208,14 +229,15 @@ Friend Module ItemExtensions
                     item.GetTag(TagType.Safe),
                     Hue.LightBlue,
                     Hue.Blue)),
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
-    Private Function FireStarterToPixel(item As IItem) As Integer
-        Return UIBufferExtensions.ToPixel(&HE7, Hue.Brown, Hue.Black)
+    Private Function FireStarterToPixel(item As IItem, invert As Boolean) As Integer
+        Return UIBufferExtensions.ToPixel(&HE7, Hue.Brown, Hue.Black, invert)
     End Function
 
-    Private Function TorchToPixel(item As IItem) As Integer
+    Private Function TorchToPixel(item As IItem, invert As Boolean) As Integer
         Return UIBufferExtensions.ToPixel(
             Asc("!"),
             If(
@@ -225,15 +247,16 @@ Friend Module ItemExtensions
                     item.IsStatisticAtMinimum(StatisticType.Fuel),
                     Hue.DarkGray,
                     Hue.Brown)),
-            Hue.Black)
+            Hue.Black,
+            invert)
     End Function
 
     <Extension>
-    Friend Function ToPixel(item As IItem) As Integer
-        Dim pixelFunction As Func(Of IItem, Integer) = Nothing
+    Friend Function ToPixel(item As IItem, invert As Boolean) As Integer
+        Dim pixelFunction As Func(Of IItem, Boolean, Integer) = Nothing
         If itemPixelTable.TryGetValue(item.ItemType, pixelFunction) Then
-            Return pixelFunction(item)
+            Return pixelFunction(item, invert)
         End If
-        Return UIBufferExtensions.ToPixel(Asc("?"), Hue.DarkGray, Hue.Black)
+        Return UIBufferExtensions.ToPixel(Asc("?"), Hue.DarkGray, Hue.Black, invert)
     End Function
 End Module

@@ -38,7 +38,7 @@ Public MustInherit Class ConsumableItemTypeDescriptor
         Dim lines As New List(Of IDialogLine)
         character.ChangeStatistic(StatisticType.Satiety, item.GetStatistic(StatisticType.Satiety))
         lines.Add(New DialogLine(MoodType.Info, $"+{item.GetStatistic(StatisticType.Satiety)} {StatisticType.Satiety.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Satiety)})"))
-        If RNG.GenerateBoolean(foodPoisoningStats.Safety, foodPoisoningStats.Hazard) Then
+        If RNG.GenerateBoolean(foodPoisoningStats.Safety, foodPoisoningStats.Hazard, Nothing) Then
             Dim illness = RNG.RollXDY(1, foodPoisoningStats.Severity)
             character.ChangeStatistic(StatisticType.Illness, illness)
             lines.Add(New DialogLine(MoodType.Info, "You get food poisoning."))

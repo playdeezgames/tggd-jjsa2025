@@ -92,11 +92,11 @@ Friend Class NavigationState
         If location Is Nothing Then
             Buffer.Fill(displayColumn, displayRow, 1, 1, character:=&HB0, Hue.Cyan, Hue.Black)
         ElseIf location.HasCharacter Then
-            Buffer.SetPixel(displayColumn, displayRow, location.Character.ToPixel())
+            Buffer.SetPixel(displayColumn, displayRow, location.Character.ToPixel(False))
         ElseIf location.HasItems Then
-            Buffer.SetPixel(displayColumn, displayRow, location.Items.First().ToPixel())
+            Buffer.SetPixel(displayColumn, displayRow, location.Items.First().ToPixel(False))
         Else
-            Buffer.SetPixel(displayColumn, displayRow, location.ToPixel())
+            Buffer.SetPixel(displayColumn, displayRow, location.ToPixel(False))
         End If
     End Sub
 

@@ -47,4 +47,5 @@
     Friend ReadOnly IsRefuelable As String = NameOf(IsRefuelable)
     Friend ReadOnly IsTutorialHouse As String = NameOf(IsTutorialHouse)
     Public ReadOnly Safe As String = NameOf(Safe)
+    Public ReadOnly ViewMode As String = NameOf(ViewMode)
 End Module

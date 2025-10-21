@@ -14,4 +14,6 @@
     Public ReadOnly Recovery As String = NameOf(Recovery)
     Public ReadOnly Water As String = NameOf(Water)
     Public ReadOnly FishSlapCounter As String = NameOf(FishSlapCounter)
+    Public ReadOnly ViewColumn As String = NameOf(ViewColumn)
+    Public ReadOnly ViewRow As String = NameOf(ViewRow)
 End Module

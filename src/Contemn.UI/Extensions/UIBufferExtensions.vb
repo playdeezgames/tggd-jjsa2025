@@ -9,11 +9,12 @@ Friend Module UIBufferExtensions
                    buffer As IUIBuffer(Of Integer),
                    Optional character As Byte = 0,
                    Optional foregroundColor As Integer = 0,
-                   Optional backgroundColor As Integer = 0)
+                   Optional backgroundColor As Integer = 0,
+                   Optional invert As Boolean = False)
         buffer.Fill(
             0, 0,
             buffer.Columns, buffer.Rows,
-            ToPixel(character, foregroundColor, backgroundColor))
+            ToPixel(character, foregroundColor, backgroundColor, invert))
     End Sub
     <Extension>
     Friend Sub Fill(
@@ -24,19 +25,21 @@ Friend Module UIBufferExtensions
                    rows As Integer,
                    Optional character As Byte = 0,
                    Optional foregroundColor As Integer = 0,
-                   Optional backgroundColor As Integer = 0)
+                   Optional backgroundColor As Integer = 0,
+                   Optional invert As Boolean = False)
         buffer.Fill(
             column, row,
             columns, rows,
-            ToPixel(character, foregroundColor, backgroundColor))
+            ToPixel(character, foregroundColor, backgroundColor, invert))
     End Sub
 
 
     Friend Function ToPixel(
                             character As Byte,
                             foregroundColor As Integer,
-                            backgroundColor As Integer) As Integer
-        Return character + foregroundColor * CharacterCount + backgroundColor * HueCount * CharacterCount
+                            backgroundColor As Integer,
+                            invert As Boolean) As Integer
+        Return character + If(invert, backgroundColor, foregroundColor) * CharacterCount + If(invert, foregroundColor, backgroundColor) * HueCount * CharacterCount
     End Function
 
     <Extension>
@@ -45,9 +48,10 @@ Friend Module UIBufferExtensions
                     column As Integer, row As Integer,
                     text As String,
                     foregroundColor As Integer,
-                    backgroundColor As Integer)
+                    backgroundColor As Integer,
+                    Optional invert As Boolean = False)
         For Each character In text
-            buffer.SetPixel(column, row, ToPixel(CByte(AscW(character)), foregroundColor, backgroundColor))
+            buffer.SetPixel(column, row, ToPixel(CByte(AscW(character)), foregroundColor, backgroundColor, invert))
             column += 1
         Next
     End Sub

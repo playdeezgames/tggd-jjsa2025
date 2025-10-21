@@ -10,6 +10,7 @@
             New DigClayVerbTypeDescriptor(),
             New DismantleVerbTypeDescriptor(),
             New DrinkVerbTypeDescriptor(),
+            New EnterViewModeVerbTypeDescriptor(),
             New ExtinguishVerbTypeDescriptor(),
             New FillVerbTypeDescriptor(),
             New FireVerbTypeDescriptor(),
