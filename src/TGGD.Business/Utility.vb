@@ -12,6 +12,12 @@ Public Module Utility
         Return items.ToList
     End Function
     <Extension>
+    Public Sub Repeat(repeatCount As Integer, predicate As Action)
+        For Each dummy In Enumerable.Range(0, repeatCount)
+            predicate()
+        Next
+    End Sub
+    <Extension>
     Public Function AppendIf(Of TSource)(source As IEnumerable(Of TSource), condition As Boolean, element As TSource) As IEnumerable(Of TSource)
         Return If(condition, source.Append(element), source)
     End Function

@@ -37,6 +37,7 @@
                     "Craft Blade",
                     NameOf(BladeItemTypeDescriptor),
                     {NameOf(SharpRockItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Sharp Rock and Hammer",
                         "Press <ACTION>",
@@ -49,6 +50,7 @@
                     "Forage for Carrot",
                     NameOf(CarrotItemTypeDescriptor),
                     Array.Empty(Of String),
+                    New Dictionary(Of String, Integer),
                     {
                         "Move onto Grass",
                         "Press <ACTION>",
@@ -61,6 +63,7 @@
                     "Catch Fish!",
                     NameOf(FishItemTypeDescriptor),
                     {NameOf(FishingNetItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Craft a Net",
                         "Go to water",
@@ -81,6 +84,7 @@
                         NameOf(RockItemTypeDescriptor),
                         NameOf(StickItemTypeDescriptor)
                     },
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Stick, Rock, Twine",
                         "Press <ACTION>",
@@ -92,7 +96,8 @@
                 New CollectItemTypeTutorialVerbTypeDescriptor(
                     "Craft Knife",
                     NameOf(KnifeItemTypeDescriptor),
-                    {NameOf(BladeItemTypeDescriptor)},
+                    {NameOf(BladeItemTypeDescriptor), NameOf(ShortStickItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Blade, Stick, and Twine",
                         "Press <ACTION>",
@@ -105,6 +110,7 @@
                     "Forage for Plant Fiber",
                     NameOf(PlantFiberItemTypeDescriptor),
                     Array.Empty(Of String),
+                    New Dictionary(Of String, Integer),
                     {
                         "Move onto Grass",
                         "Press <ACTION>",
@@ -117,6 +123,7 @@
                     "Craft Filet",
                     NameOf(RawFishFiletItemTypeDescriptor),
                     {NameOf(KnifeItemTypeDescriptor), NameOf(FishItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Knife and Fish",
                         "Press <ACTION>",
@@ -129,6 +136,7 @@
                     "Forage for Rock",
                     NameOf(RockItemTypeDescriptor),
                     Array.Empty(Of String),
+                    New Dictionary(Of String, Integer),
                     {
                         "Move onto Rock",
                         "Press <ACTION>",
@@ -141,6 +149,7 @@
                     "Craft Sharp Rock",
                     NameOf(SharpRockItemTypeDescriptor),
                     {NameOf(HammerItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Rock and Hammer",
                         "Press <ACTION>",
@@ -153,6 +162,7 @@
                     "Collect Stick",
                     NameOf(StickItemTypeDescriptor),
                     Array.Empty(Of String),
+                    New Dictionary(Of String, Integer),
                     {
                         "Move into Tree",
                         "Select ""Collect Stick""",
@@ -166,6 +176,7 @@
                     "Craft Twine",
                     NameOf(TwineItemTypeDescriptor),
                     {NameOf(PlantFiberItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather sufficient Plant Fiber",
                         "Press <ACTION>",
@@ -178,6 +189,7 @@
                     "Craft Axe",
                     NameOf(AxeItemTypeDescriptor),
                     {NameOf(SharpRockItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Sharp Rock, Stick and Twine",
                         "Press <ACTION>",
@@ -193,6 +205,7 @@
                     "Craft Camp Fire",
                     NameOf(CampFireItemTypeDescriptor),
                     {NameOf(RockItemTypeDescriptor), NameOf(StickItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Sticks and Rocks",
                         "Press <ACTION>",
@@ -208,6 +221,7 @@
                     "Dig Clay",
                     NameOf(ClayItemTypeDescriptor),
                     {NameOf(SharpStickItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Sharp Stick",
                         "Go to water",
@@ -220,6 +234,7 @@
                     "Craft Sharp Stick",
                     NameOf(SharpStickItemTypeDescriptor),
                     {NameOf(AxeItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Axe and Stick",
                         "Press <ACTION>",
@@ -232,6 +247,7 @@
                     "Craft Torch",
                     NameOf(TorchItemTypeDescriptor),
                     {NameOf(ShortStickItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Short Stick and Fiber",
                         "Press <ACTION>",
@@ -251,6 +267,7 @@
                         NameOf(RawFishFiletItemTypeDescriptor),
                         NameOf(FireStarterItemTypeDescriptor)
                     },
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Raw Filet",
                         "Place and light camp fire",
@@ -268,6 +285,7 @@
                         NameOf(LogItemTypeDescriptor),
                         NameOf(FireStarterItemTypeDescriptor)
                     },
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Raw Filet",
                         "Place and light camp fire",
@@ -281,6 +299,7 @@
                     "Craft Unfired Pot",
                     NameOf(UnfiredPotItemTypeDescriptor),
                     {NameOf(ClayItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Clay",
                         "Press <ACTION>",
@@ -293,6 +312,7 @@
                     "Craft Kiln",
                     NameOf(KilnItemTypeDescriptor),
                     {NameOf(ClayItemTypeDescriptor), NameOf(RockItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather Clay and Rocks",
                         "Press <ACTION>",
@@ -305,6 +325,7 @@
                     "Chop Wood",
                     NameOf(LogItemTypeDescriptor),
                     {NameOf(AxeItemTypeDescriptor)},
+                    New Dictionary(Of String, Integer),
                     {
                         "Make an Axe",
                         "Interact with a Tree",
@@ -320,6 +341,7 @@
                         NameOf(FireStarterItemTypeDescriptor),
                         NameOf(UnfiredPotItemTypeDescriptor)
                     },
+                    New Dictionary(Of String, Integer),
                     {
                         "Craft unfired pot",
                         "Place Kiln",
@@ -336,6 +358,7 @@
                         NameOf(StickItemTypeDescriptor),
                         NameOf(PlantFiberItemTypeDescriptor)
                     },
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather sticks and plant fiber",
                         "Press <ACTION>",
@@ -351,6 +374,7 @@
                         NameOf(StickItemTypeDescriptor),
                         NameOf(TwineItemTypeDescriptor)
                     },
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather sticks and twine",
                         "Press <ACTION>",
@@ -365,6 +389,7 @@
                     {
                         NameOf(AxeItemTypeDescriptor)
                     },
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather stick and axe",
                         "Press <ACTION>",
@@ -379,6 +404,7 @@
                     {
                         NameOf(LogItemTypeDescriptor)
                     },
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather log and axe",
                         "Press <ACTION>",
@@ -395,6 +421,7 @@
                         NameOf(ShortStickItemTypeDescriptor),
                         NameOf(BowDrillItemTypeDescriptor)
                     },
+                    New Dictionary(Of String, Integer),
                     {
                         "Gather plank, firebow and short stick",
                         "Press <ACTION>",
