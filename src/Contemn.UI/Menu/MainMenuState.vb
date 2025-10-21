@@ -67,6 +67,9 @@ Friend Class MainMenuState
     End Function
 
     Protected Overrides Function HandleCancel() As IUIState
+        If Settings.HasSettings Then
+            Return New ConfirmQuitState(Buffer, World, Settings)
+        End If
         Return Me
     End Function
 End Class

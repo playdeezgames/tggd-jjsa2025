@@ -1,6 +1,7 @@
 ﻿Imports TGGD.UI
 Imports Contemn.Business
 Imports System.Runtime.CompilerServices
+Imports System.IO
 
 Friend Class GameMenuState
     Inherits PickerState
@@ -28,7 +29,7 @@ Friend Class GameMenuState
             settings,
             GenerateTitle(world, settings),
             Hue.Magenta,
-            GenerateMenuItems(settings),
+            GenerateMenuItems(world, settings),
             CONTINUE_IDENTIFIER)
     End Sub
 
@@ -39,7 +40,7 @@ Friend Class GameMenuState
         Return "Game Menu"
     End Function
 
-    Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
+    Private Shared Function GenerateMenuItems(world As IWorld, settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
         Dim result As New List(Of (Identifier As String, Text As String)) From
             {
                 (CONTINUE_IDENTIFIER, CONTINUE_TEXT),
@@ -49,7 +50,9 @@ Friend Class GameMenuState
             result.Add((SETTINGS_IDENTIFIER, SETTINGS_TEXT))
             result.Add((SAVE_AND_CONTINUE_IDENTIFIER, SAVE_AND_CONTINUE_TEXT))
             result.Add((SAVE_AND_EXIT_IDENTIFIER, SAVE_AND_EXIT_TEXT))
-            result.Add((QUICK_LOAD_IDENTIFIER, QUICK_LOAD_TEXT))
+            If File.Exists(world.GetMetadata(MetadataType.SaveSlot)) Then
+                result.Add((QUICK_LOAD_IDENTIFIER, QUICK_LOAD_TEXT))
+            End If
         End If
         Return result
     End Function
