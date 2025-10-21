@@ -17,5 +17,6 @@ Public Interface ICharacter
     Function MoveTo(destination As ILocation) As IDialog
     Function ProcessTurn() As IEnumerable(Of IDialogLine)
     Sub Dismantle(item As IItem)
+    ReadOnly Property Name As String
     ReadOnly Property HasAvailableRecipes As Boolean
 End Interface

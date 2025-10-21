@@ -4,7 +4,7 @@ public Class N00bCharacterTypeDescriptor
     Inherits CharacterTypeDescriptor
 
     Public Sub New()
-        MyBase.New(NameOf(N00bCharacterTypeDescriptor), 1)
+        MyBase.New(NameOf(N00bCharacterTypeDescriptor), "N00b", 1)
     End Sub
 
     Const MAXIMUM_SATIETY = 100
@@ -136,5 +136,9 @@ public Class N00bCharacterTypeDescriptor
 
     Friend Overrides Function OnInteract(target As ICharacter, initiator As ICharacter) As IDialog
         Throw New NotImplementedException()
+    End Function
+
+    Friend Overrides Function GetName(character As Character) As String
+        Return CharacterTypeName
     End Function
 End Class

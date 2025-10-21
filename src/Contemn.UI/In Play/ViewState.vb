@@ -14,6 +14,31 @@ Friend Class ViewState
     Public Overrides Sub Refresh()
         Buffer.Fill
         RenderMap()
+
+        Dim x = VIEW_WIDTH
+        Dim y = 0
+        Buffer.Write(x, y, $"Pos: ({World.GetStatistic(StatisticType.ViewColumn)}, {World.GetStatistic(StatisticType.ViewRow)})", Hue.LightGray, Hue.Black)
+        y += 1
+        Buffer.Write(x, y, $"Location Type:", Hue.LightGray, Hue.Black)
+        Dim location = World.Avatar.Location.Map.GetLocation(World.GetStatistic(StatisticType.ViewColumn), World.GetStatistic(StatisticType.ViewRow))
+        y += 1
+        Buffer.Write(x, y, location.Name, Hue.LightGray, Hue.Black)
+        y += 1
+        If location.Character IsNot Nothing Then
+            Buffer.Write(x, y, $"Character:", Hue.LightGray, Hue.Black)
+            y += 1
+            Buffer.Write(x, y, location.Character.Name, Hue.LightGray, Hue.Black)
+            y += 1
+        End If
+        If location.HasItems Then
+            Buffer.Write(x, y, $"#Items: {location.Items.Count()}", Hue.LightGray, Hue.Black)
+            y += 1
+        End If
+
+        Buffer.WriteCentered(Buffer.Rows - 4, "(View Mode)", Hue.LightGray, Hue.Black)
+        Buffer.WriteCentered(Buffer.Rows - 3, "UP/DOWN/LEFT/RIGHT: move", Hue.LightGray, Hue.Black)
+        Buffer.WriteCentered(Buffer.Rows - 2, "GREEN: examine", Hue.LightGray, Hue.Black)
+        Buffer.WriteCentered(Buffer.Rows - 1, "RED: leave", Hue.LightGray, Hue.Black)
     End Sub
     Private Sub RenderMap()
         Dim map = World.Avatar.Map
@@ -47,7 +72,7 @@ Friend Class ViewState
         Select Case command
             Case UI.Command.Red
                 World.SetTag(TagType.ViewMode, False)
-                Return New GameMenuState(Buffer, World, Settings)
+                Return NeutralState.DetermineState(Buffer, World, Settings)
             Case UI.Command.Up
                 Return HandleMove(0, -1)
             Case UI.Command.Down

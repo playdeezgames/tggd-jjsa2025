@@ -78,6 +78,12 @@ Friend Class Character
         End Get
     End Property
 
+    Public ReadOnly Property Name As String Implements ICharacter.Name
+        Get
+            Return Descriptor.GetName(Me)
+        End Get
+    End Property
+
     Private Function CanPerform(verbType As String) As Boolean
         Return VerbTypes.Descriptors(verbType).CanPerform(Me)
     End Function

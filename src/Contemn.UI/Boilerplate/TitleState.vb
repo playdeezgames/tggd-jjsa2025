@@ -19,7 +19,7 @@ Friend Class TitleState
         Buffer.WriteCentered(Buffer.Rows \ 2 + 3, "For Jern Jam 2025 x SciAnts", Hue.DarkGray, Hue.Black)
         Buffer.WriteCentered(Buffer.Rows \ 2 + 4, "September 2025", Hue.DarkGray, Hue.Black)
         Buffer.WriteCentered(Buffer.Rows \ 2 + 5, "Winner: Uniqueness Award", Hue.LightGreen, Hue.Black)
-        Buffer.WriteCentered(Buffer.Rows - 1, "Press <SPACE>", Hue.White, Hue.Black)
+        Buffer.WriteCentered(Buffer.Rows - 1, "Press GREEN", Hue.White, Hue.Black)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState

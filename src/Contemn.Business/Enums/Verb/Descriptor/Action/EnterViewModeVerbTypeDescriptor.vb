@@ -12,8 +12,8 @@ Friend Class EnterViewModeVerbTypeDescriptor
 
     Friend Overrides Function Perform(character As ICharacter) As IDialog
         character.World.SetTag(TagType.ViewMode, True)
-        character.World.SetStatistic(StatisticType.ViewColumn, character.Column)
-        character.World.SetStatistic(StatisticType.ViewRow, character.Row)
+        character.World.SetStatisticRange(StatisticType.ViewColumn, character.Column, 0, character.Map.Columns - 1)
+        character.World.SetStatisticRange(StatisticType.ViewRow, character.Row, 0, character.Map.Rows - 1)
         Return Nothing
     End Function
 

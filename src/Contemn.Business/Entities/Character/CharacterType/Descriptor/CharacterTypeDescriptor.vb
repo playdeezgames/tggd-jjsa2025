@@ -3,9 +3,14 @@
 Public MustInherit Class CharacterTypeDescriptor
     ReadOnly Property CharacterType As String
     ReadOnly Property CharacterCount As Integer
-    Sub New(characterType As String, characterCount As Integer)
+    ReadOnly Property CharacterTypeName As String
+    Sub New(
+           characterType As String,
+           characterTypeName As String,
+           characterCount As Integer)
         Me.CharacterType = characterType
         Me.CharacterCount = characterCount
+        Me.CharacterTypeName = characterTypeName
     End Sub
     Friend MustOverride Function CanSpawnMap(map As IMap) As Boolean
     Friend MustOverride Function CanSpawnLocation(location As ILocation) As Boolean
@@ -17,4 +22,5 @@ Public MustInherit Class CharacterTypeDescriptor
     Friend MustOverride Sub HandleRemoveItem(character As ICharacter, item As IItem)
     Friend MustOverride Function OnInteract(target As ICharacter, initiator As ICharacter) As IDialog
     Friend MustOverride Function OnProcessTurn(character As ICharacter) As IEnumerable(Of IDialogLine)
+    Friend MustOverride Function GetName(character As Character) As String
 End Class
