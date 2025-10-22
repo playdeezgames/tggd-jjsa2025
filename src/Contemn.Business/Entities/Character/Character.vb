@@ -187,4 +187,33 @@ Friend Class Character
         End If
         Return World.GetLocation(GetStatistic(StatisticType.BumpLocationId))
     End Function
+
+    Public Function CraftRecipe(recipeType As String, nextDialog As Func(Of IDialog), confirmed As Boolean) As IDialog Implements ICharacter.CraftRecipe
+        Dim descriptor = RecipeTypes.Descriptors.Single(Function(x) x.RecipeType = recipeType)
+        Dim character = Me
+        If Descriptor.IsDestructive AndAlso Not confirmed Then
+            Return New ConfirmDialog(
+                "Are you sure?",
+                {
+                    New DialogLine(MoodType.Warning, "This recipe is destructive."),
+                    New DialogLine(MoodType.Info, "Please confirm.")
+                },
+                Function() Character.CraftRecipe(recipeType, nextDialog, True),
+                nextDialog)
+        Else
+            Dim CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
+            Const CRAFT_ANOTHER_TEXT = "Craft Another"
+            Dim messageLines = Descriptor.Craft(Character)
+            Character.Platform.PlaySfx(Sfx.Craft)
+            Character.ChangeStatistic(StatisticType.Score, 1)
+            Return New MessageDialog(
+            "Behold!",
+            messageLines,
+            {
+                (OK_CHOICE, OK_TEXT, nextDialog, True),
+                (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, Function() character.CraftRecipe(recipeType, nextDialog, True), descriptor.CanCraft(character))
+            },
+            nextDialog)
+        End If
+    End Function
 End Class

@@ -30,7 +30,7 @@ Friend Class CraftDialog
                 Return CancelDialog()
             Case Else
                 Return character.CraftRecipe(
-                    RecipeTypes.Descriptors.Single(Function(x) x.RecipeType = choice),
+                    choice,
                     LaunchMenu(character),
                     False)
         End Select

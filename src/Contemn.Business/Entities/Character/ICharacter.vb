@@ -22,4 +22,8 @@ Public Interface ICharacter
     ReadOnly Property HasAvailableRecipes As Boolean
     Sub SetBumpLocation(location As ILocation)
     Function GetBumpLocation() As ILocation
+    Function CraftRecipe(
+                        recipeType As String,
+                        nextDialog As Func(Of IDialog),
+                        confirmed As Boolean) As IDialog
 End Interface
