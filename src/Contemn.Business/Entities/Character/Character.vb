@@ -132,7 +132,7 @@ Friend Class Character
     Private Sub Leave()
         SetBumpLocation(Nothing)
         Descriptor.OnLeave(Me, Location)
-        Location.HandleLeave(Me)
+        Location.Descriptor.OnLeave(Location, Me)
         Data.Locations(EntityData.LocationId).CharacterId = Nothing
     End Sub
 
