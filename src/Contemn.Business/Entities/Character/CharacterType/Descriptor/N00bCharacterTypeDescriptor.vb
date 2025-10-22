@@ -28,7 +28,7 @@ public Class N00bCharacterTypeDescriptor
     End Sub
 
     Friend Overrides Function OnBump(character As ICharacter, location As ILocation) As IDialog
-        Return location.HandleBump(character)
+        Return location.Descriptor.OnBump(location, character)
     End Function
 
     Friend Overrides Sub OnEnter(character As ICharacter, location As ILocation)

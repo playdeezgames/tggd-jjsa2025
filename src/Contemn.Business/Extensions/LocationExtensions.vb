@@ -3,10 +3,6 @@ Imports TGGD.Business
 
 Friend Module LocationExtensions
     <Extension>
-    Friend Function HandleBump(location As ILocation, character As ICharacter) As IDialog
-        Return location.Descriptor.OnBump(location, character)
-    End Function
-    <Extension>
     Friend Sub HandleLeave(location As ILocation, character As ICharacter)
         location.Descriptor.OnLeave(location, character)
     End Sub
