@@ -66,7 +66,7 @@ Public Class FiredPotItemTypeDescriptor
             messageLines.
             Append(New DialogLine(MoodType.Info, $"+{hydrationDelta} {character.FormatStatistic(StatisticType.Hydration)}")).
             Append(New DialogLine(MoodType.Info, $"-1 {item.FormatStatistic(StatisticType.Water)}")).
-            AppendIf(illness > 0, New DialogLine(MoodType.Info, $"+{illness} {StatisticType.Illness.ToStatisticTypeDescriptor.StatisticTypeName}")),
+            AppendIf(illness > 0, New DialogLine(MoodType.Info, $"+{illness} {StatisticTypes.Descriptors(StatisticType.Illness).StatisticTypeName}")),
             Function() New ItemOfTypeDialog(character, item))
     End Function
 

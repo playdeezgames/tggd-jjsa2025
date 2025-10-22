@@ -31,7 +31,7 @@ Friend Module ItemExtensions
             lines.Add(
                 New DialogLine(
                     MoodType.Info,
-                    $"-1 {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName} {tool.Name}"))
+                    $"-1 {StatisticTypes.Descriptors(StatisticType.Durability).StatisticTypeName} {tool.Name}"))
             If tool.GetStatistic(StatisticType.Durability) < tool.GetStatisticMaximum(StatisticType.Durability) \ 3 Then
                 lines.Add(
                 New DialogLine(

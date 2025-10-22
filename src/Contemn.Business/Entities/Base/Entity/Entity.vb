@@ -104,7 +104,7 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     End Function
 
     Public Function FormatStatistic(statisticType As String) As String Implements IEntity.FormatStatistic
-        Return statisticType.ToStatisticTypeDescriptor().Format(
+        Return StatisticTypes.Descriptors(statisticType).Format(
             GetStatistic(statisticType),
             GetStatisticMinimum(statisticType),
             GetStatisticMaximum(statisticType))

@@ -20,7 +20,7 @@ Friend Class RefuelItemDialog
     End Function
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
-        Dim statisticName = StatisticType.Fuel.ToStatisticTypeDescriptor.StatisticTypeName
+        Dim statisticName = StatisticTypes.Descriptors(StatisticType.Fuel).StatisticTypeName
         Return {
             New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
         }.Concat(

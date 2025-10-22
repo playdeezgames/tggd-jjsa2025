@@ -81,7 +81,7 @@ Public MustInherit Class MendableItemTypeDescriptor
         Dim originalDurability = item.GetStatistic(StatisticType.Durability)
         item.ChangeStatistic(StatisticType.Durability, durabilityRepaired)
         Dim mendDurability = item.GetStatistic(StatisticType.Durability) - originalDurability
-        result.Add(New DialogLine(MoodType.Info, $"+{mendDurability} {StatisticType.Durability.ToStatisticTypeDescriptor.StatisticTypeName}({item.GetStatistic(StatisticType.Durability)}/{item.GetStatisticMaximum(StatisticType.Durability)})"))
+        result.Add(New DialogLine(MoodType.Info, $"+{mendDurability} {StatisticTypes.Descriptors(StatisticType.Durability).StatisticTypeName}({item.GetStatistic(StatisticType.Durability)}/{item.GetStatisticMaximum(StatisticType.Durability)})"))
         Dim mendIngredient = character.GetItemOfType(mendConsumptionItemType)
         character.RemoveItem(mendIngredient)
         result.Add(New DialogLine(MoodType.Info, $"-1 {mendIngredient.Name}({character.GetCountOfItemType(mendIngredient.ItemType)})"))

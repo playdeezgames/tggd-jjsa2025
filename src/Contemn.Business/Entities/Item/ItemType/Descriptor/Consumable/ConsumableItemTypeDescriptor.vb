@@ -37,12 +37,12 @@ Public MustInherit Class ConsumableItemTypeDescriptor
     Private Function Eat(item As IItem, character As ICharacter) As IDialog
         Dim lines As New List(Of IDialogLine)
         character.ChangeStatistic(StatisticType.Satiety, item.GetStatistic(StatisticType.Satiety))
-        lines.Add(New DialogLine(MoodType.Info, $"+{item.GetStatistic(StatisticType.Satiety)} {StatisticType.Satiety.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Satiety)})"))
+        lines.Add(New DialogLine(MoodType.Info, $"+{item.GetStatistic(StatisticType.Satiety)} {StatisticTypes.Descriptors(StatisticType.Satiety).StatisticTypeName}({character.GetStatistic(StatisticType.Satiety)})"))
         If RNG.GenerateBoolean(foodPoisoningStats.Safety, foodPoisoningStats.Hazard, Nothing) Then
             Dim illness = RNG.RollXDY(1, foodPoisoningStats.Severity)
             character.ChangeStatistic(StatisticType.Illness, illness)
             lines.Add(New DialogLine(MoodType.Info, "You get food poisoning."))
-            lines.Add(New DialogLine(MoodType.Info, $"+{illness} {StatisticType.Illness.ToStatisticTypeDescriptor.StatisticTypeName}({character.GetStatistic(StatisticType.Illness)})"))
+            lines.Add(New DialogLine(MoodType.Info, $"+{illness} {StatisticTypes.Descriptors(StatisticType.Illness).StatisticTypeName}({character.GetStatistic(StatisticType.Illness)})"))
         End If
         character.RemoveItem(item)
         lines.Add(New DialogLine(MoodType.Info, $"-1 {item.Name}({character.GetCountOfItemType(ItemType)})"))
