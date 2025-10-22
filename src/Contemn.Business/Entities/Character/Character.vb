@@ -111,8 +111,8 @@ Friend Class Character
     End Function
 
     Private Function Bump(nextLocation As ILocation) As IDialog
-        Me.SetBumpLocation(Location)
-        Return Descriptor.OnBump(Me, Location)
+        Me.SetBumpLocation(nextLocation)
+        Return Descriptor.OnBump(Me, nextLocation)
     End Function
 
     Private Function Enter(nextLocation As ILocation) As IDialog
