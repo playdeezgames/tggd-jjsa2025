@@ -3,12 +3,6 @@ Imports TGGD.Business
 
 Friend Module CharacterExtensions
     <Extension>
-    Friend Sub HandleEnter(
-                          character As ICharacter,
-                          location As ILocation)
-        character.Descriptor.OnEnter(character, location)
-    End Sub
-    <Extension>
     Friend Function IsDead(
                           character As ICharacter) As Boolean
         Return character.IsStatisticAtMinimum(StatisticType.Health)
