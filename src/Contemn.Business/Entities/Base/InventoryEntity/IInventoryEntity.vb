@@ -2,6 +2,7 @@
     Inherits IDescribedEntity(Of TDescriptor)
     Sub AddItem(item As IItem)
     Sub RemoveItem(item As IItem)
+    Sub RemoveAndRecycleItem(item As IItem)
     Function HasItem(item As IItem) As Boolean
 
     ReadOnly Property HasItems As Boolean

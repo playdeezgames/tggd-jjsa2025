@@ -61,4 +61,9 @@ Friend MustInherit Class InventoryEntity(Of TEntityData As InventoryEntityData, 
     Public Function HasItem(item As IItem) As Boolean Implements IInventoryEntity(Of TDescriptor).HasItem
         Return EntityData.ItemIds.Contains(item.ItemId)
     End Function
+
+    Public Sub RemoveAndRecycleItem(item As IItem) Implements IInventoryEntity(Of TDescriptor).RemoveAndRecycleItem
+        RemoveItem(item)
+        item.Recycle()
+    End Sub
 End Class
