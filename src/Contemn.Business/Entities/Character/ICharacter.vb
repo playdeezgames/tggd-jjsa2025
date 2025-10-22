@@ -20,4 +20,5 @@ Public Interface ICharacter
     ReadOnly Property Name As String
     ReadOnly Property HasAvailableRecipes As Boolean
     Sub SetBumpLocation(location As ILocation)
+    Function GetBumpLocation() As ILocation
 End Interface

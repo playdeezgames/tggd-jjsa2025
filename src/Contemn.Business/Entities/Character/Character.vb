@@ -174,4 +174,11 @@ Friend Class Character
     Public Sub SetBumpLocation(location As ILocation) Implements ICharacter.SetBumpLocation
         SetStatistic(StatisticType.BumpLocationId, location?.LocationId)
     End Sub
+
+    Public Function GetBumpLocation() As ILocation Implements ICharacter.GetBumpLocation
+        If Not HasStatistic(StatisticType.BumpLocationId) Then
+            Return Nothing
+        End If
+        Return World.GetLocation(GetStatistic(StatisticType.BumpLocationId))
+    End Function
 End Class
