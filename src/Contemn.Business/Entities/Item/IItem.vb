@@ -11,4 +11,5 @@ Public Interface IItem
     Function Describe() As IEnumerable(Of IDialogLine)
     Function ProcessTurn() As IEnumerable(Of IDialogLine)
     Sub Place(location As ILocation)
+    Function Deplete(character As ICharacter) As IEnumerable(Of IDialogLine)
 End Interface
