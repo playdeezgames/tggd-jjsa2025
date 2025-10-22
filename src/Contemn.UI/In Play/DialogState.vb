@@ -19,23 +19,23 @@ Friend Class DialogState
     End Sub
 
     Public Overrides Sub Refresh()
-        Buffer.Fill()
-        Buffer.WriteCentered(0, dialog.Caption, Hue.Brown, Hue.Black)
+        Buffer.Fill(0, Hue.Black, Hue.Black, False)
+        Buffer.WriteCentered(0, dialog.Caption, Hue.Brown, Hue.Black, False)
         Dim topRow = 1
         For Each line In dialog.Lines
             Dim colors = MoodColors(line.Mood)
-            Buffer.WriteCentered(topRow, line.Text, colors.ForegroundColor, colors.BackgroundColor)
+            Buffer.WriteCentered(topRow, line.Text, colors.ForegroundColor, colors.BackgroundColor, False)
             topRow += 1
         Next
         Dim centerRow = (topRow + Buffer.Rows - 1) \ 2
-        Buffer.Fill(0, centerRow, Buffer.Columns, 1, 0, Hue.Black, Hue.LightGray)
+        Buffer.Fill(0, centerRow, Buffer.Columns, 1, 0, Hue.Black, Hue.LightGray, False)
         Dim row = centerRow - choiceIndex
         For Each choice In dialog.Choices
             If row >= topRow AndAlso row < Buffer.Rows Then
                 If row = centerRow Then
-                    Buffer.WriteCentered(row, choice.Text, Hue.Black, Hue.LightGray)
+                    Buffer.WriteCentered(row, choice.Text, Hue.Black, Hue.LightGray, False)
                 Else
-                    Buffer.WriteCentered(row, choice.Text, Hue.LightGray, Hue.Black)
+                    Buffer.WriteCentered(row, choice.Text, Hue.LightGray, Hue.Black, False)
                 End If
             End If
             row += 1

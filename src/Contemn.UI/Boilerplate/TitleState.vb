@@ -12,14 +12,14 @@ Friend Class TitleState
     End Sub
 
     Public Overrides Sub Refresh()
-        Buffer.Fill()
-        Buffer.WriteCentered(Buffer.Rows \ 2 - 1, "Grubstaker of SPLORR!!", Hue.LightMagenta, Hue.Black)
-        Buffer.WriteCentered(Buffer.Rows \ 2, "(The Dead Do Not Hunger)", Hue.Magenta, Hue.Black)
-        Buffer.WriteCentered(Buffer.Rows \ 2 + 2, "A Production of TheGrumpyGameDev", Hue.DarkGray, Hue.Black)
-        Buffer.WriteCentered(Buffer.Rows \ 2 + 3, "For Jern Jam 2025 x SciAnts", Hue.DarkGray, Hue.Black)
-        Buffer.WriteCentered(Buffer.Rows \ 2 + 4, "September 2025", Hue.DarkGray, Hue.Black)
-        Buffer.WriteCentered(Buffer.Rows \ 2 + 5, "Winner: Uniqueness Award", Hue.LightGreen, Hue.Black)
-        Buffer.WriteCentered(Buffer.Rows - 1, "Press GREEN", Hue.White, Hue.Black)
+        Buffer.Fill(0, Hue.Black, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows \ 2 - 1, "Grubstaker of SPLORR!!", Hue.LightMagenta, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows \ 2, "(The Dead Do Not Hunger)", Hue.Magenta, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows \ 2 + 2, "A Production of TheGrumpyGameDev", Hue.DarkGray, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows \ 2 + 3, "For Jern Jam 2025 x SciAnts", Hue.DarkGray, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows \ 2 + 4, "September 2025", Hue.DarkGray, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows \ 2 + 5, "Winner: Uniqueness Award", Hue.LightGreen, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows - 1, "Press GREEN", Hue.White, Hue.Black, False)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState

@@ -29,16 +29,16 @@ Friend MustInherit Class PickerState
     End Sub
 
     Public Overrides Sub Refresh()
-        Buffer.Fill()
-        Buffer.Fill(0, Buffer.Rows \ 2, Buffer.Columns, 1, backgroundColor:=Hue.LightGray)
+        Buffer.Fill(0, Hue.Black, Hue.Black, False)
+        Buffer.Fill(0, Buffer.Rows \ 2, Buffer.Columns, 1, 0, Hue.Black, Hue.LightGray, False)
         Dim y = Buffer.Rows \ 2 - menuItemIndex
         For Each menuItem In menuItems
             Dim foregroundColor = If(y = Buffer.Rows \ 2, Hue.Black, Hue.LightGray)
             Dim backgroundColor = If(y = Buffer.Rows \ 2, Hue.LightGray, Hue.Black)
-            Buffer.WriteCentered(y, menuItem.Text, foregroundColor, backgroundColor)
+            Buffer.WriteCentered(y, menuItem.Text, foregroundColor, backgroundColor, False)
             y += 1
         Next
-        Buffer.WriteCentered(0, title, titleForegroundColor, Hue.Black)
+        Buffer.WriteCentered(0, title, titleForegroundColor, Hue.Black, False)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState

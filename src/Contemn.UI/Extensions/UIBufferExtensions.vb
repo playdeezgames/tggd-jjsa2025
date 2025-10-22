@@ -7,10 +7,10 @@ Friend Module UIBufferExtensions
     <Extension>
     Friend Sub Fill(
                    buffer As IUIBuffer(Of Integer),
-                   Optional character As Byte = 0,
-                   Optional foregroundColor As Integer = 0,
-                   Optional backgroundColor As Integer = 0,
-                   Optional invert As Boolean = False)
+                   character As Byte,
+                   foregroundColor As Integer,
+                   backgroundColor As Integer,
+                   invert As Boolean)
         buffer.Fill(
             0, 0,
             buffer.Columns, buffer.Rows,
@@ -23,10 +23,10 @@ Friend Module UIBufferExtensions
                    row As Integer,
                    columns As Integer,
                    rows As Integer,
-                   Optional character As Byte = 0,
-                   Optional foregroundColor As Integer = 0,
-                   Optional backgroundColor As Integer = 0,
-                   Optional invert As Boolean = False)
+                   character As Byte,
+                   foregroundColor As Integer,
+                   backgroundColor As Integer,
+                   invert As Boolean)
         buffer.Fill(
             column, row,
             columns, rows,
@@ -49,7 +49,7 @@ Friend Module UIBufferExtensions
                     text As String,
                     foregroundColor As Integer,
                     backgroundColor As Integer,
-                    Optional invert As Boolean = False)
+                    invert As Boolean)
         For Each character In text
             buffer.SetPixel(column, row, ToPixel(CByte(AscW(character)), foregroundColor, backgroundColor, invert))
             column += 1
@@ -61,7 +61,8 @@ Friend Module UIBufferExtensions
                     row As Integer,
                     text As String,
                     foregroundColor As Integer,
-                    backgroundColor As Integer)
-        buffer.Write((buffer.Columns - text.Length) \ 2, row, text, foregroundColor, backgroundColor)
+                    backgroundColor As Integer,
+                    invert As Boolean)
+        buffer.Write((buffer.Columns - text.Length) \ 2, row, text, foregroundColor, backgroundColor, invert)
     End Sub
 End Module

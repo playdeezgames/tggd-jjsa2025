@@ -12,7 +12,7 @@ Friend Class NavigationState
     End Sub
 
     Public Overrides Sub Refresh()
-        Buffer.Fill
+        Buffer.Fill(0, Hue.Black, Hue.Black, False)
         RenderMap()
         RenderStatistics()
         RenderMessages()
@@ -22,16 +22,16 @@ Friend Class NavigationState
         Dim avatar = World.Avatar
         Dim x = VIEW_WIDTH
         Dim y = 0
-        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Score), Hue.Green, Hue.Black)
+        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Score), Hue.Green, Hue.Black, False)
         y += 2
-        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Health), Hue.Red, Hue.Black)
+        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Health), Hue.Red, Hue.Black, False)
         y += 1
-        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Satiety), Hue.Magenta, Hue.Black)
+        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Satiety), Hue.Magenta, Hue.Black, False)
         y += 1
-        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Hydration), Hue.Blue, Hue.Black)
+        Buffer.Write(x, y, avatar.FormatStatistic(StatisticType.Hydration), Hue.Blue, Hue.Black, False)
         y += 1
         y = RenderIllness(x, y, avatar)
-        Buffer.Write(x, y, $"Terrain: {avatar.Location.Name}", Hue.LightGray, Hue.Black)
+        Buffer.Write(x, y, $"Terrain: {avatar.Location.Name}", Hue.LightGray, Hue.Black, False)
         y += 1
         y = RenderToolTip(x, y, avatar)
         y = RenderGroundItems(x, y, avatar)
@@ -39,7 +39,7 @@ Friend Class NavigationState
 
     Private Function RenderToolTip(x As Integer, y As Integer, character As ICharacter) As Integer
         If character.Location.HasMetadata(MetadataType.ForageTable) Then
-            Buffer.Write(x, y, $"(can forage)", Hue.DarkGray, Hue.Black)
+            Buffer.Write(x, y, $"(can forage)", Hue.DarkGray, Hue.Black, False)
             y += 1
         End If
         Return y
@@ -47,7 +47,7 @@ Friend Class NavigationState
 
     Private Function RenderGroundItems(x As Integer, y As Integer, character As ICharacter) As Integer
         If character.Location.HasItems Then
-            Buffer.Write(x, y, $"Ground Items", Hue.Black, Hue.Yellow)
+            Buffer.Write(x, y, $"Ground Items", Hue.Black, Hue.Yellow, False)
             y += 1
         End If
         Return y
@@ -55,7 +55,7 @@ Friend Class NavigationState
 
     Private Function RenderIllness(x As Integer, y As Integer, character As ICharacter) As Integer
         If character.GetStatistic(StatisticType.Illness) > character.GetStatisticMinimum(StatisticType.Illness) Then
-            Buffer.Write(x, y, character.FormatStatistic(StatisticType.Illness), Hue.Brown, Hue.Black)
+            Buffer.Write(x, y, character.FormatStatistic(StatisticType.Illness), Hue.Brown, Hue.Black, False)
             Return y + 1
         End If
         Return y
@@ -69,7 +69,7 @@ Friend Class NavigationState
         For Each line In Enumerable.Range(0, World.MessageCount)
             Dim message = World.GetMessage(line)
             Dim colors = moodColors(message.Mood)
-            Buffer.Write(0, row, message.Text, colors.ForegroundColor, colors.BackgroundColor)
+            Buffer.Write(0, row, message.Text, colors.ForegroundColor, colors.BackgroundColor, False)
             row += 1
         Next
     End Sub
@@ -90,7 +90,7 @@ Friend Class NavigationState
 
     Private Sub RenderLocation(displayColumn As Integer, displayRow As Integer, location As ILocation)
         If location Is Nothing Then
-            Buffer.Fill(displayColumn, displayRow, 1, 1, character:=&HB0, Hue.Cyan, Hue.Black)
+            Buffer.Fill(displayColumn, displayRow, 1, 1, &HB0, Hue.Cyan, Hue.Black, False)
         ElseIf location.HasCharacter Then
             Buffer.SetPixel(displayColumn, displayRow, location.Character.ToPixel(False))
         ElseIf location.HasItems Then
