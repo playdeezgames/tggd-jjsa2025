@@ -250,7 +250,7 @@ Friend Module ItemExtensions
             Hue.Black,
             invert)
     End Function
-
+    'Valid use of <Extension>, because item should not know about pixels
     <Extension>
     Friend Function ToPixel(item As IItem, invert As Boolean) As Integer
         Dim pixelFunction As Func(Of IItem, Boolean, Integer) = Nothing

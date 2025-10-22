@@ -79,6 +79,7 @@ Friend Module LocationExtensions
             invert)
     End Function
 
+    'Valid use of <Extension>, because location should not know about pixels
     <Extension>
     Friend Function ToPixel(location As ILocation, invert As Boolean) As Integer
         Return locationPixelTable(location.LocationType)(location, invert)
