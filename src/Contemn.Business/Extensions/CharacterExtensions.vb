@@ -3,11 +3,6 @@ Imports TGGD.Business
 
 Friend Module CharacterExtensions
     <Extension>
-    Friend Function IsDead(
-                          character As ICharacter) As Boolean
-        Return character.IsStatisticAtMinimum(StatisticType.Health)
-    End Function
-    <Extension>
     Friend Function CraftRecipe(
                                character As ICharacter,
                                descriptor As RecipeTypeDescriptor,

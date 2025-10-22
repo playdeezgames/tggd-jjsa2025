@@ -84,6 +84,12 @@ Friend Class Character
         End Get
     End Property
 
+    Public ReadOnly Property IsDead As Boolean Implements ICharacter.IsDead
+        Get
+            Return IsStatisticAtMinimum(StatisticType.Health)
+        End Get
+    End Property
+
     Private Function CanPerform(verbType As String) As Boolean
         Return VerbTypes.Descriptors(verbType).CanPerform(Me)
     End Function

@@ -5,6 +5,7 @@ Public Interface ICharacter
     ReadOnly Property CharacterType As String
     ReadOnly Property CharacterId As Integer
     ReadOnly Property IsAvatar As Boolean
+    ReadOnly Property IsDead As Boolean
 
     ReadOnly Property Location As ILocation
     ReadOnly Property Map As IMap
