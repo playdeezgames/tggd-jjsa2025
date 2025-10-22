@@ -126,7 +126,7 @@ Friend Class Character
         EntityData.LocationId = nextLocation.LocationId
         Data.Locations(EntityData.LocationId).CharacterId = CharacterId
         Descriptor.OnEnter(Me, Location)
-        Return Location.HandleEnter(Me)
+        Return Location.Descriptor.OnEnter(Location, Me)
     End Function
 
     Private Sub Leave()

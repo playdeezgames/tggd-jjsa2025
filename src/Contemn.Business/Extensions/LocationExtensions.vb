@@ -3,10 +3,6 @@ Imports TGGD.Business
 
 Friend Module LocationExtensions
     <Extension>
-    Friend Function HandleEnter(location As ILocation, character As ICharacter) As IDialog
-        Return location.Descriptor.OnEnter(location, character)
-    End Function
-    <Extension>
     Friend Function GetForageGenerator(location As ILocation) As IGenerator
         If location.HasStatistic(StatisticType.ForageGeneratorId) Then
             Return location.World.GetGenerator(location.GetStatistic(StatisticType.ForageGeneratorId))
@@ -18,13 +14,5 @@ Friend Module LocationExtensions
             Return generator
         End If
         Return Nothing
-    End Function
-    <Extension>
-    Sub SetDismantleTable(location As ILocation, generator As IGenerator)
-        location.SetStatistic(StatisticType.DismantleGeneratorId, generator.GeneratorId)
-    End Sub
-    <Extension>
-    Function GetDismantleTable(location As ILocation) As IGenerator
-        Return location.World.GetGenerator(location.GetStatistic(StatisticType.DismantleGeneratorId))
     End Function
 End Module

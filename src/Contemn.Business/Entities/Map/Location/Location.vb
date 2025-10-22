@@ -126,4 +126,12 @@ Friend Class Location
         Dim nextRow = descriptor.GetNextRow(Row)
         Return Map.GetLocation(nextColumn, nextRow)
     End Function
+
+    Public Function GetDismantleTable() As IGenerator Implements ILocation.GetDismantleTable
+        Return World.GetGenerator(GetStatistic(StatisticType.DismantleGeneratorId))
+    End Function
+
+    Public Sub SetDismantleTable(generator As IGenerator) Implements ILocation.SetDismantleTable
+        SetStatistic(StatisticType.DismantleGeneratorId, generator.GeneratorId)
+    End Sub
 End Class
