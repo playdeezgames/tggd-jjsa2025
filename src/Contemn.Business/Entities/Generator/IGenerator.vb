@@ -6,4 +6,6 @@
     ReadOnly Property TotalWeight As Integer
     Sub Recycle()
     ReadOnly Property Keys As IEnumerable(Of String)
+    Function GenerateItem(Of TDescriptor)(entity As IInventoryEntity(Of TDescriptor)) As IItem
+    ReadOnly Property IsDepleted As Boolean
 End Interface

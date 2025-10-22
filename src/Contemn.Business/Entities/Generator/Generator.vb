@@ -22,6 +22,12 @@ Friend Class Generator
         End Get
     End Property
 
+    Public ReadOnly Property IsDepleted As Boolean Implements IGenerator.IsDepleted
+        Get
+            Return GetWeight(String.Empty) = TotalWeight
+        End Get
+    End Property
+
     Public Sub New(data As WorldData, generatorId As Integer)
         Me.data = data
         Me.GeneratorId = generatorId
@@ -48,4 +54,15 @@ Friend Class Generator
         GeneratorData.Clear()
         data.RecycledGenerators.Add(GeneratorId)
     End Sub
+
+    Public Function GenerateItem(Of TDescriptor)(entity As IInventoryEntity(Of TDescriptor)) As IItem Implements IGenerator.GenerateItem
+        Dim generator = Me
+        Dim itemType = Generator.Generate()
+        If Not String.IsNullOrEmpty(itemType) Then
+            Generator.SetWeight(itemType, Generator.GetWeight(itemType) - 1)
+            Generator.SetWeight(String.Empty, Generator.GetWeight(String.Empty) + 1)
+            Return entity.World.CreateItem(itemType, entity)
+        End If
+        Return Nothing
+    End Function
 End Class
