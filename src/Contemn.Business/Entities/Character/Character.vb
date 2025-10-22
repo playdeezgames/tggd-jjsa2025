@@ -1,5 +1,4 @@
-﻿Imports System.Runtime.CompilerServices
-Imports Contemn.Data
+﻿Imports Contemn.Data
 Imports TGGD.Business
 
 Friend Class Character
@@ -170,5 +169,9 @@ Friend Class Character
                 World.CreateItem(entry.Key, Me)
             Next
         Next
+    End Sub
+
+    Public Sub SetBumpLocation(location As ILocation) Implements ICharacter.SetBumpLocation
+        SetStatistic(StatisticType.BumpLocationId, location?.LocationId)
     End Sub
 End Class

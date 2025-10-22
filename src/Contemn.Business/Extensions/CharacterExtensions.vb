@@ -3,12 +3,6 @@ Imports TGGD.Business
 
 Friend Module CharacterExtensions
     <Extension>
-    Friend Sub SetBumpLocation(
-                              character As ICharacter,
-                              location As ILocation)
-        character.SetStatistic(StatisticType.BumpLocationId, location?.LocationId)
-    End Sub
-    <Extension>
     Friend Function GetBumpLocation(
                                    character As ICharacter) As ILocation
         If Not character.HasStatistic(StatisticType.BumpLocationId) Then

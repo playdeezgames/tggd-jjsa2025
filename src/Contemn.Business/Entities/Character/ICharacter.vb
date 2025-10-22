@@ -19,4 +19,5 @@ Public Interface ICharacter
     Sub Dismantle(item As IItem)
     ReadOnly Property Name As String
     ReadOnly Property HasAvailableRecipes As Boolean
+    Sub SetBumpLocation(location As ILocation)
 End Interface
