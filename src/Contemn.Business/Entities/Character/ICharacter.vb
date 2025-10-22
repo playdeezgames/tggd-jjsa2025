@@ -26,4 +26,5 @@ Public Interface ICharacter
                         recipeType As String,
                         nextDialog As Func(Of IDialog),
                         confirmed As Boolean) As IDialog
+    Function GetDurabilityTotal(tagType As String) As Integer
 End Interface
