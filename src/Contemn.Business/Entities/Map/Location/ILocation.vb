@@ -16,4 +16,5 @@ Public Interface ILocation
     Function NextLocation(direction As String) As ILocation
     Function GetDismantleTable() As IGenerator
     Sub SetDismantleTable(generator As IGenerator)
+    Function GetForageGenerator() As IGenerator
 End Interface

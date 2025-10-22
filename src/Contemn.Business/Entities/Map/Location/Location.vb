@@ -134,4 +134,17 @@ Friend Class Location
     Public Sub SetDismantleTable(generator As IGenerator) Implements ILocation.SetDismantleTable
         SetStatistic(StatisticType.DismantleGeneratorId, generator.GeneratorId)
     End Sub
+
+    Public Function GetForageGenerator() As IGenerator Implements ILocation.GetForageGenerator
+        If HasStatistic(StatisticType.ForageGeneratorId) Then
+            Return World.GetGenerator(GetStatistic(StatisticType.ForageGeneratorId))
+        End If
+        Dim forageTableType = GetMetadata(MetadataType.ForageTable)
+        If Not String.IsNullOrEmpty(forageTableType) Then
+            Dim generator As IGenerator = World.CreateGenerator(forageTableType)
+            SetStatistic(StatisticType.ForageGeneratorId, generator.GeneratorId)
+            Return generator
+        End If
+        Return Nothing
+    End Function
 End Class
