@@ -3,10 +3,6 @@ Imports TGGD.Business
 
 Friend Module ItemExtensions
     <Extension>
-    Friend Sub Place(item As IItem, location As ILocation)
-        location.LocationType = item.GetMetadata(MetadataType.PlaceLocationType)
-    End Sub
-    <Extension>
     Friend Function Deplete(tool As IItem, character As ICharacter) As IEnumerable(Of IDialogLine)
         Dim lines As New List(Of IDialogLine)
         If Not tool.HasStatistic(StatisticType.Durability) Then

@@ -76,4 +76,8 @@ Friend Class Item
     Public Function ProcessTurn() As IEnumerable(Of IDialogLine) Implements IItem.ProcessTurn
         Return Descriptor.OnProcessTurn(Me)
     End Function
+
+    Public Sub Place(location As ILocation) Implements IItem.Place
+        location.LocationType = GetMetadata(MetadataType.PlaceLocationType)
+    End Sub
 End Class

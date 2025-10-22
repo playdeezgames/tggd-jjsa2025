@@ -10,4 +10,5 @@ Public Interface IItem
     Function MakeChoice(character As ICharacter, choice As String) As IDialog
     Function Describe() As IEnumerable(Of IDialogLine)
     Function ProcessTurn() As IEnumerable(Of IDialogLine)
+    Sub Place(location As ILocation)
 End Interface
