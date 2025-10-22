@@ -1,5 +1,6 @@
-﻿Imports TGGD.Business
+﻿Imports System.Runtime.CompilerServices
 Imports Contemn.Data
+Imports TGGD.Business
 
 Friend Class Character
     Inherits InventoryEntity(Of CharacterData, CharacterTypeDescriptor)
@@ -110,7 +111,8 @@ Friend Class Character
     End Function
 
     Private Function Bump(nextLocation As ILocation) As IDialog
-        Return HandleBump(nextLocation)
+        Me.SetBumpLocation(Location)
+        Return Descriptor.OnBump(Me, Location)
     End Function
 
     Private Function Enter(nextLocation As ILocation) As IDialog

@@ -3,14 +3,6 @@ Imports TGGD.Business
 
 Friend Module CharacterExtensions
     <Extension>
-    Friend Function HandleBump(
-                              character As ICharacter,
-                              location As ILocation) As IDialog
-        character.SetBumpLocation(location)
-        Dim result = character.Descriptor.OnBump(character, location)
-        Return result
-    End Function
-    <Extension>
     Friend Sub SetBumpLocation(
                               character As ICharacter,
                               location As ILocation)
