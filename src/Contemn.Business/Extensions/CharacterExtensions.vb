@@ -3,12 +3,6 @@ Imports TGGD.Business
 
 Friend Module CharacterExtensions
     <Extension>
-    Friend Sub HandleLeave(
-                          character As ICharacter,
-                          location As ILocation)
-        character.Descriptor.OnLeave(character, location)
-    End Sub
-    <Extension>
     Friend Sub HandleEnter(
                           character As ICharacter,
                           location As ILocation)
