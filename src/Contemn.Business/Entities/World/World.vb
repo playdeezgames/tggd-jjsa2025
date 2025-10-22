@@ -241,7 +241,7 @@ Public Class World
             Data.Generators.Add(New Dictionary(Of String, Integer)())
         End If
         Dim result = New Generator(Data, generatorId)
-        generatorType.ToGeneratorTypeDescriptor.Initialize(result)
+        GeneratorTypes.Descriptors(generatorType).Initialize(result)
         Return result
     End Function
 
