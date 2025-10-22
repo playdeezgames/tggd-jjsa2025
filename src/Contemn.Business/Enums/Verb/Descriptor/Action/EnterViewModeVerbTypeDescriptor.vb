@@ -7,7 +7,7 @@ Friend Class EnterViewModeVerbTypeDescriptor
         MyBase.New(
             NameOf(EnterViewModeVerbTypeDescriptor),
             Business.VerbCategoryType.Action,
-            "View Mode")
+            "View...")
     End Sub
 
     Friend Overrides Function Perform(character As ICharacter) As IDialog

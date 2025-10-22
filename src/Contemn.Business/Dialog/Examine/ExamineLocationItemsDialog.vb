@@ -11,7 +11,7 @@ Friend Class ExamineLocationItemsDialog
     End Sub
 
     Private Shared Function GenerateLines(location As ILocation) As IEnumerable(Of IDialogLine)
-        Return location.Describe()
+        Return Array.Empty(Of IDialogLine)
     End Function
 
     Private Shared Function GenerateChoices(location As ILocation) As IEnumerable(Of IDialogChoice)
@@ -19,6 +19,7 @@ Friend Class ExamineLocationItemsDialog
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
+        result.AddRange(location.Items.Select(Function(x) New DialogChoice(x.ItemId.ToString, x.Name)))
         Return result
     End Function
 
@@ -31,8 +32,12 @@ Friend Class ExamineLocationItemsDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Throw New NotImplementedException
+                Return ChooseItem(CInt(choice))
         End Select
+    End Function
+
+    Private Function ChooseItem(itemId As Integer) As IDialog
+        Return New ExamineLocationItemDialog(location, location.World.GetItem(itemId))
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
