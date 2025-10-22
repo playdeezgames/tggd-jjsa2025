@@ -13,4 +13,5 @@ Public Interface ILocation
     Sub ProcessTurn()
     Function GenerateBumpLines(character As ICharacter) As IEnumerable(Of IDialogLine)
     Function Describe() As IEnumerable(Of IDialogLine)
+    Function NextLocation(direction As String) As ILocation
 End Interface

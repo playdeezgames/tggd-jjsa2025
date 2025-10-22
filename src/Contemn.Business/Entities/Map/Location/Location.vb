@@ -119,4 +119,11 @@ Friend Class Location
     Public Function Describe() As IEnumerable(Of IDialogLine) Implements ILocation.Describe
         Return Descriptor.Describe(Me)
     End Function
+
+    Public Function NextLocation(direction As String) As ILocation Implements ILocation.NextLocation
+        Dim descriptor = DirectionTypes.Descriptors(direction)
+        Dim nextColumn = descriptor.GetNextColumn(Column)
+        Dim nextRow = descriptor.GetNextRow(Row)
+        Return Map.GetLocation(nextColumn, nextRow)
+    End Function
 End Class
