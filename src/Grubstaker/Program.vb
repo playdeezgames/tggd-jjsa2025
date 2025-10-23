@@ -8,7 +8,7 @@ Module Program
         Dim frameBuffer = Enumerable.Range(0, VIEW_COLUMNS * VIEW_ROWS).Select(Function(x) 0).ToArray
         Using host As New Host(
             GAME_TITLE,
-            New PresentationContext(frameBuffer, FontFilename, SettingsFilename, KeysFilename),
+            New PresentationContext(frameBuffer, FontFilename, SettingsFilename, KeysFilename, False),
             (VIEW_WIDTH, VIEW_HEIGHT),
             LoadHues(),
             LoadSfx(),

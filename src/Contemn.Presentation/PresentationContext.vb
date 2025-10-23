@@ -21,7 +21,7 @@ Public Class PresentationContext
     Private CommandTableHook As Action
     Private ReadOnly keysFilename As String
 
-    Public Sub New(frameBuffer() As Integer, fontFilename As String, settingsFilename As String, keysFilename As String)
+    Public Sub New(frameBuffer() As Integer, fontFilename As String, settingsFilename As String, keysFilename As String, isDemo As Boolean)
         MyBase.New(
             VIEW_COLUMNS,
             VIEW_ROWS,
@@ -29,6 +29,7 @@ Public Class PresentationContext
         font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(fontFilename)))
         Quit = False
         Me.keysFilename = keysFilename
+        Me._isDemo = isDemo
         LoadInitialSettings()
     End Sub
 
@@ -189,10 +190,6 @@ Public Class PresentationContext
     End Property
 
     Public Overrides ReadOnly Property IsDemo As Boolean
-        Get
-            Return False
-        End Get
-    End Property
 
     Private Function LoadCommandKeys() As Dictionary(Of Keys, String)
         Return JsonSerializer.Deserialize(Of Dictionary(Of Keys, String))(File.ReadAllText(keysFilename))
