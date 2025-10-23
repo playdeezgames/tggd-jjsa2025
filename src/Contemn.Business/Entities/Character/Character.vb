@@ -179,14 +179,14 @@ Friend Class Character
     End Sub
 
     Public Sub SetBumpLocation(location As ILocation) Implements ICharacter.SetBumpLocation
-        SetStatistic(StatisticType.BumpLocationId, location?.LocationId)
+        EntityData.BumpLocationId = location?.LocationId
     End Sub
 
     Public Function GetBumpLocation() As ILocation Implements ICharacter.GetBumpLocation
-        If Not HasStatistic(StatisticType.BumpLocationId) Then
-            Return Nothing
+        If EntityData.BumpLocationId.HasValue Then
+            Return World.GetLocation(EntityData.BumpLocationId.Value)
         End If
-        Return World.GetLocation(GetStatistic(StatisticType.BumpLocationId))
+        Return Nothing
     End Function
 
     Public Function CraftRecipe(recipeType As String, nextDialog As Func(Of IDialog), confirmed As Boolean) As IDialog Implements ICharacter.CraftRecipe

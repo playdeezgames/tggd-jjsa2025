@@ -1,5 +1,4 @@
 ﻿Public Module StatisticType
-    Public ReadOnly BumpLocationId As String = NameOf(BumpLocationId)
     Public ReadOnly DismantleGeneratorId As String = NameOf(DismantleGeneratorId)
     Public ReadOnly ForageGeneratorId As String = NameOf(ForageGeneratorId)
 
