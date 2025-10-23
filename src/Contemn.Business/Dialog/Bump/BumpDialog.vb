@@ -1,31 +1,25 @@
 ﻿Imports TGGD.Business
 
 Friend Class BumpDialog
-    Inherits BaseDialog
+    Inherits CharacterDialog
 
-    Private ReadOnly character As ICharacter
-
-    Public Sub New(
-                  character As ICharacter)
+    Public Sub New(character As ICharacter)
         MyBase.New(
-            GenerateCaption(character),
-            GenerateChoices(character),
-            GenerateLines(character))
-        Me.character = character
+            character,
+            AddressOf GenerateCaption,
+            AddressOf GenerateChoices,
+            AddressOf GenerateLines)
     End Sub
 
-    Private Shared Function GenerateLines(
-                                         character As ICharacter) As IEnumerable(Of IDialogLine)
+    Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
         Return character.GetBumpLocation().GenerateBumpLines(character)
     End Function
 
-    Private Shared Function GenerateCaption(
-                                           character As ICharacter) As String
+    Private Shared Function GenerateCaption(character As ICharacter) As String
         Return character.GetBumpLocation().Descriptor.LocationTypeName
     End Function
 
-    Private Shared Function GenerateChoices(
-                                           character As ICharacter) As IEnumerable(Of IDialogChoice)
+    Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
         Dim result As New List(Of IDialogChoice) From
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
@@ -39,18 +33,17 @@ Friend Class BumpDialog
         Return result
     End Function
 
-    Public Overrides Function Choose(
-                                    choice As String) As IDialog
+    Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
-                Return Nothing
+                Return CancelDialog()
             Case Else
                 Return VerbTypes.Descriptors(choice).Perform(character)
         End Select
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return Choose(NEVER_MIND_CHOICE)
+        Return Nothing
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
