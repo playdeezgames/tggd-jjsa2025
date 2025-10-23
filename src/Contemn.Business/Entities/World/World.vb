@@ -63,6 +63,15 @@ Public Class World
         End Get
     End Property
 
+    Public ReadOnly Property IsDemoComplete As Boolean Implements IWorld.IsDemoComplete
+        Get
+            If Not Platform.Demo Then
+                Return False
+            End If
+            Return Avatar.GetStatistic(StatisticType.Score) >= 1000
+        End Get
+    End Property
+
     Public Overrides Sub Clear()
         MyBase.Clear()
         Data.Maps.Clear()

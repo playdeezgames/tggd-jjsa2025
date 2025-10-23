@@ -34,7 +34,9 @@ public Class N00bCharacterTypeDescriptor
         For Each column In Enumerable.Range(character.Column - VIEW_INRADIUS, VIEW_INRADIUS * 2 + 1)
             For Each row In Enumerable.Range(character.Row - VIEW_INRADIUS, VIEW_INRADIUS * 2 + 1)
                 Dim location = character.Map.GetLocation(column, row)
-                location?.SetTag(TagType.Visible, True)
+                If location IsNot Nothing Then
+                    location.Visible = True
+                End If
             Next
         Next
     End Sub

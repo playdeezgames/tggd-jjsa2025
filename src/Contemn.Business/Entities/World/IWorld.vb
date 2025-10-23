@@ -9,6 +9,8 @@ Public Interface IWorld
         IWorldItems,
         IWorldMessages,
         IWorldGenerators
+
+    ReadOnly Property IsDemoComplete As Boolean
     Function ProcessTurn() As IEnumerable(Of IDialogLine)
     Sub PrepareAndInitialize(preparation As Action(Of IWorld))
     Sub Save()

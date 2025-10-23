@@ -1,0 +1,27 @@
+﻿Imports Contemn.Business
+Imports TGGD.UI
+
+Friend Class DemoCompleteState
+    Inherits BaseState
+
+    Public Sub New(
+                  buffer As IUIBuffer(Of Integer),
+                  world As Business.IWorld,
+                  settings As ISettings)
+        MyBase.New(buffer, world, settings)
+    End Sub
+
+    Public Overrides Sub Refresh()
+        Buffer.Fill(0, Hue.Black, Hue.Black, False)
+        Dim y = (Buffer.Rows) \ 2 - 2
+        Buffer.WriteCentered(y, "Demo Complete!", Hue.LightGreen, Hue.Black, False)
+        y += 1
+        Buffer.WriteCentered(y, World.Avatar.FormatStatistic(StatisticType.Score), Hue.Green, Hue.Black, False)
+        y += 2
+        Buffer.WriteCentered(y, "Winner: You (for now)", Hue.LightGreen, Hue.Black, False)
+    End Sub
+
+    Public Overrides Function HandleCommand(command As String) As IUIState
+        Return New MainMenuState(Buffer, World, Settings)
+    End Function
+End Class

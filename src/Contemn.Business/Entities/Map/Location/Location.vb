@@ -32,11 +32,9 @@ Friend Class Location
                 EntityData.StatisticMinimums.Clear()
                 EntityData.StatisticMaximums.Clear()
                 EntityData.Metadatas.Clear()
-                Dim isVisible = EntityData.Tags.Contains(TagType.Visible)
                 EntityData.Tags.Clear()
                 EntityData.LocationType = value
                 Initialize()
-                SetTag(TagType.Visible, isVisible)
             End If
         End Set
     End Property
@@ -97,6 +95,15 @@ Friend Class Location
         Get
             Return LocationTypes.Descriptors(LocationType)
         End Get
+    End Property
+
+    Public Property Visible As Boolean Implements ILocation.Visible
+        Get
+            Return EntityData.Visible
+        End Get
+        Set(value As Boolean)
+            EntityData.Visible = value
+        End Set
     End Property
 
     Public Overrides Sub Recycle()

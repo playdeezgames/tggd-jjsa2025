@@ -17,7 +17,7 @@
     End Function
 
     Friend Function CompletedCollectTutorial(itemType As String) As String
-        Return $"CompletedCollect{itemType.Replace("ItemTypeDescriptor", String.Empty)}Tutorial"
+        Return $"CompletedCollect{itemType}Tutorial"
     End Function
     Friend ReadOnly CanBoil As String = NameOf(CanBoil)
     Friend ReadOnly CanChop As String = NameOf(CanChop)
@@ -48,5 +48,4 @@
     Friend ReadOnly IsTutorialHouse As String = NameOf(IsTutorialHouse)
     Public ReadOnly Safe As String = NameOf(Safe)
     Public ReadOnly ViewMode As String = NameOf(ViewMode)
-    Public ReadOnly Visible As String = NameOf(Visible)
 End Module

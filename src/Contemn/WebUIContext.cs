@@ -1,5 +1,4 @@
-﻿using Contemn.Business;
-using Contemn.UI;
+﻿using Contemn.UI;
 
 namespace Contemn
 {
@@ -24,5 +23,7 @@ namespace Contemn
         public override IKeyBindings KeyBindings => throw new NotImplementedException();
 
         public override bool IsDemo => true;
+
+        public override bool Demo => IsDemo;
     }
 }

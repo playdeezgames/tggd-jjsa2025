@@ -7,6 +7,7 @@ Public Interface ILocation
     ReadOnly Property Column As Integer
     ReadOnly Property Row As Integer
     ReadOnly Property Map As IMap
+    Property Visible As Boolean
     ReadOnly Property HasCharacter As Boolean
     ReadOnly Property Character As ICharacter
     ReadOnly Property Name As String

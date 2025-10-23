@@ -16,10 +16,7 @@ Friend Class CollectItemTypeTutorialVerbTypeDescriptor
                   failureLines As IEnumerable(Of String),
                   successLines As IEnumerable(Of String))
         MyBase.New(
-            NameOf(CollectItemTypeTutorialVerbTypeDescriptor).
-                Replace(
-                    "ItemType",
-                    requiredItemType.Replace("ItemTypeDescriptor", String.Empty)),
+            TagType.CompletedCollectTutorial(requiredItemType),
             Business.VerbCategoryType.Bump,
             $"Tutorial: {verbTypeName}")
         Me.requiredItemType = requiredItemType

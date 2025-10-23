@@ -24,7 +24,7 @@ Friend Class ViewState
 
     Private Sub RenderQuickExamine()
         Dim location = World.Avatar.Location.Map.GetLocation(World.GetStatistic(StatisticType.ViewColumn), World.GetStatistic(StatisticType.ViewRow))
-        If Not location.GetTag(TagType.Visible) Then
+        If Not location.Visible Then
             Return
         End If
         Dim x = VIEW_WIDTH
@@ -64,7 +64,7 @@ Friend Class ViewState
     End Sub
 
     Private Sub RenderLocation(displayColumn As Integer, displayRow As Integer, location As ILocation, invert As Boolean)
-        If location Is Nothing OrElse Not location.GetTag(TagType.Visible) Then
+        If location Is Nothing OrElse Not location.Visible Then
             Buffer.Fill(displayColumn, displayRow, 1, 1, &HB0, Hue.Cyan, Hue.Black, invert)
         ElseIf location.HasCharacter Then
             Buffer.SetPixel(displayColumn, displayRow, location.Character.ToPixel(invert))
@@ -97,7 +97,7 @@ Friend Class ViewState
 
     Private Function HandleExamine() As IUIState
         Dim location = World.Avatar.Map.GetLocation(World.GetStatistic(StatisticType.ViewColumn), World.GetStatistic(StatisticType.ViewRow))
-        If Not location.GetTag(TagType.Visible) Then
+        If Not location.Visible Then
             Return Nothing
         End If
         Return New DialogState(Buffer, World, Settings, New ExamineLocationDialog(location))

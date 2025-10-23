@@ -7,4 +7,5 @@
     Public Property CharacterId As Integer?
     Public Property DismantleGeneratorId As Integer?
     Public Property ForageGeneratorId As Integer?
+    Public Property Visible As Boolean
 End Class
