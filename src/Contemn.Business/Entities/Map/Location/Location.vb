@@ -128,11 +128,14 @@ Friend Class Location
     End Function
 
     Public Function GetDismantleTable() As IGenerator Implements ILocation.GetDismantleTable
-        Return World.GetGenerator(GetStatistic(StatisticType.DismantleGeneratorId))
+        If EntityData.DismantleGeneratorId.HasValue Then
+            Return World.GetGenerator(EntityData.DismantleGeneratorId.Value)
+        End If
+        Return Nothing
     End Function
 
     Public Sub SetDismantleTable(generator As IGenerator) Implements ILocation.SetDismantleTable
-        SetStatistic(StatisticType.DismantleGeneratorId, generator.GeneratorId)
+        EntityData.DismantleGeneratorId = generator?.GeneratorId
     End Sub
 
     Public Function GetForageGenerator() As IGenerator Implements ILocation.GetForageGenerator
