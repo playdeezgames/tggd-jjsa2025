@@ -89,7 +89,7 @@ Friend Class NavigationState
     End Sub
 
     Private Sub RenderLocation(displayColumn As Integer, displayRow As Integer, location As ILocation)
-        If location Is Nothing Then
+        If location Is Nothing OrElse Not location.GetTag(TagType.Visible) Then
             Buffer.Fill(displayColumn, displayRow, 1, 1, &HB0, Hue.Cyan, Hue.Black, False)
         ElseIf location.HasCharacter Then
             Buffer.SetPixel(displayColumn, displayRow, location.Character.ToPixel(False))

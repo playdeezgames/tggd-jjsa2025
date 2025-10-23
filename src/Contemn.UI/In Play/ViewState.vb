@@ -15,12 +15,23 @@ Friend Class ViewState
         Buffer.Fill(0, Hue.Black, Hue.Black, False)
         RenderMap()
 
+        RenderQuickExamine()
+        Buffer.WriteCentered(Buffer.Rows - 4, "(View Mode)", Hue.LightGray, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows - 3, "UP/DOWN/LEFT/RIGHT: move", Hue.LightGray, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows - 2, "GREEN: examine", Hue.LightGray, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows - 1, "RED: leave", Hue.LightGray, Hue.Black, False)
+    End Sub
+
+    Private Sub RenderQuickExamine()
+        Dim location = World.Avatar.Location.Map.GetLocation(World.GetStatistic(StatisticType.ViewColumn), World.GetStatistic(StatisticType.ViewRow))
+        If Not location.GetTag(TagType.Visible) Then
+            Return
+        End If
         Dim x = VIEW_WIDTH
         Dim y = 0
         Buffer.Write(x, y, $"Pos: ({World.GetStatistic(StatisticType.ViewColumn)}, {World.GetStatistic(StatisticType.ViewRow)})", Hue.LightGray, Hue.Black, False)
         y += 1
         Buffer.Write(x, y, $"Location Type:", Hue.LightGray, Hue.Black, False)
-        Dim location = World.Avatar.Location.Map.GetLocation(World.GetStatistic(StatisticType.ViewColumn), World.GetStatistic(StatisticType.ViewRow))
         y += 1
         Buffer.Write(x, y, location.Name, Hue.LightGray, Hue.Black, False)
         y += 1
@@ -34,12 +45,8 @@ Friend Class ViewState
             Buffer.Write(x, y, $"#Items: {location.Items.Count()}", Hue.LightGray, Hue.Black, False)
             y += 1
         End If
-
-        Buffer.WriteCentered(Buffer.Rows - 4, "(View Mode)", Hue.LightGray, Hue.Black, False)
-        Buffer.WriteCentered(Buffer.Rows - 3, "UP/DOWN/LEFT/RIGHT: move", Hue.LightGray, Hue.Black, False)
-        Buffer.WriteCentered(Buffer.Rows - 2, "GREEN: examine", Hue.LightGray, Hue.Black, False)
-        Buffer.WriteCentered(Buffer.Rows - 1, "RED: leave", Hue.LightGray, Hue.Black, False)
     End Sub
+
     Private Sub RenderMap()
         Dim map = World.Avatar.Map
         Dim viewColumn = World.GetStatistic(StatisticType.ViewColumn)
@@ -57,8 +64,8 @@ Friend Class ViewState
     End Sub
 
     Private Sub RenderLocation(displayColumn As Integer, displayRow As Integer, location As ILocation, invert As Boolean)
-        If location Is Nothing Then
-            Buffer.Fill(displayColumn, displayRow, 1, 1, &HB0, Hue.Cyan, Hue.Black, False)
+        If location Is Nothing OrElse Not location.GetTag(TagType.Visible) Then
+            Buffer.Fill(displayColumn, displayRow, 1, 1, &HB0, Hue.Cyan, Hue.Black, invert)
         ElseIf location.HasCharacter Then
             Buffer.SetPixel(displayColumn, displayRow, location.Character.ToPixel(invert))
         ElseIf location.HasItems Then
@@ -90,6 +97,9 @@ Friend Class ViewState
 
     Private Function HandleExamine() As IUIState
         Dim location = World.Avatar.Map.GetLocation(World.GetStatistic(StatisticType.ViewColumn), World.GetStatistic(StatisticType.ViewRow))
+        If Not location.GetTag(TagType.Visible) Then
+            Return Nothing
+        End If
         Return New DialogState(Buffer, World, Settings, New ExamineLocationDialog(location))
     End Function
 

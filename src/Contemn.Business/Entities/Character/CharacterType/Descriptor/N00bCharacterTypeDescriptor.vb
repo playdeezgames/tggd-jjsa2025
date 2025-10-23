@@ -13,6 +13,7 @@ public Class N00bCharacterTypeDescriptor
     Const SATIETY_WARNING = MAXIMUM_SATIETY / 10
     Const HYDRATION_WARNING = MAXIMUM_HYDRATION / 10
     Const MAXIMUM_RECOVERY = 10
+    Const VIEW_INRADIUS = 1
 
     Friend Overrides Sub OnInitialize(character As ICharacter)
         character.World.Avatar = character
@@ -25,6 +26,17 @@ public Class N00bCharacterTypeDescriptor
         character.SetStatisticRange(StatisticType.Score, 0, 0, Integer.MaxValue)
         character.SetStatisticRange(StatisticType.Recovery, 0, 0, MAXIMUM_RECOVERY)
         character.SetStatisticRange(StatisticType.FishSlapCounter, 0, 0, Integer.MaxValue)
+
+        UpdateFogOfWar(character)
+    End Sub
+
+    Private Shared Sub UpdateFogOfWar(character As ICharacter)
+        For Each column In Enumerable.Range(character.Column - VIEW_INRADIUS, VIEW_INRADIUS * 2 + 1)
+            For Each row In Enumerable.Range(character.Row - VIEW_INRADIUS, VIEW_INRADIUS * 2 + 1)
+                Dim location = character.Map.GetLocation(column, row)
+                location?.SetTag(TagType.Visible, True)
+            Next
+        Next
     End Sub
 
     Friend Overrides Function OnBump(character As ICharacter, location As ILocation) As IDialog
@@ -35,6 +47,7 @@ public Class N00bCharacterTypeDescriptor
         For Each line In character.World.ProcessTurn()
             character.World.AddMessage(line.Mood, line.Text)
         Next
+        UpdateFogOfWar(character)
     End Sub
 
     Friend Overrides Function OnProcessTurn(character As ICharacter) As IEnumerable(Of IDialogLine)

@@ -48,4 +48,5 @@
     Friend ReadOnly IsTutorialHouse As String = NameOf(IsTutorialHouse)
     Public ReadOnly Safe As String = NameOf(Safe)
     Public ReadOnly ViewMode As String = NameOf(ViewMode)
+    Public ReadOnly Visible As String = NameOf(Visible)
 End Module
