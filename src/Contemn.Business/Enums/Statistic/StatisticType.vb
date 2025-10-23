@@ -1,6 +1,4 @@
 ﻿Public Module StatisticType
-    Public ReadOnly ForageGeneratorId As String = NameOf(ForageGeneratorId)
-
     Public ReadOnly Depletion As String = NameOf(Depletion)
     Public ReadOnly Durability As String = NameOf(Durability)
     Public ReadOnly Health As String = NameOf(Health)

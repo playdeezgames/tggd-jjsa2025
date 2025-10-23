@@ -139,13 +139,13 @@ Friend Class Location
     End Sub
 
     Public Function GetForageGenerator() As IGenerator Implements ILocation.GetForageGenerator
-        If HasStatistic(StatisticType.ForageGeneratorId) Then
-            Return World.GetGenerator(GetStatistic(StatisticType.ForageGeneratorId))
+        If EntityData.ForageGeneratorId.HasValue Then
+            Return World.GetGenerator(EntityData.ForageGeneratorId.Value)
         End If
         Dim forageTableType = GetMetadata(MetadataType.ForageTable)
         If Not String.IsNullOrEmpty(forageTableType) Then
             Dim generator As IGenerator = World.CreateGenerator(forageTableType)
-            SetStatistic(StatisticType.ForageGeneratorId, generator.GeneratorId)
+            EntityData.ForageGeneratorId = generator.GeneratorId
             Return generator
         End If
         Return Nothing

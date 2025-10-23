@@ -6,4 +6,5 @@
     Public Property Row As Integer
     Public Property CharacterId As Integer?
     Public Property DismantleGeneratorId As Integer?
+    Public Property ForageGeneratorId As Integer?
 End Class
