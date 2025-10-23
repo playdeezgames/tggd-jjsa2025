@@ -159,12 +159,12 @@ Public Class Host
     Private ReadOnly gamePadCommandTable As IReadOnlyDictionary(Of String, Func(Of GamePadState, Boolean)) =
     New Dictionary(Of String, Func(Of GamePadState, Boolean)) From
     {
-        {UI.Command.Green, Function(gamePad) gamePad.IsButtonDown(Buttons.A)},
-        {UI.Command.Red, Function(gamePad) gamePad.IsButtonDown(Buttons.B)},
-        {UI.Command.Up, Function(gamePad) gamePad.DPad.Up = ButtonState.Pressed},
+        {UI.Command.GREEN, Function(gamePad) gamePad.IsButtonDown(Buttons.A)},
+        {UI.Command.RED, Function(gamePad) gamePad.IsButtonDown(Buttons.B)},
+        {UI.Command.UP, Function(gamePad) gamePad.DPad.Up = ButtonState.Pressed},
         {UI.Command.Down, Function(gamePad) gamePad.DPad.Down = ButtonState.Pressed},
-        {UI.Command.Left, Function(gamePad) gamePad.DPad.Left = ButtonState.Pressed},
-        {UI.Command.Right, Function(gamePad) gamePad.DPad.Right = ButtonState.Pressed}
+        {UI.Command.LEFT, Function(gamePad) gamePad.DPad.Left = ButtonState.Pressed},
+        {UI.Command.RIGHT, Function(gamePad) gamePad.DPad.Right = ButtonState.Pressed}
     }
 
     Private Function MakeCommandHandler(keys As List(Of Keys), func As Func(Of GamePadState, Boolean)) As Func(Of KeyboardState, GamePadState, Boolean)

@@ -44,16 +44,16 @@ Friend Class DialogState
 
     Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
-            Case UI.Command.Up
+            Case UI.Command.UP
                 choiceIndex = (choiceIndex + dialog.Choices.Count - 1) Mod dialog.Choices.Count
                 Return Me
             Case UI.Command.Down
                 choiceIndex = (choiceIndex + 1) Mod dialog.Choices.Count
                 Return Me
-            Case UI.Command.Green
+            Case UI.Command.GREEN
                 Dim nextDialog = dialog.Choose(dialog.Choices.ToArray()(choiceIndex).Choice)
                 Return SetNextDialog(nextDialog)
-            Case UI.Command.Red
+            Case UI.Command.RED
                 Return SetNextDialog(dialog.CancelDialog())
             Case Else
                 Return Me

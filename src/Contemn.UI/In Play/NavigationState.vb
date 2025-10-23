@@ -102,7 +102,7 @@ Friend Class NavigationState
 
     Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
-            Case UI.Command.Red
+            Case UI.Command.RED
                 Return New GameMenuState(Buffer, World, Settings)
             Case UI.Command.Up
                 Return HandleMove(NameOf(MoveNorthVerbTypeDescriptor))
@@ -110,7 +110,7 @@ Friend Class NavigationState
                 Return HandleMove(NameOf(MoveSouthVerbTypeDescriptor))
             Case UI.Command.Left
                 Return HandleMove(NameOf(MoveWestVerbTypeDescriptor))
-            Case UI.Command.Right
+            Case UI.Command.RIGHT
                 Return HandleMove(NameOf(MoveEastVerbTypeDescriptor))
             Case UI.Command.Green
                 Return New DialogState(Buffer, World, Settings, CharacterActionsDialog.LaunchMenu(World.Avatar).Invoke())

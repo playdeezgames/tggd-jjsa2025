@@ -17,9 +17,9 @@ Friend Class ViewState
 
         RenderQuickExamine()
         Buffer.WriteCentered(Buffer.Rows - 4, "(View Mode)", Hue.LightGray, Hue.Black, False)
-        Buffer.WriteCentered(Buffer.Rows - 3, "UP/DOWN/LEFT/RIGHT: move", Hue.LightGray, Hue.Black, False)
-        Buffer.WriteCentered(Buffer.Rows - 2, "GREEN: examine", Hue.LightGray, Hue.Black, False)
-        Buffer.WriteCentered(Buffer.Rows - 1, "RED: leave", Hue.LightGray, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows - 3, $"{Command.UP}/{Command.DOWN}/{Command.LEFT}/{Command.RIGHT}: move", Hue.LightGray, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows - 2, $"{Command.GREEN}: examine", Hue.LightGray, Hue.Black, False)
+        Buffer.WriteCentered(Buffer.Rows - 1, $"{Command.RED}: leave", Hue.LightGray, Hue.Black, False)
     End Sub
 
     Private Sub RenderQuickExamine()
@@ -77,18 +77,18 @@ Friend Class ViewState
 
     Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
-            Case UI.Command.Red
+            Case UI.Command.RED
                 World.SetTag(TagType.ViewMode, False)
                 Return NeutralState.DetermineState(Buffer, World, Settings)
-            Case UI.Command.Up
+            Case UI.Command.UP
                 Return HandleMove(0, -1)
             Case UI.Command.Down
                 Return HandleMove(0, 1)
-            Case UI.Command.Left
+            Case UI.Command.LEFT
                 Return HandleMove(-1, 0)
-            Case UI.Command.Right
+            Case UI.Command.RIGHT
                 Return HandleMove(1, 0)
-            Case UI.Command.Green
+            Case UI.Command.GREEN
                 Return HandleExamine()
             Case Else
                 Return Me

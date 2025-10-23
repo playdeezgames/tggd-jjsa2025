@@ -70,18 +70,18 @@
 	}
 	readonly IReadOnlyDictionary<string, string> CommandTable = new Dictionary<string, string>()
 	{
-		["q"] = Command.Left,
-		["z"] = Command.Up,
-		["w"] = Command.Up,
-		["a"] = Command.Left,
-		["s"] = Command.Down,
-		["d"] = Command.Right,
-		["ArrowUp"] = Command.Up,
-		["ArrowDown"] = Command.Down,
-		["ArrowLeft"] = Command.Left,
-		["ArrowRight"] = Command.Right,
-		[" "] = Command.Green,
-		["Backspace"] = Command.Red
+		["q"] = Command.LEFT,
+		["z"] = Command.UP,
+		["w"] = Command.UP,
+		["a"] = Command.LEFT,
+		["s"] = Command.DOWN,
+		["d"] = Command.RIGHT,
+		["ArrowUp"] = Command.UP,
+		["ArrowDown"] = Command.DOWN,
+		["ArrowLeft"] = Command.LEFT,
+		["ArrowRight"] = Command.RIGHT,
+		[" "] = Command.GREEN,
+		["Backspace"] = Command.RED
 	};
 	private async Task HandleKeyDownAsync(KeyboardEventArgs args)
 	{
@@ -103,27 +103,27 @@
 	}
 	private async Task HandleLeftArrowAsync(MouseEventArgs args)
 	{
-		await HandleCommandAsync(UI.Command.Left);
+		await HandleCommandAsync(UI.Command.LEFT);
 	}
 	private async Task HandleUpArrowAsync(MouseEventArgs args)
 	{
-		await HandleCommandAsync(UI.Command.Up);
+		await HandleCommandAsync(UI.Command.UP);
 	}
 	private async Task HandleDownArrowAsync(MouseEventArgs args)
 	{
-		await HandleCommandAsync(UI.Command.Down);
+		await HandleCommandAsync(UI.Command.DOWN);
 	}
 	private async Task HandleRightArrowAsync(MouseEventArgs args)
 	{
-		await HandleCommandAsync(UI.Command.Right);
+		await HandleCommandAsync(UI.Command.RIGHT);
 	}
 	private async Task HandleSpaceAsync(MouseEventArgs args)
 	{
-		await HandleCommandAsync(UI.Command.Green);
+		await HandleCommandAsync(UI.Command.GREEN);
 	}
 	private async Task HandleBackspaceAsync(MouseEventArgs args)
 	{
-		await HandleCommandAsync(UI.Command.Red);
+		await HandleCommandAsync(UI.Command.RED);
 	}
 	private async Task HandleMuteToggleAsync(MouseEventArgs args)
 	{

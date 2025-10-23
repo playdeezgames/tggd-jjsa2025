@@ -43,15 +43,15 @@ Friend MustInherit Class PickerState
 
     Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
-            Case UI.Command.Up
+            Case UI.Command.UP
                 menuItemIndex = (menuItemIndex + menuItems.Count - 1) Mod menuItems.Count
                 Return Me
             Case UI.Command.Down
                 menuItemIndex = (menuItemIndex + 1) Mod menuItems.Count
                 Return Me
-            Case UI.Command.Green
+            Case UI.Command.GREEN
                 Return HandleMenuItem(menuItems(menuItemIndex).Identifier)
-            Case UI.Command.Red
+            Case UI.Command.RED
                 Return HandleCancel()
             Case Else
                 Return Me
