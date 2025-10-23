@@ -22,5 +22,7 @@ namespace Contemn
         public override bool FullScreen { get => false; set { } }
 
         public override IKeyBindings KeyBindings => throw new NotImplementedException();
+
+        public override bool IsDemo => true;
     }
 }

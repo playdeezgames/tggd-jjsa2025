@@ -23,15 +23,25 @@ Friend Class EmbarkationState
             settings,
             "Choose Difficulty",
             Hue.Magenta,
+            GenerateMenuItems(settings),
+            NORMAL_IDENTIFIER)
+    End Sub
+
+    Private Shared Function GenerateMenuItems(settings As ISettings) As IEnumerable(Of (Identifier As String, Text As String))
+        Dim result As New List(Of (Identifier As String, Text As String)) From
             {
                 (GO_BACK_IDENTIFIER, GO_BACK_TEXT),
-                (TUTORIAL_IDENTIFIER, TUTORIAL_TEXT),
+                (TUTORIAL_IDENTIFIER, TUTORIAL_TEXT)
+            }
+        If Not settings.IsDemo Then
+            result.AddRange({
                 (EASY_IDENTIFIER, EASY_TEXT),
                 (NORMAL_IDENTIFIER, NORMAL_TEXT),
                 (HARD_IDENTIFIER, HARD_TEXT)
-            },
-            NORMAL_IDENTIFIER)
-    End Sub
+            })
+        End If
+        Return result
+    End Function
 
     Protected Overrides Function HandleCancel() As IUIState
         Return New MainMenuState(Buffer, World, Settings)

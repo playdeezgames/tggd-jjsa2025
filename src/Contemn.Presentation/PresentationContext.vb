@@ -188,6 +188,12 @@ Public Class PresentationContext
         End Get
     End Property
 
+    Public Overrides ReadOnly Property IsDemo As Boolean
+        Get
+            Return False
+        End Get
+    End Property
+
     Private Function LoadCommandKeys() As Dictionary(Of Keys, String)
         Return JsonSerializer.Deserialize(Of Dictionary(Of Keys, String))(File.ReadAllText(keysFilename))
     End Function

@@ -12,4 +12,5 @@ Public Interface ISettings
     ReadOnly Property ViewWidth As Integer
     ReadOnly Property ViewHeight As Integer
     ReadOnly Property KeyBindings As IKeyBindings
+    ReadOnly Property IsDemo As Boolean
 End Interface

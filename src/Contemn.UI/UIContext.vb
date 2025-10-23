@@ -42,6 +42,7 @@ Public MustInherit Class UIContext
     Public MustOverride ReadOnly Property ViewHeight As Integer Implements ISettings.ViewHeight
     Public MustOverride Property FullScreen As Boolean Implements ISettings.FullScreen
     Public MustOverride ReadOnly Property KeyBindings As IKeyBindings Implements ISettings.KeyBindings
+    Public MustOverride ReadOnly Property IsDemo As Boolean Implements ISettings.IsDemo
 
     Public Sub NextEvent() Implements IUIContext.NextEvent
         If eventQueue.Any Then
