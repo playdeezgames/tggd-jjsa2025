@@ -1,19 +1,18 @@
 ﻿Imports TGGD.Business
 
 Friend Class ExamineLocationDialog
-    Inherits BaseDialog
+    Inherits LocationDialog
     Shared ReadOnly CHARACTER_CHOICE As String = NameOf(CHARACTER_CHOICE)
     Shared ReadOnly ITEMS_CHOICE As String = NameOf(ITEMS_CHOICE)
-    Private ReadOnly location As ILocation
     Const ITEMS_TEXT = "Items..."
 
     Public Sub New(location As ILocation)
         MyBase.New(
-            GenerateCaption(location),
-            GenerateChoices(location),
-            GenerateLines(location),
+            location,
+            AddressOf GenerateCaption,
+            AddressOf GenerateChoices,
+            AddressOf GenerateLines,
             Function() Nothing)
-        Me.location = location
     End Sub
 
     Private Shared Function GenerateLines(location As ILocation) As IEnumerable(Of IDialogLine)
