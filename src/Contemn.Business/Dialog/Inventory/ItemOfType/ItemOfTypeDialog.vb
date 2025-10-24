@@ -1,23 +1,23 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemOfTypeDialog
-    Inherits LegacyBaseDialog
+    Inherits CharacterDialog
     Shared ReadOnly DROP_CHOICE As String = NameOf(DROP_CHOICE)
     Const DROP_TEXT = "Drop"
     Shared ReadOnly DISMANTLE_CHOICE As String = NameOf(DISMANTLE_CHOICE)
     Const DISMANTLE_TEXT = "Dismantle"
 
-    Private ReadOnly character As ICharacter
     Private ReadOnly item As IItem
 
     Public Sub New(
                   character As ICharacter,
                   item As IItem)
         MyBase.New(
-            GenerateCaption(item),
-            GenerateChoices(character, item),
-            GenerateLines(item))
-        Me.character = character
+            character,
+            Function(x) GenerateCaption(item),
+            Function(x) GenerateChoices(x, item),
+            Function(x) GenerateLines(item),
+            ItemsOfTypeDialog.LaunchMenu(character, item.ItemType))
         Me.item = item
     End Sub
 
@@ -76,9 +76,5 @@ Friend Class ItemOfTypeDialog
         character.RemoveItem(item)
         character.Location.AddItem(item)
         Return ItemsOfTypeDialog.LaunchMenu(character, item.ItemType).Invoke()
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return ItemsOfTypeDialog.LaunchMenu(Character, Item.ItemType).Invoke()
     End Function
 End Class
