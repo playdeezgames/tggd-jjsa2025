@@ -1,17 +1,17 @@
 ﻿Imports TGGD.Business
 
 Friend Class HowToCraftItemTypeDialog
-    Inherits LegacyBaseDialog
+    Inherits CharacterDialog
 
-    Private ReadOnly character As ICharacter
     Private ReadOnly itemType As String
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
-            GenerateCaption(itemType),
-            GenerateChoices(itemType),
-            GenerateLines())
-        Me.character = character
+            character,
+            Function(x) GenerateCaption(itemType),
+            Function(x) GenerateChoices(itemType),
+            Function(x) GenerateLines(),
+            Function() New HowToCraftListDialog(character))
         Me.itemType = itemType
     End Sub
 
@@ -46,9 +46,5 @@ Friend Class HowToCraftItemTypeDialog
 
     Private Function ShowRecipe(recipeDescriptor As RecipeTypeDescriptor) As IDialog
         Return New RecipeDetailDialog(recipeDescriptor, Function() New HowToCraftItemTypeDialog(character, itemType))
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return New HowToCraftListDialog(character)
     End Function
 End Class
