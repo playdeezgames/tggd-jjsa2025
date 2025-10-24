@@ -1,15 +1,15 @@
 ﻿Imports TGGD.Business
 
 Friend Class PlaceItemDialog
-    Inherits LegacyBaseDialog
-    ReadOnly character As ICharacter
+    Inherits CharacterDialog
 
     Public Sub New(character As ICharacter)
         MyBase.New(
-            GenerateCaption(),
-            GenerateChoices(character),
-            GenerateLines())
-        Me.character = character
+            character,
+            Function(x) GenerateCaption(),
+            AddressOf GenerateChoices,
+            Function(x) GenerateLines(),
+            CharacterActionsDialog.LaunchMenu(character))
     End Sub
 
     Private Shared Function GenerateLines() As IEnumerable(Of IDialogLine)
@@ -49,9 +49,5 @@ Friend Class PlaceItemDialog
 
     Private Function ChooseLocation(choice As String) As IDialog
         Return New PlaceLocationDialog(character, character.World.GetItem(CInt(choice)))
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return CharacterActionsDialog.LaunchMenu(character).Invoke
     End Function
 End Class
