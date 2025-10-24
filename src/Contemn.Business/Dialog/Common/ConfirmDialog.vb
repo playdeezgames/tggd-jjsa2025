@@ -1,11 +1,10 @@
 ﻿Imports TGGD.Business
 
 Friend Class ConfirmDialog
-    Inherits LegacyBaseDialog
+    Inherits BaseDialog
 
     Private Shared ReadOnly NO_CHOICE As String = NameOf(NO_CHOICE)
     Const NO_TEXT = "No"
-    Private ReadOnly noDialog As Func(Of IDialog)
 
     Private Shared ReadOnly YES_CHOICE As String = NameOf(YES_CHOICE)
     Const YES_TEXT = "Yes"
@@ -22,8 +21,8 @@ Friend Class ConfirmDialog
                 New DialogChoice(NO_CHOICE, NO_TEXT),
                 New DialogChoice(YES_CHOICE, YES_TEXT)
             },
-            lines)
-        Me.noDialog = noDialog
+            lines,
+            noDialog)
         Me.yesDialog = yesDialog
     End Sub
 
@@ -37,9 +36,5 @@ Friend Class ConfirmDialog
             Case Else
                 Throw New NotImplementedException
         End Select
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return noDialog()
     End Function
 End Class
