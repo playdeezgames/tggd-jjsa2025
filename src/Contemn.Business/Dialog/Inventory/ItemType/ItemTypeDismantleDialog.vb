@@ -1,17 +1,17 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemTypeDismantleDialog
-    Inherits LegacyBaseDialog
+    Inherits CharacterDialog
 
-    Private ReadOnly character As ICharacter
     Private ReadOnly itemType As String
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
-            GenerateCaption(character, itemType),
-            GenerateChoices(character, itemType),
-            GenerateLines(character, itemType))
-        Me.character = character
+            character,
+            Function(x) GenerateCaption(x, itemType),
+            Function(x) GenerateChoices(x, itemType),
+            Function(x) GenerateLines(x, itemType),
+            ItemTypeDialog.LaunchMenu(character, itemType))
         Me.itemType = itemType
     End Sub
 
@@ -85,10 +85,6 @@ Friend Class ItemTypeDismantleDialog
 
     Private Function DismantleAll() As IDialog
         Return Dismantle(character.GetCountOfItemType(itemType))
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return ItemTypeDialog.LaunchMenu(character, itemType).Invoke
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter, itemType As String) As Func(Of IDialog)
