@@ -1,18 +1,14 @@
 ﻿Imports TGGD.Business
 
 Friend Class ExamineLocationItemDialog
-    Inherits LegacyBaseDialog
-
-    Private ReadOnly location As ILocation
-    Private ReadOnly item As IItem
+    Inherits BaseDialog
 
     Public Sub New(location As ILocation, item As IItem)
         MyBase.New(
             GenerateCaption(item),
             GenerateChoices(item),
-            GenerateLines(item))
-        Me.location = location
-        Me.item = item
+            GenerateLines(item),
+            Function() New ExamineLocationItemsDialog(location))
     End Sub
 
     Private Shared Function GenerateLines(item As IItem) As IEnumerable(Of IDialogLine)
@@ -38,9 +34,5 @@ Friend Class ExamineLocationItemDialog
             Case Else
                 Throw New NotImplementedException
         End Select
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return New ExamineLocationItemsDialog(location)
     End Function
 End Class
