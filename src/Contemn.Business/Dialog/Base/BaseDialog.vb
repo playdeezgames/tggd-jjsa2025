@@ -1,5 +1,4 @@
-﻿Imports System.Reflection.Metadata.Ecma335
-Imports TGGD.Business
+﻿Imports TGGD.Business
 
 Public MustInherit Class BaseDialog
     Inherits LegacyBaseDialog

@@ -1,13 +1,15 @@
-﻿Imports System.Reflection.Metadata.Ecma335
-Imports TGGD.Business
+﻿Imports TGGD.Business
 
 Friend Class ChooseFillVesselDialog
-    Inherits LegacyBaseDialog
-    Private ReadOnly character As ICharacter
+    Inherits CharacterDialog
 
     Public Sub New(character As ICharacter)
-        MyBase.New(GenerateCaption(character), GenerateChoices(character), GenerateLines(character))
-        Me.character = character
+        MyBase.New(
+            character,
+            AddressOf GenerateCaption,
+            AddressOf GenerateChoices,
+            AddressOf GenerateLines,
+            BumpDialog.LaunchMenu(character))
     End Sub
 
     Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
@@ -47,10 +49,6 @@ Friend Class ChooseFillVesselDialog
             character.World.ProcessTurn().
             Append(New DialogLine(MoodType.Info, $"Filled {item.Name}")),
             ChooseFillVesselDialog.LaunchMenu(character))
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return BumpDialog.LaunchMenu(character).Invoke
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
