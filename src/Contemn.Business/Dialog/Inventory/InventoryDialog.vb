@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class InventoryDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
 
     Private ReadOnly character As ICharacter
 

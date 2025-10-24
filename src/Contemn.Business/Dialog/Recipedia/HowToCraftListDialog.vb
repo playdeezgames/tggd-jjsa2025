@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class HowToCraftListDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
     ReadOnly character As ICharacter
 
     Public Sub New(character As ICharacter)

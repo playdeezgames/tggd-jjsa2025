@@ -2,7 +2,7 @@
 Imports TGGD.Business
 
 Friend Class ChooseFillVesselDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
     Private ReadOnly character As ICharacter
 
     Public Sub New(character As ICharacter)

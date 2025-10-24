@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class PlaceLocationDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
 
     Private ReadOnly character As ICharacter
     Private ReadOnly item As IItem

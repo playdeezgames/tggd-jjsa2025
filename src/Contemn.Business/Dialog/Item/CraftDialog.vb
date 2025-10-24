@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class CraftDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
 
     Private ReadOnly character As ICharacter
 

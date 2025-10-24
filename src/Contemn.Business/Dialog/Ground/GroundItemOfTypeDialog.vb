@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class GroundItemOfTypeDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
     Shared ReadOnly TAKE_CHOICE As String = NameOf(TAKE_CHOICE)
     Const TAKE_TEXT = "Take"
 

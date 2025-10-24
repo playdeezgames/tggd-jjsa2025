@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Public Class GroundDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
 
     Private ReadOnly character As ICharacter
 

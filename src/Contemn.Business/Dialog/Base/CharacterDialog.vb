@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend MustInherit Class CharacterDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
 
     Protected ReadOnly character As ICharacter
 

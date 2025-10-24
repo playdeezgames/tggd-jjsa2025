@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemTypeCraftDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
     Private Shared ReadOnly CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
 
     Private ReadOnly character As ICharacter

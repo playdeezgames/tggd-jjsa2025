@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemTypeDismantleDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
 
     Private ReadOnly character As ICharacter
     Private ReadOnly itemType As String

@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Public Class CharacterActionsDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
 
     Private ReadOnly character As ICharacter
     Sub New(character As ICharacter, verbCategoryType As String, caption As String)

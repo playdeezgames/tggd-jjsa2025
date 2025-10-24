@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class MessageDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
 
     Private ReadOnly onCancel As Func(Of IDialog)
     Private ReadOnly choiceTable As IReadOnlyDictionary(Of String, Func(Of IDialog))

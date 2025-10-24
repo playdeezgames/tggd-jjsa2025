@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Public Class PlaceItemDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
     ReadOnly character As ICharacter
 
     Public Sub New(character As ICharacter)

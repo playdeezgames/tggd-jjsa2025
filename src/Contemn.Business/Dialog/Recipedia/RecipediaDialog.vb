@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class RecipediaDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
     Private Shared ReadOnly HOW_TO_MAKE_CHOICE As String = NameOf(HOW_TO_MAKE_CHOICE)
     Const HOW_TO_MAKE_TEXT = "How to craft...?"
 

@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class RecipeDetailDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
 
     Private ReadOnly nextDialog As Func(Of IDialog)
 

@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Public Class ExamineLocationDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
     Shared ReadOnly CHARACTER_CHOICE As String = NameOf(CHARACTER_CHOICE)
     Shared ReadOnly ITEMS_CHOICE As String = NameOf(ITEMS_CHOICE)
     Private ReadOnly location As ILocation

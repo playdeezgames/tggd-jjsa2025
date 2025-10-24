@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Public Class ConfirmDialog
-    Inherits BaseDialog
+    Inherits LegacyBaseDialog
 
     Private Shared ReadOnly NO_CHOICE As String = NameOf(NO_CHOICE)
     Const NO_TEXT = "No"
