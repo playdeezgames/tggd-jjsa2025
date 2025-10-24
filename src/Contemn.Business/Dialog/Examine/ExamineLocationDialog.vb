@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ExamineLocationDialog
-    Inherits LocationDialog
+    Inherits EntityDialog(Of ILocation)
     Shared ReadOnly CHARACTER_CHOICE As String = NameOf(CHARACTER_CHOICE)
     Shared ReadOnly ITEMS_CHOICE As String = NameOf(ITEMS_CHOICE)
     Const ITEMS_TEXT = "Items..."
@@ -42,9 +42,9 @@ Friend Class ExamineLocationDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case CHARACTER_CHOICE
-                Return New ExamineLocationCharacterDialog(location)
+                Return New ExamineLocationCharacterDialog(entity)
             Case ITEMS_CHOICE
-                Return New ExamineLocationItemsDialog(location)
+                Return New ExamineLocationItemsDialog(entity)
             Case Else
                 Throw New NotImplementedException
         End Select

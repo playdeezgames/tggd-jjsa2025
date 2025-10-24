@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ExamineLocationItemsDialog
-    Inherits LocationDialog
+    Inherits EntityDialog(Of ILocation)
 
     Public Sub New(location As ILocation)
         MyBase.New(
@@ -39,6 +39,6 @@ Friend Class ExamineLocationItemsDialog
     End Function
 
     Private Function ChooseItem(itemId As Integer) As IDialog
-        Return New ExamineLocationItemDialog(location, location.World.GetItem(itemId))
+        Return New ExamineLocationItemDialog(entity, entity.World.GetItem(itemId))
     End Function
 End Class

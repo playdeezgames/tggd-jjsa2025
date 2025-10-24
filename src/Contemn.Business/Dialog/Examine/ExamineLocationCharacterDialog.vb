@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ExamineLocationCharacterDialog
-    Inherits LocationDialog
+    Inherits EntityDialog(Of ILocation)
 
     Public Sub New(location As ILocation)
         MyBase.New(
