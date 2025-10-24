@@ -8,7 +8,8 @@ Friend Class BumpDialog
             character,
             AddressOf GenerateCaption,
             AddressOf GenerateChoices,
-            AddressOf GenerateLines)
+            AddressOf GenerateLines,
+            Function() Nothing)
     End Sub
 
     Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
@@ -40,10 +41,6 @@ Friend Class BumpDialog
             Case Else
                 Return VerbTypes.Descriptors(choice).Perform(character)
         End Select
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return Nothing
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)

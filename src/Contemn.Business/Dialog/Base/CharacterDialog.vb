@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend MustInherit Class CharacterDialog
-    Inherits LegacyBaseDialog
+    Inherits BaseDialog
 
     Protected ReadOnly character As ICharacter
 
@@ -9,11 +9,13 @@ Friend MustInherit Class CharacterDialog
            character As ICharacter,
            generateCaption As Func(Of ICharacter, String),
            generateChoices As Func(Of ICharacter, IEnumerable(Of IDialogChoice)),
-           generateLines As Func(Of ICharacter, IEnumerable(Of IDialogLine)))
+           generateLines As Func(Of ICharacter, IEnumerable(Of IDialogLine)),
+           onCancelDialog As Func(Of IDialog))
         MyBase.New(
             generateCaption(character),
             generateChoices(character),
-            generateLines(character))
+            generateLines(character),
+            onCancelDialog)
         Me.character = character
     End Sub
 End Class
