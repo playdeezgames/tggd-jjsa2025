@@ -1,5 +1,4 @@
-﻿Imports System.Formats
-Imports Contemn.Data
+﻿Imports Contemn.Data
 Imports TGGD.Business
 
 Friend Class Character
@@ -220,5 +219,9 @@ Friend Class Character
 
     Public Function GetDurabilityTotal(tagType As String) As Integer Implements ICharacter.GetDurabilityTotal
         Return Items.Where(Function(x) x.GetTag(tagType)).Sum(Function(x) x.GetStatistic(StatisticType.Durability))
+    End Function
+
+    Public Function ActionMenu() As IDialog Implements ICharacter.ActionMenu
+        Return CharacterActionsDialog.LaunchMenu(Me).Invoke()
     End Function
 End Class

@@ -112,8 +112,8 @@ Friend Class NavigationState
                 Return HandleMove(NameOf(MoveWestVerbTypeDescriptor))
             Case UI.Command.RIGHT
                 Return HandleMove(NameOf(MoveEastVerbTypeDescriptor))
-            Case UI.Command.Green
-                Return New DialogState(Buffer, World, Settings, CharacterActionsDialog.LaunchMenu(World.Avatar).Invoke())
+            Case UI.Command.GREEN
+                Return New DialogState(Buffer, World, Settings, World.Avatar.ActionMenu)
             Case Else
                 Return Me
         End Select

@@ -1,15 +1,15 @@
 ﻿Imports TGGD.Business
 
-Public Class CharacterActionsDialog
-    Inherits LegacyBaseDialog
+Friend Class CharacterActionsDialog
+    Inherits CharacterDialog
 
-    Private ReadOnly character As ICharacter
     Sub New(character As ICharacter, verbCategoryType As String, caption As String)
         MyBase.New(
-            caption,
-            GenerateChoices(character, verbCategoryType),
-            Array.Empty(Of IDialogLine))
-        Me.character = character
+            character,
+            Function(x) caption,
+            Function(x) GenerateChoices(x, verbCategoryType),
+            Function(x) Array.Empty(Of IDialogLine),
+            Function() Nothing)
     End Sub
 
     Public Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
@@ -29,13 +29,9 @@ Public Class CharacterActionsDialog
     Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
-                Return Nothing
+                Return CancelDialog()
             Case Else
                 Return VerbTypes.Descriptors(choice).Perform(character)
         End Select
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return Choose(NEVER_MIND_CHOICE)
     End Function
 End Class

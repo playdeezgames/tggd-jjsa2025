@@ -27,4 +27,5 @@ Public Interface ICharacter
                         nextDialog As Func(Of IDialog),
                         confirmed As Boolean) As IDialog
     Function GetDurabilityTotal(tagType As String) As Integer
+    Function ActionMenu() As IDialog
 End Interface
