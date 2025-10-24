@@ -9,7 +9,7 @@ Friend Class PlaceItemDialog
             Function(x) GenerateCaption(),
             AddressOf GenerateChoices,
             Function(x) GenerateLines(),
-            CharacterActionsDialog.LaunchMenu(character))
+            AddressOf character.ActionMenu)
     End Sub
 
     Private Shared Function GenerateLines() As IEnumerable(Of IDialogLine)
@@ -35,13 +35,13 @@ Friend Class PlaceItemDialog
         Return Function() If(
             VerbTypes.Descriptors(NameOf(PlaceVerbTypeDescriptor)).CanPerform(character),
             New PlaceItemDialog(character),
-            CharacterActionsDialog.LaunchMenu(character).Invoke)
+            character.ActionMenu)
     End Function
 
     Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
-                Return CharacterActionsDialog.LaunchMenu(entity).Invoke
+                Return CancelDialog()
             Case Else
                 Return ChooseLocation(choice)
         End Select

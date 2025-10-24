@@ -9,7 +9,7 @@ Friend Class GroundDialog
             Function(x) "Ground",
             AddressOf GenerateChoices,
             Function(x) Array.Empty(Of IDialogLine),
-            CharacterActionsDialog.LaunchMenu(character))
+            AddressOf character.ActionMenu)
     End Sub
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
@@ -27,7 +27,7 @@ Friend Class GroundDialog
         Return Function() If(
                     character.Location.HasItems,
                     CType(New GroundDialog(character), IDialog),
-                    CharacterActionsDialog.LaunchMenu(character).Invoke())
+                    character.ActionMenu)
     End Function
 
     Public Overrides Function Choose(choice As String) As IDialog

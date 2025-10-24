@@ -222,6 +222,6 @@ Friend Class Character
     End Function
 
     Public Function ActionMenu() As IDialog Implements ICharacter.ActionMenu
-        Return CharacterActionsDialog.LaunchMenu(Me).Invoke()
+        Return New CharacterActionsDialog(Me, VerbCategoryType.Action, "Actions...")
     End Function
 End Class

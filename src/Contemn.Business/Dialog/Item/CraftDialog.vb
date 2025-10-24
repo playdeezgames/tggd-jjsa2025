@@ -9,7 +9,7 @@ Friend Class CraftDialog
             Function(x) "Craft...",
             AddressOf GenerateChoices,
             Function(x) Array.Empty(Of IDialogLine),
-            CharacterActionsDialog.LaunchMenu(character))
+            AddressOf character.ActionMenu)
     End Sub
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
@@ -39,6 +39,6 @@ Friend Class CraftDialog
         Return Function() If(
             character.HasAvailableRecipes,
             New CraftDialog(character),
-            CharacterActionsDialog.LaunchMenu(character).Invoke)
+            character.ActionMenu)
     End Function
 End Class

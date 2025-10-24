@@ -26,7 +26,7 @@ Friend Class ForageVerbTypeDescriptor
         messageLines.AddRange(lines)
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
-                (OK_CHOICE, OK_TEXT, CharacterActionsDialog.LaunchMenu(character), True),
+                (OK_CHOICE, OK_TEXT, AddressOf character.ActionMenu, True),
                 (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
             }
         character.Platform.PlaySfx(Sfx.Shucks)
@@ -34,7 +34,7 @@ Friend Class ForageVerbTypeDescriptor
             "Shucks!",
             messageLines,
             messageChoices,
-            CharacterActionsDialog.LaunchMenu(character))
+            AddressOf character.ActionMenu)
     End Function
 
     Private Function FoundItem(character As ICharacter, item As IItem, generator As IGenerator, lines As IEnumerable(Of IDialogLine)) As IDialog
@@ -48,7 +48,7 @@ Friend Class ForageVerbTypeDescriptor
         messageLines.AddRange(lines)
         Dim messageChoices As New List(Of (Choice As String, Text As String, NextDialog As Func(Of IDialog), Enabled As Boolean)) From
             {
-                (OK_CHOICE, OK_TEXT, CharacterActionsDialog.LaunchMenu(character), True),
+                (OK_CHOICE, OK_TEXT, AddressOf character.ActionMenu, True),
                 (FORAGE_AGAIN_CHOICE, FORAGE_AGAIN_TEXT, Function() Perform(character), CanPerform(character))
             }
         If generator.IsDepleted Then
@@ -60,7 +60,7 @@ Friend Class ForageVerbTypeDescriptor
             "Woo-hoo!",
             messageLines,
             messageChoices,
-            CharacterActionsDialog.LaunchMenu(character))
+            AddressOf character.ActionMenu)
     End Function
 
     Friend Overrides Function CanPerform(character As ICharacter) As Boolean

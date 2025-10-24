@@ -12,10 +12,6 @@ Friend Class CharacterActionsDialog
             Function() Nothing)
     End Sub
 
-    Public Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
-        Return Function() New CharacterActionsDialog(character, VerbCategoryType.Action, "Actions...")
-    End Function
-
     Private Shared Function GenerateChoices(character As ICharacter, verbCategoryType As String) As IEnumerable(Of IDialogChoice)
         Dim result As New List(Of IDialogChoice) From {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)

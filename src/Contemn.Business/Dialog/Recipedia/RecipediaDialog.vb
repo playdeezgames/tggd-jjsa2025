@@ -11,7 +11,7 @@ Friend Class RecipediaDialog
             Function(x) "Recipedia",
             Function(x) GenerateChoices(),
             Function(x) Array.Empty(Of IDialogLine),
-            CharacterActionsDialog.LaunchMenu(character))
+            AddressOf character.ActionMenu)
     End Sub
 
     Private Shared Function GenerateChoices() As IEnumerable(Of IDialogChoice)

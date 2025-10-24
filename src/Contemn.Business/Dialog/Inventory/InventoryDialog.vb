@@ -9,7 +9,7 @@ Friend Class InventoryDialog
             Function(x) "Inventory",
             AddressOf GenerateChoices,
             Function(x) GenerateLines(),
-            CharacterActionsDialog.LaunchMenu(character))
+            AddressOf character.ActionMenu)
     End Sub
 
     Private Shared Function GenerateLines() As IEnumerable(Of IDialogLine)
@@ -49,6 +49,6 @@ Friend Class InventoryDialog
         Return Function() If(
                     character.HasItems,
                     CType(New InventoryDialog(character), IDialog),
-                    CharacterActionsDialog.LaunchMenu(character).Invoke())
+                    character.ActionMenu)
     End Function
 End Class
