@@ -33,7 +33,7 @@ Friend Class PlaceItemDialog
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
         Return Function() If(
-            VerbTypes.Descriptors(NameOf(PlaceVerbTypeDescriptor)).CanPerform(character),
+            VerbTypes.LegacyDescriptors(NameOf(PlaceVerbTypeDescriptor)).CanPerform(character),
             New PlaceItemDialog(character),
             character.ActionMenu)
     End Function

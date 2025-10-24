@@ -17,7 +17,7 @@ Friend Class CharacterActionsDialog
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         For Each verbType In character.AvailableVerbsOfCategory(verbCategoryType)
-            Dim descriptor = VerbTypes.Descriptors(verbType)
+            Dim descriptor = VerbTypes.LegacyDescriptors(verbType)
             result.Add(New DialogChoice(verbType, descriptor.VerbTypeName))
         Next
         Return result
@@ -27,7 +27,7 @@ Friend Class CharacterActionsDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return VerbTypes.Descriptors(choice).Perform(entity)
+                Return VerbTypes.LegacyDescriptors(choice).Perform(entity)
         End Select
     End Function
 End Class
