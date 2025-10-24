@@ -1,17 +1,17 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemsOfTypeDialog
-    Inherits LegacyBaseDialog
+    Inherits CharacterDialog
 
-    Private ReadOnly character As ICharacter
     Private ReadOnly itemType As String
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
-            ItemTypes.Descriptors(itemType).ItemTypeName,
-            GenerateChoices(character, itemType),
-            GenerateLines(character, itemType))
-        Me.character = character
+            character,
+            Function(x) ItemTypes.Descriptors(itemType).ItemTypeName,
+            Function(x) GenerateChoices(x, itemType),
+            Function(x) GenerateLines(x, itemType),
+            InventoryDialog.LaunchMenu(character))
         Me.itemType = itemType
     End Sub
 
@@ -54,10 +54,6 @@ Friend Class ItemsOfTypeDialog
 
     Private Function ItemOfType(itemId As Integer) As IDialog
         Return New ItemOfTypeDialog(character, character.World.GetItem(itemId))
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return InventoryDialog.LaunchMenu(character).Invoke()
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter, itemType As String) As Func(Of IDialog)
