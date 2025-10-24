@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class PlaceLocationDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Private ReadOnly item As IItem
 
@@ -45,7 +45,7 @@ Friend Class PlaceLocationDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return PlaceItem(character, item, character.World.GetLocation(CInt(choice)))
+                Return PlaceItem(entity, item, entity.World.GetLocation(CInt(choice)))
         End Select
     End Function
 

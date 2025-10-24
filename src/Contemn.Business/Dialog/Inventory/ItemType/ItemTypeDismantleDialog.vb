@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemTypeDismantleDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Private ReadOnly itemType As String
 
@@ -66,8 +66,8 @@ Friend Class ItemTypeDismantleDialog
             {
                 New DialogLine(MoodType.Info, $"-{itemCount} {descriptor.ItemTypeName}")
             }
-        For Each item In character.ItemsOfType(itemType).Take(itemCount).ToList
-            character.Dismantle(item)
+        For Each item In entity.ItemsOfType(itemType).Take(itemCount).ToList
+            entity.Dismantle(item)
         Next
         For Each entry In descriptor.DepletionTable.ToDictionary(Function(x) x.Key, Function(x) x.Value * itemCount)
             Dim entryDescriptor = ItemTypes.Descriptors(entry.Key)
@@ -76,15 +76,15 @@ Friend Class ItemTypeDismantleDialog
         Return New OkDialog(
             "Get So Dismantled!",
             dialogLines,
-            LaunchMenu(character, itemType))
+            LaunchMenu(entity, itemType))
     End Function
 
     Private Function DismantleHalf() As IDialog
-        Return Dismantle(character.GetCountOfItemType(itemType) \ 2)
+        Return Dismantle(entity.GetCountOfItemType(itemType) \ 2)
     End Function
 
     Private Function DismantleAll() As IDialog
-        Return Dismantle(character.GetCountOfItemType(itemType))
+        Return Dismantle(entity.GetCountOfItemType(itemType))
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter, itemType As String) As Func(Of IDialog)

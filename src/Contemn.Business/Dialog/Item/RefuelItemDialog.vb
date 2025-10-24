@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class RefuelItemDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Public Sub New(character As ICharacter)
         MyBase.New(
@@ -40,16 +40,16 @@ Friend Class RefuelItemDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return DoRefuel(character.World.GetItem(CInt(choice)))
+                Return DoRefuel(entity.World.GetItem(CInt(choice)))
         End Select
     End Function
 
     Private Function DoRefuel(item As IItem) As IDialog
-        Dim bumpLocation = character.GetBumpLocation()
+        Dim bumpLocation = entity.GetBumpLocation()
         bumpLocation.ChangeStatistic(StatisticType.Fuel, item.GetStatistic(StatisticType.Fuel))
-        character.ChangeStatistic(StatisticType.Score, 1)
-        character.RemoveAndRecycleItem(item)
-        Return LaunchMenu(character).Invoke()
+        entity.ChangeStatistic(StatisticType.Score, 1)
+        entity.RemoveAndRecycleItem(item)
+        Return LaunchMenu(entity).Invoke()
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)

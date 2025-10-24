@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class GroundItemsOfTypeDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Private ReadOnly itemType As String
 
@@ -45,15 +45,15 @@ Friend Class GroundItemsOfTypeDialog
     End Function
 
     Private Function TakeAll() As IDialog
-        For Each item In character.Location.ItemsOfType(itemType)
-            character.Location.RemoveItem(item)
-            character.AddItem(item)
+        For Each item In entity.Location.ItemsOfType(itemType)
+            entity.Location.RemoveItem(item)
+            entity.AddItem(item)
         Next
-        Return GroundDialog.LaunchMenu(character).Invoke()
+        Return GroundDialog.LaunchMenu(entity).Invoke()
     End Function
 
     Private Function ItemOfType(itemId As Integer) As IDialog
-        Return New GroundItemOfTypeDialog(character, character.World.GetItem(itemId))
+        Return New GroundItemOfTypeDialog(entity, entity.World.GetItem(itemId))
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter, itemType As String) As Func(Of IDialog)

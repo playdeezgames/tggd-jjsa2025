@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ChooseFillVesselDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Public Sub New(character As ICharacter)
         MyBase.New(
@@ -41,14 +41,14 @@ Friend Class ChooseFillVesselDialog
     End Function
 
     Private Function FillVessel(itemId As Integer) As IDialog
-        Dim item = character.World.GetItem(itemId)
+        Dim item = entity.World.GetItem(itemId)
         item.SetStatistic(StatisticType.Water, item.GetStatisticMaximum(StatisticType.Water))
         item.SetTag(TagType.Safe, False)
         Return New OkDialog(
             "You filled it!",
-            character.World.ProcessTurn().
+            entity.World.ProcessTurn().
             Append(New DialogLine(MoodType.Info, $"Filled {item.Name}")),
-            ChooseFillVesselDialog.LaunchMenu(character))
+            ChooseFillVesselDialog.LaunchMenu(entity))
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)

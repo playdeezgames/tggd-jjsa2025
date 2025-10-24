@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class CraftDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Public Sub New(character As ICharacter)
         MyBase.New(
@@ -28,9 +28,9 @@ Friend Class CraftDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return character.CraftRecipe(
+                Return entity.CraftRecipe(
                     choice,
-                    LaunchMenu(character),
+                    LaunchMenu(entity),
                     False)
         End Select
     End Function

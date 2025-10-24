@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class HowToCraftItemTypeDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Private ReadOnly itemType As String
 
@@ -45,6 +45,6 @@ Friend Class HowToCraftItemTypeDialog
     End Function
 
     Private Function ShowRecipe(recipeDescriptor As RecipeTypeDescriptor) As IDialog
-        Return New RecipeDetailDialog(recipeDescriptor, Function() New HowToCraftItemTypeDialog(character, itemType))
+        Return New RecipeDetailDialog(recipeDescriptor, Function() New HowToCraftItemTypeDialog(entity, itemType))
     End Function
 End Class

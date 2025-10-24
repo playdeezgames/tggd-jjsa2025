@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemsOfTypeDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Private ReadOnly itemType As String
 
@@ -45,15 +45,15 @@ Friend Class ItemsOfTypeDialog
     End Function
 
     Private Function DropAll() As IDialog
-        For Each item In character.ItemsOfType(itemType)
-            character.RemoveItem(item)
-            character.Location.AddItem(item)
+        For Each item In entity.ItemsOfType(itemType)
+            entity.RemoveItem(item)
+            entity.Location.AddItem(item)
         Next
-        Return InventoryDialog.LaunchMenu(character).Invoke()
+        Return InventoryDialog.LaunchMenu(entity).Invoke()
     End Function
 
     Private Function ItemOfType(itemId As Integer) As IDialog
-        Return New ItemOfTypeDialog(character, character.World.GetItem(itemId))
+        Return New ItemOfTypeDialog(entity, entity.World.GetItem(itemId))
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter, itemType As String) As Func(Of IDialog)

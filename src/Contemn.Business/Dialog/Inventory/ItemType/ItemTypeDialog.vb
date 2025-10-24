@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemTypeDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Private ReadOnly itemType As String
     Private Shared ReadOnly CRAFT_CHOICE As String = NameOf(CRAFT_CHOICE)
@@ -51,7 +51,7 @@ Friend Class ItemTypeDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case CRAFT_CHOICE
-                Return New ItemTypeCraftDialog(character, itemType)
+                Return New ItemTypeCraftDialog(entity, itemType)
             Case DROP_ONE_CHOICE
                 Return DropOne()
             Case DROP_HALF_CHOICE
@@ -61,29 +61,32 @@ Friend Class ItemTypeDialog
             Case DISMANTLE_CHOICE
                 Return Dismantle()
             Case Else
-                Return character.GetItemOfType(itemType).MakeChoice(character, choice)
+                Return entity.GetItemOfType(itemType).MakeChoice(entity, choice)
         End Select
     End Function
 
     Private Function Dismantle() As IDialog
-        Return ItemTypeDismantleDialog.LaunchMenu(character, itemType).Invoke
+        Return ItemTypeDismantleDialog.LaunchMenu(entity, itemType).Invoke
     End Function
 
     Private Function DropAll() As IDialog
-        Return Drop(character.GetCountOfItemType(itemType))
+        Return Drop(entity.GetCountOfItemType(itemType))
     End Function
 
     Private Function Drop(itemCount As Integer) As IDialog
         Dim descriptor = ItemTypes.Descriptors(itemType)
-        For Each item In character.ItemsOfType(itemType).Take(itemCount)
-            character.RemoveItem(item)
-            character.Location.AddItem(item)
+        For Each item In entity.ItemsOfType(itemType).Take(itemCount)
+            entity.RemoveItem(item)
+            entity.Location.AddItem(item)
         Next
-        Return New OkDialog("You dropped em!", {New DialogLine(MoodType.Info, $"You drop {itemCount} {descriptor.ItemTypeName}.")}, ItemTypeDialog.LaunchMenu(character, itemType))
+        Return New OkDialog(
+            "You dropped em!",
+            {New DialogLine(MoodType.Info, $"You drop {itemCount} {descriptor.ItemTypeName}.")},
+            ItemTypeDialog.LaunchMenu(entity, itemType))
     End Function
 
     Private Function DropHalf() As IDialog
-        Return Drop(character.GetCountOfItemType(itemType) \ 2)
+        Return Drop(entity.GetCountOfItemType(itemType) \ 2)
     End Function
 
     Private Function DropOne() As IDialog

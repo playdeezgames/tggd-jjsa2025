@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class GroundItemTypeDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Private ReadOnly itemType As String
     Shared ReadOnly TAKE_ONE_CHOICE As String = NameOf(TAKE_ONE_CHOICE)
@@ -55,20 +55,23 @@ Friend Class GroundItemTypeDialog
     End Function
 
     Private Function TakeAll() As IDialog
-        Return Take(character.Location.GetCountOfItemType(itemType))
+        Return Take(entity.Location.GetCountOfItemType(itemType))
     End Function
 
     Private Function Take(itemCount As Integer) As IDialog
         Dim descriptor = ItemTypes.Descriptors(itemType)
-        For Each item In character.Location.ItemsOfType(itemType).Take(itemCount)
-            character.Location.RemoveItem(item)
-            character.AddItem(item)
+        For Each item In entity.Location.ItemsOfType(itemType).Take(itemCount)
+            entity.Location.RemoveItem(item)
+            entity.AddItem(item)
         Next
-        Return New OkDialog("You took em!", {New DialogLine(MoodType.Info, $"You take {itemCount} {descriptor.ItemTypeName}.")}, GroundItemTypeDialog.LaunchMenu(character, itemType))
+        Return New OkDialog(
+            "You took em!",
+            {New DialogLine(MoodType.Info, $"You take {itemCount} {descriptor.ItemTypeName}.")},
+            GroundItemTypeDialog.LaunchMenu(entity, itemType))
     End Function
 
     Private Function TakeHalf() As IDialog
-        Return Take(character.Location.GetCountOfItemType(itemType) \ 2)
+        Return Take(entity.Location.GetCountOfItemType(itemType) \ 2)
     End Function
 
     Private Function TakeOne() As IDialog

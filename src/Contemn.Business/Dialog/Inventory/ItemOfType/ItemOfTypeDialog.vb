@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemOfTypeDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
     Shared ReadOnly DROP_CHOICE As String = NameOf(DROP_CHOICE)
     Const DROP_TEXT = "Drop"
     Shared ReadOnly DISMANTLE_CHOICE As String = NameOf(DISMANTLE_CHOICE)
@@ -51,7 +51,7 @@ Friend Class ItemOfTypeDialog
             Case DISMANTLE_CHOICE
                 Return Dismantle()
             Case Else
-                Return item.MakeChoice(character, choice)
+                Return item.MakeChoice(entity, choice)
         End Select
     End Function
 
@@ -61,7 +61,7 @@ Friend Class ItemOfTypeDialog
             {
                 New DialogLine(MoodType.Info, $"-1 {descriptor.ItemTypeName}")
             }
-        character.Dismantle(item)
+        entity.Dismantle(item)
         For Each entry In descriptor.DepletionTable
             Dim entryDescriptor = ItemTypes.Descriptors(entry.Key)
             dialogLines.Add(New DialogLine(MoodType.Info, $"+{entry.Value} {entryDescriptor.ItemTypeName}"))
@@ -69,12 +69,12 @@ Friend Class ItemOfTypeDialog
         Return New OkDialog(
             "Get So Dismantled!",
             dialogLines,
-            ItemsOfTypeDialog.LaunchMenu(character, descriptor.ItemType))
+            ItemsOfTypeDialog.LaunchMenu(entity, descriptor.ItemType))
     End Function
 
     Private Function Drop() As IDialog
-        character.RemoveItem(item)
-        character.Location.AddItem(item)
-        Return ItemsOfTypeDialog.LaunchMenu(character, item.ItemType).Invoke()
+        entity.RemoveItem(item)
+        entity.Location.AddItem(item)
+        Return ItemsOfTypeDialog.LaunchMenu(entity, item.ItemType).Invoke()
     End Function
 End Class

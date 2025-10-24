@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class PlaceItemDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Public Sub New(character As ICharacter)
         MyBase.New(
@@ -41,13 +41,13 @@ Friend Class PlaceItemDialog
     Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
-                Return CharacterActionsDialog.LaunchMenu(character).Invoke
+                Return CharacterActionsDialog.LaunchMenu(entity).Invoke
             Case Else
                 Return ChooseLocation(choice)
         End Select
     End Function
 
     Private Function ChooseLocation(choice As String) As IDialog
-        Return New PlaceLocationDialog(character, character.World.GetItem(CInt(choice)))
+        Return New PlaceLocationDialog(entity, entity.World.GetItem(CInt(choice)))
     End Function
 End Class

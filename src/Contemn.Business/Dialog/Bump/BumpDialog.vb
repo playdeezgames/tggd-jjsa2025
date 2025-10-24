@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class BumpDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Public Sub New(character As ICharacter)
         MyBase.New(
@@ -39,7 +39,7 @@ Friend Class BumpDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return VerbTypes.Descriptors(choice).Perform(character)
+                Return VerbTypes.Descriptors(choice).Perform(entity)
         End Select
     End Function
 

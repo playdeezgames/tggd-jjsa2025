@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class GroundItemOfTypeDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
     Shared ReadOnly TAKE_CHOICE As String = NameOf(TAKE_CHOICE)
     Const TAKE_TEXT = "Take"
 
@@ -48,8 +48,8 @@ Friend Class GroundItemOfTypeDialog
     End Function
 
     Private Function Take() As IDialog
-        character.Location.RemoveItem(item)
-        character.AddItem(item)
-        Return GroundItemsOfTypeDialog.LaunchMenu(character, item.ItemType).Invoke()
+        entity.Location.RemoveItem(item)
+        entity.AddItem(item)
+        Return GroundItemsOfTypeDialog.LaunchMenu(entity, item.ItemType).Invoke()
     End Function
 End Class

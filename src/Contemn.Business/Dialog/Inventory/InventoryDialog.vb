@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class InventoryDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
 
     Public Sub New(character As ICharacter)
         MyBase.New(
@@ -39,9 +39,9 @@ Friend Class InventoryDialog
     Private Function MakeItemTypeDialog(itemType As String) As IDialog
         Dim descriptor = ItemTypes.Descriptors(itemType)
         If descriptor.IsAggregate Then
-            Return New ItemTypeDialog(character, itemType)
+            Return New ItemTypeDialog(entity, itemType)
         Else
-            Return New ItemsOfTypeDialog(character, itemType)
+            Return New ItemsOfTypeDialog(entity, itemType)
         End If
     End Function
 

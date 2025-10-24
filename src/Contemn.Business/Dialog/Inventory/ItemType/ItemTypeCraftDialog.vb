@@ -1,7 +1,7 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemTypeCraftDialog
-    Inherits CharacterDialog
+    Inherits EntityDialog(Of ICharacter)
     Private Shared ReadOnly CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
 
     Private ReadOnly itemType As String
@@ -36,7 +36,7 @@ Friend Class ItemTypeCraftDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return character.CraftRecipe(choice, ItemTypeDialog.LaunchMenu(character, itemType), False)
+                Return entity.CraftRecipe(choice, ItemTypeDialog.LaunchMenu(entity, itemType), False)
         End Select
     End Function
 End Class
