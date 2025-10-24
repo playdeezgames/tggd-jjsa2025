@@ -1,15 +1,15 @@
 ﻿Imports TGGD.Business
 
 Friend Class RefuelItemDialog
-    Inherits LegacyBaseDialog
-    ReadOnly character As ICharacter
+    Inherits CharacterDialog
 
     Public Sub New(character As ICharacter)
         MyBase.New(
-            GenerateCaption(character),
-            GenerateChoices(character),
-            GenerateLines(character))
-        Me.character = character
+            character,
+            AddressOf GenerateCaption,
+            AddressOf GenerateChoices,
+            AddressOf GenerateLines,
+            BumpDialog.LaunchMenu(character))
     End Sub
 
     Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
@@ -50,10 +50,6 @@ Friend Class RefuelItemDialog
         character.ChangeStatistic(StatisticType.Score, 1)
         character.RemoveAndRecycleItem(item)
         Return LaunchMenu(character).Invoke()
-    End Function
-
-    Public Overrides Function CancelDialog() As TGGD.Business.IDialog
-        Return New BumpDialog(character)
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
