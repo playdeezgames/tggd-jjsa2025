@@ -1,16 +1,15 @@
 ﻿Imports TGGD.Business
 
 Friend Class CookItemDialog
-    Inherits LegacyBaseDialog
-
-    ReadOnly character As ICharacter
+    Inherits CharacterDialog
 
     Public Sub New(character As ICharacter)
         MyBase.New(
-            "Cook...",
-            GenerateChoices(character),
-            GenerateLines(character))
-        Me.character = character
+            character,
+            Function(x) "Cook...",
+            AddressOf GenerateChoices,
+            AddressOf GenerateLines,
+            BumpDialog.LaunchMenu(character))
     End Sub
 
     Private Shared Function GenerateLines(character As ICharacter) As IEnumerable(Of IDialogLine)
@@ -54,10 +53,6 @@ Friend Class CookItemDialog
             "You cooked it!",
             messageLines,
             LaunchMenu(character))
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return New BumpDialog(character)
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
