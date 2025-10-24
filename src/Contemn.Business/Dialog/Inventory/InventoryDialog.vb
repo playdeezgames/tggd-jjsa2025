@@ -1,13 +1,15 @@
 ﻿Imports TGGD.Business
 
 Friend Class InventoryDialog
-    Inherits LegacyBaseDialog
-
-    Private ReadOnly character As ICharacter
+    Inherits CharacterDialog
 
     Public Sub New(character As ICharacter)
-        MyBase.New("Inventory", GenerateChoices(character), GenerateLines())
-        Me.character = character
+        MyBase.New(
+            character,
+            Function(x) "Inventory",
+            AddressOf GenerateChoices,
+            Function(x) GenerateLines(),
+            CharacterActionsDialog.LaunchMenu(character))
     End Sub
 
     Private Shared Function GenerateLines() As IEnumerable(Of IDialogLine)
@@ -28,7 +30,7 @@ Friend Class InventoryDialog
     Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
-                Return CharacterActionsDialog.LaunchMenu(character).Invoke()
+                Return CancelDialog()
             Case Else
                 Return MakeItemTypeDialog(choice)
         End Select
@@ -41,10 +43,6 @@ Friend Class InventoryDialog
         Else
             Return New ItemsOfTypeDialog(character, itemType)
         End If
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return Choose(NEVER_MIND_CHOICE)
     End Function
 
     Friend Shared Function LaunchMenu(character As ICharacter) As Func(Of IDialog)
