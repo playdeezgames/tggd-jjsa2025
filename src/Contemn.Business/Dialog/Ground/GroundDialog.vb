@@ -1,16 +1,15 @@
 ﻿Imports TGGD.Business
 
 Friend Class GroundDialog
-    Inherits LegacyBaseDialog
-
-    Private ReadOnly character As ICharacter
+    Inherits CharacterDialog
 
     Public Sub New(character As ICharacter)
         MyBase.New(
-            "Ground",
-            GenerateChoices(character),
-            Array.Empty(Of IDialogLine))
-        Me.character = character
+            character,
+            Function(x) "Ground",
+            AddressOf GenerateChoices,
+            Function(x) Array.Empty(Of IDialogLine),
+            CharacterActionsDialog.LaunchMenu(character))
     End Sub
 
     Private Shared Function GenerateChoices(character As ICharacter) As IEnumerable(Of IDialogChoice)
@@ -47,9 +46,5 @@ Friend Class GroundDialog
         Else
             Return New GroundItemsOfTypeDialog(character, itemType)
         End If
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return CharacterActionsDialog.LaunchMenu(character).Invoke()
     End Function
 End Class
