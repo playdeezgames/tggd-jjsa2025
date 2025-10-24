@@ -1,15 +1,15 @@
 ﻿Imports TGGD.Business
 
 Friend Class HowToCraftListDialog
-    Inherits LegacyBaseDialog
-    ReadOnly character As ICharacter
+    Inherits CharacterDialog
 
     Public Sub New(character As ICharacter)
         MyBase.New(
-            GenerateCaption(),
-            GenerateChoices(),
-            GenerateLines())
-        Me.character = character
+            character,
+            Function(x) GenerateCaption(),
+            Function(x) GenerateChoices(),
+            Function(x) GenerateLines(),
+            Function() New RecipediaDialog(character))
     End Sub
 
     Private Shared Function GenerateLines() As IEnumerable(Of IDialogLine)
@@ -37,9 +37,5 @@ Friend Class HowToCraftListDialog
             Case Else
                 Return New HowToCraftItemTypeDialog(character, choice)
         End Select
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return New RecipediaDialog(character)
     End Function
 End Class
