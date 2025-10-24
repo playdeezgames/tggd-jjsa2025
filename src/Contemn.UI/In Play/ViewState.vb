@@ -100,7 +100,7 @@ Friend Class ViewState
         If Not location.Visible Then
             Return Nothing
         End If
-        Return New DialogState(Buffer, World, Settings, New ExamineLocationDialog(location))
+        Return New DialogState(Buffer, World, Settings, location.Examine)
     End Function
 
     Private Function HandleMove(deltaX As Integer, deltaY As Integer) As IUIState

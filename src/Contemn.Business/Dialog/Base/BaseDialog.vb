@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Public MustInherit Class BaseDialog
+Friend MustInherit Class BaseDialog
     Inherits LegacyBaseDialog
 
     Private ReadOnly onCancelDialog As Func(Of IDialog)

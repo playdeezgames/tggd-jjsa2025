@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Public Class ConfirmDialog
+Friend Class ConfirmDialog
     Inherits LegacyBaseDialog
 
     Private Shared ReadOnly NO_CHOICE As String = NameOf(NO_CHOICE)

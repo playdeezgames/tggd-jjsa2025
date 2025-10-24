@@ -18,4 +18,5 @@ Public Interface ILocation
     Function GetDismantleTable() As IGenerator
     Sub SetDismantleTable(generator As IGenerator)
     Function GetForageGenerator() As IGenerator
+    Function Examine() As IDialog
 End Interface

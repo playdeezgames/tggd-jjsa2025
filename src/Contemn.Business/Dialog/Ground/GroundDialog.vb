@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Public Class GroundDialog
+Friend Class GroundDialog
     Inherits LegacyBaseDialog
 
     Private ReadOnly character As ICharacter
@@ -50,6 +50,6 @@ Public Class GroundDialog
     End Function
 
     Public Overrides Function CancelDialog() As IDialog
-        Return CharacterActionsDialog.LaunchMenu(Character).Invoke()
+        Return CharacterActionsDialog.LaunchMenu(character).Invoke()
     End Function
 End Class

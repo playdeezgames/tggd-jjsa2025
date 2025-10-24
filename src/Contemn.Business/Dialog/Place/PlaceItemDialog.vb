@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Public Class PlaceItemDialog
+Friend Class PlaceItemDialog
     Inherits LegacyBaseDialog
     ReadOnly character As ICharacter
 

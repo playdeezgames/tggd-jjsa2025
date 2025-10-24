@@ -1,6 +1,6 @@
 ﻿Imports TGGD.Business
 
-Public Class CookItemDialog
+Friend Class CookItemDialog
     Inherits LegacyBaseDialog
 
     ReadOnly character As ICharacter

@@ -159,4 +159,8 @@ Friend Class Location
         End If
         Return Nothing
     End Function
+
+    Public Function Examine() As IDialog Implements ILocation.Examine
+        Return New ExamineLocationDialog(Me)
+    End Function
 End Class
