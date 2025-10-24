@@ -1,13 +1,16 @@
 ﻿Imports TGGD.Business
 
 Friend Class RecipeDetailDialog
-    Inherits LegacyBaseDialog
+    Inherits BaseDialog
 
-    Private ReadOnly nextDialog As Func(Of IDialog)
-
-    Public Sub New(descriptor As RecipeTypeDescriptor, nextDialog As Func(Of IDialog))
-        MyBase.New(descriptor.Name, {New DialogChoice(OK_CHOICE, OK_TEXT)}, GenerateLines(descriptor))
-        Me.nextDialog = nextDialog
+    Public Sub New(
+                  descriptor As RecipeTypeDescriptor,
+                  nextDialog As Func(Of IDialog))
+        MyBase.New(
+            descriptor.Name,
+            {New DialogChoice(OK_CHOICE, OK_TEXT)},
+            GenerateLines(descriptor),
+            nextDialog)
     End Sub
 
     Private Shared Function GenerateLines(descriptor As RecipeTypeDescriptor) As IEnumerable(Of IDialogLine)
@@ -16,9 +19,5 @@ Friend Class RecipeDetailDialog
 
     Public Overrides Function Choose(choice As String) As IDialog
         Return CancelDialog()
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return nextDialog.Invoke
     End Function
 End Class
