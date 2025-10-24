@@ -1,18 +1,18 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemTypeCraftDialog
-    Inherits LegacyBaseDialog
+    Inherits CharacterDialog
     Private Shared ReadOnly CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
 
-    Private ReadOnly character As ICharacter
     Private ReadOnly itemType As String
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
-            GenerateCaption(itemType),
-            GenerateChoices(character, itemType),
-            Array.Empty(Of IDialogLine))
-        Me.character = character
+            character,
+            Function(x) GenerateCaption(itemType),
+            Function(x) GenerateChoices(x, itemType),
+            Function(x) Array.Empty(Of IDialogLine),
+            ItemTypeDialog.LaunchMenu(character, itemType))
         Me.itemType = itemType
     End Sub
 
@@ -38,9 +38,5 @@ Friend Class ItemTypeCraftDialog
             Case Else
                 Return character.CraftRecipe(choice, ItemTypeDialog.LaunchMenu(character, itemType), False)
         End Select
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return New ItemTypeDialog(character, itemType)
     End Function
 End Class
