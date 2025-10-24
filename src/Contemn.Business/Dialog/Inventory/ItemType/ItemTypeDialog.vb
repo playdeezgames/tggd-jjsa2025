@@ -1,9 +1,8 @@
 ﻿Imports TGGD.Business
 
 Friend Class ItemTypeDialog
-    Inherits LegacyBaseDialog
+    Inherits CharacterDialog
 
-    Private ReadOnly character As ICharacter
     Private ReadOnly itemType As String
     Private Shared ReadOnly CRAFT_CHOICE As String = NameOf(CRAFT_CHOICE)
     Private Const CRAFT_TEXT = "Craft..."
@@ -12,10 +11,11 @@ Friend Class ItemTypeDialog
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
-            ItemTypes.Descriptors(itemType).ItemTypeName,
-            GenerateChoices(character, itemType),
-            GenerateLines(character, itemType))
-        Me.character = character
+            character,
+            Function(x) ItemTypes.Descriptors(itemType).ItemTypeName,
+            Function(x) GenerateChoices(x, itemType),
+            Function(x) GenerateLines(x, itemType),
+            Function() VerbTypes.Descriptors(NameOf(InventoryVerbTypeDescriptor)).Perform(character))
         Me.itemType = itemType
     End Sub
 
@@ -49,7 +49,7 @@ Friend Class ItemTypeDialog
     Public Overrides Function Choose(choice As String) As IDialog
         Select Case choice
             Case NEVER_MIND_CHOICE
-                Return VerbTypes.Descriptors(NameOf(InventoryVerbTypeDescriptor)).Perform(character)
+                Return CancelDialog()
             Case CRAFT_CHOICE
                 Return New ItemTypeCraftDialog(character, itemType)
             Case DROP_ONE_CHOICE
@@ -88,10 +88,6 @@ Friend Class ItemTypeDialog
 
     Private Function DropOne() As IDialog
         Return Drop(1)
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return VerbTypes.Descriptors(NameOf(InventoryVerbTypeDescriptor)).Perform(character)
     End Function
     Friend Shared Function LaunchMenu(character As ICharacter, itemType As String) As Func(Of IDialog)
         Return Function() If(
