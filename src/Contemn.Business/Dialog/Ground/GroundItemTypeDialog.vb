@@ -1,9 +1,8 @@
 ﻿Imports TGGD.Business
 
 Friend Class GroundItemTypeDialog
-    Inherits LegacyBaseDialog
+    Inherits CharacterDialog
 
-    Private ReadOnly character As ICharacter
     Private ReadOnly itemType As String
     Shared ReadOnly TAKE_ONE_CHOICE As String = NameOf(TAKE_ONE_CHOICE)
     Const TAKE_ONE_TEXT = "Take One"
@@ -12,10 +11,11 @@ Friend Class GroundItemTypeDialog
 
     Public Sub New(character As ICharacter, itemType As String)
         MyBase.New(
-            ItemTypes.Descriptors(itemType).ItemTypeName,
-            GenerateChoices(character, itemType),
-            GenerateLines(character, itemType))
-        Me.character = character
+            character,
+            Function(x) ItemTypes.Descriptors(itemType).ItemTypeName,
+            Function(x) GenerateChoices(x, itemType),
+            Function(x) GenerateLines(x, itemType),
+            GroundDialog.LaunchMenu(character))
         Me.itemType = itemType
     End Sub
 
@@ -73,10 +73,6 @@ Friend Class GroundItemTypeDialog
 
     Private Function TakeOne() As IDialog
         Return Take(1)
-    End Function
-
-    Public Overrides Function CancelDialog() As IDialog
-        Return GroundDialog.LaunchMenu(character).Invoke
     End Function
 
 
