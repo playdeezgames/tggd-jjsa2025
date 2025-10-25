@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{E6AB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{9401E14B-0F1A-431F-9D76-4FE935FD167B}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "GrubstakerDemo", "GrubstakerDemo\GrubstakerDemo.vbproj", "{15562C16-464F-46EE-B88E-9FEAA5B66F28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{54A466E2-6025-4D6A-A3BC-288CAD9FB6BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54A466E2-6025-4D6A-A3BC-288CAD9FB6BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54A466E2-6025-4D6A-A3BC-288CAD9FB6BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15562C16-464F-46EE-B88E-9FEAA5B66F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15562C16-464F-46EE-B88E-9FEAA5B66F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15562C16-464F-46EE-B88E-9FEAA5B66F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15562C16-464F-46EE-B88E-9FEAA5B66F28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +97,7 @@ Global
 		{EF0334FE-D325-468A-AE41-A33E74A1657E} = {B9F0F140-EC47-41CD-A08F-25E6742E0DBC}
 		{98656B81-EDD5-44D0-9070-CFD2C15DEF33} = {E6ABA30A-5C53-42D2-A7B2-1F50E1FE07DC}
 		{54A466E2-6025-4D6A-A3BC-288CAD9FB6BF} = {E6ABA30A-5C53-42D2-A7B2-1F50E1FE07DC}
+		{15562C16-464F-46EE-B88E-9FEAA5B66F28} = {E6ABA30A-5C53-42D2-A7B2-1F50E1FE07DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF86998C-88A2-40ED-852A-6E8D9BF31FDC}

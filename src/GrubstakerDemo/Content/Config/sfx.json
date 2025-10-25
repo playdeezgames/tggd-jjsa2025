@@ -1,0 +1,15 @@
+﻿{
+  "Craft": "Content/Audio/Craft.wav",
+  "Take": "Content/Audio/Take.wav",
+  "Eat": "Content/Audio/Eat.wav",
+  "WooHoo": "Content/Audio/WooHoo.wav",
+  "Shucks": "Content/Audio/Shucks.wav",
+  "Yoink": "Content/Audio/Yoink.wav",
+  "Tasty": "Content/Audio/Tasty.wav",
+  "EnemyHit": "Content/Audio/EnemyHit.wav",
+  "EnemyMiss": "Content/Audio/EnemyMiss.wav",
+  "EnemyDeath": "Content/Audio/EnemyDeath.wav",
+  "PlayerHit": "Content/Audio/PlayerHit.wav",
+  "PlayerMiss": "Content/Audio/PlayerMiss.wav",
+  "PlayerDeath": "Content/Audio/PlayerDeath.wav"
+}        
