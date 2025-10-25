@@ -7,6 +7,7 @@ Imports System.Text.Json
 Public Class World
     Inherits Entity(Of WorldData)
     Implements IWorld
+    Const MAXIMUM_DEMO_SCORE = 999
     Sub New(
            data As WorldData,
            platform As IPlatform)
@@ -68,7 +69,7 @@ Public Class World
             If Not Platform.Demo Then
                 Return False
             End If
-            Return Avatar.GetStatistic(StatisticType.Score) >= 1000
+            Return Avatar.GetStatistic(StatisticType.Score) > MAXIMUM_DEMO_SCORE
         End Get
     End Property
 
