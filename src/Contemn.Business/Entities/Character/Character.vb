@@ -183,7 +183,7 @@ Friend Class Character
     End Function
 
     Public Function CraftRecipe(recipeType As String, nextDialog As Func(Of IDialog), confirmed As Boolean) As IDialog Implements ICharacter.CraftRecipe
-        Dim descriptor = RecipeTypes.Descriptors.Values.Single(Function(x) x.RecipeType = recipeType)
+        Dim descriptor = RecipeTypes.Descriptors.Values.Single(Function(x) x.RecipeId.ToString = recipeType)
         Dim character = Me
         If Descriptor.IsDestructive AndAlso Not confirmed Then
             Return New ConfirmDialog(

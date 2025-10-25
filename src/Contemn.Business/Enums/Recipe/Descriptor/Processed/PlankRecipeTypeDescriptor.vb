@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(PlankRecipeTypeDescriptor),
             False,
             New Dictionary(Of String, Integer) From {
                 {NameOf(LogItemTypeDescriptor), 1}

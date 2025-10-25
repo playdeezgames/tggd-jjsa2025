@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(BowDrillRecipeTypeDescriptor),
             False,
             New Dictionary(Of String, Integer) From
             {

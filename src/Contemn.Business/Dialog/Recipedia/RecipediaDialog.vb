@@ -22,7 +22,7 @@ Friend Class RecipediaDialog
             }
         result.AddRange(
             RecipeTypes.Descriptors.Values.
-            Select(Function(x) New DialogChoice(x.RecipeType, x.Name)))
+            Select(Function(x) New DialogChoice(x.RecipeId.ToString, x.Name)))
         Return result
     End Function
 
@@ -34,7 +34,7 @@ Friend Class RecipediaDialog
                 Return New HowToCraftListDialog(entity)
             Case Else
                 Return New RecipeDetailDialog(
-                    RecipeTypes.Descriptors.Values.Single(Function(x) x.RecipeType = choice),
+                    RecipeTypes.Descriptors.Values.Single(Function(x) x.RecipeId.ToString = choice),
                     Function() New RecipediaDialog(entity))
         End Select
     End Function

@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(TorchRecipeTypeDescriptor),
             False,
             New Dictionary(Of String, Integer) From
             {

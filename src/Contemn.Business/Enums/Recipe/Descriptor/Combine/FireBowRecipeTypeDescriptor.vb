@@ -3,7 +3,6 @@
 
     Public Sub New()
         MyBase.New(
-            NameOf(FireBowItemTypeDescriptor),
             False,
             New Dictionary(Of String, Integer) From
             {

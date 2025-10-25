@@ -12,20 +12,17 @@ Friend MustInherit Class RecipeTypeDescriptor
     '-Past You
     Friend ReadOnly RecipeId As Integer
     Friend Shared NextRecipeId As Integer = 0
-    Friend ReadOnly Property RecipeType As String
     Private ReadOnly inputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly durabilities As IReadOnlyDictionary(Of String, Integer)
     Friend ReadOnly Property IsDestructive As Boolean
     Sub New(
-           recipeType As String,
            isDestructive As Boolean,
            inputs As IReadOnlyDictionary(Of String, Integer),
            outputs As IReadOnlyDictionary(Of String, Integer),
            durabilities As IReadOnlyDictionary(Of String, Integer))
         RecipeId = NextRecipeId
         NextRecipeId += 1
-        Me.RecipeType = recipeType
         Me.inputs = inputs
         Me.outputs = outputs
         Me.durabilities = durabilities
