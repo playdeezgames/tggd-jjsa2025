@@ -22,7 +22,7 @@ Public Interface ICharacter
     Sub SetBumpLocation(location As ILocation)
     Function GetBumpLocation() As ILocation
     Function CraftRecipe(
-                        recipeType As String,
+                        recipeId As Integer,
                         nextDialog As Func(Of IDialog),
                         confirmed As Boolean) As IDialog
     Function GetDurabilityTotal(tagType As String) As Integer

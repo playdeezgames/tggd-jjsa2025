@@ -36,7 +36,7 @@ Friend Class ItemTypeCraftDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return entity.CraftRecipe(choice, ItemTypeDialog.LaunchMenu(entity, itemType), False)
+                Return entity.CraftRecipe(CInt(choice), ItemTypeDialog.LaunchMenu(entity, itemType), False)
         End Select
     End Function
 End Class

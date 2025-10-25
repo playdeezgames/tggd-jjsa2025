@@ -29,7 +29,7 @@ Friend Class CraftDialog
                 Return CancelDialog()
             Case Else
                 Return entity.CraftRecipe(
-                    choice,
+                    CInt(choice),
                     LaunchMenu(entity),
                     False)
         End Select

@@ -182,30 +182,33 @@ Friend Class Character
         Return Nothing
     End Function
 
-    Public Function CraftRecipe(recipeType As String, nextDialog As Func(Of IDialog), confirmed As Boolean) As IDialog Implements ICharacter.CraftRecipe
-        Dim descriptor = RecipeTypes.Descriptors.Values.Single(Function(x) x.RecipeId.ToString = recipeType)
+    Public Function CraftRecipe(
+                               recipeId As Integer,
+                               nextDialog As Func(Of IDialog),
+                               confirmed As Boolean) As IDialog Implements ICharacter.CraftRecipe
+        Dim descriptor = RecipeTypes.Descriptors.Values.Single(Function(x) x.RecipeId = recipeId)
         Dim character = Me
-        If Descriptor.IsDestructive AndAlso Not confirmed Then
+        If descriptor.IsDestructive AndAlso Not confirmed Then
             Return New ConfirmDialog(
                 "Are you sure?",
                 {
                     New DialogLine(MoodType.Warning, "This recipe is destructive."),
                     New DialogLine(MoodType.Info, "Please confirm.")
                 },
-                Function() Character.CraftRecipe(recipeType, nextDialog, True),
+                Function() character.CraftRecipe(recipeId, nextDialog, True),
                 nextDialog)
         Else
             Dim CRAFT_ANOTHER_CHOICE As String = NameOf(CRAFT_ANOTHER_CHOICE)
             Const CRAFT_ANOTHER_TEXT = "Craft Another"
-            Dim messageLines = Descriptor.Craft(Character)
-            Character.Platform.PlaySfx(Sfx.Craft)
-            Character.ChangeStatistic(StatisticType.Score, 1)
+            Dim messageLines = descriptor.Craft(character)
+            character.Platform.PlaySfx(Sfx.Craft)
+            character.ChangeStatistic(StatisticType.Score, 1)
             Return New MessageDialog(
             "Behold!",
             messageLines,
             {
                 (OK_CHOICE, OK_TEXT, nextDialog, True),
-                (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, Function() character.CraftRecipe(recipeType, nextDialog, True), descriptor.CanCraft(character))
+                (CRAFT_ANOTHER_CHOICE, CRAFT_ANOTHER_TEXT, Function() character.CraftRecipe(recipeId, nextDialog, True), descriptor.CanCraft(character))
             },
             nextDialog)
         End If
