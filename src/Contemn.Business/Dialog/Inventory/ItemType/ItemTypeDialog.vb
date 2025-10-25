@@ -15,7 +15,7 @@ Friend Class ItemTypeDialog
             Function(x) ItemTypes.Descriptors(itemType).ItemTypeName,
             Function(x) GenerateChoices(x, itemType),
             Function(x) GenerateLines(x, itemType),
-            Function() VerbTypes.LegacyDescriptors(NameOf(InventoryVerbTypeDescriptor)).Perform(character))
+            Function() VerbTypes.Descriptors(NameOf(InventoryVerbTypeDescriptor)).Perform(character))
         Me.itemType = itemType
     End Sub
 

@@ -406,12 +406,11 @@
                     {"Planks are used for crafting."})
             }
     End Function
-    Friend ReadOnly Descriptors As IReadOnlyList(Of VerbTypeDescriptor) =
-        New List(Of VerbTypeDescriptor)(GenerateDescriptors())
 
-    Friend ReadOnly LegacyDescriptors As IReadOnlyDictionary(Of String, VerbTypeDescriptor) =
-        Descriptors.ToDictionary(Function(x) x.VerbType, Function(x) x)
+    Friend ReadOnly Descriptors As IReadOnlyDictionary(Of String, VerbTypeDescriptor) =
+        GenerateDescriptors().ToDictionary(Function(x) x.VerbType, Function(x) x)
+
     Friend Function AllOfCategory(verbCategoryType As String) As IEnumerable(Of String)
-        Return LegacyDescriptors.Values.Where(Function(x) x.VerbCategoryType = verbCategoryType).Select(Function(x) x.VerbType)
+        Return Descriptors.Values.Where(Function(x) x.VerbCategoryType = verbCategoryType).Select(Function(x) x.VerbType)
     End Function
 End Module

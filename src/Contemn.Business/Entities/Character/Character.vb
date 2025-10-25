@@ -85,7 +85,7 @@ Friend Class Character
     End Property
 
     Private Function CanPerform(verbType As String) As Boolean
-        Return VerbTypes.LegacyDescriptors(verbType).CanPerform(Me)
+        Return VerbTypes.Descriptors(verbType).CanPerform(Me)
     End Function
 
     Public Overrides Sub Initialize()
@@ -95,7 +95,7 @@ Friend Class Character
     End Sub
 
     Public Function Perform(verbType As String) As IDialog Implements ICharacter.Perform
-        Return VerbTypes.LegacyDescriptors(verbType).Perform(Me)
+        Return VerbTypes.Descriptors(verbType).Perform(Me)
     End Function
 
     Public Function MoveTo(destination As ILocation) As IDialog Implements ICharacter.MoveTo
