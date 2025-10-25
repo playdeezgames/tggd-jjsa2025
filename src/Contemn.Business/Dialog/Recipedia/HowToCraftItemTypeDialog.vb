@@ -25,7 +25,7 @@ Friend Class HowToCraftItemTypeDialog
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
-        Dim recipes = RecipeTypes.Descriptors.Where(Function(x) x.OutputItemTypes.Contains(itemType))
+        Dim recipes = RecipeTypes.Descriptors.Values.Where(Function(x) x.OutputItemTypes.Contains(itemType))
         result.AddRange(recipes.Select(Function(x) New DialogChoice(x.RecipeType, x.Name)))
         Return result
     End Function
@@ -40,7 +40,7 @@ Friend Class HowToCraftItemTypeDialog
             Case NEVER_MIND_CHOICE
                 Return CancelDialog()
             Case Else
-                Return ShowRecipe(RecipeTypes.Descriptors.Single(Function(x) x.RecipeType = choice))
+                Return ShowRecipe(RecipeTypes.Descriptors.Values.Single(Function(x) x.RecipeType = choice))
         End Select
     End Function
 

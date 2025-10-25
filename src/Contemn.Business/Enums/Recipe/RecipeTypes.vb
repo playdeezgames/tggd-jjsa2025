@@ -1,5 +1,5 @@
 ﻿Friend Module RecipeTypes
-    Friend ReadOnly Descriptors As IEnumerable(Of RecipeTypeDescriptor) =
+    Friend ReadOnly Descriptors As IReadOnlyDictionary(Of Integer, RecipeTypeDescriptor) =
         New List(Of RecipeTypeDescriptor) From
         {
             New TwineRecipeTypeDescriptor(),
@@ -20,5 +20,5 @@
             New ShortStickRecipeTypeDescriptor(),
             New PlankRecipeTypeDescriptor(),
             New BowDrillRecipeTypeDescriptor()
-        }
+        }.ToDictionary(Function(x) x.RecipeId, Function(x) x)
 End Module

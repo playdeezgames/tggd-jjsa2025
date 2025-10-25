@@ -10,6 +10,8 @@ Friend MustInherit Class RecipeTypeDescriptor
     'So you can't.
     'Love,
     '-Past You
+    Friend ReadOnly RecipeId As Integer
+    Friend Shared NextRecipeId As Integer = 0
     Friend ReadOnly Property RecipeType As String
     Private ReadOnly inputs As IReadOnlyDictionary(Of String, Integer)
     Private ReadOnly outputs As IReadOnlyDictionary(Of String, Integer)
@@ -21,6 +23,8 @@ Friend MustInherit Class RecipeTypeDescriptor
            inputs As IReadOnlyDictionary(Of String, Integer),
            outputs As IReadOnlyDictionary(Of String, Integer),
            durabilities As IReadOnlyDictionary(Of String, Integer))
+        RecipeId = NextRecipeId
+        NextRecipeId += 1
         Me.RecipeType = recipeType
         Me.inputs = inputs
         Me.outputs = outputs

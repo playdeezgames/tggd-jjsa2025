@@ -21,7 +21,7 @@ Friend Class ItemTypeCraftDialog
             {
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
-        For Each entry In RecipeTypes.Descriptors.Where(Function(x) x.HasInput(itemType) AndAlso x.CanCraft(character))
+        For Each entry In RecipeTypes.Descriptors.Values.Where(Function(x) x.HasInput(itemType) AndAlso x.CanCraft(character))
             choices.Add(New DialogChoice(entry.RecipeType, entry.Name))
         Next
         Return choices

@@ -30,7 +30,7 @@ Friend Class ItemTypeDialog
                 New DialogChoice(NEVER_MIND_CHOICE, NEVER_MIND_TEXT)
             }
         result.AddRange(character.GetItemOfType(itemType).GetAvailableChoices(character))
-        If RecipeTypes.Descriptors.Any(Function(x) x.HasInput(itemType) AndAlso x.CanCraft(character)) Then
+        If RecipeTypes.Descriptors.Values.Any(Function(x) x.HasInput(itemType) AndAlso x.CanCraft(character)) Then
             result.Add(New DialogChoice(CRAFT_CHOICE, CRAFT_TEXT))
         End If
         If ItemTypes.Descriptors(itemType).DepletionTable.Any Then
