@@ -420,3 +420,6 @@ FodyWeavers.xsd
 /pub-windows
 /pub-linux
 /pub-mac
+/pubdemo-windows
+/pubdemo-linux
+/pubdemo-mac
